@@ -1,0 +1,271 @@
+import "package:cardano_dart_types/src/cardano/shared/asset.dart";
+import "package:cardano_dart_types/src/utils/transformations.dart";
+import "package:test/test.dart";
+
+void main() async {
+  group("Value", () {
+    group("parsing", () {
+      test("hex", () async {
+        const input =
+            "821afe2e55edb84a581c012345678114be9b1bca2c0bb5ea4814a4d6c3e04e3b2aa965e74732a14b54726176656c657237363201581c025146866af908340247fe4e9672d5ac7059f1e8534696b5f920c9e6a14563625448431a000186a0581c049c3a2837aed183d771daa7715f1573629e8e136439b203f026ff5ba1524379626572626f7434364d6172626c65543701581c0a020ad70d646c476e26891dcd8b942997fa421a02ee7241ebcab680a14a4343504363617264303801581c0c78e05b311c87444e02cfd3b54c1df60bf38da95956bc4901cb7d29a14c4c75636b794c6f466930303301581c0c78f619e54a5d00e143f66181a2c500d0c394b38a10e86cd1a23c5fa1444144415819012c581c0e14267a8020229adc0184dd25fa3174c3f7d6caadcb4425c70e7c04a34a756e7369673031313138014a756e7369673031353839014a756e736967303633383501581c0e793f4d9e8717247b17858bde76446b68dc3302f547699480c10750a145444143323301581c1131301ad4b3cb7deaddbc8f03f77189082a5738c0167e1772233097a24f43617264616e6f4269747331363131014f43617264616e6f426974733332333101581c13d50e918e235f23dcad7b9117ee91bde515d45e88d5fdd2910f9279a1534379626572626f74323057697a61726454303501581c15509d4cb60f066ca4c7e982d764d6ceb4324cb33776d1711da1beeea14e42616279416c69656e303930343601581c165f8fa6918cc42268e1c1a3faf42f354b79fbd0b07c2fe61d402f41a24f756e736967537061636531783234390150756e736967537061636531317831303101581c1774343241680e4daef7cbfe3536fc857ce23fb66cd0b66320b2e3dda1454249534f4e1a00e4e1c0581c1a71dc14baa0b4fcfb34464adc6656d0e562571e2ac1bc990c9ce5f6a144574f4c461b00000002b4137ec6581c1c357b4283de4d3c1b195e770b38070796426357f9ce5a03497238fda24d486f746c696e654e656b6f3430014d486f746c696e654e656b6f343401581c1d76557b2e2df0c19d23513081c1916a92f7ab313d7c06b1e3998283a14d756e7369676e6564746f6b656e03581c20211215310a6919fa3ba4817a6771676499506ea109ff75400937a9a1525350484552455041525449434c455330353801581c2afb448ef716bfbed1dcb676102194c3009bee5399e93b90def9db6aa1454249534f4e1a00e4e1c0581c2b71a84236854b85f995a9787678acea6b0fac1673e3781131323532a14f48617070794e65775965617254434c01581c2b8822f7799f325e278991a244e7715591945b1c2a3589cc76035ca9a147736372617463681a017d7840581c2c7caf462418609495ed78652115430875a24e18cc8a240b00bc09b9a14a4752384772697a7a6c7901581c2d7444cf9e317a12e3eb72bf424fd2a0c8fbafedf10e20bfdb4ad8aba1464348454444411a000493e0581c324f316d40e0c730d7c836daf3c0cb825376a5719d3c5a88543db4ffa34f43617264616e6f4375626531323631014f43617264616e6f4375626531323632014f43617264616e6f437562653132363301581c3ca0b2bccbf3cba1eb591fdb091fc3b2474a8866b4d2f98cda98689da1514852485072696e63655068696c6970363201581c4247d5091db82330100904963ab8d0850976c80d3f1b927e052e07bda146546f6b68756e03581c4b21109cf578a4739c1f806aba0ef71b9d6e2736743c5510698462e1a146436f7730373701581c4fd307695d244431ca93599be34d9aea403f24cf30f2eadcd7a178e2a1487377616e6b70696501581c530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8aa2581a434330303031303030303030303030303030303030303030333201581a434330303031303030303030303030303030303030303030343201581c544571c086d0e5c5022aca9717dd0f438e21190abb48f37b3ae129f0a14447524f5702581c5534595a12198346446ca7be0a56548e7091c3f2126f360a5fd8fe2daa5443617264616e6f4b69647a303031314643303234015443617264616e6f4b69647a303031324643303234015443617264616e6f4b69647a303031334643303234015443617264616e6f4b69647a303031344643303234015443617264616e6f4b69647a303031354643303234015443617264616e6f4b69647a303031364643303234015443617264616e6f4b69647a303031374643303234015443617264616e6f4b69647a303031384643303234015443617264616e6f4b69647a303031394643303234015443617264616e6f4b69647a30303230464330323401581c56b07f1eb36fe0412dad7f6cdb8bb296fdde12e4395fcde3d48caa93a1484e656b6f4c6f746c01581c570f3e65dc46e8edf8ac288f13385297e6f749a8fd84064cdcda2839a1534e465455303031384e46544372617a6531323301581c5ad8deb64bfec21ad2d96e1270b5873d0c4d0f231b928b4c39eb2435a14661646f7369611a004c4b40581c5dac8536653edc12f6f5e1045d8164b9f59998d3bdc300fc92843489a1444e4d4b521a15d0b780581c62d5fd332194ed023dc63607173347e3a9c321ec7a3e8d378921958ba14b41757269676f6e4645383201581c682fe60c9918842b3323c43b5144bc3d52a23bd2fb81345560d73f63a1444e45574d1a004c4b40581c695871943cd6bb1b47451f7ef7b076eb269b542e8cf870d26abb902ba1544c4950416d6574687973744372797374616c303101581c6cf6b2fa1fd2191ad48f74cc8cba258d1c5948f42325a078a79d6f9ea34853686f67756e543301555361627265746f6f7468536869627569636869543201555361627265746f6f7468536869627569636869543301581c776f700a98d35c4deeaa4ede7697ca45d7947d9e63b028924db6ebcaa253456e6456696f6c656e6365476c6173733031350155456e6456696f6c656e6365506c617374696331313901581c821b636862f9160d68f875ac7d460b9642e462d499c00cae9b88ec25a24a57545030303733543037014a5754503030383554313901581c88691a70bb0fe49cf9124b4f78553c36c09fa6264844e2b294119173a1454575736b6f0a581c8d0ae3c5b13b47907b16511a540d47436d12dcc96453c0f59089b451a14542524f4f4d1a004c4b40581ca0028f350aaabe0545fdcb56b039bfb08e4bb4d8c4d7c3c7d481c235a145484f534b591a20836c22581ca025d91dca7804ae13c5231c4c44a6cfa16aa98634e9e0e874380797a24a434d42594e5350313633014b434d42594e53503136304101581ca587ce7893ec56fa6136e483499d2a8210e29c34b7dc673446128875a350436861696e734f6657617230313333360150436861696e734f6657617230313739380150436861696e734f66576172303939373701581ca7904896a247d3aa09478e856769b82d1f2e060028b6bda5543b699fa74d4343434f4c4c41423030303033014d4343434f4c4c41423030363730014d4343434f4c4c41423030363731014d4343434f4c4c41423039353538014d4343434f4c4c4142303935353901581c4375746543726561747572657343686164694e61737361723036373001581c4375746543726561747572657343686164694e61737361723036373101581ca8731ef90e36acc7083d9bd501f733cb610ad67e7143d891fd45ab89a14e53776565744b697473756e65303701581ca9f27403469474f5f673449936b6b17418433498e238d683dfcd73a3a15246455454554343494e45435942455254303101581cab92d08ada99c55a4b476120b59057fb4df9d38bdb5daca446d74f4ba558184a756c69616e4c796c654c657669746174654a61685430370158194a756c69616e4c796c654c65766974617465446174615430390158194a756c69616e4c796c654c657669746174654a696d6954303801581a4a756c69616e4c796c654c657669746174654c656e6e7954303901581c4a756c69616e4c796c654c657669746174654272656361726954303501581cadc5716393953403109c335e68c0384238fd19653e960e03afa1fb1fa74f546865526566726573683030393539014f546865526566726573683032333436014f546865526566726573683034303134014f546865526566726573683034313833014f546865526566726573683035353037014f546865526566726573683036373636014f54686552656672657368303737323801581caf2e27f580f7f08e93190a81f72462f153026d06450924726645891ba144445249501aee6b2800581cafc910d7a306d20c12903979d4935ae4307241d03245743548e76783a14541534849421a77359400581cb1814c6d3b0f7a42c9ee990c06c9d504a42bb22bf0e34e7908ae21b2a1494e617275303739303801581cb788fbee71a32d2efc5ee7d151f3917d99160f78fb1e41a1bbf80d8fa1494c454146544f4b454e1b00000004c2d6179e581cb7c783f6304eddbdf8f0dece4715d63cb9f453be89d97c8fba155d57a144524553491832581cb99deed3711170a2e93edaae7cd060e643140e766785476123e8a800a14b42544c4e4430303032323701581cba503fec7bbac8c999ed172f86d1b889d96ec70f8e3cc853a4791ffca150506f6c6964696f74734330314d31323201581cc3f7c24203e407f8345238dece33aea3744a90b984a35c3fc0422540a15543617264616e6f4b69647a546573744e465430393201581cc4c00fbd8fa227442a5e7cdecde33b24588494d05a2c50fda8938c6da1444b49445a199c40581cc6a86d4d21928d2c36f395a2252ae11f7b26239c3b1c8dd2b8778b7aa246544e414d45310146544e414d453201581cc88bbd1848db5ea665b1fffbefba86e8dcd723b5085348e8a8d2260fa14444414e411a00989680581ccbc663f65389d982d5635750920b10e76bdc3151af9311b4885b5906a24f4a696e676c65467265736854333837014f4a696e676c6546726573685434333401581cd030b626219d81673bd32932d2245e0c71ae5193281f971022b23a78a148436172646f67656f1901a4581cd068fe47123ec4c86460eeb74c7d7765c67d2df295a3ac86d664ed45a15818506c757475734669727374436c61737350686f746f34383201581cd0d28dfb4ea668acfc06ebd8a656935137d4812ca083c7cbf0796643a14943424974656d30383701581cd3af4261d95b2679d54034ef224c6d0d51b10db931065a83ea5e3867a1544f6e6548756e6472656441444142696c6c30313201581cd5e6bf0500378d4f0da4e8dde6becec7621cd8cbf5cbb9b87013d4cca54a53706163654275643537014c537061636542756434353434014c537061636542756435353232014c537061636542756435363538014c53706163654275643931343201581cd894897411707efa755a76deb66d26dfd50593f2e70863e1661e98a0a14a7370616365636f696e730c581cdcba33267d89c91563eaf451d4b758b3e24f41e09c9d1e19e66c448ba158184e66744372617a65476c69746368476c746654657374303101581ce3ac0dd93edbe6bafec38fb120cf7c3e223686a97261008c2bfe0d6da14f43617264616e6f537061636541393901581cea2d23f1fa631b414252824c153f2d6ba833506477a929770a4dd9c2a1464d414442554c1901f4581cf0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9aa3456372617a650148646f6368696f697501496e66742d6372617a6501581cf28f457472e539dc75e1598a2beddf49ce5a717998c708f05f5de610a144444546531819581cfc55da262cf3a48d23d87239dcd30e872b7d149ea89c7eb4e98153b4a24b4d656f776e737465723235014f4d6567616c6f646f6e4d656368323001";
+
+        final value = Value.deserializeHex(input);
+        final result = value.serializeHexString();
+
+        expect(result, input);
+      });
+    });
+    group("operations", () {
+      final first = Value.v1(
+        lovelace: BigInt.parse("1"),
+        mA: [
+          MultiAsset(
+            // fully cancel out on add (oposite amounts)
+            policyId: "530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8a",
+            assets: [
+              Asset(
+                hexName: "344672653568323835",
+                value: BigInt.parse("-1"),
+              ),
+              Asset(
+                hexName: "4343303030313030303030303030303030303031313430303332",
+                value: BigInt.one,
+              ),
+            ],
+          ),
+          MultiAsset(
+            // cancel out first 2 of 3 on add ; cancel out last on subtract
+            policyId: "851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0",
+            assets: [
+              Asset(
+                hexName: "344672653568323835",
+                value: BigInt.parse("-20"),
+              ),
+              Asset(
+                hexName: "4343303030313030303030303030303030303031313430303332",
+                value: BigInt.parse("200"),
+              ),
+              Asset(
+                hexName: "44494e47",
+                value: BigInt.parse("5"),
+              ),
+            ],
+          ),
+          MultiAsset(
+            // doesn't exist in other
+            policyId: "ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0",
+            assets: [
+              Asset(
+                hexName: "4343303030313030303030303030303030303031313430303332",
+                value: BigInt.parse("4"),
+              ),
+              Asset(
+                hexName: "344672653568323835",
+                value: BigInt.parse("-4"),
+              ),
+            ],
+          ),
+        ],
+      );
+      final second = Value.v1(
+        lovelace: BigInt.parse("-1"),
+        mA: [
+          MultiAsset(
+            // fully cancel out (oposite amounts)
+            policyId: "530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8a",
+            assets: [
+              Asset(
+                hexName: "344672653568323835",
+                value: BigInt.parse("1"),
+              ),
+              Asset(
+                hexName: "4343303030313030303030303030303030303031313430303332",
+                value: BigInt.parse("-1"),
+              ),
+            ],
+          ),
+          MultiAsset(
+            policyId: "851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0",
+            assets: [
+              Asset(
+                hexName: "4e5458",
+                value: BigInt.parse("2"),
+              ),
+              Asset(
+                hexName: "4343303030313030303030303030303030303031313430303332",
+                value: BigInt.parse("-200"),
+              ),
+              Asset(
+                hexName: "44494e47",
+                value: BigInt.parse("5"),
+              ),
+              Asset(
+                hexName: "344672653568323835",
+                value: BigInt.parse("20"),
+              ),
+            ],
+          ),
+          MultiAsset(
+            // doesn't exist in other
+            policyId: "edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e99344479",
+            assets: [
+              Asset(
+                hexName: "44494e47",
+                value: BigInt.parse("2"),
+              ),
+            ],
+          ),
+        ],
+      );
+      test("addition", () async {
+        final expected = Value.v1(
+          lovelace: BigInt.parse("0"),
+          mA: [
+            MultiAsset(
+              // cancel out first 2 of 3
+              policyId: "851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0",
+              assets: [
+                Asset(
+                  hexName: "44494e47",
+                  value: BigInt.parse("10"),
+                ),
+                Asset(
+                  hexName: "4e5458",
+                  value: BigInt.parse("2"),
+                )
+              ],
+            ),
+            MultiAsset(
+              // doesn't exist in other
+              policyId: "ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0",
+              assets: [
+                Asset(
+                  hexName: "4343303030313030303030303030303030303031313430303332",
+                  value: BigInt.parse("4"),
+                ),
+                Asset(
+                  hexName: "344672653568323835",
+                  value: BigInt.parse("-4"),
+                ),
+              ],
+            ),
+            MultiAsset(
+              // doesn't exist in other
+              policyId: "edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e99344479",
+              assets: [
+                Asset(
+                  hexName: "44494e47",
+                  value: BigInt.parse("2"),
+                ),
+              ],
+            ),
+          ],
+        );
+
+        expect(first + second, expected);
+      });
+
+      test("subtraction", () async {
+        final expected = Value.v1(
+          lovelace: BigInt.parse("2"),
+          mA: [
+            MultiAsset(
+              // fully cancel out (oposite amounts)
+              policyId: "530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8a",
+              assets: [
+                Asset(
+                  hexName: "344672653568323835",
+                  value: BigInt.parse("-2"),
+                ),
+                Asset(
+                  hexName: "4343303030313030303030303030303030303031313430303332",
+                  value: BigInt.parse("2"),
+                ),
+              ],
+            ),
+            MultiAsset(
+              // cancel out first 2 of 3 on add ; cancel out last on subtract
+              policyId: "851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0",
+              assets: [
+                Asset(
+                  hexName: "344672653568323835",
+                  value: BigInt.parse("-40"),
+                ),
+                Asset(
+                  hexName: "4343303030313030303030303030303030303031313430303332",
+                  value: BigInt.parse("400"),
+                ),
+                Asset(
+                  hexName: "4e5458",
+                  value: BigInt.parse("-2"),
+                ),
+              ],
+            ),
+            MultiAsset(
+              // doesn't exist in other
+              policyId: "ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0",
+              assets: [
+                Asset(
+                  hexName: "4343303030313030303030303030303030303031313430303332",
+                  value: BigInt.parse("4"),
+                ),
+                Asset(
+                  hexName: "344672653568323835",
+                  value: BigInt.parse("-4"),
+                ),
+              ],
+            ),
+            MultiAsset(
+              // doesn't exist in other
+              policyId: "edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e99344479",
+              assets: [
+                Asset(
+                  hexName: "44494e47",
+                  value: BigInt.parse("-2"),
+                ),
+              ],
+            ),
+          ],
+        );
+
+        expect(first - second, expected);
+      });
+
+      test("v0 equals v1 if same lovelace", () async {
+        final a0 = Value.v0(lovelace: BigInt.from(20));
+        final a1 = Value.v1(lovelace: BigInt.from(20), mA: const []);
+        final a2 = Value.v1(lovelace: BigInt.from(21), mA: const []);
+
+        expect(a1, equals(a0));
+        expect(a1.hashCode, equals(a0.hashCode));
+        expect(a2, isNot(equals(a0)));
+        expect(a2.hashCode, isNot(equals(a0.hashCode)));
+      });
+
+      test("same lovelace and mA equals unordered", () async {
+        final a0 = first + second;
+        final a1 = second + first;
+        final a2 = a0.copyWith(lovelace: BigInt.from(123));
+        final a0Reversed = switch (a0) {
+          Value_v0() => a0,
+          Value_v1() => a0.copyWith(
+              mA: a0
+                  .mA //
+                  .reversed
+                  .map((e) => e.copyWith(assets: e.assets.reversed.toList()))
+                  .toList(),
+            ),
+        };
+
+        expect(a0, equals(a0Reversed));
+        expect(a0.hashCode, equals(a0Reversed.hashCode));
+        expect(a1, equals(a0));
+        expect(a1.hashCode, equals(a0.hashCode));
+        expect(a2, isNot(equals(a0)));
+        expect(a2.hashCode, isNot(equals(a0.hashCode)));
+        expect(first, isNot(equals(second)));
+        expect(first.hashCode, isNot(equals(second.hashCode)));
+      });
+    });
+  });
+}
