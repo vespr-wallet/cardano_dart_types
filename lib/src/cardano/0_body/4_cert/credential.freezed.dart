@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,147 +10,151 @@ part of 'credential.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Credential {
+  CredType get type;
+  Uint8List get vKeyHash;
 
- CredType get type => throw _privateConstructorUsedError; Uint8List get vKeyHash => throw _privateConstructorUsedError;
+  /// Create a copy of Credential
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $CredentialCopyWith<Credential> get copyWith =>
+      _$CredentialCopyWithImpl<Credential>(this as Credential, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Credential &&
+            (identical(other.type, type) || other.type == type) &&
+            const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+  }
 
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, type, const DeepCollectionEquality().hash(vKeyHash));
 
-
-
-
-
-/// Create a copy of Credential
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$CredentialCopyWith<Credential> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'Credential(type: $type, vKeyHash: $vKeyHash)';
+  }
 }
 
 /// @nodoc
-abstract class $CredentialCopyWith<$Res>  {
-  factory $CredentialCopyWith(Credential value, $Res Function(Credential) then) = _$CredentialCopyWithImpl<$Res, Credential>;
-@useResult
-$Res call({
- CredType type, Uint8List vKeyHash
-});
-
-
-
+abstract mixin class $CredentialCopyWith<$Res> {
+  factory $CredentialCopyWith(
+          Credential value, $Res Function(Credential) _then) =
+      _$CredentialCopyWithImpl;
+  @useResult
+  $Res call({CredType type, Uint8List vKeyHash});
 }
 
 /// @nodoc
-class _$CredentialCopyWithImpl<$Res,$Val extends Credential> implements $CredentialCopyWith<$Res> {
-  _$CredentialCopyWithImpl(this._value, this._then);
+class _$CredentialCopyWithImpl<$Res> implements $CredentialCopyWith<$Res> {
+  _$CredentialCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Credential _self;
+  final $Res Function(Credential) _then;
 
-/// Create a copy of Credential
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? vKeyHash = null,}) {
-  return _then(_value.copyWith(
-type: null == type ? _value.type : type // ignore: cast_nullable_to_non_nullable
-as CredType,vKeyHash: null == vKeyHash ? _value.vKeyHash : vKeyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$CredentialImplCopyWith<$Res> implements $CredentialCopyWith<$Res> {
-  factory _$$CredentialImplCopyWith(_$CredentialImpl value, $Res Function(_$CredentialImpl) then) = __$$CredentialImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- CredType type, Uint8List vKeyHash
-});
-
-
-
-}
-
-/// @nodoc
-class __$$CredentialImplCopyWithImpl<$Res> extends _$CredentialCopyWithImpl<$Res, _$CredentialImpl> implements _$$CredentialImplCopyWith<$Res> {
-  __$$CredentialImplCopyWithImpl(_$CredentialImpl _value, $Res Function(_$CredentialImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of Credential
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? vKeyHash = null,}) {
-  return _then(_$CredentialImpl(
-null == type ? _value.type : type // ignore: cast_nullable_to_non_nullable
-as CredType,null == vKeyHash ? _value.vKeyHash : vKeyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,
-  ));
-}
-
-
+  /// Create a copy of Credential
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? vKeyHash = null,
+  }) {
+    return _then(_self.copyWith(
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as CredType,
+      vKeyHash: null == vKeyHash
+          ? _self.vKeyHash
+          : vKeyHash // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _Credential extends Credential {
+  const _Credential(this.type, this.vKeyHash) : super._();
 
-class _$CredentialImpl extends _Credential  {
-  const _$CredentialImpl(this.type, this.vKeyHash): super._();
+  @override
+  final CredType type;
+  @override
+  final Uint8List vKeyHash;
 
-  
+  /// Create a copy of Credential
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CredentialCopyWith<_Credential> get copyWith =>
+      __$CredentialCopyWithImpl<_Credential>(this, _$identity);
 
-@override final  CredType type;
-@override final  Uint8List vKeyHash;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Credential &&
+            (identical(other.type, type) || other.type == type) &&
+            const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+  }
 
-@override
-String toString() {
-  return 'Credential(type: $type, vKeyHash: $vKeyHash)';
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, type, const DeepCollectionEquality().hash(vKeyHash));
+
+  @override
+  String toString() {
+    return 'Credential(type: $type, vKeyHash: $vKeyHash)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$CredentialImpl&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+/// @nodoc
+abstract mixin class _$CredentialCopyWith<$Res>
+    implements $CredentialCopyWith<$Res> {
+  factory _$CredentialCopyWith(
+          _Credential value, $Res Function(_Credential) _then) =
+      __$CredentialCopyWithImpl;
+  @override
+  @useResult
+  $Res call({CredType type, Uint8List vKeyHash});
 }
 
+/// @nodoc
+class __$CredentialCopyWithImpl<$Res> implements _$CredentialCopyWith<$Res> {
+  __$CredentialCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(vKeyHash));
+  final _Credential _self;
+  final $Res Function(_Credential) _then;
 
-/// Create a copy of Credential
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$CredentialImplCopyWith<_$CredentialImpl> get copyWith => __$$CredentialImplCopyWithImpl<_$CredentialImpl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of Credential
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? type = null,
+    Object? vKeyHash = null,
+  }) {
+    return _then(_Credential(
+      null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as CredType,
+      null == vKeyHash
+          ? _self.vKeyHash
+          : vKeyHash // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
 }
 
-
-abstract class _Credential extends Credential {
-  const factory _Credential(final  CredType type, final  Uint8List vKeyHash) = _$CredentialImpl;
-  const _Credential._(): super._();
-
-  
-
-@override CredType get type;@override Uint8List get vKeyHash;
-/// Create a copy of Credential
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$CredentialImplCopyWith<_$CredentialImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

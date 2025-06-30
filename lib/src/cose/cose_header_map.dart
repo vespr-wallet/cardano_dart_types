@@ -15,8 +15,7 @@ import "cose_signature.dart";
 part "cose_header_map.freezed.dart";
 
 @freezed
-class CoseHeaderMap with _$CoseHeaderMap implements COSEItem {
-
+sealed class CoseHeaderMap with _$CoseHeaderMap implements COSEItem {
   const factory CoseHeaderMap({
     CborValue? algorithmId, //  BigInteger / String / byte[] / (long / Integer)
     CborList? criticality, // Array<BigInteger / String / byte[] / (long / Integer)>

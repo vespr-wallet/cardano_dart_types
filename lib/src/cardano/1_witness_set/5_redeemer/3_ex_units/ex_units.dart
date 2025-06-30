@@ -7,8 +7,7 @@ import "../../../cbor_encodable.dart";
 part "ex_units.freezed.dart";
 
 @freezed
-class ExUnits with _$ExUnits implements CborEncodable {
-
+sealed class ExUnits with _$ExUnits implements CborEncodable {
   const factory ExUnits({
     required BigInt mem,
     required BigInt steps,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,150 +10,158 @@ part of 'transaction_input.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CardanoTransactionInput {
+  String get transactionHash; //hex
+  int get index;
 
- String get transactionHash => throw _privateConstructorUsedError;//hex
- int get index => throw _privateConstructorUsedError;
+  /// Create a copy of CardanoTransactionInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $CardanoTransactionInputCopyWith<CardanoTransactionInput> get copyWith =>
+      _$CardanoTransactionInputCopyWithImpl<CardanoTransactionInput>(
+          this as CardanoTransactionInput, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CardanoTransactionInput &&
+            (identical(other.transactionHash, transactionHash) ||
+                other.transactionHash == transactionHash) &&
+            (identical(other.index, index) || other.index == index));
+  }
 
+  @override
+  int get hashCode => Object.hash(runtimeType, transactionHash, index);
 
-
-
-
-
-/// Create a copy of CardanoTransactionInput
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$CardanoTransactionInputCopyWith<CardanoTransactionInput> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index)';
+  }
 }
 
 /// @nodoc
-abstract class $CardanoTransactionInputCopyWith<$Res>  {
-  factory $CardanoTransactionInputCopyWith(CardanoTransactionInput value, $Res Function(CardanoTransactionInput) then) = _$CardanoTransactionInputCopyWithImpl<$Res, CardanoTransactionInput>;
-@useResult
-$Res call({
- String transactionHash, int index
-});
-
-
-
+abstract mixin class $CardanoTransactionInputCopyWith<$Res> {
+  factory $CardanoTransactionInputCopyWith(CardanoTransactionInput value,
+          $Res Function(CardanoTransactionInput) _then) =
+      _$CardanoTransactionInputCopyWithImpl;
+  @useResult
+  $Res call({String transactionHash, int index});
 }
 
 /// @nodoc
-class _$CardanoTransactionInputCopyWithImpl<$Res,$Val extends CardanoTransactionInput> implements $CardanoTransactionInputCopyWith<$Res> {
-  _$CardanoTransactionInputCopyWithImpl(this._value, this._then);
+class _$CardanoTransactionInputCopyWithImpl<$Res>
+    implements $CardanoTransactionInputCopyWith<$Res> {
+  _$CardanoTransactionInputCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final CardanoTransactionInput _self;
+  final $Res Function(CardanoTransactionInput) _then;
 
-/// Create a copy of CardanoTransactionInput
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? transactionHash = null,Object? index = null,}) {
-  return _then(_value.copyWith(
-transactionHash: null == transactionHash ? _value.transactionHash : transactionHash // ignore: cast_nullable_to_non_nullable
-as String,index: null == index ? _value.index : index // ignore: cast_nullable_to_non_nullable
-as int,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$CardanoTransactionInputImplCopyWith<$Res> implements $CardanoTransactionInputCopyWith<$Res> {
-  factory _$$CardanoTransactionInputImplCopyWith(_$CardanoTransactionInputImpl value, $Res Function(_$CardanoTransactionInputImpl) then) = __$$CardanoTransactionInputImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- String transactionHash, int index
-});
-
-
-
-}
-
-/// @nodoc
-class __$$CardanoTransactionInputImplCopyWithImpl<$Res> extends _$CardanoTransactionInputCopyWithImpl<$Res, _$CardanoTransactionInputImpl> implements _$$CardanoTransactionInputImplCopyWith<$Res> {
-  __$$CardanoTransactionInputImplCopyWithImpl(_$CardanoTransactionInputImpl _value, $Res Function(_$CardanoTransactionInputImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of CardanoTransactionInput
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? transactionHash = null,Object? index = null,}) {
-  return _then(_$CardanoTransactionInputImpl(
-transactionHash: null == transactionHash ? _value.transactionHash : transactionHash // ignore: cast_nullable_to_non_nullable
-as String,index: null == index ? _value.index : index // ignore: cast_nullable_to_non_nullable
-as int,
-  ));
-}
-
-
+  /// Create a copy of CardanoTransactionInput
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? transactionHash = null,
+    Object? index = null,
+  }) {
+    return _then(_self.copyWith(
+      transactionHash: null == transactionHash
+          ? _self.transactionHash
+          : transactionHash // ignore: cast_nullable_to_non_nullable
+              as String,
+      index: null == index
+          ? _self.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _CardanoTransactionInput extends CardanoTransactionInput {
+  const _CardanoTransactionInput(
+      {required this.transactionHash, required this.index})
+      : super._();
 
-class _$CardanoTransactionInputImpl extends _CardanoTransactionInput  {
-  const _$CardanoTransactionInputImpl({required this.transactionHash, required this.index}): super._();
-
-  
-
-@override final  String transactionHash;
+  @override
+  final String transactionHash;
 //hex
-@override final  int index;
+  @override
+  final int index;
 
-@override
-String toString() {
-  return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index)';
+  /// Create a copy of CardanoTransactionInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CardanoTransactionInputCopyWith<_CardanoTransactionInput> get copyWith =>
+      __$CardanoTransactionInputCopyWithImpl<_CardanoTransactionInput>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _CardanoTransactionInput &&
+            (identical(other.transactionHash, transactionHash) ||
+                other.transactionHash == transactionHash) &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, transactionHash, index);
+
+  @override
+  String toString() {
+    return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$CardanoTransactionInputImpl&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index));
+/// @nodoc
+abstract mixin class _$CardanoTransactionInputCopyWith<$Res>
+    implements $CardanoTransactionInputCopyWith<$Res> {
+  factory _$CardanoTransactionInputCopyWith(_CardanoTransactionInput value,
+          $Res Function(_CardanoTransactionInput) _then) =
+      __$CardanoTransactionInputCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String transactionHash, int index});
 }
 
+/// @nodoc
+class __$CardanoTransactionInputCopyWithImpl<$Res>
+    implements _$CardanoTransactionInputCopyWith<$Res> {
+  __$CardanoTransactionInputCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,transactionHash,index);
+  final _CardanoTransactionInput _self;
+  final $Res Function(_CardanoTransactionInput) _then;
 
-/// Create a copy of CardanoTransactionInput
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$CardanoTransactionInputImplCopyWith<_$CardanoTransactionInputImpl> get copyWith => __$$CardanoTransactionInputImplCopyWithImpl<_$CardanoTransactionInputImpl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of CardanoTransactionInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? transactionHash = null,
+    Object? index = null,
+  }) {
+    return _then(_CardanoTransactionInput(
+      transactionHash: null == transactionHash
+          ? _self.transactionHash
+          : transactionHash // ignore: cast_nullable_to_non_nullable
+              as String,
+      index: null == index
+          ? _self.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
-
-abstract class _CardanoTransactionInput extends CardanoTransactionInput {
-  const factory _CardanoTransactionInput({required final  String transactionHash, required final  int index}) = _$CardanoTransactionInputImpl;
-  const _CardanoTransactionInput._(): super._();
-
-  
-
-@override String get transactionHash;//hex
-@override int get index;
-/// Create a copy of CardanoTransactionInput
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$CardanoTransactionInputImplCopyWith<_$CardanoTransactionInputImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

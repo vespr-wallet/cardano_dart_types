@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,156 +10,179 @@ part of 'constitution.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Constitution {
+  Anchor get anchor;
+  String? get scriptHash;
 
- Anchor get anchor => throw _privateConstructorUsedError; String? get scriptHash => throw _privateConstructorUsedError;
+  /// Create a copy of Constitution
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ConstitutionCopyWith<Constitution> get copyWith =>
+      _$ConstitutionCopyWithImpl<Constitution>(
+          this as Constitution, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Constitution &&
+            (identical(other.anchor, anchor) || other.anchor == anchor) &&
+            (identical(other.scriptHash, scriptHash) ||
+                other.scriptHash == scriptHash));
+  }
 
+  @override
+  int get hashCode => Object.hash(runtimeType, anchor, scriptHash);
 
-
-
-
-
-/// Create a copy of Constitution
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$ConstitutionCopyWith<Constitution> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'Constitution(anchor: $anchor, scriptHash: $scriptHash)';
+  }
 }
 
 /// @nodoc
-abstract class $ConstitutionCopyWith<$Res>  {
-  factory $ConstitutionCopyWith(Constitution value, $Res Function(Constitution) then) = _$ConstitutionCopyWithImpl<$Res, Constitution>;
-@useResult
-$Res call({
- Anchor anchor, String? scriptHash
-});
+abstract mixin class $ConstitutionCopyWith<$Res> {
+  factory $ConstitutionCopyWith(
+          Constitution value, $Res Function(Constitution) _then) =
+      _$ConstitutionCopyWithImpl;
+  @useResult
+  $Res call({Anchor anchor, String? scriptHash});
 
-
-$AnchorCopyWith<$Res> get anchor;
+  $AnchorCopyWith<$Res> get anchor;
 }
 
 /// @nodoc
-class _$ConstitutionCopyWithImpl<$Res,$Val extends Constitution> implements $ConstitutionCopyWith<$Res> {
-  _$ConstitutionCopyWithImpl(this._value, this._then);
+class _$ConstitutionCopyWithImpl<$Res> implements $ConstitutionCopyWith<$Res> {
+  _$ConstitutionCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Constitution _self;
+  final $Res Function(Constitution) _then;
 
-/// Create a copy of Constitution
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? anchor = null,Object? scriptHash = freezed,}) {
-  return _then(_value.copyWith(
-anchor: null == anchor ? _value.anchor : anchor // ignore: cast_nullable_to_non_nullable
-as Anchor,scriptHash: freezed == scriptHash ? _value.scriptHash : scriptHash // ignore: cast_nullable_to_non_nullable
-as String?,
-  )as $Val);
-}
-/// Create a copy of Constitution
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$AnchorCopyWith<$Res> get anchor {
-  
-  return $AnchorCopyWith<$Res>(_value.anchor, (value) {
-    return _then(_value.copyWith(anchor: value) as $Val);
-  });
-}
-}
+  /// Create a copy of Constitution
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? anchor = null,
+    Object? scriptHash = freezed,
+  }) {
+    return _then(_self.copyWith(
+      anchor: null == anchor
+          ? _self.anchor
+          : anchor // ignore: cast_nullable_to_non_nullable
+              as Anchor,
+      scriptHash: freezed == scriptHash
+          ? _self.scriptHash
+          : scriptHash // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 
-
-/// @nodoc
-abstract class _$$ConstitutionImplCopyWith<$Res> implements $ConstitutionCopyWith<$Res> {
-  factory _$$ConstitutionImplCopyWith(_$ConstitutionImpl value, $Res Function(_$ConstitutionImpl) then) = __$$ConstitutionImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- Anchor anchor, String? scriptHash
-});
-
-
-@override $AnchorCopyWith<$Res> get anchor;
-}
-
-/// @nodoc
-class __$$ConstitutionImplCopyWithImpl<$Res> extends _$ConstitutionCopyWithImpl<$Res, _$ConstitutionImpl> implements _$$ConstitutionImplCopyWith<$Res> {
-  __$$ConstitutionImplCopyWithImpl(_$ConstitutionImpl _value, $Res Function(_$ConstitutionImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of Constitution
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? anchor = null,Object? scriptHash = freezed,}) {
-  return _then(_$ConstitutionImpl(
-anchor: null == anchor ? _value.anchor : anchor // ignore: cast_nullable_to_non_nullable
-as Anchor,scriptHash: freezed == scriptHash ? _value.scriptHash : scriptHash // ignore: cast_nullable_to_non_nullable
-as String?,
-  ));
-}
-
-
+  /// Create a copy of Constitution
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AnchorCopyWith<$Res> get anchor {
+    return $AnchorCopyWith<$Res>(_self.anchor, (value) {
+      return _then(_self.copyWith(anchor: value));
+    });
+  }
 }
 
 /// @nodoc
 
+class _Constitution extends Constitution {
+  const _Constitution({required this.anchor, required this.scriptHash})
+      : super._();
 
-class _$ConstitutionImpl extends _Constitution  {
-  const _$ConstitutionImpl({required this.anchor, required this.scriptHash}): super._();
+  @override
+  final Anchor anchor;
+  @override
+  final String? scriptHash;
 
-  
+  /// Create a copy of Constitution
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ConstitutionCopyWith<_Constitution> get copyWith =>
+      __$ConstitutionCopyWithImpl<_Constitution>(this, _$identity);
 
-@override final  Anchor anchor;
-@override final  String? scriptHash;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Constitution &&
+            (identical(other.anchor, anchor) || other.anchor == anchor) &&
+            (identical(other.scriptHash, scriptHash) ||
+                other.scriptHash == scriptHash));
+  }
 
-@override
-String toString() {
-  return 'Constitution(anchor: $anchor, scriptHash: $scriptHash)';
+  @override
+  int get hashCode => Object.hash(runtimeType, anchor, scriptHash);
+
+  @override
+  String toString() {
+    return 'Constitution(anchor: $anchor, scriptHash: $scriptHash)';
+  }
 }
 
+/// @nodoc
+abstract mixin class _$ConstitutionCopyWith<$Res>
+    implements $ConstitutionCopyWith<$Res> {
+  factory _$ConstitutionCopyWith(
+          _Constitution value, $Res Function(_Constitution) _then) =
+      __$ConstitutionCopyWithImpl;
+  @override
+  @useResult
+  $Res call({Anchor anchor, String? scriptHash});
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$ConstitutionImpl&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.scriptHash, scriptHash) || other.scriptHash == scriptHash));
+  @override
+  $AnchorCopyWith<$Res> get anchor;
 }
 
+/// @nodoc
+class __$ConstitutionCopyWithImpl<$Res>
+    implements _$ConstitutionCopyWith<$Res> {
+  __$ConstitutionCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,anchor,scriptHash);
+  final _Constitution _self;
+  final $Res Function(_Constitution) _then;
 
-/// Create a copy of Constitution
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$ConstitutionImplCopyWith<_$ConstitutionImpl> get copyWith => __$$ConstitutionImplCopyWithImpl<_$ConstitutionImpl>(this, _$identity);
+  /// Create a copy of Constitution
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? anchor = null,
+    Object? scriptHash = freezed,
+  }) {
+    return _then(_Constitution(
+      anchor: null == anchor
+          ? _self.anchor
+          : anchor // ignore: cast_nullable_to_non_nullable
+              as Anchor,
+      scriptHash: freezed == scriptHash
+          ? _self.scriptHash
+          : scriptHash // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 
-
-
-
-
-
-
-
+  /// Create a copy of Constitution
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AnchorCopyWith<$Res> get anchor {
+    return $AnchorCopyWith<$Res>(_self.anchor, (value) {
+      return _then(_self.copyWith(anchor: value));
+    });
+  }
 }
 
-
-abstract class _Constitution extends Constitution {
-  const factory _Constitution({required final  Anchor anchor, required final  String? scriptHash}) = _$ConstitutionImpl;
-  const _Constitution._(): super._();
-
-  
-
-@override Anchor get anchor;@override String? get scriptHash;
-/// Create a copy of Constitution
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$ConstitutionImplCopyWith<_$ConstitutionImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

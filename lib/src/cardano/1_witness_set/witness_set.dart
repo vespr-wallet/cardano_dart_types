@@ -20,8 +20,7 @@ import "7_plutus_script_v3/plutus_script_v3.dart";
 part "witness_set.freezed.dart";
 
 @freezed
-class ListWithCborType<T> with _$ListWithCborType<T> {
-
+sealed class ListWithCborType<T> with _$ListWithCborType<T> {
   const factory ListWithCborType(
     List<T> items,
     CborLengthType cborLengthType,
@@ -34,8 +33,7 @@ class ListWithCborType<T> with _$ListWithCborType<T> {
 
 /// this can be transaction signatures or a full blown smart contract
 @freezed
-class WitnessSet with _$WitnessSet implements CborEncodable {
-
+sealed class WitnessSet with _$WitnessSet implements CborEncodable {
   const factory WitnessSet({
     ListWithCborType<WitnessVKey>? ivkeyWitnesses,
     ListWithCborType<NativeScript>? inativeScripts,
@@ -228,7 +226,8 @@ class WitnessSet with _$WitnessSet implements CborEncodable {
           final encodedValue = encoded[encodedKey];
           final inputValue = cMap[inputKey];
           if (encodedValue?.hexEncode() != inputValue?.hexEncode()) {
-            throw Exception("Value mismatch for key $encodedKey: ${encodedValue?.hexEncode()} != ${inputValue?.hexEncode()}");
+            throw Exception(
+                "Value mismatch for key $encodedKey: ${encodedValue?.hexEncode()} != ${inputValue?.hexEncode()}");
           }
         }
 

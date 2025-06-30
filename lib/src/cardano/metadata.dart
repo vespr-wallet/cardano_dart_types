@@ -8,7 +8,7 @@ part "metadata.freezed.dart";
 
 @freezed
 @immutable
-class CBORMetadata with _$CBORMetadata implements CborEncodable {
+sealed class CBORMetadata with _$CBORMetadata implements CborEncodable {
   factory CBORMetadata({required CborValue value}) = _CBORMetadata;
   CBORMetadata._();
 

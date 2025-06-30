@@ -8,8 +8,7 @@ part "transaction_input.freezed.dart";
 
 /// Points to an UTXO unspent change entry using a transactionId and index.
 @freezed
-class CardanoTransactionInput with _$CardanoTransactionInput implements CborEncodable {
-
+sealed class CardanoTransactionInput with _$CardanoTransactionInput implements CborEncodable {
   const factory CardanoTransactionInput({
     required String transactionHash, //hex
     required int index,

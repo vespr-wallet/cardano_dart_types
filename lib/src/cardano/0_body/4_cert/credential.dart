@@ -25,7 +25,7 @@ enum CredType {
 }
 
 @freezed
-class Credential with _$Credential implements CborEncodable {
+sealed class Credential with _$Credential implements CborEncodable {
   const factory Credential(
     CredType type,
     Uint8List vKeyHash,

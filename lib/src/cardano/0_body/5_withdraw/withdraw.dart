@@ -6,8 +6,7 @@ import "../../../utils/transformations.dart";
 part "withdraw.freezed.dart";
 
 @freezed
-class Withdraw with _$Withdraw {
-
+sealed class Withdraw with _$Withdraw {
   const factory Withdraw(String stakeAddressBech32, BigInt coin) = _Withdraw;
   const Withdraw._();
 

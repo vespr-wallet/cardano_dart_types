@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,150 +10,147 @@ part of 'voting_procedures.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$VotingProcedures {
+  Map<Voter, Map<GovActionId, VotingProcedure>> get voting;
 
- Map<Voter, Map<GovActionId, VotingProcedure>> get voting => throw _privateConstructorUsedError;
+  /// Create a copy of VotingProcedures
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $VotingProceduresCopyWith<VotingProcedures> get copyWith =>
+      _$VotingProceduresCopyWithImpl<VotingProcedures>(
+          this as VotingProcedures, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is VotingProcedures &&
+            const DeepCollectionEquality().equals(other.voting, voting));
+  }
 
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(voting));
 
-
-
-
-
-/// Create a copy of VotingProcedures
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$VotingProceduresCopyWith<VotingProcedures> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'VotingProcedures(voting: $voting)';
+  }
 }
 
 /// @nodoc
-abstract class $VotingProceduresCopyWith<$Res>  {
-  factory $VotingProceduresCopyWith(VotingProcedures value, $Res Function(VotingProcedures) then) = _$VotingProceduresCopyWithImpl<$Res, VotingProcedures>;
-@useResult
-$Res call({
- Map<Voter, Map<GovActionId, VotingProcedure>> voting
-});
-
-
-
+abstract mixin class $VotingProceduresCopyWith<$Res> {
+  factory $VotingProceduresCopyWith(
+          VotingProcedures value, $Res Function(VotingProcedures) _then) =
+      _$VotingProceduresCopyWithImpl;
+  @useResult
+  $Res call({Map<Voter, Map<GovActionId, VotingProcedure>> voting});
 }
 
 /// @nodoc
-class _$VotingProceduresCopyWithImpl<$Res,$Val extends VotingProcedures> implements $VotingProceduresCopyWith<$Res> {
-  _$VotingProceduresCopyWithImpl(this._value, this._then);
+class _$VotingProceduresCopyWithImpl<$Res>
+    implements $VotingProceduresCopyWith<$Res> {
+  _$VotingProceduresCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final VotingProcedures _self;
+  final $Res Function(VotingProcedures) _then;
 
-/// Create a copy of VotingProcedures
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? voting = null,}) {
-  return _then(_value.copyWith(
-voting: null == voting ? _value.voting : voting // ignore: cast_nullable_to_non_nullable
-as Map<Voter, Map<GovActionId, VotingProcedure>>,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$VotingProceduresImplCopyWith<$Res> implements $VotingProceduresCopyWith<$Res> {
-  factory _$$VotingProceduresImplCopyWith(_$VotingProceduresImpl value, $Res Function(_$VotingProceduresImpl) then) = __$$VotingProceduresImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- Map<Voter, Map<GovActionId, VotingProcedure>> voting
-});
-
-
-
-}
-
-/// @nodoc
-class __$$VotingProceduresImplCopyWithImpl<$Res> extends _$VotingProceduresCopyWithImpl<$Res, _$VotingProceduresImpl> implements _$$VotingProceduresImplCopyWith<$Res> {
-  __$$VotingProceduresImplCopyWithImpl(_$VotingProceduresImpl _value, $Res Function(_$VotingProceduresImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of VotingProcedures
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? voting = null,}) {
-  return _then(_$VotingProceduresImpl(
-voting: null == voting ? _value._voting : voting // ignore: cast_nullable_to_non_nullable
-as Map<Voter, Map<GovActionId, VotingProcedure>>,
-  ));
-}
-
-
+  /// Create a copy of VotingProcedures
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? voting = null,
+  }) {
+    return _then(_self.copyWith(
+      voting: null == voting
+          ? _self.voting
+          : voting // ignore: cast_nullable_to_non_nullable
+              as Map<Voter, Map<GovActionId, VotingProcedure>>,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _VotingProcedures extends VotingProcedures {
+  const _VotingProcedures(
+      {required final Map<Voter, Map<GovActionId, VotingProcedure>> voting})
+      : _voting = voting,
+        super._();
 
-class _$VotingProceduresImpl extends _VotingProcedures  {
-  const _$VotingProceduresImpl({required final  Map<Voter, Map<GovActionId, VotingProcedure>> voting}): _voting = voting,super._();
+  final Map<Voter, Map<GovActionId, VotingProcedure>> _voting;
+  @override
+  Map<Voter, Map<GovActionId, VotingProcedure>> get voting {
+    if (_voting is EqualUnmodifiableMapView) return _voting;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_voting);
+  }
 
-  
+  /// Create a copy of VotingProcedures
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$VotingProceduresCopyWith<_VotingProcedures> get copyWith =>
+      __$VotingProceduresCopyWithImpl<_VotingProcedures>(this, _$identity);
 
- final  Map<Voter, Map<GovActionId, VotingProcedure>> _voting;
-@override Map<Voter, Map<GovActionId, VotingProcedure>> get voting {
-  if (_voting is EqualUnmodifiableMapView) return _voting;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_voting);
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _VotingProcedures &&
+            const DeepCollectionEquality().equals(other._voting, _voting));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_voting));
+
+  @override
+  String toString() {
+    return 'VotingProcedures(voting: $voting)';
+  }
 }
 
-
-@override
-String toString() {
-  return 'VotingProcedures(voting: $voting)';
+/// @nodoc
+abstract mixin class _$VotingProceduresCopyWith<$Res>
+    implements $VotingProceduresCopyWith<$Res> {
+  factory _$VotingProceduresCopyWith(
+          _VotingProcedures value, $Res Function(_VotingProcedures) _then) =
+      __$VotingProceduresCopyWithImpl;
+  @override
+  @useResult
+  $Res call({Map<Voter, Map<GovActionId, VotingProcedure>> voting});
 }
 
+/// @nodoc
+class __$VotingProceduresCopyWithImpl<$Res>
+    implements _$VotingProceduresCopyWith<$Res> {
+  __$VotingProceduresCopyWithImpl(this._self, this._then);
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$VotingProceduresImpl&&const DeepCollectionEquality().equals(other._voting, _voting));
+  final _VotingProcedures _self;
+  final $Res Function(_VotingProcedures) _then;
+
+  /// Create a copy of VotingProcedures
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? voting = null,
+  }) {
+    return _then(_VotingProcedures(
+      voting: null == voting
+          ? _self._voting
+          : voting // ignore: cast_nullable_to_non_nullable
+              as Map<Voter, Map<GovActionId, VotingProcedure>>,
+    ));
+  }
 }
 
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_voting));
-
-/// Create a copy of VotingProcedures
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$VotingProceduresImplCopyWith<_$VotingProceduresImpl> get copyWith => __$$VotingProceduresImplCopyWithImpl<_$VotingProceduresImpl>(this, _$identity);
-
-
-
-
-
-
-
-
-}
-
-
-abstract class _VotingProcedures extends VotingProcedures {
-  const factory _VotingProcedures({required final  Map<Voter, Map<GovActionId, VotingProcedure>> voting}) = _$VotingProceduresImpl;
-  const _VotingProcedures._(): super._();
-
-  
-
-@override Map<Voter, Map<GovActionId, VotingProcedure>> get voting;
-/// Create a copy of VotingProcedures
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$VotingProceduresImplCopyWith<_$VotingProceduresImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

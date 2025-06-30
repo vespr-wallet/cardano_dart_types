@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,147 +10,150 @@ part of 'voter.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Voter {
+  VoterType get voterType;
+  Uint8List get vKeyHash;
 
- VoterType get voterType => throw _privateConstructorUsedError; Uint8List get vKeyHash => throw _privateConstructorUsedError;
+  /// Create a copy of Voter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $VoterCopyWith<Voter> get copyWith =>
+      _$VoterCopyWithImpl<Voter>(this as Voter, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Voter &&
+            (identical(other.voterType, voterType) ||
+                other.voterType == voterType) &&
+            const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+  }
 
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, voterType, const DeepCollectionEquality().hash(vKeyHash));
 
-
-
-
-
-/// Create a copy of Voter
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$VoterCopyWith<Voter> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'Voter(voterType: $voterType, vKeyHash: $vKeyHash)';
+  }
 }
 
 /// @nodoc
-abstract class $VoterCopyWith<$Res>  {
-  factory $VoterCopyWith(Voter value, $Res Function(Voter) then) = _$VoterCopyWithImpl<$Res, Voter>;
-@useResult
-$Res call({
- VoterType voterType, Uint8List vKeyHash
-});
-
-
-
+abstract mixin class $VoterCopyWith<$Res> {
+  factory $VoterCopyWith(Voter value, $Res Function(Voter) _then) =
+      _$VoterCopyWithImpl;
+  @useResult
+  $Res call({VoterType voterType, Uint8List vKeyHash});
 }
 
 /// @nodoc
-class _$VoterCopyWithImpl<$Res,$Val extends Voter> implements $VoterCopyWith<$Res> {
-  _$VoterCopyWithImpl(this._value, this._then);
+class _$VoterCopyWithImpl<$Res> implements $VoterCopyWith<$Res> {
+  _$VoterCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Voter _self;
+  final $Res Function(Voter) _then;
 
-/// Create a copy of Voter
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? voterType = null,Object? vKeyHash = null,}) {
-  return _then(_value.copyWith(
-voterType: null == voterType ? _value.voterType : voterType // ignore: cast_nullable_to_non_nullable
-as VoterType,vKeyHash: null == vKeyHash ? _value.vKeyHash : vKeyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$VoterImplCopyWith<$Res> implements $VoterCopyWith<$Res> {
-  factory _$$VoterImplCopyWith(_$VoterImpl value, $Res Function(_$VoterImpl) then) = __$$VoterImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- VoterType voterType, Uint8List vKeyHash
-});
-
-
-
-}
-
-/// @nodoc
-class __$$VoterImplCopyWithImpl<$Res> extends _$VoterCopyWithImpl<$Res, _$VoterImpl> implements _$$VoterImplCopyWith<$Res> {
-  __$$VoterImplCopyWithImpl(_$VoterImpl _value, $Res Function(_$VoterImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of Voter
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? voterType = null,Object? vKeyHash = null,}) {
-  return _then(_$VoterImpl(
-voterType: null == voterType ? _value.voterType : voterType // ignore: cast_nullable_to_non_nullable
-as VoterType,vKeyHash: null == vKeyHash ? _value.vKeyHash : vKeyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,
-  ));
-}
-
-
+  /// Create a copy of Voter
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? voterType = null,
+    Object? vKeyHash = null,
+  }) {
+    return _then(_self.copyWith(
+      voterType: null == voterType
+          ? _self.voterType
+          : voterType // ignore: cast_nullable_to_non_nullable
+              as VoterType,
+      vKeyHash: null == vKeyHash
+          ? _self.vKeyHash
+          : vKeyHash // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _Voter extends Voter {
+  const _Voter({required this.voterType, required this.vKeyHash}) : super._();
 
-class _$VoterImpl extends _Voter  {
-  const _$VoterImpl({required this.voterType, required this.vKeyHash}): super._();
+  @override
+  final VoterType voterType;
+  @override
+  final Uint8List vKeyHash;
 
-  
+  /// Create a copy of Voter
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$VoterCopyWith<_Voter> get copyWith =>
+      __$VoterCopyWithImpl<_Voter>(this, _$identity);
 
-@override final  VoterType voterType;
-@override final  Uint8List vKeyHash;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Voter &&
+            (identical(other.voterType, voterType) ||
+                other.voterType == voterType) &&
+            const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+  }
 
-@override
-String toString() {
-  return 'Voter(voterType: $voterType, vKeyHash: $vKeyHash)';
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, voterType, const DeepCollectionEquality().hash(vKeyHash));
+
+  @override
+  String toString() {
+    return 'Voter(voterType: $voterType, vKeyHash: $vKeyHash)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$VoterImpl&&(identical(other.voterType, voterType) || other.voterType == voterType)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+/// @nodoc
+abstract mixin class _$VoterCopyWith<$Res> implements $VoterCopyWith<$Res> {
+  factory _$VoterCopyWith(_Voter value, $Res Function(_Voter) _then) =
+      __$VoterCopyWithImpl;
+  @override
+  @useResult
+  $Res call({VoterType voterType, Uint8List vKeyHash});
 }
 
+/// @nodoc
+class __$VoterCopyWithImpl<$Res> implements _$VoterCopyWith<$Res> {
+  __$VoterCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,voterType,const DeepCollectionEquality().hash(vKeyHash));
+  final _Voter _self;
+  final $Res Function(_Voter) _then;
 
-/// Create a copy of Voter
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$VoterImplCopyWith<_$VoterImpl> get copyWith => __$$VoterImplCopyWithImpl<_$VoterImpl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of Voter
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? voterType = null,
+    Object? vKeyHash = null,
+  }) {
+    return _then(_Voter(
+      voterType: null == voterType
+          ? _self.voterType
+          : voterType // ignore: cast_nullable_to_non_nullable
+              as VoterType,
+      vKeyHash: null == vKeyHash
+          ? _self.vKeyHash
+          : vKeyHash // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
 }
 
-
-abstract class _Voter extends Voter {
-  const factory _Voter({required final  VoterType voterType, required final  Uint8List vKeyHash}) = _$VoterImpl;
-  const _Voter._(): super._();
-
-  
-
-@override VoterType get voterType;@override Uint8List get vKeyHash;
-/// Create a copy of Voter
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$VoterImplCopyWith<_$VoterImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

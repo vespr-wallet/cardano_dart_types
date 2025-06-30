@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,156 +10,197 @@ part of 'cose_key.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CoseKey {
+  Uint8List get keyId; // verification key bytes
+  CborValue get algorithmId;
+  CborValue get crvKey;
+  CborValue get keyType;
 
- Uint8List get keyId => throw _privateConstructorUsedError;// verification key bytes
- CborValue get algorithmId => throw _privateConstructorUsedError; CborValue get crvKey => throw _privateConstructorUsedError; CborValue get keyType => throw _privateConstructorUsedError;
+  /// Create a copy of CoseKey
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $CoseKeyCopyWith<CoseKey> get copyWith =>
+      _$CoseKeyCopyWithImpl<CoseKey>(this as CoseKey, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CoseKey &&
+            const DeepCollectionEquality().equals(other.keyId, keyId) &&
+            (identical(other.algorithmId, algorithmId) ||
+                other.algorithmId == algorithmId) &&
+            (identical(other.crvKey, crvKey) || other.crvKey == crvKey) &&
+            (identical(other.keyType, keyType) || other.keyType == keyType));
+  }
 
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(keyId), algorithmId, crvKey, keyType);
 
-
-
-
-
-/// Create a copy of CoseKey
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$CoseKeyCopyWith<CoseKey> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'CoseKey(keyId: $keyId, algorithmId: $algorithmId, crvKey: $crvKey, keyType: $keyType)';
+  }
 }
 
 /// @nodoc
-abstract class $CoseKeyCopyWith<$Res>  {
-  factory $CoseKeyCopyWith(CoseKey value, $Res Function(CoseKey) then) = _$CoseKeyCopyWithImpl<$Res, CoseKey>;
-@useResult
-$Res call({
- Uint8List keyId, CborValue algorithmId, CborValue crvKey, CborValue keyType
-});
-
-
-
+abstract mixin class $CoseKeyCopyWith<$Res> {
+  factory $CoseKeyCopyWith(CoseKey value, $Res Function(CoseKey) _then) =
+      _$CoseKeyCopyWithImpl;
+  @useResult
+  $Res call(
+      {Uint8List keyId,
+      CborValue algorithmId,
+      CborValue crvKey,
+      CborValue keyType});
 }
 
 /// @nodoc
-class _$CoseKeyCopyWithImpl<$Res,$Val extends CoseKey> implements $CoseKeyCopyWith<$Res> {
-  _$CoseKeyCopyWithImpl(this._value, this._then);
+class _$CoseKeyCopyWithImpl<$Res> implements $CoseKeyCopyWith<$Res> {
+  _$CoseKeyCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final CoseKey _self;
+  final $Res Function(CoseKey) _then;
 
-/// Create a copy of CoseKey
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? keyId = null,Object? algorithmId = null,Object? crvKey = null,Object? keyType = null,}) {
-  return _then(_value.copyWith(
-keyId: null == keyId ? _value.keyId : keyId // ignore: cast_nullable_to_non_nullable
-as Uint8List,algorithmId: null == algorithmId ? _value.algorithmId : algorithmId // ignore: cast_nullable_to_non_nullable
-as CborValue,crvKey: null == crvKey ? _value.crvKey : crvKey // ignore: cast_nullable_to_non_nullable
-as CborValue,keyType: null == keyType ? _value.keyType : keyType // ignore: cast_nullable_to_non_nullable
-as CborValue,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$CoseKeyImplCopyWith<$Res> implements $CoseKeyCopyWith<$Res> {
-  factory _$$CoseKeyImplCopyWith(_$CoseKeyImpl value, $Res Function(_$CoseKeyImpl) then) = __$$CoseKeyImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- Uint8List keyId, CborValue algorithmId, CborValue crvKey, CborValue keyType
-});
-
-
-
-}
-
-/// @nodoc
-class __$$CoseKeyImplCopyWithImpl<$Res> extends _$CoseKeyCopyWithImpl<$Res, _$CoseKeyImpl> implements _$$CoseKeyImplCopyWith<$Res> {
-  __$$CoseKeyImplCopyWithImpl(_$CoseKeyImpl _value, $Res Function(_$CoseKeyImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of CoseKey
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? keyId = null,Object? algorithmId = null,Object? crvKey = null,Object? keyType = null,}) {
-  return _then(_$CoseKeyImpl(
-keyId: null == keyId ? _value.keyId : keyId // ignore: cast_nullable_to_non_nullable
-as Uint8List,algorithmId: null == algorithmId ? _value.algorithmId : algorithmId // ignore: cast_nullable_to_non_nullable
-as CborValue,crvKey: null == crvKey ? _value.crvKey : crvKey // ignore: cast_nullable_to_non_nullable
-as CborValue,keyType: null == keyType ? _value.keyType : keyType // ignore: cast_nullable_to_non_nullable
-as CborValue,
-  ));
-}
-
-
+  /// Create a copy of CoseKey
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? keyId = null,
+    Object? algorithmId = null,
+    Object? crvKey = null,
+    Object? keyType = null,
+  }) {
+    return _then(_self.copyWith(
+      keyId: null == keyId
+          ? _self.keyId
+          : keyId // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      algorithmId: null == algorithmId
+          ? _self.algorithmId
+          : algorithmId // ignore: cast_nullable_to_non_nullable
+              as CborValue,
+      crvKey: null == crvKey
+          ? _self.crvKey
+          : crvKey // ignore: cast_nullable_to_non_nullable
+              as CborValue,
+      keyType: null == keyType
+          ? _self.keyType
+          : keyType // ignore: cast_nullable_to_non_nullable
+              as CborValue,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _CoseKey extends CoseKey {
+  const _CoseKey(
+      {required this.keyId,
+      this.algorithmId = const CborSmallInt(ALG_EdDSA),
+      this.crvKey = const CborSmallInt(CRV_Ed25519),
+      this.keyType = const CborSmallInt(OKP)})
+      : super._();
 
-class _$CoseKeyImpl extends _CoseKey  {
-  const _$CoseKeyImpl({required this.keyId, this.algorithmId = const CborSmallInt(ALG_EdDSA), this.crvKey = const CborSmallInt(CRV_Ed25519), this.keyType = const CborSmallInt(OKP)}): super._();
-
-  
-
-@override final  Uint8List keyId;
+  @override
+  final Uint8List keyId;
 // verification key bytes
-@override@JsonKey() final  CborValue algorithmId;
-@override@JsonKey() final  CborValue crvKey;
-@override@JsonKey() final  CborValue keyType;
+  @override
+  @JsonKey()
+  final CborValue algorithmId;
+  @override
+  @JsonKey()
+  final CborValue crvKey;
+  @override
+  @JsonKey()
+  final CborValue keyType;
 
-@override
-String toString() {
-  return 'CoseKey(keyId: $keyId, algorithmId: $algorithmId, crvKey: $crvKey, keyType: $keyType)';
+  /// Create a copy of CoseKey
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CoseKeyCopyWith<_CoseKey> get copyWith =>
+      __$CoseKeyCopyWithImpl<_CoseKey>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _CoseKey &&
+            const DeepCollectionEquality().equals(other.keyId, keyId) &&
+            (identical(other.algorithmId, algorithmId) ||
+                other.algorithmId == algorithmId) &&
+            (identical(other.crvKey, crvKey) || other.crvKey == crvKey) &&
+            (identical(other.keyType, keyType) || other.keyType == keyType));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(keyId), algorithmId, crvKey, keyType);
+
+  @override
+  String toString() {
+    return 'CoseKey(keyId: $keyId, algorithmId: $algorithmId, crvKey: $crvKey, keyType: $keyType)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$CoseKeyImpl&&const DeepCollectionEquality().equals(other.keyId, keyId)&&(identical(other.algorithmId, algorithmId) || other.algorithmId == algorithmId)&&(identical(other.crvKey, crvKey) || other.crvKey == crvKey)&&(identical(other.keyType, keyType) || other.keyType == keyType));
+/// @nodoc
+abstract mixin class _$CoseKeyCopyWith<$Res> implements $CoseKeyCopyWith<$Res> {
+  factory _$CoseKeyCopyWith(_CoseKey value, $Res Function(_CoseKey) _then) =
+      __$CoseKeyCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {Uint8List keyId,
+      CborValue algorithmId,
+      CborValue crvKey,
+      CborValue keyType});
 }
 
+/// @nodoc
+class __$CoseKeyCopyWithImpl<$Res> implements _$CoseKeyCopyWith<$Res> {
+  __$CoseKeyCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(keyId),algorithmId,crvKey,keyType);
+  final _CoseKey _self;
+  final $Res Function(_CoseKey) _then;
 
-/// Create a copy of CoseKey
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$CoseKeyImplCopyWith<_$CoseKeyImpl> get copyWith => __$$CoseKeyImplCopyWithImpl<_$CoseKeyImpl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of CoseKey
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? keyId = null,
+    Object? algorithmId = null,
+    Object? crvKey = null,
+    Object? keyType = null,
+  }) {
+    return _then(_CoseKey(
+      keyId: null == keyId
+          ? _self.keyId
+          : keyId // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      algorithmId: null == algorithmId
+          ? _self.algorithmId
+          : algorithmId // ignore: cast_nullable_to_non_nullable
+              as CborValue,
+      crvKey: null == crvKey
+          ? _self.crvKey
+          : crvKey // ignore: cast_nullable_to_non_nullable
+              as CborValue,
+      keyType: null == keyType
+          ? _self.keyType
+          : keyType // ignore: cast_nullable_to_non_nullable
+              as CborValue,
+    ));
+  }
 }
 
-
-abstract class _CoseKey extends CoseKey {
-  const factory _CoseKey({required final  Uint8List keyId, final  CborValue algorithmId, final  CborValue crvKey, final  CborValue keyType}) = _$CoseKeyImpl;
-  const _CoseKey._(): super._();
-
-  
-
-@override Uint8List get keyId;// verification key bytes
-@override CborValue get algorithmId;@override CborValue get crvKey;@override CborValue get keyType;
-/// Create a copy of CoseKey
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$CoseKeyImplCopyWith<_$CoseKeyImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

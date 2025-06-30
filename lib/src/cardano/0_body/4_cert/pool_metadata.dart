@@ -11,7 +11,6 @@ part "pool_metadata.freezed.dart";
 
 @freezed
 sealed class PoolMetadata with _$PoolMetadata implements CborEncodable {
-
   factory PoolMetadata({
     required String metadataUrl,
     required Uint8List metadataHash,
@@ -38,6 +37,7 @@ sealed class PoolMetadata with _$PoolMetadata implements CborEncodable {
     );
   }
 
+  @override
   late final Lazy<String> metadataHashHex = Lazy(() => metadataHash.hexEncode());
 
   @override

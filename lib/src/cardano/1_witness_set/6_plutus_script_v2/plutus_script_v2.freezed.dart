@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,144 +10,139 @@ part of 'plutus_script_v2.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PlutusScriptV2 {
+  Uint8List get bytes;
 
- Uint8List get bytes => throw _privateConstructorUsedError;
+  /// Create a copy of PlutusScriptV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $PlutusScriptV2CopyWith<PlutusScriptV2> get copyWith =>
+      _$PlutusScriptV2CopyWithImpl<PlutusScriptV2>(
+          this as PlutusScriptV2, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PlutusScriptV2 &&
+            const DeepCollectionEquality().equals(other.bytes, bytes));
+  }
 
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(bytes));
 
-
-
-
-
-/// Create a copy of PlutusScriptV2
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$PlutusScriptV2CopyWith<PlutusScriptV2> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'PlutusScriptV2(bytes: $bytes)';
+  }
 }
 
 /// @nodoc
-abstract class $PlutusScriptV2CopyWith<$Res>  {
-  factory $PlutusScriptV2CopyWith(PlutusScriptV2 value, $Res Function(PlutusScriptV2) then) = _$PlutusScriptV2CopyWithImpl<$Res, PlutusScriptV2>;
-@useResult
-$Res call({
- Uint8List bytes
-});
-
-
-
+abstract mixin class $PlutusScriptV2CopyWith<$Res> {
+  factory $PlutusScriptV2CopyWith(
+          PlutusScriptV2 value, $Res Function(PlutusScriptV2) _then) =
+      _$PlutusScriptV2CopyWithImpl;
+  @useResult
+  $Res call({Uint8List bytes});
 }
 
 /// @nodoc
-class _$PlutusScriptV2CopyWithImpl<$Res,$Val extends PlutusScriptV2> implements $PlutusScriptV2CopyWith<$Res> {
-  _$PlutusScriptV2CopyWithImpl(this._value, this._then);
+class _$PlutusScriptV2CopyWithImpl<$Res>
+    implements $PlutusScriptV2CopyWith<$Res> {
+  _$PlutusScriptV2CopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PlutusScriptV2 _self;
+  final $Res Function(PlutusScriptV2) _then;
 
-/// Create a copy of PlutusScriptV2
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? bytes = null,}) {
-  return _then(_value.copyWith(
-bytes: null == bytes ? _value.bytes : bytes // ignore: cast_nullable_to_non_nullable
-as Uint8List,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$PlutusScriptV2ImplCopyWith<$Res> implements $PlutusScriptV2CopyWith<$Res> {
-  factory _$$PlutusScriptV2ImplCopyWith(_$PlutusScriptV2Impl value, $Res Function(_$PlutusScriptV2Impl) then) = __$$PlutusScriptV2ImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- Uint8List bytes
-});
-
-
-
-}
-
-/// @nodoc
-class __$$PlutusScriptV2ImplCopyWithImpl<$Res> extends _$PlutusScriptV2CopyWithImpl<$Res, _$PlutusScriptV2Impl> implements _$$PlutusScriptV2ImplCopyWith<$Res> {
-  __$$PlutusScriptV2ImplCopyWithImpl(_$PlutusScriptV2Impl _value, $Res Function(_$PlutusScriptV2Impl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of PlutusScriptV2
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? bytes = null,}) {
-  return _then(_$PlutusScriptV2Impl(
-bytes: null == bytes ? _value.bytes : bytes // ignore: cast_nullable_to_non_nullable
-as Uint8List,
-  ));
-}
-
-
+  /// Create a copy of PlutusScriptV2
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bytes = null,
+  }) {
+    return _then(_self.copyWith(
+      bytes: null == bytes
+          ? _self.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _PlutusScriptV2 extends PlutusScriptV2 {
+  const _PlutusScriptV2({required this.bytes}) : super._();
 
-class _$PlutusScriptV2Impl extends _PlutusScriptV2  {
-  const _$PlutusScriptV2Impl({required this.bytes}): super._();
+  @override
+  final Uint8List bytes;
 
-  
+  /// Create a copy of PlutusScriptV2
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PlutusScriptV2CopyWith<_PlutusScriptV2> get copyWith =>
+      __$PlutusScriptV2CopyWithImpl<_PlutusScriptV2>(this, _$identity);
 
-@override final  Uint8List bytes;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _PlutusScriptV2 &&
+            const DeepCollectionEquality().equals(other.bytes, bytes));
+  }
 
-@override
-String toString() {
-  return 'PlutusScriptV2(bytes: $bytes)';
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(bytes));
+
+  @override
+  String toString() {
+    return 'PlutusScriptV2(bytes: $bytes)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$PlutusScriptV2Impl&&const DeepCollectionEquality().equals(other.bytes, bytes));
+/// @nodoc
+abstract mixin class _$PlutusScriptV2CopyWith<$Res>
+    implements $PlutusScriptV2CopyWith<$Res> {
+  factory _$PlutusScriptV2CopyWith(
+          _PlutusScriptV2 value, $Res Function(_PlutusScriptV2) _then) =
+      __$PlutusScriptV2CopyWithImpl;
+  @override
+  @useResult
+  $Res call({Uint8List bytes});
 }
 
+/// @nodoc
+class __$PlutusScriptV2CopyWithImpl<$Res>
+    implements _$PlutusScriptV2CopyWith<$Res> {
+  __$PlutusScriptV2CopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+  final _PlutusScriptV2 _self;
+  final $Res Function(_PlutusScriptV2) _then;
 
-/// Create a copy of PlutusScriptV2
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$PlutusScriptV2ImplCopyWith<_$PlutusScriptV2Impl> get copyWith => __$$PlutusScriptV2ImplCopyWithImpl<_$PlutusScriptV2Impl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of PlutusScriptV2
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? bytes = null,
+  }) {
+    return _then(_PlutusScriptV2(
+      bytes: null == bytes
+          ? _self.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
 }
 
-
-abstract class _PlutusScriptV2 extends PlutusScriptV2 {
-  const factory _PlutusScriptV2({required final  Uint8List bytes}) = _$PlutusScriptV2Impl;
-  const _PlutusScriptV2._(): super._();
-
-  
-
-@override Uint8List get bytes;
-/// Create a copy of PlutusScriptV2
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$PlutusScriptV2ImplCopyWith<_$PlutusScriptV2Impl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

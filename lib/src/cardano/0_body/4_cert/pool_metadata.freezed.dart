@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,150 +10,187 @@ part of 'pool_metadata.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PoolMetadata {
+  Lazy<String> get metadataHashHex;
+  String get metadataUrl;
+  Uint8List get metadataHash;
+  CborLengthType get cborLengthType;
 
- String get metadataUrl => throw _privateConstructorUsedError; Uint8List get metadataHash => throw _privateConstructorUsedError; CborLengthType get cborLengthType => throw _privateConstructorUsedError;
+  /// Create a copy of PoolMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $PoolMetadataCopyWith<PoolMetadata> get copyWith =>
+      _$PoolMetadataCopyWithImpl<PoolMetadata>(
+          this as PoolMetadata, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PoolMetadata &&
+            (identical(other.metadataHashHex, metadataHashHex) ||
+                other.metadataHashHex == metadataHashHex) &&
+            (identical(other.metadataUrl, metadataUrl) ||
+                other.metadataUrl == metadataUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.metadataHash, metadataHash) &&
+            (identical(other.cborLengthType, cborLengthType) ||
+                other.cborLengthType == cborLengthType));
+  }
 
+  @override
+  int get hashCode => Object.hash(runtimeType, metadataHashHex, metadataUrl,
+      const DeepCollectionEquality().hash(metadataHash), cborLengthType);
 
-
-
-
-
-/// Create a copy of PoolMetadata
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$PoolMetadataCopyWith<PoolMetadata> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'PoolMetadata(metadataHashHex: $metadataHashHex, metadataUrl: $metadataUrl, metadataHash: $metadataHash, cborLengthType: $cborLengthType)';
+  }
 }
 
 /// @nodoc
-abstract class $PoolMetadataCopyWith<$Res>  {
-  factory $PoolMetadataCopyWith(PoolMetadata value, $Res Function(PoolMetadata) then) = _$PoolMetadataCopyWithImpl<$Res, PoolMetadata>;
-@useResult
-$Res call({
- String metadataUrl, Uint8List metadataHash, CborLengthType cborLengthType
-});
-
-
-
+abstract mixin class $PoolMetadataCopyWith<$Res> {
+  factory $PoolMetadataCopyWith(
+          PoolMetadata value, $Res Function(PoolMetadata) _then) =
+      _$PoolMetadataCopyWithImpl;
+  @useResult
+  $Res call(
+      {String metadataUrl,
+      Uint8List metadataHash,
+      CborLengthType cborLengthType});
 }
 
 /// @nodoc
-class _$PoolMetadataCopyWithImpl<$Res,$Val extends PoolMetadata> implements $PoolMetadataCopyWith<$Res> {
-  _$PoolMetadataCopyWithImpl(this._value, this._then);
+class _$PoolMetadataCopyWithImpl<$Res> implements $PoolMetadataCopyWith<$Res> {
+  _$PoolMetadataCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PoolMetadata _self;
+  final $Res Function(PoolMetadata) _then;
 
-/// Create a copy of PoolMetadata
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? metadataUrl = null,Object? metadataHash = null,Object? cborLengthType = null,}) {
-  return _then(_value.copyWith(
-metadataUrl: null == metadataUrl ? _value.metadataUrl : metadataUrl // ignore: cast_nullable_to_non_nullable
-as String,metadataHash: null == metadataHash ? _value.metadataHash : metadataHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,cborLengthType: null == cborLengthType ? _value.cborLengthType : cborLengthType // ignore: cast_nullable_to_non_nullable
-as CborLengthType,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$PoolMetadataImplCopyWith<$Res> implements $PoolMetadataCopyWith<$Res> {
-  factory _$$PoolMetadataImplCopyWith(_$PoolMetadataImpl value, $Res Function(_$PoolMetadataImpl) then) = __$$PoolMetadataImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- String metadataUrl, Uint8List metadataHash, CborLengthType cborLengthType
-});
-
-
-
-}
-
-/// @nodoc
-class __$$PoolMetadataImplCopyWithImpl<$Res> extends _$PoolMetadataCopyWithImpl<$Res, _$PoolMetadataImpl> implements _$$PoolMetadataImplCopyWith<$Res> {
-  __$$PoolMetadataImplCopyWithImpl(_$PoolMetadataImpl _value, $Res Function(_$PoolMetadataImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of PoolMetadata
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? metadataUrl = null,Object? metadataHash = null,Object? cborLengthType = null,}) {
-  return _then(_$PoolMetadataImpl(
-metadataUrl: null == metadataUrl ? _value.metadataUrl : metadataUrl // ignore: cast_nullable_to_non_nullable
-as String,metadataHash: null == metadataHash ? _value.metadataHash : metadataHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,cborLengthType: null == cborLengthType ? _value.cborLengthType : cborLengthType // ignore: cast_nullable_to_non_nullable
-as CborLengthType,
-  ));
-}
-
-
+  /// Create a copy of PoolMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? metadataUrl = null,
+    Object? metadataHash = null,
+    Object? cborLengthType = null,
+  }) {
+    return _then(_self.copyWith(
+      metadataUrl: null == metadataUrl
+          ? _self.metadataUrl
+          : metadataUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      metadataHash: null == metadataHash
+          ? _self.metadataHash
+          : metadataHash // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      cborLengthType: null == cborLengthType
+          ? _self.cborLengthType
+          : cborLengthType // ignore: cast_nullable_to_non_nullable
+              as CborLengthType,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _PoolMetadata extends PoolMetadata {
+  _PoolMetadata(
+      {required this.metadataUrl,
+      required this.metadataHash,
+      required this.cborLengthType})
+      : super._();
 
-class _$PoolMetadataImpl extends _PoolMetadata  {
-   _$PoolMetadataImpl({required this.metadataUrl, required this.metadataHash, required this.cborLengthType}): super._();
+  @override
+  final String metadataUrl;
+  @override
+  final Uint8List metadataHash;
+  @override
+  final CborLengthType cborLengthType;
 
-  
+  /// Create a copy of PoolMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PoolMetadataCopyWith<_PoolMetadata> get copyWith =>
+      __$PoolMetadataCopyWithImpl<_PoolMetadata>(this, _$identity);
 
-@override final  String metadataUrl;
-@override final  Uint8List metadataHash;
-@override final  CborLengthType cborLengthType;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _PoolMetadata &&
+            (identical(other.metadataUrl, metadataUrl) ||
+                other.metadataUrl == metadataUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.metadataHash, metadataHash) &&
+            (identical(other.cborLengthType, cborLengthType) ||
+                other.cborLengthType == cborLengthType));
+  }
 
-@override
-String toString() {
-  return 'PoolMetadata(metadataUrl: $metadataUrl, metadataHash: $metadataHash, cborLengthType: $cborLengthType)';
+  @override
+  int get hashCode => Object.hash(runtimeType, metadataUrl,
+      const DeepCollectionEquality().hash(metadataHash), cborLengthType);
+
+  @override
+  String toString() {
+    return 'PoolMetadata(metadataUrl: $metadataUrl, metadataHash: $metadataHash, cborLengthType: $cborLengthType)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$PoolMetadataImpl&&(identical(other.metadataUrl, metadataUrl) || other.metadataUrl == metadataUrl)&&const DeepCollectionEquality().equals(other.metadataHash, metadataHash)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
+/// @nodoc
+abstract mixin class _$PoolMetadataCopyWith<$Res>
+    implements $PoolMetadataCopyWith<$Res> {
+  factory _$PoolMetadataCopyWith(
+          _PoolMetadata value, $Res Function(_PoolMetadata) _then) =
+      __$PoolMetadataCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String metadataUrl,
+      Uint8List metadataHash,
+      CborLengthType cborLengthType});
 }
 
+/// @nodoc
+class __$PoolMetadataCopyWithImpl<$Res>
+    implements _$PoolMetadataCopyWith<$Res> {
+  __$PoolMetadataCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,metadataUrl,const DeepCollectionEquality().hash(metadataHash),cborLengthType);
+  final _PoolMetadata _self;
+  final $Res Function(_PoolMetadata) _then;
 
-/// Create a copy of PoolMetadata
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$PoolMetadataImplCopyWith<_$PoolMetadataImpl> get copyWith => __$$PoolMetadataImplCopyWithImpl<_$PoolMetadataImpl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of PoolMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? metadataUrl = null,
+    Object? metadataHash = null,
+    Object? cborLengthType = null,
+  }) {
+    return _then(_PoolMetadata(
+      metadataUrl: null == metadataUrl
+          ? _self.metadataUrl
+          : metadataUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      metadataHash: null == metadataHash
+          ? _self.metadataHash
+          : metadataHash // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      cborLengthType: null == cborLengthType
+          ? _self.cborLengthType
+          : cborLengthType // ignore: cast_nullable_to_non_nullable
+              as CborLengthType,
+    ));
+  }
 }
 
-
-abstract class _PoolMetadata extends PoolMetadata {
-   factory _PoolMetadata({required final  String metadataUrl, required final  Uint8List metadataHash, required final  CborLengthType cborLengthType}) = _$PoolMetadataImpl;
-   _PoolMetadata._(): super._();
-
-  
-
-@override String get metadataUrl;@override Uint8List get metadataHash;@override CborLengthType get cborLengthType;
-/// Create a copy of PoolMetadata
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$PoolMetadataImplCopyWith<_$PoolMetadataImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

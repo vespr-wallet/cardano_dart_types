@@ -12,8 +12,7 @@ import "../cbor_encodable.dart";
 part "utxo.freezed.dart";
 
 @freezed
-class Utxo with _$Utxo implements CborEncodable {
-
+sealed class Utxo with _$Utxo implements CborEncodable {
   const factory Utxo({
     required CardanoTransactionInput identifier,
     required CardanoTransactionOutput content,

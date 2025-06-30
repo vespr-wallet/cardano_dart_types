@@ -6,15 +6,15 @@ part of 'cardano_derivation.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CardanoDerivedAddressImpl _$$CardanoDerivedAddressImplFromJson(Map json) =>
-    _$CardanoDerivedAddressImpl(
+CardanoDerivedAddress _$CardanoDerivedAddressFromJson(Map json) =>
+    CardanoDerivedAddress(
       type: $enumDecode(_$AddressTypeEnumMap, json['type']),
       bytes: byteListConverter.fromJson(json['bytes'] as List),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$CardanoDerivedAddressImplToJson(
-        _$CardanoDerivedAddressImpl instance) =>
+Map<String, dynamic> _$CardanoDerivedAddressToJson(
+        CardanoDerivedAddress instance) =>
     <String, dynamic>{
       'type': _$AddressTypeEnumMap[instance.type]!,
       'bytes': byteListConverter.toJson(instance.bytes),
@@ -29,69 +29,63 @@ const _$AddressTypeEnumMap = {
   AddressType.byron: 'byron',
 };
 
-_$CardanoDerivedDRepImpl _$$CardanoDerivedDRepImplFromJson(Map json) =>
-    _$CardanoDerivedDRepImpl(
+CardanoDerivedDRep _$CardanoDerivedDRepFromJson(Map json) => CardanoDerivedDRep(
       value: DRepDerivation.fromJson(
           Map<String, dynamic>.from(json['value'] as Map)),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$CardanoDerivedDRepImplToJson(
-        _$CardanoDerivedDRepImpl instance) =>
+Map<String, dynamic> _$CardanoDerivedDRepToJson(CardanoDerivedDRep instance) =>
     <String, dynamic>{
       'value': instance.value,
       'runtimeType': instance.$type,
     };
 
-_$CardanoDerivedConstitutionalCommitteeImpl
-    _$$CardanoDerivedConstitutionalCommitteeImplFromJson(Map json) =>
-        _$CardanoDerivedConstitutionalCommitteeImpl(
+CardanoDerivedConstitutionalCommittee
+    _$CardanoDerivedConstitutionalCommitteeFromJson(Map json) =>
+        CardanoDerivedConstitutionalCommittee(
           value: ConstitutionalCommitee.fromJson(
               Map<String, dynamic>.from(json['value'] as Map)),
           $type: json['runtimeType'] as String?,
         );
 
-Map<String, dynamic> _$$CardanoDerivedConstitutionalCommitteeImplToJson(
-        _$CardanoDerivedConstitutionalCommitteeImpl instance) =>
+Map<String, dynamic> _$CardanoDerivedConstitutionalCommitteeToJson(
+        CardanoDerivedConstitutionalCommittee instance) =>
     <String, dynamic>{
       'value': instance.value,
       'runtimeType': instance.$type,
     };
 
-_$DRepDerivationImpl _$$DRepDerivationImplFromJson(Map json) =>
-    _$DRepDerivationImpl(
+_DRepDerivation _$DRepDerivationFromJson(Map json) => _DRepDerivation(
       bytes: byteListConverter.fromJson(json['bytes'] as List),
     );
 
-Map<String, dynamic> _$$DRepDerivationImplToJson(
-        _$DRepDerivationImpl instance) =>
+Map<String, dynamic> _$DRepDerivationToJson(_DRepDerivation instance) =>
     <String, dynamic>{
       'bytes': byteListConverter.toJson(instance.bytes),
     };
 
-_$ConstitutionalCommiteeColdImpl _$$ConstitutionalCommiteeColdImplFromJson(
-        Map json) =>
-    _$ConstitutionalCommiteeColdImpl(
+ConstitutionalCommiteeCold _$ConstitutionalCommiteeColdFromJson(Map json) =>
+    ConstitutionalCommiteeCold(
       bytes: byteListConverter.fromJson(json['bytes'] as List),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ConstitutionalCommiteeColdImplToJson(
-        _$ConstitutionalCommiteeColdImpl instance) =>
+Map<String, dynamic> _$ConstitutionalCommiteeColdToJson(
+        ConstitutionalCommiteeCold instance) =>
     <String, dynamic>{
       'bytes': byteListConverter.toJson(instance.bytes),
       'runtimeType': instance.$type,
     };
 
-_$ConstitutionalCommiteeHotImpl _$$ConstitutionalCommiteeHotImplFromJson(
-        Map json) =>
-    _$ConstitutionalCommiteeHotImpl(
+ConstitutionalCommiteeHot _$ConstitutionalCommiteeHotFromJson(Map json) =>
+    ConstitutionalCommiteeHot(
       bytes: byteListConverter.fromJson(json['bytes'] as List),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ConstitutionalCommiteeHotImplToJson(
-        _$ConstitutionalCommiteeHotImpl instance) =>
+Map<String, dynamic> _$ConstitutionalCommiteeHotToJson(
+        ConstitutionalCommiteeHot instance) =>
     <String, dynamic>{
       'bytes': byteListConverter.toJson(instance.bytes),
       'runtimeType': instance.$type,

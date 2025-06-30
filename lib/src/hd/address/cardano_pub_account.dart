@@ -110,7 +110,7 @@ abstract class CardanoPubAccountFactory {
 }
 
 @freezed
-class CardanoPubAccount with _$CardanoPubAccount {
+sealed class CardanoPubAccount with _$CardanoPubAccount {
   CardanoPubAccount._();
   factory CardanoPubAccount._private({
     required Bip32PublicKey accountKey,
@@ -126,16 +126,20 @@ class CardanoPubAccount with _$CardanoPubAccount {
     required Bip32PublicKey constitutionalCommitteeHotKey,
   }) = _CardanoPubAccount;
 
+  @override
   late final Lazy<CardanoDerivedAddress> stakeDerivation = Lazy(
     () => CardanoDerivedAddress(type: AddressType.reward, bytes: stakeKey.rawKey),
   );
 
+  @override
   late final Lazy<DRepDerivation> dRepDerivation = Lazy(
     () => DRepDerivation(bytes: drepIdKey.rawKey),
   );
+  @override
   late final Lazy<ConstitutionalCommiteeCold> constitutionalCommitteeColdDerivation = Lazy(
     () => ConstitutionalCommiteeCold(bytes: constitutionalCommitteeColdKey.rawKey),
   );
+  @override
   late final Lazy<ConstitutionalCommiteeHot> constitutionalCommitteeHotDerivation = Lazy(
     () => ConstitutionalCommiteeHot(bytes: constitutionalCommitteeHotKey.rawKey),
   );

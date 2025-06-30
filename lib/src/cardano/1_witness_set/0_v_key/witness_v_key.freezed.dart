@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,147 +10,155 @@ part of 'witness_v_key.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$WitnessVKey {
+  Uint8List get vkey;
+  Uint8List get signature;
 
- Uint8List get vkey => throw _privateConstructorUsedError; Uint8List get signature => throw _privateConstructorUsedError;
+  /// Create a copy of WitnessVKey
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $WitnessVKeyCopyWith<WitnessVKey> get copyWith =>
+      _$WitnessVKeyCopyWithImpl<WitnessVKey>(this as WitnessVKey, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is WitnessVKey &&
+            const DeepCollectionEquality().equals(other.vkey, vkey) &&
+            const DeepCollectionEquality().equals(other.signature, signature));
+  }
 
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(vkey),
+      const DeepCollectionEquality().hash(signature));
 
-
-
-
-
-/// Create a copy of WitnessVKey
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$WitnessVKeyCopyWith<WitnessVKey> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'WitnessVKey(vkey: $vkey, signature: $signature)';
+  }
 }
 
 /// @nodoc
-abstract class $WitnessVKeyCopyWith<$Res>  {
-  factory $WitnessVKeyCopyWith(WitnessVKey value, $Res Function(WitnessVKey) then) = _$WitnessVKeyCopyWithImpl<$Res, WitnessVKey>;
-@useResult
-$Res call({
- Uint8List vkey, Uint8List signature
-});
-
-
-
+abstract mixin class $WitnessVKeyCopyWith<$Res> {
+  factory $WitnessVKeyCopyWith(
+          WitnessVKey value, $Res Function(WitnessVKey) _then) =
+      _$WitnessVKeyCopyWithImpl;
+  @useResult
+  $Res call({Uint8List vkey, Uint8List signature});
 }
 
 /// @nodoc
-class _$WitnessVKeyCopyWithImpl<$Res,$Val extends WitnessVKey> implements $WitnessVKeyCopyWith<$Res> {
-  _$WitnessVKeyCopyWithImpl(this._value, this._then);
+class _$WitnessVKeyCopyWithImpl<$Res> implements $WitnessVKeyCopyWith<$Res> {
+  _$WitnessVKeyCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final WitnessVKey _self;
+  final $Res Function(WitnessVKey) _then;
 
-/// Create a copy of WitnessVKey
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? vkey = null,Object? signature = null,}) {
-  return _then(_value.copyWith(
-vkey: null == vkey ? _value.vkey : vkey // ignore: cast_nullable_to_non_nullable
-as Uint8List,signature: null == signature ? _value.signature : signature // ignore: cast_nullable_to_non_nullable
-as Uint8List,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$WitnessVKeyImplCopyWith<$Res> implements $WitnessVKeyCopyWith<$Res> {
-  factory _$$WitnessVKeyImplCopyWith(_$WitnessVKeyImpl value, $Res Function(_$WitnessVKeyImpl) then) = __$$WitnessVKeyImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- Uint8List vkey, Uint8List signature
-});
-
-
-
-}
-
-/// @nodoc
-class __$$WitnessVKeyImplCopyWithImpl<$Res> extends _$WitnessVKeyCopyWithImpl<$Res, _$WitnessVKeyImpl> implements _$$WitnessVKeyImplCopyWith<$Res> {
-  __$$WitnessVKeyImplCopyWithImpl(_$WitnessVKeyImpl _value, $Res Function(_$WitnessVKeyImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of WitnessVKey
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? vkey = null,Object? signature = null,}) {
-  return _then(_$WitnessVKeyImpl(
-vkey: null == vkey ? _value.vkey : vkey // ignore: cast_nullable_to_non_nullable
-as Uint8List,signature: null == signature ? _value.signature : signature // ignore: cast_nullable_to_non_nullable
-as Uint8List,
-  ));
-}
-
-
+  /// Create a copy of WitnessVKey
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? vkey = null,
+    Object? signature = null,
+  }) {
+    return _then(_self.copyWith(
+      vkey: null == vkey
+          ? _self.vkey
+          : vkey // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      signature: null == signature
+          ? _self.signature
+          : signature // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _WitnessVKey extends WitnessVKey {
+  const _WitnessVKey({required this.vkey, required this.signature}) : super._();
 
-class _$WitnessVKeyImpl extends _WitnessVKey  {
-  const _$WitnessVKeyImpl({required this.vkey, required this.signature}): super._();
+  @override
+  final Uint8List vkey;
+  @override
+  final Uint8List signature;
 
-  
+  /// Create a copy of WitnessVKey
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$WitnessVKeyCopyWith<_WitnessVKey> get copyWith =>
+      __$WitnessVKeyCopyWithImpl<_WitnessVKey>(this, _$identity);
 
-@override final  Uint8List vkey;
-@override final  Uint8List signature;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _WitnessVKey &&
+            const DeepCollectionEquality().equals(other.vkey, vkey) &&
+            const DeepCollectionEquality().equals(other.signature, signature));
+  }
 
-@override
-String toString() {
-  return 'WitnessVKey(vkey: $vkey, signature: $signature)';
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(vkey),
+      const DeepCollectionEquality().hash(signature));
+
+  @override
+  String toString() {
+    return 'WitnessVKey(vkey: $vkey, signature: $signature)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$WitnessVKeyImpl&&const DeepCollectionEquality().equals(other.vkey, vkey)&&const DeepCollectionEquality().equals(other.signature, signature));
+/// @nodoc
+abstract mixin class _$WitnessVKeyCopyWith<$Res>
+    implements $WitnessVKeyCopyWith<$Res> {
+  factory _$WitnessVKeyCopyWith(
+          _WitnessVKey value, $Res Function(_WitnessVKey) _then) =
+      __$WitnessVKeyCopyWithImpl;
+  @override
+  @useResult
+  $Res call({Uint8List vkey, Uint8List signature});
 }
 
+/// @nodoc
+class __$WitnessVKeyCopyWithImpl<$Res> implements _$WitnessVKeyCopyWith<$Res> {
+  __$WitnessVKeyCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(vkey),const DeepCollectionEquality().hash(signature));
+  final _WitnessVKey _self;
+  final $Res Function(_WitnessVKey) _then;
 
-/// Create a copy of WitnessVKey
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$WitnessVKeyImplCopyWith<_$WitnessVKeyImpl> get copyWith => __$$WitnessVKeyImplCopyWithImpl<_$WitnessVKeyImpl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of WitnessVKey
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? vkey = null,
+    Object? signature = null,
+  }) {
+    return _then(_WitnessVKey(
+      vkey: null == vkey
+          ? _self.vkey
+          : vkey // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      signature: null == signature
+          ? _self.signature
+          : signature // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
 }
 
-
-abstract class _WitnessVKey extends WitnessVKey {
-  const factory _WitnessVKey({required final  Uint8List vkey, required final  Uint8List signature}) = _$WitnessVKeyImpl;
-  const _WitnessVKey._(): super._();
-
-  
-
-@override Uint8List get vkey;@override Uint8List get signature;
-/// Create a copy of WitnessVKey
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$WitnessVKeyImplCopyWith<_$WitnessVKeyImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

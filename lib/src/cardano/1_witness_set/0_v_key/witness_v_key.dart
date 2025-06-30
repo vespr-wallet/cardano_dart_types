@@ -17,8 +17,7 @@ extension _BechExt on Iterable<int> {
 
 /// A witness is a public key and a signature (a signed hash of the body) used for on-chain validation.
 @freezed
-class WitnessVKey with _$WitnessVKey implements CborEncodable {
-
+sealed class WitnessVKey with _$WitnessVKey implements CborEncodable {
   const factory WitnessVKey({required Uint8List vkey, required Uint8List signature}) = _WitnessVKey;
   const WitnessVKey._();
 

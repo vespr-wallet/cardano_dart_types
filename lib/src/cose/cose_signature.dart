@@ -13,8 +13,7 @@ import "cose_item.dart";
 part "cose_signature.freezed.dart";
 
 @freezed
-class CoseSignature with _$CoseSignature implements COSEItem {
-
+sealed class CoseSignature with _$CoseSignature implements COSEItem {
   const factory CoseSignature({
     required CoseHeaders headers,
     required Uint8List signature,

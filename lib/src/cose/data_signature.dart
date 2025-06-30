@@ -12,8 +12,7 @@ part "data_signature.freezed.dart";
 part "data_signature.g.dart";
 
 @freezed
-class DataSignature with _$DataSignature {
-
+sealed class DataSignature with _$DataSignature {
   const factory DataSignature({
     @JsonKey(name: "key") required String coseKeyHex, // hex encoded [CoseKey]
     @JsonKey(name: "signature") required String coseSignHex, // hex encoded [CoseSign] or [CoseSign1]

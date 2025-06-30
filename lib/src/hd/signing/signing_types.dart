@@ -21,8 +21,7 @@ import "vote_info.dart";
 part "signing_types.freezed.dart";
 
 @Freezed(copyWith: false)
-class TxDiff with _$TxDiff {
-
+sealed class TxDiff with _$TxDiff {
   const factory TxDiff({
     required Value diff,
     required List<Utxo> usedUtxos,
@@ -91,8 +90,7 @@ class TxDiff with _$TxDiff {
 }
 
 @Freezed(copyWith: false)
-class TxSigningBundle with _$TxSigningBundle {
-
+sealed class TxSigningBundle with _$TxSigningBundle {
   const factory TxSigningBundle({
     required String receiveAddressBech32,
     required NetworkId networkId,
@@ -171,8 +169,7 @@ class TxSigningBundle with _$TxSigningBundle {
 }
 
 @freezed
-class TxSignedBundle with _$TxSignedBundle {
-
+sealed class TxSignedBundle with _$TxSignedBundle {
   const factory TxSignedBundle({
     required String receiveAddressBech32,
     required NetworkId networkId,
@@ -206,8 +203,7 @@ class TxSignedBundle with _$TxSignedBundle {
 }
 
 @Freezed(copyWith: false)
-class TxPreparedForSigning with _$TxPreparedForSigning {
-
+sealed class TxPreparedForSigning with _$TxPreparedForSigning {
   const factory TxPreparedForSigning({
     required CardanoTransaction tx,
     required TxDiff txDiff,
@@ -241,8 +237,7 @@ class TxPreparedForSigning with _$TxPreparedForSigning {
 }
 
 @Freezed(copyWith: false)
-class TxAndSignature with _$TxAndSignature {
-
+sealed class TxAndSignature with _$TxAndSignature {
   const factory TxAndSignature({
     required CardanoTransaction tx,
     required TxDiff txDiff,

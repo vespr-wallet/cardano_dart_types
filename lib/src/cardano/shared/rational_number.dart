@@ -7,7 +7,7 @@ import "../cbor_encodable.dart";
 part "rational_number.freezed.dart";
 
 @freezed
-class RationalNumber with _$RationalNumber implements CborEncodable {
+sealed class RationalNumber with _$RationalNumber implements CborEncodable {
   factory RationalNumber({
     required BigInt numerator,
     required BigInt denominator,

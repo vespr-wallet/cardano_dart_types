@@ -12,7 +12,6 @@ part "anchor.freezed.dart";
 
 @freezed
 sealed class Anchor with _$Anchor implements CborEncodable {
-
   factory Anchor({
     required String anchorUrl,
     required Uint8List anchorDataHash,
@@ -39,6 +38,7 @@ sealed class Anchor with _$Anchor implements CborEncodable {
     );
   }
 
+  @override
   late final Lazy<String> metadataHashHex = Lazy(() => anchorDataHash.hexEncode());
 
   @override

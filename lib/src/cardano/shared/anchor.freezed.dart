@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,150 +10,183 @@ part of 'anchor.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Anchor {
+  Lazy<String> get metadataHashHex;
+  String get anchorUrl;
+  Uint8List get anchorDataHash;
+  CborLengthType get cborLengthType;
 
- String get anchorUrl => throw _privateConstructorUsedError; Uint8List get anchorDataHash => throw _privateConstructorUsedError; CborLengthType get cborLengthType => throw _privateConstructorUsedError;
+  /// Create a copy of Anchor
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $AnchorCopyWith<Anchor> get copyWith =>
+      _$AnchorCopyWithImpl<Anchor>(this as Anchor, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Anchor &&
+            (identical(other.metadataHashHex, metadataHashHex) ||
+                other.metadataHashHex == metadataHashHex) &&
+            (identical(other.anchorUrl, anchorUrl) ||
+                other.anchorUrl == anchorUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.anchorDataHash, anchorDataHash) &&
+            (identical(other.cborLengthType, cborLengthType) ||
+                other.cborLengthType == cborLengthType));
+  }
 
+  @override
+  int get hashCode => Object.hash(runtimeType, metadataHashHex, anchorUrl,
+      const DeepCollectionEquality().hash(anchorDataHash), cborLengthType);
 
-
-
-
-
-/// Create a copy of Anchor
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$AnchorCopyWith<Anchor> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'Anchor(metadataHashHex: $metadataHashHex, anchorUrl: $anchorUrl, anchorDataHash: $anchorDataHash, cborLengthType: $cborLengthType)';
+  }
 }
 
 /// @nodoc
-abstract class $AnchorCopyWith<$Res>  {
-  factory $AnchorCopyWith(Anchor value, $Res Function(Anchor) then) = _$AnchorCopyWithImpl<$Res, Anchor>;
-@useResult
-$Res call({
- String anchorUrl, Uint8List anchorDataHash, CborLengthType cborLengthType
-});
-
-
-
+abstract mixin class $AnchorCopyWith<$Res> {
+  factory $AnchorCopyWith(Anchor value, $Res Function(Anchor) _then) =
+      _$AnchorCopyWithImpl;
+  @useResult
+  $Res call(
+      {String anchorUrl,
+      Uint8List anchorDataHash,
+      CborLengthType cborLengthType});
 }
 
 /// @nodoc
-class _$AnchorCopyWithImpl<$Res,$Val extends Anchor> implements $AnchorCopyWith<$Res> {
-  _$AnchorCopyWithImpl(this._value, this._then);
+class _$AnchorCopyWithImpl<$Res> implements $AnchorCopyWith<$Res> {
+  _$AnchorCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Anchor _self;
+  final $Res Function(Anchor) _then;
 
-/// Create a copy of Anchor
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? anchorUrl = null,Object? anchorDataHash = null,Object? cborLengthType = null,}) {
-  return _then(_value.copyWith(
-anchorUrl: null == anchorUrl ? _value.anchorUrl : anchorUrl // ignore: cast_nullable_to_non_nullable
-as String,anchorDataHash: null == anchorDataHash ? _value.anchorDataHash : anchorDataHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,cborLengthType: null == cborLengthType ? _value.cborLengthType : cborLengthType // ignore: cast_nullable_to_non_nullable
-as CborLengthType,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$AnchorImplCopyWith<$Res> implements $AnchorCopyWith<$Res> {
-  factory _$$AnchorImplCopyWith(_$AnchorImpl value, $Res Function(_$AnchorImpl) then) = __$$AnchorImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- String anchorUrl, Uint8List anchorDataHash, CborLengthType cborLengthType
-});
-
-
-
-}
-
-/// @nodoc
-class __$$AnchorImplCopyWithImpl<$Res> extends _$AnchorCopyWithImpl<$Res, _$AnchorImpl> implements _$$AnchorImplCopyWith<$Res> {
-  __$$AnchorImplCopyWithImpl(_$AnchorImpl _value, $Res Function(_$AnchorImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of Anchor
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? anchorUrl = null,Object? anchorDataHash = null,Object? cborLengthType = null,}) {
-  return _then(_$AnchorImpl(
-anchorUrl: null == anchorUrl ? _value.anchorUrl : anchorUrl // ignore: cast_nullable_to_non_nullable
-as String,anchorDataHash: null == anchorDataHash ? _value.anchorDataHash : anchorDataHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,cborLengthType: null == cborLengthType ? _value.cborLengthType : cborLengthType // ignore: cast_nullable_to_non_nullable
-as CborLengthType,
-  ));
-}
-
-
+  /// Create a copy of Anchor
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? anchorUrl = null,
+    Object? anchorDataHash = null,
+    Object? cborLengthType = null,
+  }) {
+    return _then(_self.copyWith(
+      anchorUrl: null == anchorUrl
+          ? _self.anchorUrl
+          : anchorUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      anchorDataHash: null == anchorDataHash
+          ? _self.anchorDataHash
+          : anchorDataHash // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      cborLengthType: null == cborLengthType
+          ? _self.cborLengthType
+          : cborLengthType // ignore: cast_nullable_to_non_nullable
+              as CborLengthType,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _Anchor extends Anchor {
+  _Anchor(
+      {required this.anchorUrl,
+      required this.anchorDataHash,
+      this.cborLengthType = CborLengthType.auto})
+      : super._();
 
-class _$AnchorImpl extends _Anchor  {
-   _$AnchorImpl({required this.anchorUrl, required this.anchorDataHash, this.cborLengthType = CborLengthType.auto}): super._();
+  @override
+  final String anchorUrl;
+  @override
+  final Uint8List anchorDataHash;
+  @override
+  @JsonKey()
+  final CborLengthType cborLengthType;
 
-  
+  /// Create a copy of Anchor
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AnchorCopyWith<_Anchor> get copyWith =>
+      __$AnchorCopyWithImpl<_Anchor>(this, _$identity);
 
-@override final  String anchorUrl;
-@override final  Uint8List anchorDataHash;
-@override@JsonKey() final  CborLengthType cborLengthType;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Anchor &&
+            (identical(other.anchorUrl, anchorUrl) ||
+                other.anchorUrl == anchorUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.anchorDataHash, anchorDataHash) &&
+            (identical(other.cborLengthType, cborLengthType) ||
+                other.cborLengthType == cborLengthType));
+  }
 
-@override
-String toString() {
-  return 'Anchor(anchorUrl: $anchorUrl, anchorDataHash: $anchorDataHash, cborLengthType: $cborLengthType)';
+  @override
+  int get hashCode => Object.hash(runtimeType, anchorUrl,
+      const DeepCollectionEquality().hash(anchorDataHash), cborLengthType);
+
+  @override
+  String toString() {
+    return 'Anchor(anchorUrl: $anchorUrl, anchorDataHash: $anchorDataHash, cborLengthType: $cborLengthType)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$AnchorImpl&&(identical(other.anchorUrl, anchorUrl) || other.anchorUrl == anchorUrl)&&const DeepCollectionEquality().equals(other.anchorDataHash, anchorDataHash)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
+/// @nodoc
+abstract mixin class _$AnchorCopyWith<$Res> implements $AnchorCopyWith<$Res> {
+  factory _$AnchorCopyWith(_Anchor value, $Res Function(_Anchor) _then) =
+      __$AnchorCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String anchorUrl,
+      Uint8List anchorDataHash,
+      CborLengthType cborLengthType});
 }
 
+/// @nodoc
+class __$AnchorCopyWithImpl<$Res> implements _$AnchorCopyWith<$Res> {
+  __$AnchorCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,anchorUrl,const DeepCollectionEquality().hash(anchorDataHash),cborLengthType);
+  final _Anchor _self;
+  final $Res Function(_Anchor) _then;
 
-/// Create a copy of Anchor
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$AnchorImplCopyWith<_$AnchorImpl> get copyWith => __$$AnchorImplCopyWithImpl<_$AnchorImpl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of Anchor
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? anchorUrl = null,
+    Object? anchorDataHash = null,
+    Object? cborLengthType = null,
+  }) {
+    return _then(_Anchor(
+      anchorUrl: null == anchorUrl
+          ? _self.anchorUrl
+          : anchorUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      anchorDataHash: null == anchorDataHash
+          ? _self.anchorDataHash
+          : anchorDataHash // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      cborLengthType: null == cborLengthType
+          ? _self.cborLengthType
+          : cborLengthType // ignore: cast_nullable_to_non_nullable
+              as CborLengthType,
+    ));
+  }
 }
 
-
-abstract class _Anchor extends Anchor {
-   factory _Anchor({required final  String anchorUrl, required final  Uint8List anchorDataHash, final  CborLengthType cborLengthType}) = _$AnchorImpl;
-   _Anchor._(): super._();
-
-  
-
-@override String get anchorUrl;@override Uint8List get anchorDataHash;@override CborLengthType get cborLengthType;
-/// Create a copy of Anchor
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$AnchorImplCopyWith<_$AnchorImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

@@ -35,7 +35,6 @@ void conditionalAssert(bool Function() fct, [String? message]) {
 /// outer wrapper of a Cardano blockchain transaction.
 @freezed
 sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodable {
-
   factory CardanoTransaction({
     required CardanoTransactionBody body,
     required WitnessSet witnessSet,

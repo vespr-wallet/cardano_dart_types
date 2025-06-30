@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,147 +10,157 @@ part of 'gov_action_id.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GovActionId {
+  Lazy<String> get bech32;
+  String get transactionId;
+  int get govActionIndex;
 
- String get transactionId => throw _privateConstructorUsedError; int get govActionIndex => throw _privateConstructorUsedError;
+  /// Create a copy of GovActionId
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $GovActionIdCopyWith<GovActionId> get copyWith =>
+      _$GovActionIdCopyWithImpl<GovActionId>(this as GovActionId, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GovActionId &&
+            (identical(other.bech32, bech32) || other.bech32 == bech32) &&
+            (identical(other.transactionId, transactionId) ||
+                other.transactionId == transactionId) &&
+            (identical(other.govActionIndex, govActionIndex) ||
+                other.govActionIndex == govActionIndex));
+  }
 
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, bech32, transactionId, govActionIndex);
 
-
-
-
-
-/// Create a copy of GovActionId
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$GovActionIdCopyWith<GovActionId> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'GovActionId(bech32: $bech32, transactionId: $transactionId, govActionIndex: $govActionIndex)';
+  }
 }
 
 /// @nodoc
-abstract class $GovActionIdCopyWith<$Res>  {
-  factory $GovActionIdCopyWith(GovActionId value, $Res Function(GovActionId) then) = _$GovActionIdCopyWithImpl<$Res, GovActionId>;
-@useResult
-$Res call({
- String transactionId, int govActionIndex
-});
-
-
-
+abstract mixin class $GovActionIdCopyWith<$Res> {
+  factory $GovActionIdCopyWith(
+          GovActionId value, $Res Function(GovActionId) _then) =
+      _$GovActionIdCopyWithImpl;
+  @useResult
+  $Res call({String transactionId, int govActionIndex});
 }
 
 /// @nodoc
-class _$GovActionIdCopyWithImpl<$Res,$Val extends GovActionId> implements $GovActionIdCopyWith<$Res> {
-  _$GovActionIdCopyWithImpl(this._value, this._then);
+class _$GovActionIdCopyWithImpl<$Res> implements $GovActionIdCopyWith<$Res> {
+  _$GovActionIdCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final GovActionId _self;
+  final $Res Function(GovActionId) _then;
 
-/// Create a copy of GovActionId
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? transactionId = null,Object? govActionIndex = null,}) {
-  return _then(_value.copyWith(
-transactionId: null == transactionId ? _value.transactionId : transactionId // ignore: cast_nullable_to_non_nullable
-as String,govActionIndex: null == govActionIndex ? _value.govActionIndex : govActionIndex // ignore: cast_nullable_to_non_nullable
-as int,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$GovActionIdImplCopyWith<$Res> implements $GovActionIdCopyWith<$Res> {
-  factory _$$GovActionIdImplCopyWith(_$GovActionIdImpl value, $Res Function(_$GovActionIdImpl) then) = __$$GovActionIdImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- String transactionId, int govActionIndex
-});
-
-
-
-}
-
-/// @nodoc
-class __$$GovActionIdImplCopyWithImpl<$Res> extends _$GovActionIdCopyWithImpl<$Res, _$GovActionIdImpl> implements _$$GovActionIdImplCopyWith<$Res> {
-  __$$GovActionIdImplCopyWithImpl(_$GovActionIdImpl _value, $Res Function(_$GovActionIdImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of GovActionId
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? transactionId = null,Object? govActionIndex = null,}) {
-  return _then(_$GovActionIdImpl(
-transactionId: null == transactionId ? _value.transactionId : transactionId // ignore: cast_nullable_to_non_nullable
-as String,govActionIndex: null == govActionIndex ? _value.govActionIndex : govActionIndex // ignore: cast_nullable_to_non_nullable
-as int,
-  ));
-}
-
-
+  /// Create a copy of GovActionId
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? transactionId = null,
+    Object? govActionIndex = null,
+  }) {
+    return _then(_self.copyWith(
+      transactionId: null == transactionId
+          ? _self.transactionId
+          : transactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      govActionIndex: null == govActionIndex
+          ? _self.govActionIndex
+          : govActionIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _GovActionId extends GovActionId {
+  _GovActionId({required this.transactionId, required this.govActionIndex})
+      : super._();
 
-class _$GovActionIdImpl extends _GovActionId  {
-   _$GovActionIdImpl({required this.transactionId, required this.govActionIndex}): super._();
+  @override
+  final String transactionId;
+  @override
+  final int govActionIndex;
 
-  
+  /// Create a copy of GovActionId
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GovActionIdCopyWith<_GovActionId> get copyWith =>
+      __$GovActionIdCopyWithImpl<_GovActionId>(this, _$identity);
 
-@override final  String transactionId;
-@override final  int govActionIndex;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _GovActionId &&
+            (identical(other.transactionId, transactionId) ||
+                other.transactionId == transactionId) &&
+            (identical(other.govActionIndex, govActionIndex) ||
+                other.govActionIndex == govActionIndex));
+  }
 
-@override
-String toString() {
-  return 'GovActionId(transactionId: $transactionId, govActionIndex: $govActionIndex)';
+  @override
+  int get hashCode => Object.hash(runtimeType, transactionId, govActionIndex);
+
+  @override
+  String toString() {
+    return 'GovActionId(transactionId: $transactionId, govActionIndex: $govActionIndex)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$GovActionIdImpl&&(identical(other.transactionId, transactionId) || other.transactionId == transactionId)&&(identical(other.govActionIndex, govActionIndex) || other.govActionIndex == govActionIndex));
+/// @nodoc
+abstract mixin class _$GovActionIdCopyWith<$Res>
+    implements $GovActionIdCopyWith<$Res> {
+  factory _$GovActionIdCopyWith(
+          _GovActionId value, $Res Function(_GovActionId) _then) =
+      __$GovActionIdCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String transactionId, int govActionIndex});
 }
 
+/// @nodoc
+class __$GovActionIdCopyWithImpl<$Res> implements _$GovActionIdCopyWith<$Res> {
+  __$GovActionIdCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,transactionId,govActionIndex);
+  final _GovActionId _self;
+  final $Res Function(_GovActionId) _then;
 
-/// Create a copy of GovActionId
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$GovActionIdImplCopyWith<_$GovActionIdImpl> get copyWith => __$$GovActionIdImplCopyWithImpl<_$GovActionIdImpl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of GovActionId
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? transactionId = null,
+    Object? govActionIndex = null,
+  }) {
+    return _then(_GovActionId(
+      transactionId: null == transactionId
+          ? _self.transactionId
+          : transactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      govActionIndex: null == govActionIndex
+          ? _self.govActionIndex
+          : govActionIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
-
-abstract class _GovActionId extends GovActionId {
-   factory _GovActionId({required final  String transactionId, required final  int govActionIndex}) = _$GovActionIdImpl;
-   _GovActionId._(): super._();
-
-  
-
-@override String get transactionId;@override int get govActionIndex;
-/// Create a copy of GovActionId
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$GovActionIdImplCopyWith<_$GovActionIdImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

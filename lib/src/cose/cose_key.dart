@@ -12,8 +12,7 @@ import "cip30_constants.dart";
 part "cose_key.freezed.dart";
 
 @freezed
-class CoseKey with _$CoseKey implements CborEncodable {
-
+sealed class CoseKey with _$CoseKey implements CborEncodable {
   const factory CoseKey({
     required Uint8List keyId, // verification key bytes
     @Default(CborSmallInt(ALG_EdDSA)) CborValue algorithmId,

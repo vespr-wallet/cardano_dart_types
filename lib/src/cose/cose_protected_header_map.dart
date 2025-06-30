@@ -12,8 +12,7 @@ import "cose_item.dart";
 part "cose_protected_header_map.freezed.dart";
 
 @freezed
-class CoseProtectedHeaderMap with _$CoseProtectedHeaderMap implements COSEItem {
-
+sealed class CoseProtectedHeaderMap with _$CoseProtectedHeaderMap implements COSEItem {
   const factory CoseProtectedHeaderMap({
     required Uint8List bytes,
   }) = _CoseProtectedHeaderMap;

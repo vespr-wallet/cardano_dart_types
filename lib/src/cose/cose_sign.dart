@@ -14,8 +14,7 @@ import "cose_signature.dart";
 part "cose_sign.freezed.dart";
 
 @freezed
-class CoseSign with _$CoseSign implements CborEncodable {
-
+sealed class CoseSign with _$CoseSign implements CborEncodable {
   const factory CoseSign({
     required CoseHeaders headers,
     required Uint8List payload,

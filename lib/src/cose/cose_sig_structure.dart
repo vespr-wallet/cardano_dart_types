@@ -14,8 +14,7 @@ import "cose_protected_header_map.dart";
 part "cose_sig_structure.freezed.dart";
 
 @freezed
-class CoseSigStructure with _$CoseSigStructure implements CborEncodable {
-
+sealed class CoseSigStructure with _$CoseSigStructure implements CborEncodable {
   const factory CoseSigStructure({
     required CoseProtectedHeaderMap bodyProtected,
     required CoseProtectedHeaderMap? signProtected,

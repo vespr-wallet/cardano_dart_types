@@ -1,3 +1,7 @@
+## 2.9.2
+
+- Updated freezed major version and re-generated classes
+
 ## [2.9.1+1]
 
 - Improved and expanded the README documentation for open-source/public use. No code changes.
@@ -31,7 +35,7 @@
 
 # New
 
-- [CardanoWallet] exposes xPub Bech32 
+- [CardanoWallet] exposes xPub Bech32
 
 ## [2.7.1] - 5th of November, 2024
 

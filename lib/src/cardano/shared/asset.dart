@@ -114,8 +114,7 @@ sealed class Value with _$Value implements CborEncodable {
 /// Native Token multi-asset container.
 @Freezed(equal: false)
 @immutable
-class MultiAsset with _$MultiAsset {
-
+sealed class MultiAsset with _$MultiAsset {
   const factory MultiAsset({
     required String policyId, // hex encoded
     required List<Asset> assets,
@@ -142,9 +141,9 @@ class MultiAsset with _$MultiAsset {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MultiAssetImpl &&
+            other is MultiAsset &&
             (identical(other.policyId, policyId) || other.policyId == policyId) &&
-            const DeepCollectionEquality.unordered().equals(other._assets, assets));
+            const DeepCollectionEquality.unordered().equals(other.assets, assets));
   }
 
   @override
@@ -180,8 +179,7 @@ extension MultiAssetIterableX on Iterable<MultiAsset> {
 
 /// an single asset name and value under a MultiAsset policyId
 @freezed
-class Asset with _$Asset {
-
+sealed class Asset with _$Asset {
   const factory Asset({
     required String hexName, // hex encoded
     required BigInt value,

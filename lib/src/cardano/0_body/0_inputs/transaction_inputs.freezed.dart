@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,159 +10,175 @@ part of 'transaction_inputs.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CardanoTransactionInputs {
+  List<CardanoTransactionInput> get data;
+  List<int> get cborTags;
 
- List<CardanoTransactionInput> get data => throw _privateConstructorUsedError; List<int> get cborTags => throw _privateConstructorUsedError;
+  /// Create a copy of CardanoTransactionInputs
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $CardanoTransactionInputsCopyWith<CardanoTransactionInputs> get copyWith =>
+      _$CardanoTransactionInputsCopyWithImpl<CardanoTransactionInputs>(
+          this as CardanoTransactionInputs, _$identity);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CardanoTransactionInputs &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality().equals(other.cborTags, cborTags));
+  }
 
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(data),
+      const DeepCollectionEquality().hash(cborTags));
 
-
-
-
-
-/// Create a copy of CardanoTransactionInputs
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-$CardanoTransactionInputsCopyWith<CardanoTransactionInputs> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'CardanoTransactionInputs(data: $data, cborTags: $cborTags)';
+  }
 }
 
 /// @nodoc
-abstract class $CardanoTransactionInputsCopyWith<$Res>  {
-  factory $CardanoTransactionInputsCopyWith(CardanoTransactionInputs value, $Res Function(CardanoTransactionInputs) then) = _$CardanoTransactionInputsCopyWithImpl<$Res, CardanoTransactionInputs>;
-@useResult
-$Res call({
- List<CardanoTransactionInput> data, List<int> cborTags
-});
-
-
-
+abstract mixin class $CardanoTransactionInputsCopyWith<$Res> {
+  factory $CardanoTransactionInputsCopyWith(CardanoTransactionInputs value,
+          $Res Function(CardanoTransactionInputs) _then) =
+      _$CardanoTransactionInputsCopyWithImpl;
+  @useResult
+  $Res call({List<CardanoTransactionInput> data, List<int> cborTags});
 }
 
 /// @nodoc
-class _$CardanoTransactionInputsCopyWithImpl<$Res,$Val extends CardanoTransactionInputs> implements $CardanoTransactionInputsCopyWith<$Res> {
-  _$CardanoTransactionInputsCopyWithImpl(this._value, this._then);
+class _$CardanoTransactionInputsCopyWithImpl<$Res>
+    implements $CardanoTransactionInputsCopyWith<$Res> {
+  _$CardanoTransactionInputsCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final CardanoTransactionInputs _self;
+  final $Res Function(CardanoTransactionInputs) _then;
 
-/// Create a copy of CardanoTransactionInputs
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? data = null,Object? cborTags = null,}) {
-  return _then(_value.copyWith(
-data: null == data ? _value.data : data // ignore: cast_nullable_to_non_nullable
-as List<CardanoTransactionInput>,cborTags: null == cborTags ? _value.cborTags : cborTags // ignore: cast_nullable_to_non_nullable
-as List<int>,
-  )as $Val);
-}
-
-}
-
-
-/// @nodoc
-abstract class _$$CardanoTransactionInputsImplCopyWith<$Res> implements $CardanoTransactionInputsCopyWith<$Res> {
-  factory _$$CardanoTransactionInputsImplCopyWith(_$CardanoTransactionInputsImpl value, $Res Function(_$CardanoTransactionInputsImpl) then) = __$$CardanoTransactionInputsImplCopyWithImpl<$Res>;
-@override @useResult
-$Res call({
- List<CardanoTransactionInput> data, List<int> cborTags
-});
-
-
-
-}
-
-/// @nodoc
-class __$$CardanoTransactionInputsImplCopyWithImpl<$Res> extends _$CardanoTransactionInputsCopyWithImpl<$Res, _$CardanoTransactionInputsImpl> implements _$$CardanoTransactionInputsImplCopyWith<$Res> {
-  __$$CardanoTransactionInputsImplCopyWithImpl(_$CardanoTransactionInputsImpl _value, $Res Function(_$CardanoTransactionInputsImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of CardanoTransactionInputs
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? data = null,Object? cborTags = null,}) {
-  return _then(_$CardanoTransactionInputsImpl(
-data: null == data ? _value._data : data // ignore: cast_nullable_to_non_nullable
-as List<CardanoTransactionInput>,cborTags: null == cborTags ? _value._cborTags : cborTags // ignore: cast_nullable_to_non_nullable
-as List<int>,
-  ));
-}
-
-
+  /// Create a copy of CardanoTransactionInputs
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+    Object? cborTags = null,
+  }) {
+    return _then(_self.copyWith(
+      data: null == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<CardanoTransactionInput>,
+      cborTags: null == cborTags
+          ? _self.cborTags
+          : cborTags // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _CardanoTransactionInputs extends CardanoTransactionInputs {
+  const _CardanoTransactionInputs(
+      {required final List<CardanoTransactionInput> data,
+      required final List<int> cborTags})
+      : _data = data,
+        _cborTags = cborTags,
+        super._();
 
-class _$CardanoTransactionInputsImpl extends _CardanoTransactionInputs  {
-  const _$CardanoTransactionInputsImpl({required final  List<CardanoTransactionInput> data, required final  List<int> cborTags}): _data = data,_cborTags = cborTags,super._();
+  final List<CardanoTransactionInput> _data;
+  @override
+  List<CardanoTransactionInput> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
-  
+  final List<int> _cborTags;
+  @override
+  List<int> get cborTags {
+    if (_cborTags is EqualUnmodifiableListView) return _cborTags;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cborTags);
+  }
 
- final  List<CardanoTransactionInput> _data;
-@override List<CardanoTransactionInput> get data {
-  if (_data is EqualUnmodifiableListView) return _data;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_data);
+  /// Create a copy of CardanoTransactionInputs
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CardanoTransactionInputsCopyWith<_CardanoTransactionInputs> get copyWith =>
+      __$CardanoTransactionInputsCopyWithImpl<_CardanoTransactionInputs>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _CardanoTransactionInputs &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            const DeepCollectionEquality().equals(other._cborTags, _cborTags));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      const DeepCollectionEquality().hash(_cborTags));
+
+  @override
+  String toString() {
+    return 'CardanoTransactionInputs(data: $data, cborTags: $cborTags)';
+  }
 }
 
- final  List<int> _cborTags;
-@override List<int> get cborTags {
-  if (_cborTags is EqualUnmodifiableListView) return _cborTags;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_cborTags);
+/// @nodoc
+abstract mixin class _$CardanoTransactionInputsCopyWith<$Res>
+    implements $CardanoTransactionInputsCopyWith<$Res> {
+  factory _$CardanoTransactionInputsCopyWith(_CardanoTransactionInputs value,
+          $Res Function(_CardanoTransactionInputs) _then) =
+      __$CardanoTransactionInputsCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<CardanoTransactionInput> data, List<int> cborTags});
 }
 
+/// @nodoc
+class __$CardanoTransactionInputsCopyWithImpl<$Res>
+    implements _$CardanoTransactionInputsCopyWith<$Res> {
+  __$CardanoTransactionInputsCopyWithImpl(this._self, this._then);
 
-@override
-String toString() {
-  return 'CardanoTransactionInputs(data: $data, cborTags: $cborTags)';
+  final _CardanoTransactionInputs _self;
+  final $Res Function(_CardanoTransactionInputs) _then;
+
+  /// Create a copy of CardanoTransactionInputs
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? data = null,
+    Object? cborTags = null,
+  }) {
+    return _then(_CardanoTransactionInputs(
+      data: null == data
+          ? _self._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<CardanoTransactionInput>,
+      cborTags: null == cborTags
+          ? _self._cborTags
+          : cborTags // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+    ));
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$CardanoTransactionInputsImpl&&const DeepCollectionEquality().equals(other._data, _data)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_cborTags));
-
-/// Create a copy of CardanoTransactionInputs
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$CardanoTransactionInputsImplCopyWith<_$CardanoTransactionInputsImpl> get copyWith => __$$CardanoTransactionInputsImplCopyWithImpl<_$CardanoTransactionInputsImpl>(this, _$identity);
-
-
-
-
-
-
-
-
-}
-
-
-abstract class _CardanoTransactionInputs extends CardanoTransactionInputs {
-  const factory _CardanoTransactionInputs({required final  List<CardanoTransactionInput> data, required final  List<int> cborTags}) = _$CardanoTransactionInputsImpl;
-  const _CardanoTransactionInputs._(): super._();
-
-  
-
-@override List<CardanoTransactionInput> get data;@override List<int> get cborTags;
-/// Create a copy of CardanoTransactionInputs
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$CardanoTransactionInputsImplCopyWith<_$CardanoTransactionInputsImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on

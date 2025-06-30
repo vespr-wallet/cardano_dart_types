@@ -9,8 +9,7 @@ import "../../cbor_encodable.dart";
 part "stake_pool_id.freezed.dart";
 
 @freezed
-class StakePoolId with _$StakePoolId implements CborEncodable {
-
+sealed class StakePoolId with _$StakePoolId implements CborEncodable {
   const factory StakePoolId(Uint8List poolKeyHash) = _StakePoolId;
   const StakePoolId._();
 

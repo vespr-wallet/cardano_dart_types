@@ -35,6 +35,7 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
     required CborLengthType lengthType,
   }) = CardanoTransactionOutput_PostAlonzo;
 
+  @override
   late final OutputDatum? datum = switch (this) {
     CardanoTransactionOutput_PostAlonzo(outDatum: final outDatum) => outDatum,
     CardanoTransactionOutput_Legacy(outDatumHash: final datumHash) => datumHash,

@@ -10,8 +10,7 @@ import "../script.dart";
 part "plutus_script_v3.freezed.dart";
 
 @freezed
-class PlutusScriptV3 extends Script with _$PlutusScriptV3 {
-
+sealed class PlutusScriptV3 extends Script with _$PlutusScriptV3 {
   const factory PlutusScriptV3({required Uint8List bytes}) = _PlutusScriptV3;
   const PlutusScriptV3._();
 

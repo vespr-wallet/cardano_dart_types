@@ -14,7 +14,6 @@ part "voter.freezed.dart";
 
 @freezed
 sealed class Voter with _$Voter implements CborEncodable {
-
   // This is very similar to [Credential]
   const factory Voter({
     required VoterType voterType,

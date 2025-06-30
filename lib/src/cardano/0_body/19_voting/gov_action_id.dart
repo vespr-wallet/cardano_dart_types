@@ -12,13 +12,13 @@ const govActionBech32Hrp = "gov_action";
 
 @freezed
 sealed class GovActionId with _$GovActionId implements CborEncodable {
-
   factory GovActionId({
     required String transactionId,
     required int govActionIndex,
   }) = _GovActionId;
   GovActionId._();
 
+  @override
   late final Lazy<String> bech32 = Lazy(
     () => "$transactionId${govActionIndex.toRadixString(16).padLeft(2, '0')}".hexToBech32(govActionBech32Hrp),
   );

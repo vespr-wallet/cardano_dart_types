@@ -26,7 +26,7 @@ part "transaction_body.freezed.dart";
 
 /// Core of the cardano transaction that is signed.
 @Freezed(copyWith: false)
-class CardanoTransactionBody with _$CardanoTransactionBody implements CborEncodable {
+sealed class CardanoTransactionBody with _$CardanoTransactionBody implements CborEncodable {
   CardanoTransactionBody._();
 
   factory CardanoTransactionBody.create({

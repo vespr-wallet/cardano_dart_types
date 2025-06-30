@@ -49,6 +49,7 @@ sealed class CardanoDerivation with _$CardanoDerivation {
     required ConstitutionalCommitee value,
   }) = CardanoDerivedConstitutionalCommittee;
 
+  @override
   late final ByteList pubKey = switch (this) {
     CardanoDerivedAddress(bytes: final bytes) => bytes,
     CardanoDerivedDRep(value: final value) => value.bytes,
@@ -58,11 +59,14 @@ sealed class CardanoDerivation with _$CardanoDerivation {
   Uint8List marshal() => jsonEncode(toJson()).hexDecode();
 
   // bytes
+  @override
   late final Lazy<Uint8List> _credentialsBytes = Lazy(() => blake2bHash224(pubKey));
   Uint8List get credentialsBytes => _credentialsBytes.value;
 
   // hex
+  @override
   late final Lazy<String> _credentialsHex = Lazy(() => _credentialsBytes.value.hexEncode());
+  @override
   late final Lazy<String> _keyHex = Lazy(() => pubKey.hexEncode());
   String get credentialsHex => _credentialsHex.value;
   String get keyHex => _keyHex.value; // verify key
@@ -80,24 +84,31 @@ sealed class DRepDerivation with _$DRepDerivation {
   DRepDerivation._();
 
   // raw key
+  @override
   late final Lazy<String> _dRepKeyHex = Lazy(() => bytes.hexEncode());
   String get dRepKeyHex => _dRepKeyHex.value; // hex encoded - raw key
 
   // credentials (hashed raw key)
+  @override
   late final Lazy<Uint8List> _credentialsBytes = Lazy(() => blake2bHash224(bytes.toUint8List()));
+  @override
   late final Lazy<String> _credentialsHex = Lazy(() => _credentialsBytes.value.hexEncode());
   Uint8List get credentialsBytes => _credentialsBytes.value;
   String get credentialsHex => _credentialsHex.value;
 
   // dRep ID - CIP 105 (Legacy)
+  @override
   late final Lazy<String> _dRepIdLegacyBech32 = Lazy(() => _credentialsBytes.value.bech32Encode(drepHrp));
   String get dRepIdLegacyHex => _credentialsHex.value;
   String get dRepIdLegacyBech32 => _dRepIdLegacyBech32.value;
 
   // dRep ID - CIP 129
+  @override
   late final Lazy<Uint8List> _dRepIdNewBytes = Lazy(() => Uint8List.fromList(
       [getGovKeyPrefix(keyType: GovKeyType.drep, credType: GovCredType.keyHash), ..._credentialsBytes.value]));
+  @override
   late final Lazy<String> _dRepIdNewHex = Lazy(() => _dRepIdNewBytes.value.hexEncode());
+  @override
   late final Lazy<String> _dRepIdNewBech32 = Lazy(() => _dRepIdNewBytes.value.bech32Encode(drepHrp));
 
   Uint8List get dRepIdNewBytes => _dRepIdNewBytes.value;
@@ -119,16 +130,20 @@ sealed class ConstitutionalCommitee with _$ConstitutionalCommitee {
 
   Uint8List marshal() => jsonEncode(toJson()).hexDecode();
 
+  @override
   late final String hexCCKey = bytes.hexEncode();
 
   // credentials (hashed raw key) = _pubCCKeyHash
+  @override
   late final Uint8List credentialsBytes = blake2bHash224(bytes.toUint8List());
+  @override
   late final String hexCredential = credentialsBytes.hexEncode();
 
   // this is the CIP 105 (Legacy)
   // late final String bech32Credential = credentialsBytes.bech32Encode(_hrp);
 
   // CIP 129 (New)
+  @override
   late final Uint8List ccIdBytes = Uint8List.fromList([
     getGovKeyPrefix(
       keyType: switch (this) {
@@ -139,9 +154,12 @@ sealed class ConstitutionalCommitee with _$ConstitutionalCommitee {
     ),
     ...credentialsBytes
   ]);
+  @override
   late final String ccIdHex = ccIdBytes.hexEncode();
+  @override
   late final String ccIdBech32 = ccIdBytes.bech32Encode(_hrp);
 
+  @override
   late final String _hrp = switch (this) {
     ConstitutionalCommiteeCold() => "cc_cold",
     ConstitutionalCommiteeHot() => "cc_hot",

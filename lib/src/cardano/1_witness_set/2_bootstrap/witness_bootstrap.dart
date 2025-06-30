@@ -10,7 +10,7 @@ import "../../cbor_encodable.dart";
 part "witness_bootstrap.freezed.dart";
 
 @freezed
-class WitnessBootstrap with _$WitnessBootstrap implements CborEncodable {
+sealed class WitnessBootstrap with _$WitnessBootstrap implements CborEncodable {
   const factory WitnessBootstrap({
     required Uint8List publicKey,
     required Uint8List signature,

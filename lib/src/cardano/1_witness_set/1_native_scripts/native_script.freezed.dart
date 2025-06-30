@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,581 +10,452 @@ part of 'native_script.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-
-final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NativeScript {
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is NativeScript);
+  }
 
+  @override
+  int get hashCode => runtimeType.hashCode;
 
-
-
-
-
-
-
-
-
+  @override
+  String toString() {
+    return 'NativeScript()';
+  }
 }
 
 /// @nodoc
-abstract class $NativeScriptCopyWith<$Res>  {
-  factory $NativeScriptCopyWith(NativeScript value, $Res Function(NativeScript) then) = _$NativeScriptCopyWithImpl<$Res, NativeScript>;
-
-
-
-}
-
-/// @nodoc
-class _$NativeScriptCopyWithImpl<$Res,$Val extends NativeScript> implements $NativeScriptCopyWith<$Res> {
-  _$NativeScriptCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-
-
-}
-
-
-/// @nodoc
-abstract class _$$NativeScript_PubKeyImplCopyWith<$Res>  {
-  factory _$$NativeScript_PubKeyImplCopyWith(_$NativeScript_PubKeyImpl value, $Res Function(_$NativeScript_PubKeyImpl) then) = __$$NativeScript_PubKeyImplCopyWithImpl<$Res>;
-@useResult
-$Res call({
- Uint8List blob
-});
-
-
-
-}
-
-/// @nodoc
-class __$$NativeScript_PubKeyImplCopyWithImpl<$Res> extends _$NativeScriptCopyWithImpl<$Res, _$NativeScript_PubKeyImpl> implements _$$NativeScript_PubKeyImplCopyWith<$Res> {
-  __$$NativeScript_PubKeyImplCopyWithImpl(_$NativeScript_PubKeyImpl _value, $Res Function(_$NativeScript_PubKeyImpl) _then)
-      : super(_value, _then);
-
-
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? blob = null,}) {
-  return _then(_$NativeScript_PubKeyImpl(
-blob: null == blob ? _value.blob : blob // ignore: cast_nullable_to_non_nullable
-as Uint8List,
-  ));
-}
-
-
+class $NativeScriptCopyWith<$Res> {
+  $NativeScriptCopyWith(NativeScript _, $Res Function(NativeScript) __);
 }
 
 /// @nodoc
 
+class NativeScript_PubKey extends NativeScript {
+  const NativeScript_PubKey({required this.blob}) : super._();
 
-class _$NativeScript_PubKeyImpl extends NativeScript_PubKey  {
-  const _$NativeScript_PubKeyImpl({required this.blob}): super._();
+  final Uint8List blob;
 
-  
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $NativeScript_PubKeyCopyWith<NativeScript_PubKey> get copyWith =>
+      _$NativeScript_PubKeyCopyWithImpl<NativeScript_PubKey>(this, _$identity);
 
-@override final  Uint8List blob;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NativeScript_PubKey &&
+            const DeepCollectionEquality().equals(other.blob, blob));
+  }
 
-@override
-String toString() {
-  return 'NativeScript.pubKey(blob: $blob)';
-}
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(blob));
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$NativeScript_PubKeyImpl&&const DeepCollectionEquality().equals(other.blob, blob));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(blob));
-
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$NativeScript_PubKeyImplCopyWith<_$NativeScript_PubKeyImpl> get copyWith => __$$NativeScript_PubKeyImplCopyWithImpl<_$NativeScript_PubKeyImpl>(this, _$identity);
-
-
-
-
-
-
-
-
-}
-
-
-abstract class NativeScript_PubKey extends NativeScript {
-  const factory NativeScript_PubKey({required final  Uint8List blob}) = _$NativeScript_PubKeyImpl;
-  const NativeScript_PubKey._(): super._();
-
-  
-
- Uint8List get blob;
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-_$$NativeScript_PubKeyImplCopyWith<_$NativeScript_PubKeyImpl> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'NativeScript.pubKey(blob: $blob)';
+  }
 }
 
 /// @nodoc
-abstract class _$$NativeScript_AllImplCopyWith<$Res>  {
-  factory _$$NativeScript_AllImplCopyWith(_$NativeScript_AllImpl value, $Res Function(_$NativeScript_AllImpl) then) = __$$NativeScript_AllImplCopyWithImpl<$Res>;
-@useResult
-$Res call({
- List<NativeScript> scripts
-});
-
-
-
+abstract mixin class $NativeScript_PubKeyCopyWith<$Res>
+    implements $NativeScriptCopyWith<$Res> {
+  factory $NativeScript_PubKeyCopyWith(
+          NativeScript_PubKey value, $Res Function(NativeScript_PubKey) _then) =
+      _$NativeScript_PubKeyCopyWithImpl;
+  @useResult
+  $Res call({Uint8List blob});
 }
 
 /// @nodoc
-class __$$NativeScript_AllImplCopyWithImpl<$Res> extends _$NativeScriptCopyWithImpl<$Res, _$NativeScript_AllImpl> implements _$$NativeScript_AllImplCopyWith<$Res> {
-  __$$NativeScript_AllImplCopyWithImpl(_$NativeScript_AllImpl _value, $Res Function(_$NativeScript_AllImpl) _then)
-      : super(_value, _then);
+class _$NativeScript_PubKeyCopyWithImpl<$Res>
+    implements $NativeScript_PubKeyCopyWith<$Res> {
+  _$NativeScript_PubKeyCopyWithImpl(this._self, this._then);
 
+  final NativeScript_PubKey _self;
+  final $Res Function(NativeScript_PubKey) _then;
 
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? scripts = null,}) {
-  return _then(_$NativeScript_AllImpl(
-scripts: null == scripts ? _value._scripts : scripts // ignore: cast_nullable_to_non_nullable
-as List<NativeScript>,
-  ));
-}
-
-
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? blob = null,
+  }) {
+    return _then(NativeScript_PubKey(
+      blob: null == blob
+          ? _self.blob
+          : blob // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
 }
 
 /// @nodoc
 
+class NativeScript_All extends NativeScript {
+  const NativeScript_All({required final List<NativeScript> scripts})
+      : _scripts = scripts,
+        super._();
 
-class _$NativeScript_AllImpl extends NativeScript_All  {
-  const _$NativeScript_AllImpl({required final  List<NativeScript> scripts}): _scripts = scripts,super._();
+  final List<NativeScript> _scripts;
+  List<NativeScript> get scripts {
+    if (_scripts is EqualUnmodifiableListView) return _scripts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_scripts);
+  }
 
-  
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $NativeScript_AllCopyWith<NativeScript_All> get copyWith =>
+      _$NativeScript_AllCopyWithImpl<NativeScript_All>(this, _$identity);
 
- final  List<NativeScript> _scripts;
-@override List<NativeScript> get scripts {
-  if (_scripts is EqualUnmodifiableListView) return _scripts;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_scripts);
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NativeScript_All &&
+            const DeepCollectionEquality().equals(other._scripts, _scripts));
+  }
 
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_scripts));
 
-@override
-String toString() {
-  return 'NativeScript.all(scripts: $scripts)';
-}
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$NativeScript_AllImpl&&const DeepCollectionEquality().equals(other._scripts, _scripts));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts));
-
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$NativeScript_AllImplCopyWith<_$NativeScript_AllImpl> get copyWith => __$$NativeScript_AllImplCopyWithImpl<_$NativeScript_AllImpl>(this, _$identity);
-
-
-
-
-
-
-
-
-}
-
-
-abstract class NativeScript_All extends NativeScript {
-  const factory NativeScript_All({required final  List<NativeScript> scripts}) = _$NativeScript_AllImpl;
-  const NativeScript_All._(): super._();
-
-  
-
- List<NativeScript> get scripts;
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-_$$NativeScript_AllImplCopyWith<_$NativeScript_AllImpl> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'NativeScript.all(scripts: $scripts)';
+  }
 }
 
 /// @nodoc
-abstract class _$$NativeScript_AnyImplCopyWith<$Res>  {
-  factory _$$NativeScript_AnyImplCopyWith(_$NativeScript_AnyImpl value, $Res Function(_$NativeScript_AnyImpl) then) = __$$NativeScript_AnyImplCopyWithImpl<$Res>;
-@useResult
-$Res call({
- List<NativeScript> scripts
-});
-
-
-
+abstract mixin class $NativeScript_AllCopyWith<$Res>
+    implements $NativeScriptCopyWith<$Res> {
+  factory $NativeScript_AllCopyWith(
+          NativeScript_All value, $Res Function(NativeScript_All) _then) =
+      _$NativeScript_AllCopyWithImpl;
+  @useResult
+  $Res call({List<NativeScript> scripts});
 }
 
 /// @nodoc
-class __$$NativeScript_AnyImplCopyWithImpl<$Res> extends _$NativeScriptCopyWithImpl<$Res, _$NativeScript_AnyImpl> implements _$$NativeScript_AnyImplCopyWith<$Res> {
-  __$$NativeScript_AnyImplCopyWithImpl(_$NativeScript_AnyImpl _value, $Res Function(_$NativeScript_AnyImpl) _then)
-      : super(_value, _then);
+class _$NativeScript_AllCopyWithImpl<$Res>
+    implements $NativeScript_AllCopyWith<$Res> {
+  _$NativeScript_AllCopyWithImpl(this._self, this._then);
 
+  final NativeScript_All _self;
+  final $Res Function(NativeScript_All) _then;
 
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? scripts = null,}) {
-  return _then(_$NativeScript_AnyImpl(
-scripts: null == scripts ? _value._scripts : scripts // ignore: cast_nullable_to_non_nullable
-as List<NativeScript>,
-  ));
-}
-
-
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? scripts = null,
+  }) {
+    return _then(NativeScript_All(
+      scripts: null == scripts
+          ? _self._scripts
+          : scripts // ignore: cast_nullable_to_non_nullable
+              as List<NativeScript>,
+    ));
+  }
 }
 
 /// @nodoc
 
+class NativeScript_Any extends NativeScript {
+  const NativeScript_Any({required final List<NativeScript> scripts})
+      : _scripts = scripts,
+        super._();
 
-class _$NativeScript_AnyImpl extends NativeScript_Any  {
-  const _$NativeScript_AnyImpl({required final  List<NativeScript> scripts}): _scripts = scripts,super._();
+  final List<NativeScript> _scripts;
+  List<NativeScript> get scripts {
+    if (_scripts is EqualUnmodifiableListView) return _scripts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_scripts);
+  }
 
-  
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $NativeScript_AnyCopyWith<NativeScript_Any> get copyWith =>
+      _$NativeScript_AnyCopyWithImpl<NativeScript_Any>(this, _$identity);
 
- final  List<NativeScript> _scripts;
-@override List<NativeScript> get scripts {
-  if (_scripts is EqualUnmodifiableListView) return _scripts;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_scripts);
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NativeScript_Any &&
+            const DeepCollectionEquality().equals(other._scripts, _scripts));
+  }
 
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_scripts));
 
-@override
-String toString() {
-  return 'NativeScript.any(scripts: $scripts)';
-}
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$NativeScript_AnyImpl&&const DeepCollectionEquality().equals(other._scripts, _scripts));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts));
-
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$NativeScript_AnyImplCopyWith<_$NativeScript_AnyImpl> get copyWith => __$$NativeScript_AnyImplCopyWithImpl<_$NativeScript_AnyImpl>(this, _$identity);
-
-
-
-
-
-
-
-
-}
-
-
-abstract class NativeScript_Any extends NativeScript {
-  const factory NativeScript_Any({required final  List<NativeScript> scripts}) = _$NativeScript_AnyImpl;
-  const NativeScript_Any._(): super._();
-
-  
-
- List<NativeScript> get scripts;
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-_$$NativeScript_AnyImplCopyWith<_$NativeScript_AnyImpl> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'NativeScript.any(scripts: $scripts)';
+  }
 }
 
 /// @nodoc
-abstract class _$$NativeScript_AtLeastImplCopyWith<$Res>  {
-  factory _$$NativeScript_AtLeastImplCopyWith(_$NativeScript_AtLeastImpl value, $Res Function(_$NativeScript_AtLeastImpl) then) = __$$NativeScript_AtLeastImplCopyWithImpl<$Res>;
-@useResult
-$Res call({
- int required, List<NativeScript> scripts
-});
-
-
-
+abstract mixin class $NativeScript_AnyCopyWith<$Res>
+    implements $NativeScriptCopyWith<$Res> {
+  factory $NativeScript_AnyCopyWith(
+          NativeScript_Any value, $Res Function(NativeScript_Any) _then) =
+      _$NativeScript_AnyCopyWithImpl;
+  @useResult
+  $Res call({List<NativeScript> scripts});
 }
 
 /// @nodoc
-class __$$NativeScript_AtLeastImplCopyWithImpl<$Res> extends _$NativeScriptCopyWithImpl<$Res, _$NativeScript_AtLeastImpl> implements _$$NativeScript_AtLeastImplCopyWith<$Res> {
-  __$$NativeScript_AtLeastImplCopyWithImpl(_$NativeScript_AtLeastImpl _value, $Res Function(_$NativeScript_AtLeastImpl) _then)
-      : super(_value, _then);
+class _$NativeScript_AnyCopyWithImpl<$Res>
+    implements $NativeScript_AnyCopyWith<$Res> {
+  _$NativeScript_AnyCopyWithImpl(this._self, this._then);
 
+  final NativeScript_Any _self;
+  final $Res Function(NativeScript_Any) _then;
 
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? required = null,Object? scripts = null,}) {
-  return _then(_$NativeScript_AtLeastImpl(
-required: null == required ? _value.required : required // ignore: cast_nullable_to_non_nullable
-as int,scripts: null == scripts ? _value._scripts : scripts // ignore: cast_nullable_to_non_nullable
-as List<NativeScript>,
-  ));
-}
-
-
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? scripts = null,
+  }) {
+    return _then(NativeScript_Any(
+      scripts: null == scripts
+          ? _self._scripts
+          : scripts // ignore: cast_nullable_to_non_nullable
+              as List<NativeScript>,
+    ));
+  }
 }
 
 /// @nodoc
 
+class NativeScript_AtLeast extends NativeScript {
+  const NativeScript_AtLeast(
+      {required this.required, required final List<NativeScript> scripts})
+      : _scripts = scripts,
+        super._();
 
-class _$NativeScript_AtLeastImpl extends NativeScript_AtLeast  {
-  const _$NativeScript_AtLeastImpl({required this.required, required final  List<NativeScript> scripts}): _scripts = scripts,super._();
+  final int required;
+  final List<NativeScript> _scripts;
+  List<NativeScript> get scripts {
+    if (_scripts is EqualUnmodifiableListView) return _scripts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_scripts);
+  }
 
-  
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $NativeScript_AtLeastCopyWith<NativeScript_AtLeast> get copyWith =>
+      _$NativeScript_AtLeastCopyWithImpl<NativeScript_AtLeast>(
+          this, _$identity);
 
-@override final  int required;
- final  List<NativeScript> _scripts;
-@override List<NativeScript> get scripts {
-  if (_scripts is EqualUnmodifiableListView) return _scripts;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_scripts);
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NativeScript_AtLeast &&
+            (identical(other.required, required) ||
+                other.required == required) &&
+            const DeepCollectionEquality().equals(other._scripts, _scripts));
+  }
 
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, required, const DeepCollectionEquality().hash(_scripts));
 
-@override
-String toString() {
-  return 'NativeScript.atLeast(required: $required, scripts: $scripts)';
-}
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$NativeScript_AtLeastImpl&&(identical(other.required, required) || other.required == required)&&const DeepCollectionEquality().equals(other._scripts, _scripts));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,required,const DeepCollectionEquality().hash(_scripts));
-
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$NativeScript_AtLeastImplCopyWith<_$NativeScript_AtLeastImpl> get copyWith => __$$NativeScript_AtLeastImplCopyWithImpl<_$NativeScript_AtLeastImpl>(this, _$identity);
-
-
-
-
-
-
-
-
-}
-
-
-abstract class NativeScript_AtLeast extends NativeScript {
-  const factory NativeScript_AtLeast({required final  int required, required final  List<NativeScript> scripts}) = _$NativeScript_AtLeastImpl;
-  const NativeScript_AtLeast._(): super._();
-
-  
-
- int get required; List<NativeScript> get scripts;
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-_$$NativeScript_AtLeastImplCopyWith<_$NativeScript_AtLeastImpl> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'NativeScript.atLeast(required: $required, scripts: $scripts)';
+  }
 }
 
 /// @nodoc
-abstract class _$$NativeScript_RequireTimeAfterImplCopyWith<$Res>  {
-  factory _$$NativeScript_RequireTimeAfterImplCopyWith(_$NativeScript_RequireTimeAfterImpl value, $Res Function(_$NativeScript_RequireTimeAfterImpl) then) = __$$NativeScript_RequireTimeAfterImplCopyWithImpl<$Res>;
-@useResult
-$Res call({
- BigInt slot
-});
-
-
-
+abstract mixin class $NativeScript_AtLeastCopyWith<$Res>
+    implements $NativeScriptCopyWith<$Res> {
+  factory $NativeScript_AtLeastCopyWith(NativeScript_AtLeast value,
+          $Res Function(NativeScript_AtLeast) _then) =
+      _$NativeScript_AtLeastCopyWithImpl;
+  @useResult
+  $Res call({int required, List<NativeScript> scripts});
 }
 
 /// @nodoc
-class __$$NativeScript_RequireTimeAfterImplCopyWithImpl<$Res> extends _$NativeScriptCopyWithImpl<$Res, _$NativeScript_RequireTimeAfterImpl> implements _$$NativeScript_RequireTimeAfterImplCopyWith<$Res> {
-  __$$NativeScript_RequireTimeAfterImplCopyWithImpl(_$NativeScript_RequireTimeAfterImpl _value, $Res Function(_$NativeScript_RequireTimeAfterImpl) _then)
-      : super(_value, _then);
+class _$NativeScript_AtLeastCopyWithImpl<$Res>
+    implements $NativeScript_AtLeastCopyWith<$Res> {
+  _$NativeScript_AtLeastCopyWithImpl(this._self, this._then);
 
+  final NativeScript_AtLeast _self;
+  final $Res Function(NativeScript_AtLeast) _then;
 
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? slot = null,}) {
-  return _then(_$NativeScript_RequireTimeAfterImpl(
-slot: null == slot ? _value.slot : slot // ignore: cast_nullable_to_non_nullable
-as BigInt,
-  ));
-}
-
-
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? required = null,
+    Object? scripts = null,
+  }) {
+    return _then(NativeScript_AtLeast(
+      required: null == required
+          ? _self.required
+          : required // ignore: cast_nullable_to_non_nullable
+              as int,
+      scripts: null == scripts
+          ? _self._scripts
+          : scripts // ignore: cast_nullable_to_non_nullable
+              as List<NativeScript>,
+    ));
+  }
 }
 
 /// @nodoc
 
+class NativeScript_RequireTimeAfter extends NativeScript {
+  const NativeScript_RequireTimeAfter({required this.slot}) : super._();
 
-class _$NativeScript_RequireTimeAfterImpl extends NativeScript_RequireTimeAfter  {
-  const _$NativeScript_RequireTimeAfterImpl({required this.slot}): super._();
+  final BigInt slot;
 
-  
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $NativeScript_RequireTimeAfterCopyWith<NativeScript_RequireTimeAfter>
+      get copyWith => _$NativeScript_RequireTimeAfterCopyWithImpl<
+          NativeScript_RequireTimeAfter>(this, _$identity);
 
-@override final  BigInt slot;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NativeScript_RequireTimeAfter &&
+            (identical(other.slot, slot) || other.slot == slot));
+  }
 
-@override
-String toString() {
-  return 'NativeScript.requireTimeAfter(slot: $slot)';
-}
+  @override
+  int get hashCode => Object.hash(runtimeType, slot);
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$NativeScript_RequireTimeAfterImpl&&(identical(other.slot, slot) || other.slot == slot));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,slot);
-
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$NativeScript_RequireTimeAfterImplCopyWith<_$NativeScript_RequireTimeAfterImpl> get copyWith => __$$NativeScript_RequireTimeAfterImplCopyWithImpl<_$NativeScript_RequireTimeAfterImpl>(this, _$identity);
-
-
-
-
-
-
-
-
-}
-
-
-abstract class NativeScript_RequireTimeAfter extends NativeScript {
-  const factory NativeScript_RequireTimeAfter({required final  BigInt slot}) = _$NativeScript_RequireTimeAfterImpl;
-  const NativeScript_RequireTimeAfter._(): super._();
-
-  
-
- BigInt get slot;
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-_$$NativeScript_RequireTimeAfterImplCopyWith<_$NativeScript_RequireTimeAfterImpl> get copyWith => throw _privateConstructorUsedError;
-
+  @override
+  String toString() {
+    return 'NativeScript.requireTimeAfter(slot: $slot)';
+  }
 }
 
 /// @nodoc
-abstract class _$$NativeScript_RequireTimeBeforeImplCopyWith<$Res>  {
-  factory _$$NativeScript_RequireTimeBeforeImplCopyWith(_$NativeScript_RequireTimeBeforeImpl value, $Res Function(_$NativeScript_RequireTimeBeforeImpl) then) = __$$NativeScript_RequireTimeBeforeImplCopyWithImpl<$Res>;
-@useResult
-$Res call({
- BigInt slot
-});
-
-
-
+abstract mixin class $NativeScript_RequireTimeAfterCopyWith<$Res>
+    implements $NativeScriptCopyWith<$Res> {
+  factory $NativeScript_RequireTimeAfterCopyWith(
+          NativeScript_RequireTimeAfter value,
+          $Res Function(NativeScript_RequireTimeAfter) _then) =
+      _$NativeScript_RequireTimeAfterCopyWithImpl;
+  @useResult
+  $Res call({BigInt slot});
 }
 
 /// @nodoc
-class __$$NativeScript_RequireTimeBeforeImplCopyWithImpl<$Res> extends _$NativeScriptCopyWithImpl<$Res, _$NativeScript_RequireTimeBeforeImpl> implements _$$NativeScript_RequireTimeBeforeImplCopyWith<$Res> {
-  __$$NativeScript_RequireTimeBeforeImplCopyWithImpl(_$NativeScript_RequireTimeBeforeImpl _value, $Res Function(_$NativeScript_RequireTimeBeforeImpl) _then)
-      : super(_value, _then);
+class _$NativeScript_RequireTimeAfterCopyWithImpl<$Res>
+    implements $NativeScript_RequireTimeAfterCopyWith<$Res> {
+  _$NativeScript_RequireTimeAfterCopyWithImpl(this._self, this._then);
 
+  final NativeScript_RequireTimeAfter _self;
+  final $Res Function(NativeScript_RequireTimeAfter) _then;
 
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? slot = null,}) {
-  return _then(_$NativeScript_RequireTimeBeforeImpl(
-slot: null == slot ? _value.slot : slot // ignore: cast_nullable_to_non_nullable
-as BigInt,
-  ));
-}
-
-
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? slot = null,
+  }) {
+    return _then(NativeScript_RequireTimeAfter(
+      slot: null == slot
+          ? _self.slot
+          : slot // ignore: cast_nullable_to_non_nullable
+              as BigInt,
+    ));
+  }
 }
 
 /// @nodoc
 
+class NativeScript_RequireTimeBefore extends NativeScript {
+  const NativeScript_RequireTimeBefore({required this.slot}) : super._();
 
-class _$NativeScript_RequireTimeBeforeImpl extends NativeScript_RequireTimeBefore  {
-  const _$NativeScript_RequireTimeBeforeImpl({required this.slot}): super._();
+  final BigInt slot;
 
-  
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $NativeScript_RequireTimeBeforeCopyWith<NativeScript_RequireTimeBefore>
+      get copyWith => _$NativeScript_RequireTimeBeforeCopyWithImpl<
+          NativeScript_RequireTimeBefore>(this, _$identity);
 
-@override final  BigInt slot;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NativeScript_RequireTimeBefore &&
+            (identical(other.slot, slot) || other.slot == slot));
+  }
 
-@override
-String toString() {
-  return 'NativeScript.requireTimeBefore(slot: $slot)';
+  @override
+  int get hashCode => Object.hash(runtimeType, slot);
+
+  @override
+  String toString() {
+    return 'NativeScript.requireTimeBefore(slot: $slot)';
+  }
 }
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$NativeScript_RequireTimeBeforeImpl&&(identical(other.slot, slot) || other.slot == slot));
+/// @nodoc
+abstract mixin class $NativeScript_RequireTimeBeforeCopyWith<$Res>
+    implements $NativeScriptCopyWith<$Res> {
+  factory $NativeScript_RequireTimeBeforeCopyWith(
+          NativeScript_RequireTimeBefore value,
+          $Res Function(NativeScript_RequireTimeBefore) _then) =
+      _$NativeScript_RequireTimeBeforeCopyWithImpl;
+  @useResult
+  $Res call({BigInt slot});
 }
 
+/// @nodoc
+class _$NativeScript_RequireTimeBeforeCopyWithImpl<$Res>
+    implements $NativeScript_RequireTimeBeforeCopyWith<$Res> {
+  _$NativeScript_RequireTimeBeforeCopyWithImpl(this._self, this._then);
 
-@override
-int get hashCode => Object.hash(runtimeType,slot);
+  final NativeScript_RequireTimeBefore _self;
+  final $Res Function(NativeScript_RequireTimeBefore) _then;
 
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$NativeScript_RequireTimeBeforeImplCopyWith<_$NativeScript_RequireTimeBeforeImpl> get copyWith => __$$NativeScript_RequireTimeBeforeImplCopyWithImpl<_$NativeScript_RequireTimeBeforeImpl>(this, _$identity);
-
-
-
-
-
-
-
-
+  /// Create a copy of NativeScript
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? slot = null,
+  }) {
+    return _then(NativeScript_RequireTimeBefore(
+      slot: null == slot
+          ? _self.slot
+          : slot // ignore: cast_nullable_to_non_nullable
+              as BigInt,
+    ));
+  }
 }
 
-
-abstract class NativeScript_RequireTimeBefore extends NativeScript {
-  const factory NativeScript_RequireTimeBefore({required final  BigInt slot}) = _$NativeScript_RequireTimeBeforeImpl;
-  const NativeScript_RequireTimeBefore._(): super._();
-
-  
-
- BigInt get slot;
-/// Create a copy of NativeScript
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-_$$NativeScript_RequireTimeBeforeImplCopyWith<_$NativeScript_RequireTimeBeforeImpl> get copyWith => throw _privateConstructorUsedError;
-
-}
+// dart format on
