@@ -1,3 +1,7 @@
+## [2.9.1+1]
+
+- Improved and expanded the README documentation for open-source/public use. No code changes.
+
 ## [2.9.1] - April 20, 2025
 
 # Breaking Changes
