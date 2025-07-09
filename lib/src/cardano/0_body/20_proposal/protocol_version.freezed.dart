@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -23,7 +22,8 @@ mixin _$ProtocolVersion {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
   $ProtocolVersionCopyWith<ProtocolVersion> get copyWith =>
-      _$ProtocolVersionCopyWithImpl<ProtocolVersion>(this as ProtocolVersion, _$identity);
+      _$ProtocolVersionCopyWithImpl<ProtocolVersion>(
+          this as ProtocolVersion, _$identity);
 
   @override
   bool operator ==(Object other) {
@@ -45,14 +45,16 @@ mixin _$ProtocolVersion {
 
 /// @nodoc
 abstract mixin class $ProtocolVersionCopyWith<$Res> {
-  factory $ProtocolVersionCopyWith(ProtocolVersion value, $Res Function(ProtocolVersion) _then) =
+  factory $ProtocolVersionCopyWith(
+          ProtocolVersion value, $Res Function(ProtocolVersion) _then) =
       _$ProtocolVersionCopyWithImpl;
   @useResult
   $Res call({int major, int minor});
 }
 
 /// @nodoc
-class _$ProtocolVersionCopyWithImpl<$Res> implements $ProtocolVersionCopyWith<$Res> {
+class _$ProtocolVersionCopyWithImpl<$Res>
+    implements $ProtocolVersionCopyWith<$Res> {
   _$ProtocolVersionCopyWithImpl(this._self, this._then);
 
   final ProtocolVersion _self;
@@ -82,7 +84,8 @@ class _$ProtocolVersionCopyWithImpl<$Res> implements $ProtocolVersionCopyWith<$R
 /// @nodoc
 
 class _ProtocolVersion extends ProtocolVersion {
-  const _ProtocolVersion({required this.major, required this.minor}) : super._();
+  const _ProtocolVersion({required this.major, required this.minor})
+      : super._();
 
   @override
   final int major;
@@ -116,8 +119,10 @@ class _ProtocolVersion extends ProtocolVersion {
 }
 
 /// @nodoc
-abstract mixin class _$ProtocolVersionCopyWith<$Res> implements $ProtocolVersionCopyWith<$Res> {
-  factory _$ProtocolVersionCopyWith(_ProtocolVersion value, $Res Function(_ProtocolVersion) _then) =
+abstract mixin class _$ProtocolVersionCopyWith<$Res>
+    implements $ProtocolVersionCopyWith<$Res> {
+  factory _$ProtocolVersionCopyWith(
+          _ProtocolVersion value, $Res Function(_ProtocolVersion) _then) =
       __$ProtocolVersionCopyWithImpl;
   @override
   @useResult
@@ -125,7 +130,8 @@ abstract mixin class _$ProtocolVersionCopyWith<$Res> implements $ProtocolVersion
 }
 
 /// @nodoc
-class __$ProtocolVersionCopyWithImpl<$Res> implements _$ProtocolVersionCopyWith<$Res> {
+class __$ProtocolVersionCopyWithImpl<$Res>
+    implements _$ProtocolVersionCopyWith<$Res> {
   __$ProtocolVersionCopyWithImpl(this._self, this._then);
 
   final _ProtocolVersion _self;

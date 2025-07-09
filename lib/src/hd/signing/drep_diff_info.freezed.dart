@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -24,7 +23,8 @@ mixin _$DRepDiffInfo {
         (other.runtimeType == runtimeType &&
             other is DRepDiffInfo &&
             (identical(other.dRepId, dRepId) || other.dRepId == dRepId) &&
-            (identical(other.metadataUrl, metadataUrl) || other.metadataUrl == metadataUrl));
+            (identical(other.metadataUrl, metadataUrl) ||
+                other.metadataUrl == metadataUrl));
   }
 
   @override
@@ -39,7 +39,8 @@ mixin _$DRepDiffInfo {
 /// @nodoc
 
 class _DRepDiffInfo extends DRepDiffInfo {
-  const _DRepDiffInfo({required this.dRepId, required this.metadataUrl}) : super._();
+  const _DRepDiffInfo({required this.dRepId, required this.metadataUrl})
+      : super._();
 
   @override
   final String dRepId;
@@ -53,7 +54,8 @@ class _DRepDiffInfo extends DRepDiffInfo {
         (other.runtimeType == runtimeType &&
             other is _DRepDiffInfo &&
             (identical(other.dRepId, dRepId) || other.dRepId == dRepId) &&
-            (identical(other.metadataUrl, metadataUrl) || other.metadataUrl == metadataUrl));
+            (identical(other.metadataUrl, metadataUrl) ||
+                other.metadataUrl == metadataUrl));
   }
 
   @override
