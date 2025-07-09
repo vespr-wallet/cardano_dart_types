@@ -1,3 +1,7 @@
+## 2.9.3
+
+- FIX: [CoseSign1] was throwing for serialized with forJson: true when payload has not utf8
+
 ## 2.9.2
 
 - Updated freezed major version and re-generated classes
