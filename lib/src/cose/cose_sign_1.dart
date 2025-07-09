@@ -39,7 +39,17 @@ sealed class CoseSign1 with _$CoseSign1 implements CborEncodable {
   @override
   CborValue serialize({required bool forJson}) => CborList.of([
         ...(headers.serialize(forJson: forJson) as CborList),
-        forJson ? CborString(payload.utf8Encode()) : CborBytes(payload),
+        forJson ? CborString(payload.utf8OrHexEncode()) : CborBytes(payload),
         forJson ? CborString(signature.hexEncode()) : CborBytes(signature),
       ]);
+}
+
+extension _StringX on Uint8List {
+  String utf8OrHexEncode() {
+    try {
+      return utf8Encode();
+    } catch (e) {
+      return hexEncode();
+    }
+  }
 }
