@@ -36,6 +36,11 @@ sealed class CoseSign1 with _$CoseSign1 implements CborEncodable {
     );
   }
 
+  factory CoseSign1.deserializeHex(String hex) {
+    final cborValue = hex.cborDecode();
+    return CoseSign1.deserialize(cborValue);
+  }
+
   @override
   CborValue serialize({required bool forJson}) => CborList.of([
         ...(headers.serialize(forJson: forJson) as CborList),

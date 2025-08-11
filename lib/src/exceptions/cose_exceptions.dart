@@ -26,6 +26,10 @@ class CoseHeaderMapParseException extends CoseParseException {
   CoseHeaderMapParseException(super.message);
 }
 
+class CoseKeyParseException extends CoseParseException {
+  CoseKeyParseException(super.message);
+}
+
 abstract class CoseParseException extends Error {
   final String message;
 

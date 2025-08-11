@@ -1,3 +1,9 @@
+## 2.9.4
+
+- [CoseKey] - added deserialize and deserializeHex factories
+- [CoseSign] - added deserializeHex factory
+- [CoseSign1] - added deserializeHex factory
+
 ## 2.9.3
 
 - FIX: [CoseSign1] was throwing for serialized with forJson: true when payload has not utf8
