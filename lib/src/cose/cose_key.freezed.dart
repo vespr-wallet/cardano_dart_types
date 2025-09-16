@@ -103,9 +103,9 @@ class _$CoseKeyCopyWithImpl<$Res> implements $CoseKeyCopyWith<$Res> {
 class _CoseKey extends CoseKey {
   const _CoseKey(
       {required this.keyId,
-      this.algorithmId = const CborSmallInt(ALG_EdDSA),
-      this.crvKey = const CborSmallInt(CRV_Ed25519),
-      this.keyType = const CborSmallInt(OKP)})
+      this.algorithmId = _defaultAlgorithmId,
+      this.crvKey = _defaultCrvKey,
+      this.keyType = _defaultKeyType})
       : super._();
 
   @override

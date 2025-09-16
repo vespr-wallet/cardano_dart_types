@@ -33,7 +33,7 @@ sealed class CoseKey with _$CoseKey implements CborEncodable {
           (forJson ? CborString("algorithmId") : const CborSmallInt(3)): algorithmId,
           (forJson ? CborString("crvKey") : const CborSmallInt(CRV_KEY)): crvKey,
           (forJson ? CborString("keyId") : const CborSmallInt(X_KEY)):
-              (forJson ? CborString(keyId.addressBech32Encode()) : CborBytes(keyId)),
+              (forJson ? CborString(keyId.hexEncode()) : CborBytes(keyId)),
         },
       );
 
