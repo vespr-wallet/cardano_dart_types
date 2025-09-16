@@ -1,3 +1,7 @@
+## 2.9.5
+
+- Added new [CardanoSigningPath] to easily specify required signers for both cold and hot wallets
+
 ## 2.9.4
 
 - [CoseKey] - added deserialize and deserializeHex factories
