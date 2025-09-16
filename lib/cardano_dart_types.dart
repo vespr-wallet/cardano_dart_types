@@ -62,6 +62,7 @@ export "src/hd/signing/proposal_diff_info.dart";
 export "src/hd/signing/signing_types.dart";
 export "src/hd/signing/vote_info.dart";
 export "src/hd/wallet_factory.dart";
+export "src/signing/cardano_signing_path.dart";
 export "src/utils/cardano_utils.dart";
 export "src/utils/lazy.dart";
 export "src/utils/models/address_info.dart";
