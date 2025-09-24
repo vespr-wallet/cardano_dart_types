@@ -1,3 +1,12 @@
+## 2.10.0
+
+Breaking Change:
+- [CardanoSigningPath] no longer tracks account index
+
+Other Changes:
+- Fixed ser/deser for Certificates containing 258 tag
+- Fixed CoseSig parsing
+
 ## 2.9.5
 
 - Added new [CardanoSigningPath] to easily specify required signers for both cold and hot wallets
