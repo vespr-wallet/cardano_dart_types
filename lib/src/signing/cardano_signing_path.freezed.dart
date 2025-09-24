@@ -14,30 +14,61 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CardanoSigningPath {
 
- List<int> get signingPath;
+ int get address;
+/// Create a copy of CardanoSigningPath
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CardanoSigningPathCopyWith<CardanoSigningPath> get copyWith => _$CardanoSigningPathCopyWithImpl<CardanoSigningPath>(this as CardanoSigningPath, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath&&const DeepCollectionEquality().equals(other.signingPath, signingPath));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath&&(identical(other.address, address) || other.address == address));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(signingPath));
+int get hashCode => Object.hash(runtimeType,address);
 
 @override
 String toString() {
-  return 'CardanoSigningPath(signingPath: $signingPath)';
+  return 'CardanoSigningPath(address: $address)';
 }
 
 
 }
 
 /// @nodoc
-class $CardanoSigningPathCopyWith<$Res>  {
-$CardanoSigningPathCopyWith(CardanoSigningPath _, $Res Function(CardanoSigningPath) __);
+abstract mixin class $CardanoSigningPathCopyWith<$Res>  {
+  factory $CardanoSigningPathCopyWith(CardanoSigningPath value, $Res Function(CardanoSigningPath) _then) = _$CardanoSigningPathCopyWithImpl;
+@useResult
+$Res call({
+ int address
+});
+
+
+
+
+}
+/// @nodoc
+class _$CardanoSigningPathCopyWithImpl<$Res>
+    implements $CardanoSigningPathCopyWith<$Res> {
+  _$CardanoSigningPathCopyWithImpl(this._self, this._then);
+
+  final CardanoSigningPath _self;
+  final $Res Function(CardanoSigningPath) _then;
+
+/// Create a copy of CardanoSigningPath
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? address = null,}) {
+  return _then(_self.copyWith(
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
 }
 
 
@@ -46,15 +77,14 @@ $CardanoSigningPathCopyWith(CardanoSigningPath _, $Res Function(CardanoSigningPa
 
 
 class CardanoSigningPath_Byron extends CardanoSigningPath {
-   CardanoSigningPath_Byron({required this.account, required this.address}): super._();
+   CardanoSigningPath_Byron({required this.address}): super._();
   
 
- final  int account;
- final  int address;
+@override final  int address;
 
 /// Create a copy of CardanoSigningPath
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $CardanoSigningPath_ByronCopyWith<CardanoSigningPath_Byron> get copyWith => _$CardanoSigningPath_ByronCopyWithImpl<CardanoSigningPath_Byron>(this, _$identity);
 
@@ -62,16 +92,16 @@ $CardanoSigningPath_ByronCopyWith<CardanoSigningPath_Byron> get copyWith => _$Ca
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_Byron&&(identical(other.account, account) || other.account == account)&&(identical(other.address, address) || other.address == address));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_Byron&&(identical(other.address, address) || other.address == address));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,account,address);
+int get hashCode => Object.hash(runtimeType,address);
 
 @override
 String toString() {
-  return 'CardanoSigningPath.byron(account: $account, address: $address)';
+  return 'CardanoSigningPath.byron(address: $address)';
 }
 
 
@@ -80,9 +110,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $CardanoSigningPath_ByronCopyWith<$Res> implements $CardanoSigningPathCopyWith<$Res> {
   factory $CardanoSigningPath_ByronCopyWith(CardanoSigningPath_Byron value, $Res Function(CardanoSigningPath_Byron) _then) = _$CardanoSigningPath_ByronCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- int account, int address
+ int address
 });
 
 
@@ -99,10 +129,9 @@ class _$CardanoSigningPath_ByronCopyWithImpl<$Res>
 
 /// Create a copy of CardanoSigningPath
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? account = null,Object? address = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? address = null,}) {
   return _then(CardanoSigningPath_Byron(
-account: null == account ? _self.account : account // ignore: cast_nullable_to_non_nullable
-as int,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -114,16 +143,15 @@ as int,
 
 
 class CardanoSigningPath_Shelley extends CardanoSigningPath {
-   CardanoSigningPath_Shelley({required this.account, required this.address, required this.role}): super._();
+   CardanoSigningPath_Shelley({required this.address, required this.role}): super._();
   
 
- final  int account;
- final  int address;
+@override final  int address;
  final  Bip32KeyRole role;
 
 /// Create a copy of CardanoSigningPath
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $CardanoSigningPath_ShelleyCopyWith<CardanoSigningPath_Shelley> get copyWith => _$CardanoSigningPath_ShelleyCopyWithImpl<CardanoSigningPath_Shelley>(this, _$identity);
 
@@ -131,16 +159,16 @@ $CardanoSigningPath_ShelleyCopyWith<CardanoSigningPath_Shelley> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_Shelley&&(identical(other.account, account) || other.account == account)&&(identical(other.address, address) || other.address == address)&&(identical(other.role, role) || other.role == role));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_Shelley&&(identical(other.address, address) || other.address == address)&&(identical(other.role, role) || other.role == role));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,account,address,role);
+int get hashCode => Object.hash(runtimeType,address,role);
 
 @override
 String toString() {
-  return 'CardanoSigningPath.shelley(account: $account, address: $address, role: $role)';
+  return 'CardanoSigningPath.shelley(address: $address, role: $role)';
 }
 
 
@@ -149,9 +177,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $CardanoSigningPath_ShelleyCopyWith<$Res> implements $CardanoSigningPathCopyWith<$Res> {
   factory $CardanoSigningPath_ShelleyCopyWith(CardanoSigningPath_Shelley value, $Res Function(CardanoSigningPath_Shelley) _then) = _$CardanoSigningPath_ShelleyCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- int account, int address, Bip32KeyRole role
+ int address, Bip32KeyRole role
 });
 
 
@@ -168,10 +196,9 @@ class _$CardanoSigningPath_ShelleyCopyWithImpl<$Res>
 
 /// Create a copy of CardanoSigningPath
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? account = null,Object? address = null,Object? role = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? address = null,Object? role = null,}) {
   return _then(CardanoSigningPath_Shelley(
-account: null == account ? _self.account : account // ignore: cast_nullable_to_non_nullable
-as int,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as int,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as Bip32KeyRole,
   ));
@@ -184,15 +211,14 @@ as Bip32KeyRole,
 
 
 class CardanoSigningPath_CIP36 extends CardanoSigningPath {
-   CardanoSigningPath_CIP36({required this.account, required this.address}): super._();
+   CardanoSigningPath_CIP36({required this.address}): super._();
   
 
- final  int account;
- final  int address;
+@override final  int address;
 
 /// Create a copy of CardanoSigningPath
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $CardanoSigningPath_CIP36CopyWith<CardanoSigningPath_CIP36> get copyWith => _$CardanoSigningPath_CIP36CopyWithImpl<CardanoSigningPath_CIP36>(this, _$identity);
 
@@ -200,16 +226,16 @@ $CardanoSigningPath_CIP36CopyWith<CardanoSigningPath_CIP36> get copyWith => _$Ca
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_CIP36&&(identical(other.account, account) || other.account == account)&&(identical(other.address, address) || other.address == address));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_CIP36&&(identical(other.address, address) || other.address == address));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,account,address);
+int get hashCode => Object.hash(runtimeType,address);
 
 @override
 String toString() {
-  return 'CardanoSigningPath.cip36(account: $account, address: $address)';
+  return 'CardanoSigningPath.cip36(address: $address)';
 }
 
 
@@ -218,9 +244,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $CardanoSigningPath_CIP36CopyWith<$Res> implements $CardanoSigningPathCopyWith<$Res> {
   factory $CardanoSigningPath_CIP36CopyWith(CardanoSigningPath_CIP36 value, $Res Function(CardanoSigningPath_CIP36) _then) = _$CardanoSigningPath_CIP36CopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- int account, int address
+ int address
 });
 
 
@@ -237,83 +263,10 @@ class _$CardanoSigningPath_CIP36CopyWithImpl<$Res>
 
 /// Create a copy of CardanoSigningPath
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? account = null,Object? address = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? address = null,}) {
   return _then(CardanoSigningPath_CIP36(
-account: null == account ? _self.account : account // ignore: cast_nullable_to_non_nullable
-as int,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as int,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class CardanoSigningPath_Custom extends CardanoSigningPath {
-   CardanoSigningPath_Custom({required final  List<int> path}): _path = path,super._();
-  
-
- final  List<int> _path;
- List<int> get path {
-  if (_path is EqualUnmodifiableListView) return _path;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_path);
-}
-
-
-/// Create a copy of CardanoSigningPath
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$CardanoSigningPath_CustomCopyWith<CardanoSigningPath_Custom> get copyWith => _$CardanoSigningPath_CustomCopyWithImpl<CardanoSigningPath_Custom>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_Custom&&const DeepCollectionEquality().equals(other._path, _path));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_path));
-
-@override
-String toString() {
-  return 'CardanoSigningPath.custom(path: $path)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $CardanoSigningPath_CustomCopyWith<$Res> implements $CardanoSigningPathCopyWith<$Res> {
-  factory $CardanoSigningPath_CustomCopyWith(CardanoSigningPath_Custom value, $Res Function(CardanoSigningPath_Custom) _then) = _$CardanoSigningPath_CustomCopyWithImpl;
-@useResult
-$Res call({
- List<int> path
-});
-
-
-
-
-}
-/// @nodoc
-class _$CardanoSigningPath_CustomCopyWithImpl<$Res>
-    implements $CardanoSigningPath_CustomCopyWith<$Res> {
-  _$CardanoSigningPath_CustomCopyWithImpl(this._self, this._then);
-
-  final CardanoSigningPath_Custom _self;
-  final $Res Function(CardanoSigningPath_Custom) _then;
-
-/// Create a copy of CardanoSigningPath
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? path = null,}) {
-  return _then(CardanoSigningPath_Custom(
-path: null == path ? _self._path : path // ignore: cast_nullable_to_non_nullable
-as List<int>,
   ));
 }
 
