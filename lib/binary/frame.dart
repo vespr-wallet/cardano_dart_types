@@ -19,25 +19,22 @@ class Frame {
   int offset = -1;
 
   /// Not part of public API
-  Frame(this.key, this.value, {this.length, this.offset = -1})
-      : lazy = false,
-        deleted = false,
-        assert(assertKey(key));
+  Frame(this.key, this.value, {this.length, this.offset = -1}) : lazy = false, deleted = false, assert(assertKey(key));
 
   /// Not part of public API
   Frame.deleted(this.key, {this.length})
-      : value = null,
-        lazy = false,
-        deleted = true,
-        offset = -1,
-        assert(assertKey(key));
+    : value = null,
+      lazy = false,
+      deleted = true,
+      offset = -1,
+      assert(assertKey(key));
 
   /// Not part of public API
   Frame.lazy(this.key, {this.length, this.offset = -1})
-      : value = null,
-        lazy = true,
-        deleted = false,
-        assert(assertKey(key));
+    : value = null,
+      lazy = true,
+      deleted = false,
+      assert(assertKey(key));
 
   /// Not part of public API
   static bool assertKey(dynamic key) {

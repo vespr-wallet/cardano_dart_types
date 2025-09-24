@@ -23,9 +23,9 @@ sealed class Voter with _$Voter implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList([
-        voterType.serialize(forJson: forJson),
-        forJson ? CborString(vKeyHash.hexEncode()) : CborBytes(vKeyHash),
-      ]);
+    voterType.serialize(forJson: forJson),
+    forJson ? CborString(vKeyHash.hexEncode()) : CborBytes(vKeyHash),
+  ]);
 
   factory Voter.deserialize(CborValue cList) {
     if (cList is! CborList) {

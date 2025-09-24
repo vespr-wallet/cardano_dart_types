@@ -98,7 +98,11 @@ extension IntListExtensions on Iterable<int> {
 
 extension IntListListExtensions on Iterable<List<int>> {
   cbor.CborValue serializeCbor({required bool forJson, List<int> tags = const []}) => forJson
-      ? cbor.CborString(fold<List<int>>([], (previousValue, element) => [...previousValue, ...element])
-          .tryCatch(t: (data) => data.utf8Encode(), c: (data) => data.hexEncode()))
+      ? cbor.CborString(
+          fold<List<int>>(
+            [],
+            (previousValue, element) => [...previousValue, ...element],
+          ).tryCatch(t: (data) => data.utf8Encode(), c: (data) => data.hexEncode()),
+        )
       : cbor.CborBytes.indefinite(toList(growable: false), tags: tags);
 }

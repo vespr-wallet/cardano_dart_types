@@ -39,19 +39,19 @@ sealed class Drep with _$Drep implements CborEncodable {
     final type = value[0] as CborInt;
     return switch (type.toInt()) {
       0 => Drep_AddrKeyHash(
-          hash: (value[1] as CborBytes).bytes.hexEncode(),
-          lengthType: value.type,
-        ),
+        hash: (value[1] as CborBytes).bytes.hexEncode(),
+        lengthType: value.type,
+      ),
       1 => Drep_ScriptHash(
-          hash: (value[1] as CborBytes).bytes.hexEncode(),
-          lengthType: value.type,
-        ),
+        hash: (value[1] as CborBytes).bytes.hexEncode(),
+        lengthType: value.type,
+      ),
       2 => Drep_Abstain(
-          lengthType: value.type,
-        ),
+        lengthType: value.type,
+      ),
       3 => Drep_NoConfidence(
-          lengthType: value.type,
-        ),
+        lengthType: value.type,
+      ),
       _ => throw Exception("Invalid Drep type"),
     };
   }
@@ -66,20 +66,20 @@ sealed class Drep with _$Drep implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList.of(
-        [
-          // ignore: no_runtimetype_tostring
-          forJson ? CborString(runtimeType.toString()) : CborSmallInt(type),
-          ...switch (this) {
-            Drep_AddrKeyHash(hash: final hash) => [
-                forJson ? CborString(hash) : CborBytes(hash.hexDecode()),
-              ],
-            Drep_ScriptHash(hash: final hash) => [
-                forJson ? CborString(hash) : CborBytes(hash.hexDecode()),
-              ],
-            Drep_Abstain() => [],
-            Drep_NoConfidence() => [],
-          },
+    [
+      // ignore: no_runtimetype_tostring
+      forJson ? CborString(runtimeType.toString()) : CborSmallInt(type),
+      ...switch (this) {
+        Drep_AddrKeyHash(hash: final hash) => [
+          forJson ? CborString(hash) : CborBytes(hash.hexDecode()),
         ],
-        type: lengthType,
-      );
+        Drep_ScriptHash(hash: final hash) => [
+          forJson ? CborString(hash) : CborBytes(hash.hexDecode()),
+        ],
+        Drep_Abstain() => [],
+        Drep_NoConfidence() => [],
+      },
+    ],
+    type: lengthType,
+  );
 }

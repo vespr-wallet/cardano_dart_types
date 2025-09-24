@@ -15,8 +15,8 @@ class BinaryReaderImpl extends BinaryReader {
 
   /// Not part of public API
   BinaryReaderImpl(this._buffer, [int? bufferLength])
-      : _byteData = ByteData.view(_buffer.buffer, _buffer.offsetInBytes),
-        _bufferLimit = bufferLength ?? _buffer.length;
+    : _byteData = ByteData.view(_buffer.buffer, _buffer.offsetInBytes),
+      _bufferLimit = bufferLength ?? _buffer.length;
 
   @pragma("vm:prefer-inline")
   @pragma("dart2js:tryInline")
@@ -241,8 +241,10 @@ class BinaryReaderImpl extends BinaryReader {
       case FrameValueType.mapT:
         return readMap();
       default:
-        throw Exception("Cannot read, unknown typeId: $typeId. "
-            "Did you forget to register an adapter?");
+        throw Exception(
+          "Cannot read, unknown typeId: $typeId. "
+          "Did you forget to register an adapter?",
+        );
     }
   }
 }

@@ -121,7 +121,9 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
   }
 
   factory WitnessSet.deserialize({required CborMap cMap}) {
-    final ListWithCborType<WitnessVKey>? vkeyWitnesses = cMap.getList(0)?.let(
+    final ListWithCborType<WitnessVKey>? vkeyWitnesses = cMap
+        .getList(0)
+        ?.let(
           (p0) => ListWithCborType(
             p0.map((item) => WitnessVKey.deserialize(cList: item as CborList)).asUnmodifiableList,
             p0.type,
@@ -129,7 +131,9 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
           ),
         );
 
-    final ListWithCborType<NativeScript>? nativeScripts = cMap.getList(1)?.let(
+    final ListWithCborType<NativeScript>? nativeScripts = cMap
+        .getList(1)
+        ?.let(
           (p0) => ListWithCborType(
             p0.map((item) => NativeScript.deserialize(cList: item as CborList)).asUnmodifiableList,
             p0.type,
@@ -137,7 +141,9 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
           ),
         );
 
-    final ListWithCborType<WitnessBootstrap>? bootstrap = cMap.getList(2)?.let(
+    final ListWithCborType<WitnessBootstrap>? bootstrap = cMap
+        .getList(2)
+        ?.let(
           (p0) => ListWithCborType(
             p0.map(WitnessBootstrap.deserialize).asUnmodifiableList,
             p0.type,
@@ -145,7 +151,9 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
           ),
         );
 
-    final ListWithCborType<PlutusScriptV1>? plutusScriptV1 = cMap.getList(3)?.let(
+    final ListWithCborType<PlutusScriptV1>? plutusScriptV1 = cMap
+        .getList(3)
+        ?.let(
           (p0) => ListWithCborType(
             p0.map(PlutusScriptV1.deserialize).asUnmodifiableList,
             p0.type,
@@ -153,7 +161,9 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
           ),
         );
 
-    final ListWithCborType<PlutusData>? plutusData = cMap.getList(4)?.let(
+    final ListWithCborType<PlutusData>? plutusData = cMap
+        .getList(4)
+        ?.let(
           (p0) => ListWithCborType(
             p0.map(PlutusData.deserialize).asUnmodifiableList,
             p0.type,
@@ -165,21 +175,23 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
 
     final ListWithCborType<Redeemer>? redeemer = switch (cRedeemer) {
       CborList() => ListWithCborType(
-          cRedeemer.map(Redeemer.deserializePreConway).asUnmodifiableList,
-          cRedeemer.type,
-          cRedeemer.tags,
-        ),
+        cRedeemer.map(Redeemer.deserializePreConway).asUnmodifiableList,
+        cRedeemer.type,
+        cRedeemer.tags,
+      ),
       // Conway ERA is CborMap
       CborMap() => ListWithCborType(
-          cRedeemer.entries.map((entry) => Redeemer.deserializeConway(entry.key, entry.value)).asUnmodifiableList,
-          cRedeemer.type,
-          cRedeemer.tags,
-        ),
+        cRedeemer.entries.map((entry) => Redeemer.deserializeConway(entry.key, entry.value)).asUnmodifiableList,
+        cRedeemer.type,
+        cRedeemer.tags,
+      ),
       null => null,
       _ => throw CborMalformedException("cborValue is ${cRedeemer.runtimeType}"),
     };
 
-    final ListWithCborType<PlutusScriptV2>? plutusScriptV2 = cMap.getList(6)?.let(
+    final ListWithCborType<PlutusScriptV2>? plutusScriptV2 = cMap
+        .getList(6)
+        ?.let(
           (p0) => ListWithCborType(
             p0.map(PlutusScriptV2.deserialize).asUnmodifiableList,
             p0.type,
@@ -187,7 +199,9 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
           ),
         );
 
-    final ListWithCborType<PlutusScriptV3>? plutusScriptV3 = cMap.getList(7)?.let(
+    final ListWithCborType<PlutusScriptV3>? plutusScriptV3 = cMap
+        .getList(7)
+        ?.let(
           (p0) => ListWithCborType(
             p0.map(PlutusScriptV3.deserialize).asUnmodifiableList,
             p0.type,
@@ -227,7 +241,8 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
           final inputValue = cMap[inputKey];
           if (encodedValue?.hexEncode() != inputValue?.hexEncode()) {
             throw Exception(
-                "Value mismatch for key $encodedKey: ${encodedValue?.hexEncode()} != ${inputValue?.hexEncode()}");
+              "Value mismatch for key $encodedKey: ${encodedValue?.hexEncode()} != ${inputValue?.hexEncode()}",
+            );
           }
         }
 
@@ -241,14 +256,14 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
     return result;
   }
 
-// transaction_witness_set = {? 0 : nonempty_set<vkeywitness>
-//                           , ? 1 : nonempty_set<native_script>
-//                           , ? 2 : nonempty_set<bootstrap_witness>
-//                           , ? 3 : nonempty_set<plutus_v1_script>
-//                           , ? 4 : nonempty_set<plutus_data>
-//                           , ? 5 : redeemers
-//                           , ? 6 : nonempty_set<plutus_v2_script>
-//                           , ? 7 : nonempty_set<plutus_v3_script>}
+  // transaction_witness_set = {? 0 : nonempty_set<vkeywitness>
+  //                           , ? 1 : nonempty_set<native_script>
+  //                           , ? 2 : nonempty_set<bootstrap_witness>
+  //                           , ? 3 : nonempty_set<plutus_v1_script>
+  //                           , ? 4 : nonempty_set<plutus_data>
+  //                           , ? 5 : redeemers
+  //                           , ? 6 : nonempty_set<plutus_v2_script>
+  //                           , ? 7 : nonempty_set<plutus_v3_script>}
   @override
   CborMap serialize({required bool forJson}) {
     final witnessesEntry = ivkeyWitnesses?.let(
@@ -315,15 +330,15 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
         };
         final redeemerEntriesCbor = switch (isConway) {
           true => CborMap.fromEntries(
-              p0.items.map((e) => e.serializeConway(forJson: forJson)),
-              type: p0.cborLengthType,
-              tags: p0.tags ?? [],
-            ),
+            p0.items.map((e) => e.serializeConway(forJson: forJson)),
+            type: p0.cborLengthType,
+            tags: p0.tags ?? [],
+          ),
           false => CborList.of(
-              p0.items.map((e) => e.serializePreConway(forJson: forJson)),
-              type: p0.cborLengthType,
-              tags: p0.tags ?? [],
-            ),
+            p0.items.map((e) => e.serializePreConway(forJson: forJson)),
+            type: p0.cborLengthType,
+            tags: p0.tags ?? [],
+          ),
         };
         return MapEntry(
           forJson ? CborString("redeemer") : const CborSmallInt(5),

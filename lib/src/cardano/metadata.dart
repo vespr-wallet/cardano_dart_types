@@ -27,9 +27,9 @@ sealed class CBORMetadata with _$CBORMetadata implements CborEncodable {
 
   @override
   int get hashCode => Object.hash(
-        runtimeType,
-        const DeepCollectionEquality().hash(computeBlake2bHash256()),
-      );
+    runtimeType,
+    const DeepCollectionEquality().hash(computeBlake2bHash256()),
+  );
 
   factory CBORMetadata.deserialize({required CborValue cValue}) => CBORMetadata(value: cValue);
 }

@@ -23,12 +23,12 @@ sealed class WitnessVKey with _$WitnessVKey implements CborEncodable {
 
   @override
   CborList serialize({required bool forJson}) => CborList.of(
-        [
-          if (forJson) CborString("credentials: ${blake2bHash224(vkey).hexEncode()}"),
-          forJson ? CborString(vkey.vkeyBech32Encode()) : CborBytes(vkey),
-          forJson ? CborString(signature.hexEncode()) : CborBytes(signature),
-        ],
-      );
+    [
+      if (forJson) CborString("credentials: ${blake2bHash224(vkey).hexEncode()}"),
+      forJson ? CborString(vkey.vkeyBech32Encode()) : CborBytes(vkey),
+      forJson ? CborString(signature.hexEncode()) : CborBytes(signature),
+    ],
+  );
 
   factory WitnessVKey.deserialize({required CborList cList}) {
     return WitnessVKey(

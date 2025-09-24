@@ -34,7 +34,7 @@ sealed class CoseHeaders with _$CoseHeaders implements COSEItem {
 
   @override
   CborValue serialize({required bool forJson}) => CborList.of([
-        protectedHeader.serialize(forJson: forJson),
-        unprotectedHeader.serialize(forJson: forJson),
-      ]);
+    protectedHeader.serialize(forJson: forJson),
+    unprotectedHeader.serialize(forJson: forJson),
+  ]);
 }

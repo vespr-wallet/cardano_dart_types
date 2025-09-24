@@ -42,10 +42,10 @@ sealed class PoolMetadata with _$PoolMetadata implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList.of(
-        [
-          CborString(metadataUrl),
-          forJson ? CborString(metadataHashHex.value) : CborBytes(metadataHash),
-        ],
-        type: cborLengthType,
-      );
+    [
+      CborString(metadataUrl),
+      forJson ? CborString(metadataHashHex.value) : CborBytes(metadataHash),
+    ],
+    type: cborLengthType,
+  );
 }

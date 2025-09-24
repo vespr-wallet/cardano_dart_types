@@ -17,9 +17,9 @@ sealed class ProtocolVersion with _$ProtocolVersion implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList([
-        CborSmallInt(major),
-        CborSmallInt(minor),
-      ]);
+    CborSmallInt(major),
+    CborSmallInt(minor),
+  ]);
 
   factory ProtocolVersion.deserialize(CborValue cValue) {
     if (cValue is! CborList) {

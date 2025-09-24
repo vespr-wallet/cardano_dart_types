@@ -21,9 +21,9 @@ sealed class Utxo with _$Utxo implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList([
-        identifier.serialize(forJson: forJson),
-        content.serialize(forJson: forJson),
-      ]);
+    identifier.serialize(forJson: forJson),
+    content.serialize(forJson: forJson),
+  ]);
 
   factory Utxo.deserializeBytes(Uint8List bytes) {
     return Utxo.deserialize(cbor.decode(bytes));
@@ -50,21 +50,21 @@ sealed class Utxo with _$Utxo implements CborEncodable {
     }
   }
 
-//
-// [
-//  [
-//    "RIzCpEd89jg-fU_hP7Lzy-9x2zr0rpL1wOaS4Ab6sBc", // txhash Bytes -> usable as hex
-//    1 // txId
-//  ],
-//  [
-//    "Ae1J2a29BlkikLmhYDI3XWt51N92DK0Nm8qVVfxBmfZrFs6etYSe2WRz-s4CWy6by98eNSrUNimB", // address bytes -> usable as bech32
-//    [
-//      2129140, // lovelace bigint
-//      { // Value object
-//        "CkNSR11mOB1bxyVyJHJep6g6EV_4HCV9sHpoPA":{"SURqZWVmbw":1},
-//      }
-//    ]
-//  ]
-// ]
-//
+  //
+  // [
+  //  [
+  //    "RIzCpEd89jg-fU_hP7Lzy-9x2zr0rpL1wOaS4Ab6sBc", // txhash Bytes -> usable as hex
+  //    1 // txId
+  //  ],
+  //  [
+  //    "Ae1J2a29BlkikLmhYDI3XWt51N92DK0Nm8qVVfxBmfZrFs6etYSe2WRz-s4CWy6by98eNSrUNimB", // address bytes -> usable as bech32
+  //    [
+  //      2129140, // lovelace bigint
+  //      { // Value object
+  //        "CkNSR11mOB1bxyVyJHJep6g6EV_4HCV9sHpoPA":{"SURqZWVmbw":1},
+  //      }
+  //    ]
+  //  ]
+  // ]
+  //
 }

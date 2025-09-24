@@ -64,22 +64,22 @@ sealed class Redeemer with _$Redeemer {
   }
 
   CborValue serializePreConway({required bool forJson}) => CborList.of([
-        forJson ? CborString(redeemerTag.name) : CborSmallInt(redeemerTag.intValue),
-        CborSmallInt(index),
-        plutusData.serialize(forJson: forJson),
-        exUnits.serialize(forJson: forJson),
-      ]);
+    forJson ? CborString(redeemerTag.name) : CborSmallInt(redeemerTag.intValue),
+    CborSmallInt(index),
+    plutusData.serialize(forJson: forJson),
+    exUnits.serialize(forJson: forJson),
+  ]);
 
   MapEntry<CborValue, CborValue> serializeConway({required bool forJson}) => MapEntry(
-        CborList.of([
-          forJson ? CborString(redeemerTag.name) : CborSmallInt(redeemerTag.intValue),
-          CborSmallInt(index),
-        ]),
-        CborList.of([
-          plutusData.serialize(forJson: forJson),
-          exUnits.serialize(forJson: forJson),
-        ]),
-      );
+    CborList.of([
+      forJson ? CborString(redeemerTag.name) : CborSmallInt(redeemerTag.intValue),
+      CborSmallInt(index),
+    ]),
+    CborList.of([
+      plutusData.serialize(forJson: forJson),
+      exUnits.serialize(forJson: forJson),
+    ]),
+  );
 }
 
 enum RedeemerTag {
@@ -88,8 +88,7 @@ enum RedeemerTag {
   cert(2),
   reward(3),
   voting(4),
-  proposing(5),
-  ;
+  proposing(5);
 
   final int intValue;
   const RedeemerTag(this.intValue);

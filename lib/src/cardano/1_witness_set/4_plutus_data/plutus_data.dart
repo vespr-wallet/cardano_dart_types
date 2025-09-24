@@ -40,10 +40,10 @@ sealed class PlutusData with _$PlutusData implements CborEncodable {
       PlutusData_Constr() => _serializePlutusData_Constr(obj, forJson: forJson),
       PlutusData_List() => _serializePlutusData_List(obj, forJson: forJson),
       PlutusData_Map() => CborMap(
-          obj.data.map((key, value) => MapEntry(key.serialize(forJson: forJson), value.serialize(forJson: forJson))),
-          tags: obj.tags,
-          type: obj.cborLengthType,
-        ),
+        obj.data.map((key, value) => MapEntry(key.serialize(forJson: forJson), value.serialize(forJson: forJson))),
+        tags: obj.tags,
+        type: obj.cborLengthType,
+      ),
     };
   }
 
@@ -56,8 +56,12 @@ sealed class PlutusData with _$PlutusData implements CborEncodable {
         final alternative = cValue[0] as CborSmallInt;
         final data = cValue[1] as CborList;
 
-        return PlutusData.constr(_compactCborTagToAlternative(alternative.toInt()), _deserialisePlutusData_List(data),
-            cValue.tags, cValue.type);
+        return PlutusData.constr(
+          _compactCborTagToAlternative(alternative.toInt()),
+          _deserialisePlutusData_List(data),
+          cValue.tags,
+          cValue.type,
+        );
       } else {
         return _deserialisePlutusData_List(cValue);
       }
@@ -65,14 +69,15 @@ sealed class PlutusData with _$PlutusData implements CborEncodable {
 
     final result = switch (cValue) {
       CborInt() => PlutusData.bigInt(cValue.toBigInt()),
-      CborBytes() => cValue.type == CborLengthType.indefinite
-          ? PlutusData.indefiniteBytes(cValue.bytesList, cValue.tags)
-          : PlutusData.definiteBytes(cValue.bytes, cValue.tags),
+      CborBytes() =>
+        cValue.type == CborLengthType.indefinite
+            ? PlutusData.indefiniteBytes(cValue.bytesList, cValue.tags)
+            : PlutusData.definiteBytes(cValue.bytes, cValue.tags),
       CborMap() => PlutusData.map(
-          cValue.map((key, value) => MapEntry(PlutusData.deserialize(key), PlutusData.deserialize(value))),
-          cValue.tags,
-          cValue.type,
-        ),
+        cValue.map((key, value) => MapEntry(PlutusData.deserialize(key), PlutusData.deserialize(value))),
+        cValue.tags,
+        cValue.type,
+      ),
       CborList() => fromCborList(cValue),
       _ => throw PlutusDataParseException("constr: Unknown type ${cValue.runtimeType}"),
     };
@@ -106,26 +111,26 @@ int _alternativeToCompactCborTag(int altTag) {
 }
 
 CborValue _serializePlutusData_Constr(PlutusData_Constr d, {required bool forJson}) => CborList(
-      [
-        CborSmallInt(forJson ? d.alternative : _alternativeToCompactCborTag(d.alternative)),
-        _serializePlutusData_List(d.data, forJson: forJson),
-      ],
-      tags: d.tags,
-      type: d.cborLengthType,
-    );
+  [
+    CborSmallInt(forJson ? d.alternative : _alternativeToCompactCborTag(d.alternative)),
+    _serializePlutusData_List(d.data, forJson: forJson),
+  ],
+  tags: d.tags,
+  type: d.cborLengthType,
+);
 
 CborValue _serializePlutusData_List(PlutusData_List d, {required bool forJson}) => CborList(
-      d.data
-          .map((e) => e.serialize(forJson: forJson)) //
-          .toList(growable: false),
-      tags: d.tags,
-      type: d.cborLengthType,
-    );
+  d.data
+      .map((e) => e.serialize(forJson: forJson)) //
+      .toList(growable: false),
+  tags: d.tags,
+  type: d.cborLengthType,
+);
 
 PlutusData_List _deserialisePlutusData_List(CborList cborList) => PlutusData_List(
-      cborList
-          .map(PlutusData.deserialize) //
-          .toList(growable: false),
-      cborList.tags,
-      cborList.type,
-    );
+  cborList
+      .map(PlutusData.deserialize) //
+      .toList(growable: false),
+  cborList.tags,
+  cborList.type,
+);

@@ -13,8 +13,7 @@ part "cardano_derivation.g.dart";
 enum GovKeyType {
   ccHot(prefix: 0x00),
   ccCold(prefix: 0x10),
-  drep(prefix: 0x20),
-  ;
+  drep(prefix: 0x20);
 
   final int prefix;
 
@@ -23,8 +22,7 @@ enum GovKeyType {
 
 enum GovCredType {
   keyHash(prefix: 0x02),
-  scriptHash(prefix: 0x03),
-  ;
+  scriptHash(prefix: 0x03);
 
   final int prefix;
 
@@ -104,8 +102,12 @@ sealed class DRepDerivation with _$DRepDerivation {
 
   // dRep ID - CIP 129
   @override
-  late final Lazy<Uint8List> _dRepIdNewBytes = Lazy(() => Uint8List.fromList(
-      [getGovKeyPrefix(keyType: GovKeyType.drep, credType: GovCredType.keyHash), ..._credentialsBytes.value]));
+  late final Lazy<Uint8List> _dRepIdNewBytes = Lazy(
+    () => Uint8List.fromList([
+      getGovKeyPrefix(keyType: GovKeyType.drep, credType: GovCredType.keyHash),
+      ..._credentialsBytes.value,
+    ]),
+  );
   @override
   late final Lazy<String> _dRepIdNewHex = Lazy(() => _dRepIdNewBytes.value.hexEncode());
   @override
@@ -152,7 +154,7 @@ sealed class ConstitutionalCommitee with _$ConstitutionalCommitee {
       },
       credType: GovCredType.keyHash,
     ),
-    ...credentialsBytes
+    ...credentialsBytes,
   ]);
   @override
   late final String ccIdHex = ccIdBytes.hexEncode();

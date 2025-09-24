@@ -37,9 +37,9 @@ sealed class WitnessBootstrap with _$WitnessBootstrap implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList.of([
-        publicKey.serializeCbor(forJson: forJson),
-        signature.serializeCbor(forJson: forJson),
-        chainCode.serializeCbor(forJson: forJson),
-        attributes.serializeCbor(forJson: forJson),
-      ]);
+    publicKey.serializeCbor(forJson: forJson),
+    signature.serializeCbor(forJson: forJson),
+    chainCode.serializeCbor(forJson: forJson),
+    attributes.serializeCbor(forJson: forJson),
+  ]);
 }

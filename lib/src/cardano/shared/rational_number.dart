@@ -39,7 +39,8 @@ sealed class RationalNumber with _$RationalNumber implements CborEncodable {
   }
 
   @override
-  CborValue serialize({required bool forJson}) => forJson //
+  CborValue serialize({required bool forJson}) =>
+      forJson //
       ? CborString(toString())
       : CborRationalNumber(numerator: CborInt(numerator), denominator: CborInt(denominator));
 }

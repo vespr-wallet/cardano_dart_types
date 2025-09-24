@@ -11,9 +11,9 @@ sealed class Withdraw with _$Withdraw {
   const Withdraw._();
 
   MapEntry<CborValue, CborInt> serializeEntry({required bool forJson}) => MapEntry(
-        forJson ? CborString(stakeAddressBech32) : CborBytes(stakeAddressBech32.bech32Decode()),
-        CborInt(coin),
-      );
+    forJson ? CborString(stakeAddressBech32) : CborBytes(stakeAddressBech32.bech32Decode()),
+    CborInt(coin),
+  );
 
   factory Withdraw.deserialize({required CborBytes stakeAddress, required CborInt coin}) =>
       Withdraw(stakeAddress.bytes.toUint8List().addressBech32Encode(), coin.toBigInt());
@@ -21,6 +21,6 @@ sealed class Withdraw with _$Withdraw {
 
 extension WithdrawIterableExtension on Iterable<Withdraw> {
   CborValue serialize({required bool forJson}) => CborMap.fromEntries(
-        map((withdrawEntry) => withdrawEntry.serializeEntry(forJson: forJson)),
-      );
+    map((withdrawEntry) => withdrawEntry.serializeEntry(forJson: forJson)),
+  );
 }

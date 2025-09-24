@@ -50,7 +50,8 @@ sealed class ProtocolParamUpdate with _$ProtocolParamUpdate implements CborEncod
     final mapOfCbor = cMap.map((key, value) {
       if (key is! CborInt) {
         throw Exception(
-            "ProtocolParamUpdate deserialization failed. Expected key to be cbor int but got ${key.runtimeType}");
+          "ProtocolParamUpdate deserialization failed. Expected key to be cbor int but got ${key.runtimeType}",
+        );
       }
       return MapEntry(key.toInt(), value);
     });
@@ -190,31 +191,33 @@ sealed class ProtocolParamUpdate with _$ProtocolParamUpdate implements CborEncod
   }
 
   @override
-  CborValue serialize({required bool forJson}) => CborMap.fromEntries([
-        minFeeA?.let((value) => MapEntry(const CborSmallInt(0), CborInt(value))),
-        minFeeB?.let((value) => MapEntry(const CborSmallInt(1), CborInt(value))),
-        maxBlockSize?.let((value) => MapEntry(const CborSmallInt(2), CborSmallInt(value))),
-        maxTxSize?.let((value) => MapEntry(const CborSmallInt(3), CborSmallInt(value))),
-        maxBlockHeaderSize?.let((value) => MapEntry(const CborSmallInt(4), CborSmallInt(value))),
-        keyDeposit?.let((value) => MapEntry(const CborSmallInt(5), CborInt(value))),
-        poolDeposit?.let((value) => MapEntry(const CborSmallInt(6), CborInt(value))),
-        maxEpoch?.let((value) => MapEntry(const CborSmallInt(7), CborSmallInt(value))),
-        nOpt?.let((value) => MapEntry(const CborSmallInt(8), CborSmallInt(value))),
-        poolPledgeInfluence?.let((value) => MapEntry(const CborSmallInt(9), value.serialize(forJson: forJson))),
-        expansionRate?.let((value) => MapEntry(const CborSmallInt(10), value.serialize(forJson: forJson))),
-        treasuryGrowth?.let((value) => MapEntry(const CborSmallInt(11), value.serialize(forJson: forJson))),
-        decentralisationConstant?.let((value) => MapEntry(const CborSmallInt(12), value.serialize(forJson: forJson))),
-        extraEntropy?.let((value) => MapEntry(const CborSmallInt(13), value.serialize(forJson: forJson))),
-        protocolVersion?.let((value) => MapEntry(const CborSmallInt(14), value.serialize(forJson: forJson))),
-        minUtxo?.let((value) => MapEntry(const CborSmallInt(15), CborInt(value))),
-        minPoolCost?.let((value) => MapEntry(const CborSmallInt(16), CborInt(value))),
-        adaPerUtxoByte?.let((value) => MapEntry(const CborSmallInt(17), CborInt(value))),
-        costmdls?.let((value) => MapEntry(const CborSmallInt(18), value)),
-        executionCosts?.let((value) => MapEntry(const CborSmallInt(19), value)),
-        maxTxExUnits?.let((value) => MapEntry(const CborSmallInt(20), value)),
-        maxBlockExUnits?.let((value) => MapEntry(const CborSmallInt(21), value)),
-        maxValSize?.let((value) => MapEntry(const CborSmallInt(22), CborInt(value))),
-        collateralPercentage?.let((value) => MapEntry(const CborSmallInt(23), CborSmallInt(value))),
-        maxCollateralInputs?.let((value) => MapEntry(const CborSmallInt(24), CborSmallInt(value))),
-      ].nonNulls);
+  CborValue serialize({required bool forJson}) => CborMap.fromEntries(
+    [
+      minFeeA?.let((value) => MapEntry(const CborSmallInt(0), CborInt(value))),
+      minFeeB?.let((value) => MapEntry(const CborSmallInt(1), CborInt(value))),
+      maxBlockSize?.let((value) => MapEntry(const CborSmallInt(2), CborSmallInt(value))),
+      maxTxSize?.let((value) => MapEntry(const CborSmallInt(3), CborSmallInt(value))),
+      maxBlockHeaderSize?.let((value) => MapEntry(const CborSmallInt(4), CborSmallInt(value))),
+      keyDeposit?.let((value) => MapEntry(const CborSmallInt(5), CborInt(value))),
+      poolDeposit?.let((value) => MapEntry(const CborSmallInt(6), CborInt(value))),
+      maxEpoch?.let((value) => MapEntry(const CborSmallInt(7), CborSmallInt(value))),
+      nOpt?.let((value) => MapEntry(const CborSmallInt(8), CborSmallInt(value))),
+      poolPledgeInfluence?.let((value) => MapEntry(const CborSmallInt(9), value.serialize(forJson: forJson))),
+      expansionRate?.let((value) => MapEntry(const CborSmallInt(10), value.serialize(forJson: forJson))),
+      treasuryGrowth?.let((value) => MapEntry(const CborSmallInt(11), value.serialize(forJson: forJson))),
+      decentralisationConstant?.let((value) => MapEntry(const CborSmallInt(12), value.serialize(forJson: forJson))),
+      extraEntropy?.let((value) => MapEntry(const CborSmallInt(13), value.serialize(forJson: forJson))),
+      protocolVersion?.let((value) => MapEntry(const CborSmallInt(14), value.serialize(forJson: forJson))),
+      minUtxo?.let((value) => MapEntry(const CborSmallInt(15), CborInt(value))),
+      minPoolCost?.let((value) => MapEntry(const CborSmallInt(16), CborInt(value))),
+      adaPerUtxoByte?.let((value) => MapEntry(const CborSmallInt(17), CborInt(value))),
+      costmdls?.let((value) => MapEntry(const CborSmallInt(18), value)),
+      executionCosts?.let((value) => MapEntry(const CborSmallInt(19), value)),
+      maxTxExUnits?.let((value) => MapEntry(const CborSmallInt(20), value)),
+      maxBlockExUnits?.let((value) => MapEntry(const CborSmallInt(21), value)),
+      maxValSize?.let((value) => MapEntry(const CborSmallInt(22), CborInt(value))),
+      collateralPercentage?.let((value) => MapEntry(const CborSmallInt(23), CborSmallInt(value))),
+      maxCollateralInputs?.let((value) => MapEntry(const CborSmallInt(24), CborSmallInt(value))),
+    ].nonNulls,
+  );
 }

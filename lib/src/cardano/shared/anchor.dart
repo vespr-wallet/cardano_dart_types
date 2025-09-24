@@ -43,10 +43,10 @@ sealed class Anchor with _$Anchor implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList.of(
-        [
-          CborString(anchorUrl),
-          forJson ? CborString(metadataHashHex.value) : CborBytes(anchorDataHash),
-        ],
-        type: cborLengthType,
-      );
+    [
+      CborString(anchorUrl),
+      forJson ? CborString(metadataHashHex.value) : CborBytes(anchorDataHash),
+    ],
+    type: cborLengthType,
+  );
 }

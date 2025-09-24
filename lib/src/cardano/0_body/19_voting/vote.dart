@@ -7,8 +7,7 @@ import "../../cbor_encodable.dart";
 enum Vote implements CborEncodable {
   no(0),
   yes(1),
-  abstain(2),
-  ;
+  abstain(2);
 
   final int serializeIntValue;
 
@@ -27,7 +26,7 @@ enum Vote implements CborEncodable {
   }
 
   static Vote fromSerializeIntValue(int value) => Vote.values.firstWhere(
-        (element) => element.serializeIntValue == value,
-        orElse: () => throw Exception("Invalid Vote serializeIntValue $value"),
-      );
+    (element) => element.serializeIntValue == value,
+    orElse: () => throw Exception("Invalid Vote serializeIntValue $value"),
+  );
 }

@@ -36,7 +36,7 @@ sealed class CoseSignature with _$CoseSignature implements COSEItem {
 
   @override
   CborValue serialize({required bool forJson}) => CborList.of([
-        ...(headers.serialize(forJson: forJson) as CborList),
-        forJson ? CborString(signature.hexEncode()) : CborBytes(signature),
-      ]);
+    ...(headers.serialize(forJson: forJson) as CborList),
+    forJson ? CborString(signature.hexEncode()) : CborBytes(signature),
+  ]);
 }

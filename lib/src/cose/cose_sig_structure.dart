@@ -28,27 +28,25 @@ sealed class CoseSigStructure with _$CoseSigStructure implements CborEncodable {
   factory CoseSigStructure.fromSign1({
     required CoseProtectedHeaderMap bodyProtected,
     required Uint8List payload,
-  }) =>
-      CoseSigStructure(
-        sigContext: SigContext.signature1,
-        bodyProtected: bodyProtected,
-        signProtected: null,
-        payload: payload,
-        externalAad: <int>[].toUint8List(),
-      );
+  }) => CoseSigStructure(
+    sigContext: SigContext.signature1,
+    bodyProtected: bodyProtected,
+    signProtected: null,
+    payload: payload,
+    externalAad: <int>[].toUint8List(),
+  );
 
   /// Signed with multiple keys (for single key use [CoseSigStructure.fromSign1])
   factory CoseSigStructure.fromSign({
     required CoseProtectedHeaderMap bodyProtected,
     required Uint8List payload,
-  }) =>
-      CoseSigStructure(
-        sigContext: SigContext.signature,
-        bodyProtected: bodyProtected,
-        signProtected: null,
-        payload: payload,
-        externalAad: <int>[].toUint8List(),
-      );
+  }) => CoseSigStructure(
+    sigContext: SigContext.signature,
+    bodyProtected: bodyProtected,
+    signProtected: null,
+    payload: payload,
+    externalAad: <int>[].toUint8List(),
+  );
 
   factory CoseSigStructure.deserialize(CborValue cborValue) {
     if (cborValue is! CborList) {
@@ -75,14 +73,14 @@ sealed class CoseSigStructure with _$CoseSigStructure implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList.of(
-        [
-          CborString(sigContext.utf8Value),
-          bodyProtected.serialize(forJson: forJson),
-          signProtected?.serialize(forJson: forJson),
-          CborBytes(externalAad),
-          CborBytes(payload),
-        ].nonNulls().toList(growable: false),
-      );
+    [
+      CborString(sigContext.utf8Value),
+      bodyProtected.serialize(forJson: forJson),
+      signProtected?.serialize(forJson: forJson),
+      CborBytes(externalAad),
+      CborBytes(payload),
+    ].nonNulls().toList(growable: false),
+  );
 }
 
 enum SigContext {

@@ -28,7 +28,8 @@ sealed class CardanoTransactionInput with _$CardanoTransactionInput implements C
   factory CardanoTransactionInput.deserialize({required CborList cList}) {
     if (cList.length != 2) {
       throw CborDeserializationException(
-          "CardanoTransactionInput deserialization failed. Invalid cbor length ${cList.length}");
+        "CardanoTransactionInput deserialization failed. Invalid cbor length ${cList.length}",
+      );
     }
 
     final result = CardanoTransactionInput(

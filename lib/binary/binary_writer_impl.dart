@@ -34,7 +34,7 @@ class BinaryWriterImpl {
   }
 
   void _increaseBufferSize(int count) {
-// We will create a list in the range of 2-4 times larger than required.
+    // We will create a list in the range of 2-4 times larger than required.
     final newSize = _pow2roundup((_offset + count) * 2);
     final newBuffer = Uint8List(newSize);
     newBuffer.setRange(0, _offset, _buffer);
@@ -271,8 +271,10 @@ class BinaryWriterImpl {
       }
       writeMap(value);
     } else {
-      throw Exception("Cannot write, unknown type: ${value.runtimeType}. "
-          "Did you forget to register an adapter?");
+      throw Exception(
+        "Cannot write, unknown type: ${value.runtimeType}. "
+        "Did you forget to register an adapter?",
+      );
     }
   }
 

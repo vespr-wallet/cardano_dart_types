@@ -54,12 +54,12 @@ sealed class ProposalProcedure with _$ProposalProcedure implements CborEncodable
 
   @override
   CborValue serialize({required bool forJson}) => CborList(
-        [
-          deposit,
-          forJson ? CborString(rewardAccount.addressBase58Orbech32Encode()) : CborBytes(rewardAccount),
-          govAction.serialize(forJson: forJson),
-          anchor.serialize(forJson: forJson),
-        ],
-        type: cborLengthType,
-      );
+    [
+      deposit,
+      forJson ? CborString(rewardAccount.addressBase58Orbech32Encode()) : CborBytes(rewardAccount),
+      govAction.serialize(forJson: forJson),
+      anchor.serialize(forJson: forJson),
+    ],
+    type: cborLengthType,
+  );
 }

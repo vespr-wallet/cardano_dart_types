@@ -37,11 +37,11 @@ sealed class Nonce with _$Nonce implements CborEncodable {
     return switch (i.toInt()) {
       0 => const Nonce(nonceHash: null),
       1 => Nonce(
-          nonceHash: (cValue[1] as CborBytes).bytes.toUint8List(),
-        ),
+        nonceHash: (cValue[1] as CborBytes).bytes.toUint8List(),
+      ),
       _ => throw CborDeserializationException(
-          "Nonce deserialization failed. Invalid Nonce type ${i.toInt()}",
-        ),
+        "Nonce deserialization failed. Invalid Nonce type ${i.toInt()}",
+      ),
     };
   }
 

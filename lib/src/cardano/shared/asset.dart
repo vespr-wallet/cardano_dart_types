@@ -25,9 +25,9 @@ sealed class Value with _$Value implements CborEncodable {
   const factory Value.v1({required BigInt lovelace, required List<MultiAsset> mA}) = Value_v1;
 
   List<MultiAsset> get multiAssets => switch (this) {
-        Value_v0() => const [],
-        Value_v1(mA: final mA) => mA,
-      };
+    Value_v0() => const [],
+    Value_v1(mA: final mA) => mA,
+  };
 
   //
   // [
@@ -44,11 +44,11 @@ sealed class Value with _$Value implements CborEncodable {
     return switch (obj) {
       Value_v0() => lovelace.serialize(forJson: forJson),
       Value_v1() => CborList.of(
-          [
-            lovelace.serialize(forJson: forJson),
-            CborMap.fromEntries(obj.mA.map((multiAsset) => multiAsset.serialize(forJson: forJson))),
-          ],
-        ),
+        [
+          lovelace.serialize(forJson: forJson),
+          CborMap.fromEntries(obj.mA.map((multiAsset) => multiAsset.serialize(forJson: forJson))),
+        ],
+      ),
     };
   }
 
@@ -72,8 +72,9 @@ sealed class Value with _$Value implements CborEncodable {
       throw CardanoValueParseException("cValue list has length != 2 : ${cValue.length}");
     }
 
-    final List<MultiAsset> multiAssets =
-        (cValue[1] as CborMap).entries.map((entry) => MultiAsset.deserialize(cMapEntry: entry)).toList();
+    final List<MultiAsset> multiAssets = (cValue[1] as CborMap).entries
+        .map((entry) => MultiAsset.deserialize(cMapEntry: entry))
+        .toList();
 
     final result = Value.v1(
       lovelace: (cValue[0] as CborInt).toBigInt(),
@@ -218,7 +219,8 @@ extension MultiAssetListOperations on List<MultiAsset> {
       mergedMultiAssets.addAll(
         otherMultiAssets.map(
           (e) => e.copyWith(
-            assets: e.assets //
+            assets: e
+                .assets //
                 .map((e2) => e2.copyWith(value: BigInt.zero - e2.value))
                 .toList(),
           ),
@@ -244,7 +246,10 @@ extension AssetListOperations on List<Asset> {
         mergedPolicyAssets.add(thisAsset);
       } else {
         final otherAsset = otherPolicyAssets.removeAt(otherAssetIndex);
-        final mergedAmount = op == Operation.add //
+        final mergedAmount =
+            op ==
+                Operation
+                    .add //
             ? thisAsset.value + otherAsset.value
             : thisAsset.value - otherAsset.value;
 

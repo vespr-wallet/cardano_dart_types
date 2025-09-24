@@ -211,8 +211,8 @@ extension _ParameterChangeX on GovAction_ParameterChange {
       policyHash == null
           ? const CborNull()
           : forJson
-              ? CborString(policyHash.hexEncode())
-              : CborBytes(policyHash),
+          ? CborString(policyHash.hexEncode())
+          : CborBytes(policyHash),
     ]);
   }
 }
@@ -236,8 +236,8 @@ extension _TreasuryWithdrawalsX on GovAction_TreasuryWithdrawals {
       policyHash == null
           ? const CborNull()
           : forJson
-              ? CborString(policyHash.hexEncode())
-              : CborBytes(policyHash),
+          ? CborString(policyHash.hexEncode())
+          : CborBytes(policyHash),
     ]);
   }
 }

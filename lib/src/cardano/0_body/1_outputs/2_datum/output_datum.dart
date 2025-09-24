@@ -19,7 +19,7 @@ sealed class OutputDatum with _$OutputDatum implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => switch (this) {
-        OutputDatum_Hash(datumHash: final datumHash) => datumHash.serializeCbor(forJson: forJson),
-        OutputDatum_Inline(plutusData: final plutusData) => plutusData.serialize(forJson: forJson),
-      };
+    OutputDatum_Hash(datumHash: final datumHash) => datumHash.serializeCbor(forJson: forJson),
+    OutputDatum_Inline(plutusData: final plutusData) => plutusData.serialize(forJson: forJson),
+  };
 }

@@ -37,8 +37,8 @@ sealed class Constitution with _$Constitution implements CborEncodable {
         CborNull() => null,
         CborBytes() => scriptHash.bytes.hexEncode(),
         _ => throw Exception(
-            "Constitution deserialization failed. Invalid script hash type ${scriptHash.runtimeType}",
-          ),
+          "Constitution deserialization failed. Invalid script hash type ${scriptHash.runtimeType}",
+        ),
       },
     );
   }
@@ -52,8 +52,8 @@ sealed class Constitution with _$Constitution implements CborEncodable {
       scriptHash == null
           ? const CborNull()
           : forJson
-              ? CborString(scriptHash)
-              : CborBytes(scriptHash.hexDecode()),
+          ? CborString(scriptHash)
+          : CborBytes(scriptHash.hexDecode()),
     ]);
   }
 }

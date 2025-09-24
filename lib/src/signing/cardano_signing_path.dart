@@ -29,7 +29,6 @@ sealed class CardanoSigningPath with _$CardanoSigningPath {
     required int account,
     required int address,
     required Bip32KeyRole role,
-
   }) = CardanoSigningPath_Shelley;
 
   factory CardanoSigningPath.cip36({
@@ -44,26 +43,26 @@ sealed class CardanoSigningPath with _$CardanoSigningPath {
   @override
   late final List<int> signingPath = switch (this) {
     CardanoSigningPath_Byron(:final account, :final address) => [
-        _harden + 44,
-        _harden + 1815,
-        _harden + account,
-        0,
-        address,
-      ],
+      _harden + 44,
+      _harden + 1815,
+      _harden + account,
+      0,
+      address,
+    ],
     CardanoSigningPath_Shelley(:final account, :final role, :final address) => [
-        _harden + 1852,
-        _harden + 1815,
-        _harden + account,
-        role.derivationIndex,
-        address,
-      ],
+      _harden + 1852,
+      _harden + 1815,
+      _harden + account,
+      role.derivationIndex,
+      address,
+    ],
     CardanoSigningPath_CIP36(:final account, :final address) => [
-        _harden + 1694,
-        _harden + 1815,
-        _harden + account,
-        0,
-        address,
-      ],
+      _harden + 1694,
+      _harden + 1815,
+      _harden + account,
+      0,
+      address,
+    ],
     CardanoSigningPath_Custom(:final path) => path,
   };
 

@@ -25,9 +25,9 @@ sealed class GovActionId with _$GovActionId implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList([
-        forJson ? CborString(transactionId) : CborBytes(transactionId.hexDecode()),
-        CborSmallInt(govActionIndex),
-      ]);
+    forJson ? CborString(transactionId) : CborBytes(transactionId.hexDecode()),
+    CborSmallInt(govActionIndex),
+  ]);
 
   static GovActionId deserialize(CborValue cList) {
     if (cList is! CborList) {

@@ -85,7 +85,8 @@ sealed class CardanoAddress with _$CardanoAddress {
     CredentialType paymentType = CredentialType.key,
     CredentialType stakeType = CredentialType.key,
   }) {
-    final addressBytes = [(stakeType.index << 5) | (paymentType.index << 4) | (networkId.intValue & 0x0f)] +
+    final addressBytes =
+        [(stakeType.index << 5) | (paymentType.index << 4) | (networkId.intValue & 0x0f)] +
         blake2bHash224(spend.rawKey) +
         blake2bHash224(stake.rawKey);
     return CardanoAddress(addressBytes);
@@ -120,39 +121,35 @@ sealed class CardanoAddress with _$CardanoAddress {
     required NetworkId networkId,
     List<int>? stakeCredentials,
     CredentialType credentialType = CredentialType.key,
-  }) =>
-      CardanoAddress(
-        [
-              (stakeCredentials != null ? baseDiscrim : enterpriseDiscrim) |
-                  (credentialType.index << 4) |
-                  (networkId.index & 0x0f)
-            ] +
-            paymentCredentials +
-            (stakeCredentials ?? []),
-      );
+  }) => CardanoAddress(
+    [
+          (stakeCredentials != null ? baseDiscrim : enterpriseDiscrim) |
+              (credentialType.index << 4) |
+              (networkId.index & 0x0f),
+        ] +
+        paymentCredentials +
+        (stakeCredentials ?? []),
+  );
 
   factory CardanoAddress.fromStakeCredentials({
     required List<int> stakeCredentials,
     required NetworkId networkId,
-  }) =>
-      CardanoAddress([rewardDiscrim | (CredentialType.key.index << 4) | (networkId.index & 0x0f)] + stakeCredentials);
+  }) => CardanoAddress([rewardDiscrim | (CredentialType.key.index << 4) | (networkId.index & 0x0f)] + stakeCredentials);
 
   factory CardanoAddress.fromHexStakeCredentials({
     required String stakeCredentials,
     required NetworkId networkId,
-  }) =>
-      CardanoAddress.fromStakeCredentials(stakeCredentials: stakeCredentials.hexDecode(), networkId: networkId);
+  }) => CardanoAddress.fromStakeCredentials(stakeCredentials: stakeCredentials.hexDecode(), networkId: networkId);
 
   factory CardanoAddress.fromHexPaymentCredentials({
     required String paymentCredentials,
     required NetworkId networkId,
     String? stakeCredentials,
-  }) =>
-      CardanoAddress.fromPaymentCredentials(
-        paymentCredentials: paymentCredentials.hexDecode(),
-        stakeCredentials: stakeCredentials?.hexDecode(),
-        networkId: networkId,
-      );
+  }) => CardanoAddress.fromPaymentCredentials(
+    paymentCredentials: paymentCredentials.hexDecode(),
+    stakeCredentials: stakeCredentials?.hexDecode(),
+    networkId: networkId,
+  );
 
   factory CardanoAddress.fromJson(Map<String, dynamic> json) => _$CardanoAddressFromJson(json);
 
@@ -169,11 +166,13 @@ sealed class CardanoAddress with _$CardanoAddress {
   late final Uint8List credentialsBytes = bytes.skip(1).take(28).toUint8List();
 
   @override
-  late final Uint8List? stakeCredentialsBytes = getAddressType(bytes).let((p0) => p0 == AddressType.reward
-      ? credentialsBytes
-      : p0 == AddressType.base
-          ? bytes.skip(29).toUint8List()
-          : null);
+  late final Uint8List? stakeCredentialsBytes = getAddressType(bytes).let(
+    (p0) => p0 == AddressType.reward
+        ? credentialsBytes
+        : p0 == AddressType.base
+        ? bytes.skip(29).toUint8List()
+        : null,
+  );
 
   @override
   late final String credentials = credentialsBytes.hexEncode();
@@ -185,11 +184,13 @@ sealed class CardanoAddress with _$CardanoAddress {
   late final String? stakeCredentials = stakeCredentialsBytes?.hexEncode();
 
   @override
-  late final String? stakeBech32Encoded = getAddressType(bytes).let((p0) => p0 == AddressType.reward
-      ? bech32Encoded
-      : p0 == AddressType.base
-          ? ([rewardDiscrim | (networkId.index & 0x0f)] + bytes.skip(29).toList()).addressBech32Encode()
-          : null);
+  late final String? stakeBech32Encoded = getAddressType(bytes).let(
+    (p0) => p0 == AddressType.reward
+        ? bech32Encoded
+        : p0 == AddressType.base
+        ? ([rewardDiscrim | (networkId.index & 0x0f)] + bytes.skip(29).toList()).addressBech32Encode()
+        : null,
+  );
 
   @override
   late final NetworkId networkId = getNetworkId(bytes);
@@ -229,7 +230,7 @@ sealed class CardanoAddress with _$CardanoAddress {
     final hrpSet = getAddressType(address) == AddressType.reward ? defaultRewardHrp : defaultAddrHrp;
     return switch (getCredentialType(address)) {
       CredentialType.key => hrpSet.keyCred,
-      CredentialType.script => hrpSet.scriptCred
+      CredentialType.script => hrpSet.scriptCred,
     };
   }
 
@@ -260,7 +261,8 @@ sealed class CardanoAddress with _$CardanoAddress {
         return AddressType.reward;
       default:
         throw InvalidAddressTypeError(
-            "addressType: $addrType is not defined. Containing hex address ${address.hexEncode()}");
+          "addressType: $addrType is not defined. Containing hex address ${address.hexEncode()}",
+        );
     }
   }
 

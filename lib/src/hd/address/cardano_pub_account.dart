@@ -11,10 +11,11 @@ import "hd_wallet.dart";
 
 part "cardano_pub_account.freezed.dart";
 
-typedef Bip32PublicKeyDerivator = FutureOr<Bip32PublicKey> Function(
-  Bip32PublicKey,
-  int,
-);
+typedef Bip32PublicKeyDerivator =
+    FutureOr<Bip32PublicKey> Function(
+      Bip32PublicKey,
+      int,
+    );
 
 class _CardanoPubAccountSyncFactory extends CardanoPubAccountFactory {
   _CardanoPubAccountSyncFactory() : super(Bip32Ed25519KeyDerivation.instance.ckdPub);

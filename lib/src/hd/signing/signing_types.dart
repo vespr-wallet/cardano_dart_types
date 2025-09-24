@@ -60,14 +60,17 @@ sealed class TxDiff with _$TxDiff {
     final diff = Value.deserializeBytes(reader.readByteList());
     final usedUtxos = reader.readBytesList().map(Utxo.deserializeBytes).toList();
     final stakeDelegationPoolId = reader.read() as String?;
-    final dRepDelegation = (reader.read() as Uint8List?) //
-        ?.let((bytes) => Drep.deserialize(cborDecode(bytes)));
+    final dRepDelegation =
+        (reader.read() as Uint8List?) //
+            ?.let((bytes) => Drep.deserialize(cborDecode(bytes)));
     final dRepRegistration = (reader.read() as Uint8List?)?.let(DRepDiffInfo.unmarshal);
     final dRepUpdate = (reader.read() as Uint8List?)?.let(DRepDiffInfo.unmarshal);
-    final authorizeConstitutionalCommitteeHot = (reader.read() as Uint8List?) //
-        ?.let((bytes) => Credential.deserialize(cborDecode(bytes)));
-    final resignConstitutionalCommitteeCold = (reader.read() as Uint8List?) //
-        ?.let((bytes) => Credential.deserialize(cborDecode(bytes)));
+    final authorizeConstitutionalCommitteeHot =
+        (reader.read() as Uint8List?) //
+            ?.let((bytes) => Credential.deserialize(cborDecode(bytes)));
+    final resignConstitutionalCommitteeCold =
+        (reader.read() as Uint8List?) //
+            ?.let((bytes) => Credential.deserialize(cborDecode(bytes)));
     final votes = reader.readBytesList().map(VoteInfo.unmarshal).toList();
     final proposals = reader.readBytesList().map(ProposalDiffInfo.unmarshal).toList();
     final dRepDeregistration = reader.readBool();
@@ -135,14 +138,17 @@ sealed class TxSigningBundle with _$TxSigningBundle {
     final txsData = reader.readBytesList().map(TxPreparedForSigning.unmarshal).toList();
     final totalDiff = Value.deserializeBytes(reader.readByteList());
     final stakeDelegationPoolId = reader.read() as String?;
-    final dRepDelegation = (reader.read() as Uint8List?) //
-        ?.let((bytes) => Drep.deserialize(cborDecode(bytes)));
+    final dRepDelegation =
+        (reader.read() as Uint8List?) //
+            ?.let((bytes) => Drep.deserialize(cborDecode(bytes)));
     final dRepRegistration = (reader.read() as Uint8List?)?.let(DRepDiffInfo.unmarshal);
     final dRepUpdate = (reader.read() as Uint8List?)?.let(DRepDiffInfo.unmarshal);
-    final authorizeConstitutionalCommitteeHot = (reader.read() as Uint8List?) //
-        ?.let((bytes) => Credential.deserialize(cborDecode(bytes)));
-    final resignConstitutionalCommitteeCold = (reader.read() as Uint8List?) //
-        ?.let((bytes) => Credential.deserialize(cborDecode(bytes)));
+    final authorizeConstitutionalCommitteeHot =
+        (reader.read() as Uint8List?) //
+            ?.let((bytes) => Credential.deserialize(cborDecode(bytes)));
+    final resignConstitutionalCommitteeCold =
+        (reader.read() as Uint8List?) //
+            ?.let((bytes) => Credential.deserialize(cborDecode(bytes)));
     final votes = reader.readBytesList().map(VoteInfo.unmarshal).toList();
     final proposals = reader.readBytesList().map(ProposalDiffInfo.unmarshal).toList();
     final dRepDeregistration = reader.readBool();

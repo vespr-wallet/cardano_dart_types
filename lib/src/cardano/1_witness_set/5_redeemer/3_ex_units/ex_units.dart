@@ -30,7 +30,7 @@ sealed class ExUnits with _$ExUnits implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList.of([
-        CborInt(mem),
-        CborInt(steps),
-      ]);
+    CborInt(mem),
+    CborInt(steps),
+  ]);
 }

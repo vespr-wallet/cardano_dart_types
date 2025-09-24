@@ -28,14 +28,15 @@ sealed class CoseKey with _$CoseKey implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborMap.of(
-        {
-          (forJson ? CborString("keyType") : const CborSmallInt(1)): keyType,
-          (forJson ? CborString("algorithmId") : const CborSmallInt(3)): algorithmId,
-          (forJson ? CborString("crvKey") : const CborSmallInt(CRV_KEY)): crvKey,
-          (forJson ? CborString("keyId") : const CborSmallInt(X_KEY)):
-              (forJson ? CborString(keyId.hexEncode()) : CborBytes(keyId)),
-        },
-      );
+    {
+      (forJson ? CborString("keyType") : const CborSmallInt(1)): keyType,
+      (forJson ? CborString("algorithmId") : const CborSmallInt(3)): algorithmId,
+      (forJson ? CborString("crvKey") : const CborSmallInt(CRV_KEY)): crvKey,
+      (forJson ? CborString("keyId") : const CborSmallInt(X_KEY)): (forJson
+          ? CborString(keyId.hexEncode())
+          : CborBytes(keyId)),
+    },
+  );
 
   factory CoseKey.deserialize(CborValue cValue) {
     if (cValue is! CborMap) {

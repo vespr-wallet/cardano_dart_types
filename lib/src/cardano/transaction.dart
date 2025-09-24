@@ -41,38 +41,37 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     required bool isValidDi,
     required CBORMetadata? auxiliaryData,
     required bool overrideBodyMetadataHash, // NEVER USE THIS FOR PARTIAL SIGN
-  }) =>
-      CardanoTransaction._hidden(
-        body: overrideBodyMetadataHash
-            ? CardanoTransactionBody.create(
-//rebuild body to include metadataHash
-                inputs: body.inputs,
-                outputs: body.outputs,
-                fee: body.fee,
-                ttl: body.ttl,
-                certs: body.certs,
-                withdrawals: body.withdrawals,
-                metadataHash: auxiliaryData?.computeBlake2bHash256(),
-//optionally add hash if metadata present
-                validityStartInterval: body.validityStartInterval,
-                mint: body.mint,
-                scriptDataHash: body.scriptDataHash,
-                collateral: body.collateral,
-                requiredSigners: body.requiredSigners,
-                networkId: body.networkId,
-                collateralReturn: body.collateralReturn,
-                totalCollateral: body.totalCollateral,
-                referenceInputs: body.referenceInputs,
-                votingProcedures: body.votingProcedures,
-                proposalProcedures: body.proposalProcedures,
-                currentTreasuryValue: body.currentTreasuryValue,
-                donation: body.donation,
-              )
-            : body,
-        witnessSet: witnessSet,
-        isValidDi: isValidDi,
-        auxiliaryData: auxiliaryData,
-      );
+  }) => CardanoTransaction._hidden(
+    body: overrideBodyMetadataHash
+        ? CardanoTransactionBody.create(
+            //rebuild body to include metadataHash
+            inputs: body.inputs,
+            outputs: body.outputs,
+            fee: body.fee,
+            ttl: body.ttl,
+            certs: body.certs,
+            withdrawals: body.withdrawals,
+            metadataHash: auxiliaryData?.computeBlake2bHash256(),
+            //optionally add hash if metadata present
+            validityStartInterval: body.validityStartInterval,
+            mint: body.mint,
+            scriptDataHash: body.scriptDataHash,
+            collateral: body.collateral,
+            requiredSigners: body.requiredSigners,
+            networkId: body.networkId,
+            collateralReturn: body.collateralReturn,
+            totalCollateral: body.totalCollateral,
+            referenceInputs: body.referenceInputs,
+            votingProcedures: body.votingProcedures,
+            proposalProcedures: body.proposalProcedures,
+            currentTreasuryValue: body.currentTreasuryValue,
+            donation: body.donation,
+          )
+        : body,
+    witnessSet: witnessSet,
+    isValidDi: isValidDi,
+    auxiliaryData: auxiliaryData,
+  );
   const CardanoTransaction._();
 
   const factory CardanoTransaction._hidden({
@@ -170,18 +169,21 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
         .fold(BigInt.zero, (previousValue, element) => previousValue + element.coin);
 
     const deepEq = DeepCollectionEquality();
-    final incoming = outputs //
-        .where((item) => deepEq.equals(item.addressBytes, receiveAddress.bytes))
-        .fold(
-          Value.v0(lovelace: BigInt.zero),
-          (previousValue, element) => previousValue + element.value,
-        );
+    final incoming =
+        outputs //
+            .where((item) => deepEq.equals(item.addressBytes, receiveAddress.bytes))
+            .fold(
+              Value.v0(lovelace: BigInt.zero),
+              (previousValue, element) => previousValue + element.value,
+            );
 
     final utxoByHashAndId = walletUtxos.groupFoldBy(
       (e) => "${e.identifier.transactionHash}#${e.identifier.index}",
       (previous, element) => element,
     );
-    final consumedUtxosFromThisWallet = body.inputs.data //
+    final consumedUtxosFromThisWallet = body
+        .inputs
+        .data //
         .map((e) => utxoByHashAndId["${e.transactionHash}#${e.index}"])
         .nonNulls;
 
@@ -196,7 +198,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     final thisWalletVotes = votesMap.entries
         .map((pair) {
           final voter = pair.key;
-          final isThisWallet = voter.vKeyHash.deepEquals(drepCredentialBytes) ||
+          final isThisWallet =
+              voter.vKeyHash.deepEquals(drepCredentialBytes) ||
               voter.vKeyHash.deepEquals(constitutionalCommitteeHotCredentialBytes);
           if (!isThisWallet) return <VoteInfo>[];
           final votes = pair.value;
@@ -211,117 +214,143 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
       diff: diff,
       usedUtxos: consumedUtxosFromThisWallet.toList(),
       stakeDelegationPoolId: body.certs
-          ?.map((e) => switch (e) {
-                Certificate_StakeRegistrationLegacy() => null,
-                Certificate_StakeDeRegistrationLegacy() => null,
-                Certificate_StakeDelegation() =>
-                  e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.stakePoolId : null,
-                Certificate_PoolRegistration() => null,
-                Certificate_PoolRetirement() => null,
-                Certificate_StakeRegistration() => null,
-                Certificate_StakeDeRegistration() => null,
-                Certificate_VoteDelegation() => null,
-                Certificate_StakeVoteDelegation() =>
-                  e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.stakePoolId : null,
-                Certificate_StakeRegistrationDelegation() =>
-                  e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.stakePoolId : null,
-                Certificate_VoteRegistrationDelegation() => null,
-                Certificate_StakeVoteRegistrationDelegation() =>
-                  e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.stakePoolId : null,
-                Certificate_AuthorizeCommitteeHot() => null,
-                Certificate_ResignCommitteeCold() => null,
-                Certificate_RegisterDRep() => null,
-                Certificate_UnregisterDRep() => null,
-                Certificate_UpdateDRep() => null,
-              })
+          ?.map(
+            (e) => switch (e) {
+              Certificate_StakeRegistrationLegacy() => null,
+              Certificate_StakeDeRegistrationLegacy() => null,
+              Certificate_StakeDelegation() =>
+                e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.stakePoolId : null,
+              Certificate_PoolRegistration() => null,
+              Certificate_PoolRetirement() => null,
+              Certificate_StakeRegistration() => null,
+              Certificate_StakeDeRegistration() => null,
+              Certificate_VoteDelegation() => null,
+              Certificate_StakeVoteDelegation() =>
+                e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.stakePoolId : null,
+              Certificate_StakeRegistrationDelegation() =>
+                e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.stakePoolId : null,
+              Certificate_VoteRegistrationDelegation() => null,
+              Certificate_StakeVoteRegistrationDelegation() =>
+                e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.stakePoolId : null,
+              Certificate_AuthorizeCommitteeHot() => null,
+              Certificate_ResignCommitteeCold() => null,
+              Certificate_RegisterDRep() => null,
+              Certificate_UnregisterDRep() => null,
+              Certificate_UpdateDRep() => null,
+            },
+          )
           .nonNulls
           .lastOrNull
           ?.bech32PoolId,
       authorizeConstitutionalCommitteeHot: body.certs
-          ?.map((e) => switch (e) {
-                Certificate_AuthorizeCommitteeHot() =>
-                  e.committeeColdCredential.vKeyHash.deepEquals(constitutionalCommitteeColdCredentialBytes)
-                      ? e.committeeHotCredential
-                      : null,
-                _ => null,
-              })
+          ?.map(
+            (e) => switch (e) {
+              Certificate_AuthorizeCommitteeHot() =>
+                e.committeeColdCredential.vKeyHash.deepEquals(constitutionalCommitteeColdCredentialBytes)
+                    ? e.committeeHotCredential
+                    : null,
+              _ => null,
+            },
+          )
           .nonNulls
           .lastOrNull,
       resignConstitutionalCommitteeCold: body.certs
-          ?.map((e) => switch (e) {
-                Certificate_ResignCommitteeCold() =>
-                  e.committeeColdCredential.vKeyHash.deepEquals(constitutionalCommitteeColdCredentialBytes)
-                      ? e.committeeColdCredential
-                      : null,
-                _ => null,
-              })
+          ?.map(
+            (e) => switch (e) {
+              Certificate_ResignCommitteeCold() =>
+                e.committeeColdCredential.vKeyHash.deepEquals(constitutionalCommitteeColdCredentialBytes)
+                    ? e.committeeColdCredential
+                    : null,
+              _ => null,
+            },
+          )
           .nonNulls
           .lastOrNull,
       dRepDelegation: body.certs
-          ?.map((e) => switch (e) {
-                Certificate_VoteDelegation() =>
-                  e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.dRep : null,
-                Certificate_StakeVoteDelegation() =>
-                  e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.dRep : null,
-                Certificate_VoteRegistrationDelegation() =>
-                  e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.dRep : null,
-                Certificate_StakeVoteRegistrationDelegation() =>
-                  e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.dRep : null,
-                Certificate_StakeRegistrationLegacy() => null,
-                Certificate_StakeDeRegistrationLegacy() => null,
-                Certificate_StakeDelegation() => null,
-                Certificate_PoolRegistration() => null,
-                Certificate_PoolRetirement() => null,
-                Certificate_StakeRegistration() => null,
-                Certificate_StakeDeRegistration() => null,
-                Certificate_StakeRegistrationDelegation() => null,
-                Certificate_AuthorizeCommitteeHot() => null,
-                Certificate_ResignCommitteeCold() => null,
-                Certificate_RegisterDRep() => null,
-                Certificate_UnregisterDRep() => null,
-                Certificate_UpdateDRep() => null,
-              })
+          ?.map(
+            (e) => switch (e) {
+              Certificate_VoteDelegation() =>
+                e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.dRep : null,
+              Certificate_StakeVoteDelegation() =>
+                e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.dRep : null,
+              Certificate_VoteRegistrationDelegation() =>
+                e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.dRep : null,
+              Certificate_StakeVoteRegistrationDelegation() =>
+                e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.dRep : null,
+              Certificate_StakeRegistrationLegacy() => null,
+              Certificate_StakeDeRegistrationLegacy() => null,
+              Certificate_StakeDelegation() => null,
+              Certificate_PoolRegistration() => null,
+              Certificate_PoolRetirement() => null,
+              Certificate_StakeRegistration() => null,
+              Certificate_StakeDeRegistration() => null,
+              Certificate_StakeRegistrationDelegation() => null,
+              Certificate_AuthorizeCommitteeHot() => null,
+              Certificate_ResignCommitteeCold() => null,
+              Certificate_RegisterDRep() => null,
+              Certificate_UnregisterDRep() => null,
+              Certificate_UpdateDRep() => null,
+            },
+          )
           .nonNulls
           .lastOrNull,
       dRepRegistration: body.certs
-          ?.map((e) => switch (e) {
-                Certificate_RegisterDRep() => e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes)
+          ?.map(
+            (e) => switch (e) {
+              Certificate_RegisterDRep() =>
+                e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes)
                     ? DRepDiffInfo(
-                        dRepId: e.dRepCredential.vKeyHash.bech32Encode("drep"), metadataUrl: e.anchor?.anchorUrl)
+                        dRepId: e.dRepCredential.vKeyHash.bech32Encode("drep"),
+                        metadataUrl: e.anchor?.anchorUrl,
+                      )
                     : null,
-                _ => null,
-              })
+              _ => null,
+            },
+          )
           .nonNulls
           .lastOrNull,
       dRepUpdate: body.certs
-          ?.map((e) => switch (e) {
-                Certificate_UpdateDRep() => e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes)
+          ?.map(
+            (e) => switch (e) {
+              Certificate_UpdateDRep() =>
+                e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes)
                     ? DRepDiffInfo(
-                        dRepId: e.dRepCredential.vKeyHash.bech32Encode("drep"), metadataUrl: e.anchor?.anchorUrl)
+                        dRepId: e.dRepCredential.vKeyHash.bech32Encode("drep"),
+                        metadataUrl: e.anchor?.anchorUrl,
+                      )
                     : null,
-                _ => null,
-              })
+              _ => null,
+            },
+          )
           .nonNulls
           .lastOrNull,
-      dRepDeregistration: body.certs
-              ?.map((e) => switch (e) {
-                    Certificate_UnregisterDRep() => e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes),
-                    _ => false,
-                  })
+      dRepDeregistration:
+          body.certs
+              ?.map(
+                (e) => switch (e) {
+                  Certificate_UnregisterDRep() => e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes),
+                  _ => false,
+                },
+              )
               .nonNulls
               .lastOrNull ??
           false,
-      stakeDeregistration: body.certs
-              ?.map((e) => switch (e) {
-                    Certificate_StakeDeRegistrationLegacy() =>
-                      e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes),
-                    Certificate_StakeDeRegistration() => e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes),
-                    _ => false,
-                  })
+      stakeDeregistration:
+          body.certs
+              ?.map(
+                (e) => switch (e) {
+                  Certificate_StakeDeRegistrationLegacy() => e.stakeCredential.vKeyHash.deepEquals(
+                    stakeCredentialsBytes,
+                  ),
+                  Certificate_StakeDeRegistration() => e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes),
+                  _ => false,
+                },
+              )
               .nonNulls
               .lastOrNull ??
           false,
-      proposals: body.proposalProcedures
+      proposals:
+          body.proposalProcedures
               ?.mapIndexed(
                 (index, e) => ProposalDiffInfo(
                   proposalId: GovActionId(transactionId: bodyHash, govActionIndex: index),

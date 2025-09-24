@@ -158,7 +158,8 @@ sealed class Certificate with _$Certificate implements CborEncodable {
     }
     if (cList.isEmpty) {
       throw CborDeserializationException(
-          "Certificate deserialization failed. Invalid number of DataItem(s) : ${cList.length}");
+        "Certificate deserialization failed. Invalid number of DataItem(s) : ${cList.length}",
+      );
     }
     final certType = cList[0] as CborInt;
 
@@ -185,8 +186,8 @@ sealed class Certificate with _$Certificate implements CborEncodable {
       17 => _parseUnregisterDRep(cList: cList),
       18 => _parseUpdateDRep(cList: cList),
       _ => throw CborDeserializationException(
-          "Certificate deserialization failed. Invalid type : ${cList[0]}",
-        ),
+        "Certificate deserialization failed. Invalid type : ${cList[0]}",
+      ),
     };
 
     conditionalAssert(
@@ -228,84 +229,84 @@ sealed class Certificate with _$Certificate implements CborEncodable {
         forJson ? CborString(runtimeType.toString()) : CborSmallInt(certType),
         ...switch (thisCert) {
           Certificate_StakeRegistrationLegacy() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+          ],
           Certificate_StakeDeRegistrationLegacy() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+          ],
           Certificate_StakeDelegation() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-              thisCert.stakePoolId.serialize(forJson: forJson),
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+            thisCert.stakePoolId.serialize(forJson: forJson),
+          ],
           Certificate_PoolRegistration() => [
-              thisCert.operator.serialize(forJson: forJson),
-              forJson ? CborString(thisCert.vrfKeyHash.hexEncode()) : CborBytes(thisCert.vrfKeyHash),
-              thisCert.pledge,
-              thisCert.cost,
-              thisCert.margin.serialize(forJson: forJson),
-              forJson ? CborString(thisCert.rewardAccount.addressBech32Encode()) : CborBytes(thisCert.rewardAccount),
-              CborList.of(thisCert.poolOwners.map(CborBytes.new)),
-              thisCert.relays,
-              thisCert.poolMetadata?.serialize(forJson: forJson) ?? const CborNull(),
-            ],
+            thisCert.operator.serialize(forJson: forJson),
+            forJson ? CborString(thisCert.vrfKeyHash.hexEncode()) : CborBytes(thisCert.vrfKeyHash),
+            thisCert.pledge,
+            thisCert.cost,
+            thisCert.margin.serialize(forJson: forJson),
+            forJson ? CborString(thisCert.rewardAccount.addressBech32Encode()) : CborBytes(thisCert.rewardAccount),
+            CborList.of(thisCert.poolOwners.map(CborBytes.new)),
+            thisCert.relays,
+            thisCert.poolMetadata?.serialize(forJson: forJson) ?? const CborNull(),
+          ],
           Certificate_PoolRetirement() => [
-              thisCert.operator.serialize(forJson: forJson),
-              thisCert.epoch,
-            ],
+            thisCert.operator.serialize(forJson: forJson),
+            thisCert.epoch,
+          ],
           Certificate_StakeRegistration() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-              thisCert.coin,
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+            thisCert.coin,
+          ],
           Certificate_StakeDeRegistration() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-              thisCert.coin,
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+            thisCert.coin,
+          ],
           Certificate_VoteDelegation() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-              thisCert.dRep.serialize(forJson: forJson),
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+            thisCert.dRep.serialize(forJson: forJson),
+          ],
           Certificate_StakeVoteDelegation() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-              thisCert.stakePoolId.serialize(forJson: forJson),
-              thisCert.dRep.serialize(forJson: forJson),
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+            thisCert.stakePoolId.serialize(forJson: forJson),
+            thisCert.dRep.serialize(forJson: forJson),
+          ],
           Certificate_StakeRegistrationDelegation() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-              thisCert.stakePoolId.serialize(forJson: forJson),
-              thisCert.coin,
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+            thisCert.stakePoolId.serialize(forJson: forJson),
+            thisCert.coin,
+          ],
           Certificate_VoteRegistrationDelegation() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-              thisCert.dRep.serialize(forJson: forJson),
-              thisCert.coin,
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+            thisCert.dRep.serialize(forJson: forJson),
+            thisCert.coin,
+          ],
           Certificate_StakeVoteRegistrationDelegation() => [
-              thisCert.stakeCredential.serialize(forJson: forJson),
-              thisCert.stakePoolId.serialize(forJson: forJson),
-              thisCert.dRep.serialize(forJson: forJson),
-              thisCert.coin,
-            ],
+            thisCert.stakeCredential.serialize(forJson: forJson),
+            thisCert.stakePoolId.serialize(forJson: forJson),
+            thisCert.dRep.serialize(forJson: forJson),
+            thisCert.coin,
+          ],
           Certificate_AuthorizeCommitteeHot() => [
-              thisCert.committeeColdCredential.serialize(forJson: forJson),
-              thisCert.committeeHotCredential.serialize(forJson: forJson),
-            ],
+            thisCert.committeeColdCredential.serialize(forJson: forJson),
+            thisCert.committeeHotCredential.serialize(forJson: forJson),
+          ],
           Certificate_ResignCommitteeCold() => [
-              thisCert.committeeColdCredential.serialize(forJson: forJson),
-              thisCert.anchor?.serialize(forJson: forJson) ?? const CborNull(),
-            ],
+            thisCert.committeeColdCredential.serialize(forJson: forJson),
+            thisCert.anchor?.serialize(forJson: forJson) ?? const CborNull(),
+          ],
           Certificate_RegisterDRep() => [
-              thisCert.dRepCredential.serialize(forJson: forJson),
-              thisCert.coin,
-              thisCert.anchor?.serialize(forJson: forJson) ?? const CborNull(),
-            ],
+            thisCert.dRepCredential.serialize(forJson: forJson),
+            thisCert.coin,
+            thisCert.anchor?.serialize(forJson: forJson) ?? const CborNull(),
+          ],
           Certificate_UnregisterDRep() => [
-              thisCert.dRepCredential.serialize(forJson: forJson),
-              thisCert.coin,
-            ],
+            thisCert.dRepCredential.serialize(forJson: forJson),
+            thisCert.coin,
+          ],
           Certificate_UpdateDRep() => [
-              thisCert.dRepCredential.serialize(forJson: forJson),
-              thisCert.anchor?.serialize(forJson: forJson) ?? const CborNull(),
-            ],
+            thisCert.dRepCredential.serialize(forJson: forJson),
+            thisCert.anchor?.serialize(forJson: forJson) ?? const CborNull(),
+          ],
         },
       ],
     );
@@ -314,14 +315,15 @@ sealed class Certificate with _$Certificate implements CborEncodable {
 
 extension CertificateIterableExtension on Iterable<Certificate> {
   CborValue serialize({required bool forJson}) => CborList.of(
-        map((withdrawEntry) => withdrawEntry.serialize(forJson: forJson)),
-      );
+    map((withdrawEntry) => withdrawEntry.serialize(forJson: forJson)),
+  );
 }
 
 Certificate_StakeRegistrationLegacy _deserializeStakeRegistrationLegacy({required CborList cList}) {
   if (cList.length < 2) {
     throw CborDeserializationException(
-        "Certificate deserialization failed. Invalid number of DataItem(s) : ${cList.length}");
+      "Certificate deserialization failed. Invalid number of DataItem(s) : ${cList.length}",
+    );
   }
   final certType = cList[0] as CborSmallInt;
 
@@ -338,7 +340,8 @@ Certificate_StakeRegistrationLegacy _deserializeStakeRegistrationLegacy({require
 Certificate_StakeDeRegistrationLegacy _deserializeStakeDeRegistrationLegacy({required CborList cList}) {
   if (cList.length < 2) {
     throw CborDeserializationException(
-        "Certificate_StakeDeRegistrationLegacy deserialization failed. Invalid number of DataItem(s) : ${cList.length}");
+      "Certificate_StakeDeRegistrationLegacy deserialization failed. Invalid number of DataItem(s) : ${cList.length}",
+    );
   }
   final certType = cList[0] as CborSmallInt;
 
@@ -355,7 +358,8 @@ Certificate_StakeDeRegistrationLegacy _deserializeStakeDeRegistrationLegacy({req
 Certificate_StakeDelegation _deserializeStakeDelegation({required CborList cList}) {
   if (cList.length != 3) {
     throw CborDeserializationException(
-        "Certificate_StakeDelegation deserialization failed. Invalid number of DataItem(s) : ${cList.length}");
+      "Certificate_StakeDelegation deserialization failed. Invalid number of DataItem(s) : ${cList.length}",
+    );
   }
   final certType = cList[0] as CborSmallInt;
 
@@ -535,7 +539,8 @@ Certificate_StakeRegistrationDelegation _parseStakeRegistrationDelegation({requi
 
   if (certType.value != 11) {
     throw CborDeserializationException(
-        "StakeRegistrationDelegation deserialization failed. Invalid type : ${certType.value}");
+      "StakeRegistrationDelegation deserialization failed. Invalid type : ${certType.value}",
+    );
   }
 
   final cStakeCred = cList[1];
@@ -547,7 +552,10 @@ Certificate_StakeRegistrationDelegation _parseStakeRegistrationDelegation({requi
   final cCoin = cList[3] as CborInt;
 
   return Certificate_StakeRegistrationDelegation(
-      stakeCredential: stakeCredentials, stakePoolId: stakePoolId, coin: cCoin);
+    stakeCredential: stakeCredentials,
+    stakePoolId: stakePoolId,
+    coin: cCoin,
+  );
 }
 
 Certificate_VoteRegistrationDelegation _parseVoteRegistrationDelegation({required CborList cList}) {
@@ -560,7 +568,8 @@ Certificate_VoteRegistrationDelegation _parseVoteRegistrationDelegation({require
 
   if (certType.value != 12) {
     throw CborDeserializationException(
-        "VoteRegistrationDelegation deserialization failed. Invalid type : ${certType.value}");
+      "VoteRegistrationDelegation deserialization failed. Invalid type : ${certType.value}",
+    );
   }
 
   final cStakeCred = cList[1];
@@ -655,8 +664,8 @@ Certificate_ResignCommitteeCold _parseResignCommitteeCold({required CborList cLi
     CborNull() => null,
     CborList() => Anchor.deserialize(cAnchor),
     _ => throw CborDeserializationException(
-        "RegisterDRep deserialization failed. Invalid anchor cbor type : ${cAnchor.runtimeType}",
-      ),
+      "RegisterDRep deserialization failed. Invalid anchor cbor type : ${cAnchor.runtimeType}",
+    ),
   };
 
   return Certificate_ResignCommitteeCold(
@@ -689,8 +698,8 @@ Certificate_RegisterDRep _parseRegisterDRep({required CborList cList}) {
     CborNull() => null,
     CborList() => Anchor.deserialize(cAnchor),
     _ => throw CborDeserializationException(
-        "RegisterDRep deserialization failed. Invalid anchor cbor type : ${cAnchor.runtimeType}",
-      ),
+      "RegisterDRep deserialization failed. Invalid anchor cbor type : ${cAnchor.runtimeType}",
+    ),
   };
 
   return Certificate_RegisterDRep(
@@ -747,8 +756,8 @@ Certificate_UpdateDRep _parseUpdateDRep({required CborList cList}) {
     CborNull() => null,
     CborList() => Anchor.deserialize(cAnchor),
     _ => throw CborDeserializationException(
-        "RegisterDRep deserialization failed. Invalid anchor cbor type : ${cAnchor.runtimeType}",
-      ),
+      "RegisterDRep deserialization failed. Invalid anchor cbor type : ${cAnchor.runtimeType}",
+    ),
   };
 
   return Certificate_UpdateDRep(

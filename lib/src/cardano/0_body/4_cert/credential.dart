@@ -19,9 +19,11 @@ enum CredType {
 
   const CredType(this.intValue);
 
-  factory CredType.fromSmallInt(int value) => CredType.values.singleWhere((element) => element.intValue == value,
-      orElse: () =>
-          throw CborDeserializationException("CredentialType deserialization failed. Invalid StakeCredType : $value"));
+  factory CredType.fromSmallInt(int value) => CredType.values.singleWhere(
+    (element) => element.intValue == value,
+    orElse: () =>
+        throw CborDeserializationException("CredentialType deserialization failed. Invalid StakeCredType : $value"),
+  );
 }
 
 @freezed
@@ -35,15 +37,15 @@ sealed class Credential with _$Credential implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList([
-        forJson ? CborString(type.name) : CborSmallInt(type.intValue),
-        ...forJson
-            ? [
-                CborString(vKeyHash.hexEncode()),
-                CborString("as stake: ${"e1${vKeyHash.hexEncode()}".hexAddressToBech32()}"),
-                CborString("as base: ${"01${vKeyHash.hexEncode()}".hexAddressToBech32()}")
-              ]
-            : [CborBytes(vKeyHash)],
-      ]);
+    forJson ? CborString(type.name) : CborSmallInt(type.intValue),
+    ...forJson
+        ? [
+            CborString(vKeyHash.hexEncode()),
+            CborString("as stake: ${"e1${vKeyHash.hexEncode()}".hexAddressToBech32()}"),
+            CborString("as base: ${"01${vKeyHash.hexEncode()}".hexAddressToBech32()}"),
+          ]
+        : [CborBytes(vKeyHash)],
+  ]);
 
   factory Credential.deserialize(CborValue cList) {
     if (cList is! CborList) {
@@ -53,7 +55,8 @@ sealed class Credential with _$Credential implements CborEncodable {
     }
     if (cList.length < 2) {
       throw CborDeserializationException(
-          "Credential deserialization failed. Invalid number of DataItem(s) : ${cList.length}");
+        "Credential deserialization failed. Invalid number of DataItem(s) : ${cList.length}",
+      );
     }
 
     final CborSmallInt cTypeDi = cList[0] as CborSmallInt;

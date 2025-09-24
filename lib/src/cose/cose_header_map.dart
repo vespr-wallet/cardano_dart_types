@@ -44,13 +44,15 @@ sealed class CoseHeaderMap with _$CoseHeaderMap implements COSEItem {
     final hashed = (cValue[CborString("hashed")] as CborBool?)?.value;
 
     final otherHeaders = CborMap.fromEntries(
-      cValue.keys.where((e) {
-        if (e is CborString && e.toString() == "hashed") return false;
-        if (e is! CborInt) return true;
+      cValue.keys
+          .where((e) {
+            if (e is CborString && e.toString() == "hashed") return false;
+            if (e is! CborInt) return true;
 
-        final eBigInt = e.toBigInt();
-        return eBigInt < BigInt.one || eBigInt > _bigInt7;
-      }).map((e) => MapEntry(e, cValue[e]!)),
+            final eBigInt = e.toBigInt();
+            return eBigInt < BigInt.one || eBigInt > _bigInt7;
+          })
+          .map((e) => MapEntry(e, cValue[e]!)),
     );
 
     return CoseHeaderMap(
@@ -68,42 +70,58 @@ sealed class CoseHeaderMap with _$CoseHeaderMap implements COSEItem {
 
   @override
   CborValue serialize({required bool forJson}) => CborMap.fromEntries(
-        [
-          algorithmId?.let((p0) => MapEntry(
-                forJson ? CborString("algorithmId") : const CborSmallInt(1),
-                p0,
-              )),
-          criticality?.let((p0) => MapEntry(
-                forJson ? CborString("criticality") : const CborSmallInt(2),
-                p0,
-              )),
-          contentType?.let((p0) => MapEntry(
-                forJson ? CborString("contentType") : const CborSmallInt(3),
-                p0,
-              )),
-          keyId?.let((p0) => MapEntry(
-                forJson ? CborString("keyId") : const CborSmallInt(4),
-                forJson ? CborString(p0.hexEncode()) : CborBytes(p0),
-              )),
-          initVector?.let((p0) => MapEntry(
-                forJson ? CborString("initVector") : const CborSmallInt(5),
-                forJson ? CborString(p0.hexEncode()) : CborBytes(p0),
-              )),
-          partialInitVector?.let((p0) => MapEntry(
-                forJson ? CborString("partialInitVector") : const CborSmallInt(6),
-                forJson ? CborString(p0.hexEncode()) : CborBytes(p0),
-              )),
-          counterSignature?.let((p0) => MapEntry(
-                forJson ? CborString("counterSignature") : const CborSmallInt(7),
-                CborList.of(p0.map((e) => e.serialize(forJson: forJson))),
-              )),
-          hashed?.let((p0) => MapEntry(
-                CborString("hashed"),
-                CborBool(p0),
-              )),
-          ...otherHeaders.entries,
-        ].nonNulls(),
-      );
+    [
+      algorithmId?.let(
+        (p0) => MapEntry(
+          forJson ? CborString("algorithmId") : const CborSmallInt(1),
+          p0,
+        ),
+      ),
+      criticality?.let(
+        (p0) => MapEntry(
+          forJson ? CborString("criticality") : const CborSmallInt(2),
+          p0,
+        ),
+      ),
+      contentType?.let(
+        (p0) => MapEntry(
+          forJson ? CborString("contentType") : const CborSmallInt(3),
+          p0,
+        ),
+      ),
+      keyId?.let(
+        (p0) => MapEntry(
+          forJson ? CborString("keyId") : const CborSmallInt(4),
+          forJson ? CborString(p0.hexEncode()) : CborBytes(p0),
+        ),
+      ),
+      initVector?.let(
+        (p0) => MapEntry(
+          forJson ? CborString("initVector") : const CborSmallInt(5),
+          forJson ? CborString(p0.hexEncode()) : CborBytes(p0),
+        ),
+      ),
+      partialInitVector?.let(
+        (p0) => MapEntry(
+          forJson ? CborString("partialInitVector") : const CborSmallInt(6),
+          forJson ? CborString(p0.hexEncode()) : CborBytes(p0),
+        ),
+      ),
+      counterSignature?.let(
+        (p0) => MapEntry(
+          forJson ? CborString("counterSignature") : const CborSmallInt(7),
+          CborList.of(p0.map((e) => e.serialize(forJson: forJson))),
+        ),
+      ),
+      hashed?.let(
+        (p0) => MapEntry(
+          CborString("hashed"),
+          CborBool(p0),
+        ),
+      ),
+      ...otherHeaders.entries,
+    ].nonNulls(),
+  );
 }
 
 final _bigInt7 = BigInt.parse("7");

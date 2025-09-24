@@ -20,13 +20,13 @@ sealed class RequiredSigners with _$RequiredSigners implements CborEncodable {
 
   @override
   CborList serialize({required bool forJson}) => CborList(
-        [
-          ...signersBytes.map((e) => e.serializeCbor(forJson: forJson)),
-          if (forJson) CborString("tags: [${cborTags.join(", ")}]"),
-        ],
-        tags: cborTags,
-        type: CborLengthType.definite,
-      );
+    [
+      ...signersBytes.map((e) => e.serializeCbor(forJson: forJson)),
+      if (forJson) CborString("tags: [${cborTags.join(", ")}]"),
+    ],
+    tags: cborTags,
+    type: CborLengthType.definite,
+  );
 
   static RequiredSigners deserialize(CborValue cList) {
     if (cList is! CborList) {

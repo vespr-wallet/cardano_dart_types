@@ -21,7 +21,8 @@ sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
   factory VotingProcedures.deserialize({required CborValue cValue}) {
     if (cValue is! CborMap) {
       throw CborDeserializationException(
-          "VotingProcedures deserialization failed. Invalid cbor type ${cValue.runtimeType} ; expected CborMap");
+        "VotingProcedures deserialization failed. Invalid cbor type ${cValue.runtimeType} ; expected CborMap",
+      );
     }
 
     final voting = Map.fromEntries(
@@ -40,18 +41,18 @@ sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborMap.fromEntries(
-        voting.entries.map(
-          (e) {
-            final voter = e.key;
-            final votingProcedureMap = e.value;
+    voting.entries.map(
+      (e) {
+        final voter = e.key;
+        final votingProcedureMap = e.value;
 
-            return MapEntry(
-              voter.serialize(forJson: forJson),
-              votingProcedureMap.serialize(forJson: forJson),
-            );
-          },
-        ),
-      );
+        return MapEntry(
+          voter.serialize(forJson: forJson),
+          votingProcedureMap.serialize(forJson: forJson),
+        );
+      },
+    ),
+  );
 }
 
 Map<GovActionId, VotingProcedure> _deserializeVotingProcedureMap(CborValue cMap) {
