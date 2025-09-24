@@ -7,9 +7,9 @@ part of 'data_signature.dart';
 // **************************************************************************
 
 _DataSignature _$DataSignatureFromJson(Map json) => _DataSignature(
-      coseKeyHex: json['key'] as String,
-      coseSignHex: json['signature'] as String,
-    );
+  coseKeyHex: json['key'] as String,
+  coseSignHex: json['signature'] as String,
+);
 
 Map<String, dynamic> _$DataSignatureToJson(_DataSignature instance) =>
     <String, dynamic>{

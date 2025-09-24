@@ -7,6 +7,7 @@ import "package:freezed_annotation/freezed_annotation.dart";
 
 import "../exceptions/cose_exceptions.dart";
 import "../utils/transformations.dart";
+import "cose_header_map.dart";
 import "cose_item.dart";
 
 part "cose_protected_header_map.freezed.dart";
@@ -27,5 +28,7 @@ sealed class CoseProtectedHeaderMap with _$CoseProtectedHeaderMap implements COS
   }
 
   @override
-  CborValue serialize({required bool forJson}) => forJson ? CborString(bytes.hexEncode()) : CborBytes(bytes);
+  CborValue serialize({required bool forJson}) => forJson //
+      ? CoseHeaderMap.deserialize(bytes.cborDecode()).serialize(forJson: forJson)
+      : CborBytes(bytes);
 }

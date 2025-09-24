@@ -52,11 +52,11 @@ sealed class CoseSigStructure with _$CoseSigStructure implements CborEncodable {
     if (cborValue is! CborList) {
       throw CoseSigStructureParseException("cborValue is type ${cborValue.runtimeType}");
     }
-    if (cborValue.length != 4 || cborValue.length != 5) {
+    if (cborValue.length != 4 && cborValue.length != 5) {
       throw CoseSigStructureParseException("cborValue length is ${cborValue.length}. Expected 4 or 5.");
     }
 
-    final sigContext = SigContext.fromString((cborValue[0] as CborBytes).bytes.toUint8List().utf8Encode());
+    final sigContext = SigContext.fromString((cborValue[0] as CborString).toString());
     final protectedHeaderMap = CoseProtectedHeaderMap.deserialize(cborValue[1]);
     final signProtected = cborValue.length == 4 ? null : CoseProtectedHeaderMap.deserialize(cborValue[2]);
     final externalAad = (cborValue[cborValue.length - 2] as CborBytes).bytes.toUint8List();

@@ -20,6 +20,7 @@ export "src/cardano/0_body/20_proposal/proposal_procedure.dart";
 export "src/cardano/0_body/20_proposal/protocol_param_update.dart";
 export "src/cardano/0_body/20_proposal/protocol_version.dart";
 export "src/cardano/0_body/4_cert/certificate.dart";
+export "src/cardano/0_body/4_cert/certificates.dart";
 export "src/cardano/0_body/4_cert/credential.dart";
 export "src/cardano/0_body/4_cert/stake_pool_id.dart";
 export "src/cardano/0_body/5_withdraw/withdraw.dart";

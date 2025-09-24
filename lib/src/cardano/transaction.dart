@@ -213,8 +213,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     return TxDiff(
       diff: diff,
       usedUtxos: consumedUtxosFromThisWallet.toList(),
-      stakeDelegationPoolId: body.certs
-          ?.map(
+      stakeDelegationPoolId: body.certs?.certificates
+          .map(
             (e) => switch (e) {
               Certificate_StakeRegistrationLegacy() => null,
               Certificate_StakeDeRegistrationLegacy() => null,
@@ -242,8 +242,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           .nonNulls
           .lastOrNull
           ?.bech32PoolId,
-      authorizeConstitutionalCommitteeHot: body.certs
-          ?.map(
+      authorizeConstitutionalCommitteeHot: body.certs?.certificates
+          .map(
             (e) => switch (e) {
               Certificate_AuthorizeCommitteeHot() =>
                 e.committeeColdCredential.vKeyHash.deepEquals(constitutionalCommitteeColdCredentialBytes)
@@ -254,8 +254,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           )
           .nonNulls
           .lastOrNull,
-      resignConstitutionalCommitteeCold: body.certs
-          ?.map(
+      resignConstitutionalCommitteeCold: body.certs?.certificates
+          .map(
             (e) => switch (e) {
               Certificate_ResignCommitteeCold() =>
                 e.committeeColdCredential.vKeyHash.deepEquals(constitutionalCommitteeColdCredentialBytes)
@@ -266,8 +266,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           )
           .nonNulls
           .lastOrNull,
-      dRepDelegation: body.certs
-          ?.map(
+      dRepDelegation: body.certs?.certificates
+          .map(
             (e) => switch (e) {
               Certificate_VoteDelegation() =>
                 e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes) ? e.dRep : null,
@@ -294,8 +294,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           )
           .nonNulls
           .lastOrNull,
-      dRepRegistration: body.certs
-          ?.map(
+      dRepRegistration: body.certs?.certificates
+          .map(
             (e) => switch (e) {
               Certificate_RegisterDRep() =>
                 e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes)
@@ -309,8 +309,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           )
           .nonNulls
           .lastOrNull,
-      dRepUpdate: body.certs
-          ?.map(
+      dRepUpdate: body.certs?.certificates
+          .map(
             (e) => switch (e) {
               Certificate_UpdateDRep() =>
                 e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes)
@@ -325,8 +325,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           .nonNulls
           .lastOrNull,
       dRepDeregistration:
-          body.certs
-              ?.map(
+          body.certs?.certificates
+              .map(
                 (e) => switch (e) {
                   Certificate_UnregisterDRep() => e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes),
                   _ => false,
@@ -336,8 +336,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
               .lastOrNull ??
           false,
       stakeDeregistration:
-          body.certs
-              ?.map(
+          body.certs?.certificates
+              .map(
                 (e) => switch (e) {
                   Certificate_StakeDeRegistrationLegacy() => e.stakeCredential.vKeyHash.deepEquals(
                     stakeCredentialsBytes,

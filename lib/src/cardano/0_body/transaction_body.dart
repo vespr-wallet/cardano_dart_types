@@ -19,7 +19,7 @@ import "14_required_signers/required_signers.dart";
 import "19_voting/voting_procedures.dart";
 import "1_outputs/transaction_output.dart";
 import "20_proposal/proposal_procedure.dart";
-import "4_cert/certificate.dart";
+import "4_cert/certificates.dart";
 import "5_withdraw/withdraw.dart";
 
 part "transaction_body.freezed.dart";
@@ -36,7 +36,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required BigInt fee, // 2
     // OPTIONAL
     BigInt? ttl, // 3
-    List<Certificate>? certs, // 4
+    Certificates? certs, // 4
     List<Withdraw>? withdrawals, // 5
     // 6 - update ; what is it?
     Uint8List? metadataHash, // 7
@@ -88,7 +88,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required BigInt fee, // 2
     // OPTIONAL
     required BigInt? ttl, // 3
-    required List<Certificate>? certs, // 4
+    required Certificates? certs, // 4
     required List<Withdraw>? withdrawals, // 5
     // 6 - update ; what is it?
     required Uint8List? metadataHash, // 7
@@ -118,7 +118,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required BigInt fee, // 2
     // OPTIONAL
     required BigInt? ttl, // 3
-    required List<Certificate>? certs, // 4
+    required Certificates? certs, // 4
     required List<Withdraw>? withdrawals, // 5
     // 6 - update ; what is it?
     required Uint8List? metadataHash, // 7
@@ -202,7 +202,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     final outputs = (outputsCbor! as CborList).map(CardanoTransactionOutput.deserialize).toList();
     final fee = (feeCbor! as CborInt).toBigInt();
     final ttl = ttlCbor == null ? null : (ttlCbor as CborInt).toBigInt();
-    final certs = (certsCbor as CborList?)?.map(Certificate.deserialize);
+    final certs = certsCbor != null ? Certificates.deserialize(certsCbor) : null;
     final withdrawals = withdrawalsCbor?.let((cValue) {
       final withdrawalsCborMap = cValue as CborMap;
       return withdrawalsCborMap.entries.map(
@@ -245,7 +245,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
       outputs: outputs,
       fee: fee,
       ttl: ttl,
-      certs: certs?.toList(growable: false),
+      certs: certs,
       withdrawals: withdrawals?.toList(growable: false),
       metadataHash: metadataHash,
       validityStartInterval: validityStartInterval,
