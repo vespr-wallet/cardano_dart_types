@@ -11,48 +11,48 @@ part of 'transaction_input.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$CardanoTransactionInput {
-  String get transactionHash; //hex
-  int get index;
 
-  /// Create a copy of CardanoTransactionInput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $CardanoTransactionInputCopyWith<CardanoTransactionInput> get copyWith =>
-      _$CardanoTransactionInputCopyWithImpl<CardanoTransactionInput>(
-          this as CardanoTransactionInput, _$identity);
+ String get transactionHash;//hex
+ int get index;
+/// Create a copy of CardanoTransactionInput
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CardanoTransactionInputCopyWith<CardanoTransactionInput> get copyWith => _$CardanoTransactionInputCopyWithImpl<CardanoTransactionInput>(this as CardanoTransactionInput, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is CardanoTransactionInput &&
-            (identical(other.transactionHash, transactionHash) ||
-                other.transactionHash == transactionHash) &&
-            (identical(other.index, index) || other.index == index));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, transactionHash, index);
 
-  @override
-  String toString() {
-    return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionInput&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,transactionHash,index);
+
+@override
+String toString() {
+  return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $CardanoTransactionInputCopyWith<$Res> {
-  factory $CardanoTransactionInputCopyWith(CardanoTransactionInput value,
-          $Res Function(CardanoTransactionInput) _then) =
-      _$CardanoTransactionInputCopyWithImpl;
-  @useResult
-  $Res call({String transactionHash, int index});
-}
+abstract mixin class $CardanoTransactionInputCopyWith<$Res>  {
+  factory $CardanoTransactionInputCopyWith(CardanoTransactionInput value, $Res Function(CardanoTransactionInput) _then) = _$CardanoTransactionInputCopyWithImpl;
+@useResult
+$Res call({
+ String transactionHash, int index
+});
 
+
+
+
+}
 /// @nodoc
 class _$CardanoTransactionInputCopyWithImpl<$Res>
     implements $CardanoTransactionInputCopyWith<$Res> {
@@ -61,79 +61,68 @@ class _$CardanoTransactionInputCopyWithImpl<$Res>
   final CardanoTransactionInput _self;
   final $Res Function(CardanoTransactionInput) _then;
 
-  /// Create a copy of CardanoTransactionInput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? transactionHash = null,
-    Object? index = null,
-  }) {
-    return _then(_self.copyWith(
-      transactionHash: null == transactionHash
-          ? _self.transactionHash
-          : transactionHash // ignore: cast_nullable_to_non_nullable
-              as String,
-      index: null == index
-          ? _self.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of CardanoTransactionInput
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? transactionHash = null,Object? index = null,}) {
+  return _then(_self.copyWith(
+transactionHash: null == transactionHash ? _self.transactionHash : transactionHash // ignore: cast_nullable_to_non_nullable
+as String,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
 
+}
+
+
+
 /// @nodoc
+
 
 class _CardanoTransactionInput extends CardanoTransactionInput {
-  const _CardanoTransactionInput(
-      {required this.transactionHash, required this.index})
-      : super._();
+  const _CardanoTransactionInput({required this.transactionHash, required this.index}): super._();
+  
 
-  @override
-  final String transactionHash;
+@override final  String transactionHash;
 //hex
-  @override
-  final int index;
+@override final  int index;
 
-  /// Create a copy of CardanoTransactionInput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$CardanoTransactionInputCopyWith<_CardanoTransactionInput> get copyWith =>
-      __$CardanoTransactionInputCopyWithImpl<_CardanoTransactionInput>(
-          this, _$identity);
+/// Create a copy of CardanoTransactionInput
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CardanoTransactionInputCopyWith<_CardanoTransactionInput> get copyWith => __$CardanoTransactionInputCopyWithImpl<_CardanoTransactionInput>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _CardanoTransactionInput &&
-            (identical(other.transactionHash, transactionHash) ||
-                other.transactionHash == transactionHash) &&
-            (identical(other.index, index) || other.index == index));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, transactionHash, index);
 
-  @override
-  String toString() {
-    return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransactionInput&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,transactionHash,index);
+
+@override
+String toString() {
+  return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$CardanoTransactionInputCopyWith<$Res>
-    implements $CardanoTransactionInputCopyWith<$Res> {
-  factory _$CardanoTransactionInputCopyWith(_CardanoTransactionInput value,
-          $Res Function(_CardanoTransactionInput) _then) =
-      __$CardanoTransactionInputCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String transactionHash, int index});
-}
+abstract mixin class _$CardanoTransactionInputCopyWith<$Res> implements $CardanoTransactionInputCopyWith<$Res> {
+  factory _$CardanoTransactionInputCopyWith(_CardanoTransactionInput value, $Res Function(_CardanoTransactionInput) _then) = __$CardanoTransactionInputCopyWithImpl;
+@override @useResult
+$Res call({
+ String transactionHash, int index
+});
 
+
+
+
+}
 /// @nodoc
 class __$CardanoTransactionInputCopyWithImpl<$Res>
     implements _$CardanoTransactionInputCopyWith<$Res> {
@@ -142,25 +131,17 @@ class __$CardanoTransactionInputCopyWithImpl<$Res>
   final _CardanoTransactionInput _self;
   final $Res Function(_CardanoTransactionInput) _then;
 
-  /// Create a copy of CardanoTransactionInput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? transactionHash = null,
-    Object? index = null,
-  }) {
-    return _then(_CardanoTransactionInput(
-      transactionHash: null == transactionHash
-          ? _self.transactionHash
-          : transactionHash // ignore: cast_nullable_to_non_nullable
-              as String,
-      index: null == index
-          ? _self.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of CardanoTransactionInput
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? transactionHash = null,Object? index = null,}) {
+  return _then(_CardanoTransactionInput(
+transactionHash: null == transactionHash ? _self.transactionHash : transactionHash // ignore: cast_nullable_to_non_nullable
+as String,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
 }
 
 // dart format on

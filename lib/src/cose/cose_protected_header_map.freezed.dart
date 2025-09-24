@@ -11,46 +11,47 @@ part of 'cose_protected_header_map.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$CoseProtectedHeaderMap {
-  Uint8List get bytes;
 
-  /// Create a copy of CoseProtectedHeaderMap
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $CoseProtectedHeaderMapCopyWith<CoseProtectedHeaderMap> get copyWith =>
-      _$CoseProtectedHeaderMapCopyWithImpl<CoseProtectedHeaderMap>(
-          this as CoseProtectedHeaderMap, _$identity);
+ Uint8List get bytes;
+/// Create a copy of CoseProtectedHeaderMap
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CoseProtectedHeaderMapCopyWith<CoseProtectedHeaderMap> get copyWith => _$CoseProtectedHeaderMapCopyWithImpl<CoseProtectedHeaderMap>(this as CoseProtectedHeaderMap, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is CoseProtectedHeaderMap &&
-            const DeepCollectionEquality().equals(other.bytes, bytes));
-  }
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(bytes));
 
-  @override
-  String toString() {
-    return 'CoseProtectedHeaderMap(bytes: $bytes)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseProtectedHeaderMap&&const DeepCollectionEquality().equals(other.bytes, bytes));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+
+@override
+String toString() {
+  return 'CoseProtectedHeaderMap(bytes: $bytes)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $CoseProtectedHeaderMapCopyWith<$Res> {
-  factory $CoseProtectedHeaderMapCopyWith(CoseProtectedHeaderMap value,
-          $Res Function(CoseProtectedHeaderMap) _then) =
-      _$CoseProtectedHeaderMapCopyWithImpl;
-  @useResult
-  $Res call({Uint8List bytes});
-}
+abstract mixin class $CoseProtectedHeaderMapCopyWith<$Res>  {
+  factory $CoseProtectedHeaderMapCopyWith(CoseProtectedHeaderMap value, $Res Function(CoseProtectedHeaderMap) _then) = _$CoseProtectedHeaderMapCopyWithImpl;
+@useResult
+$Res call({
+ Uint8List bytes
+});
 
+
+
+
+}
 /// @nodoc
 class _$CoseProtectedHeaderMapCopyWithImpl<$Res>
     implements $CoseProtectedHeaderMapCopyWith<$Res> {
@@ -59,68 +60,65 @@ class _$CoseProtectedHeaderMapCopyWithImpl<$Res>
   final CoseProtectedHeaderMap _self;
   final $Res Function(CoseProtectedHeaderMap) _then;
 
-  /// Create a copy of CoseProtectedHeaderMap
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? bytes = null,
-  }) {
-    return _then(_self.copyWith(
-      bytes: null == bytes
-          ? _self.bytes
-          : bytes // ignore: cast_nullable_to_non_nullable
-              as Uint8List,
-    ));
-  }
+/// Create a copy of CoseProtectedHeaderMap
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? bytes = null,}) {
+  return _then(_self.copyWith(
+bytes: null == bytes ? _self.bytes : bytes // ignore: cast_nullable_to_non_nullable
+as Uint8List,
+  ));
 }
 
+}
+
+
+
 /// @nodoc
+
 
 class _CoseProtectedHeaderMap extends CoseProtectedHeaderMap {
-  const _CoseProtectedHeaderMap({required this.bytes}) : super._();
+  const _CoseProtectedHeaderMap({required this.bytes}): super._();
+  
 
-  @override
-  final Uint8List bytes;
+@override final  Uint8List bytes;
 
-  /// Create a copy of CoseProtectedHeaderMap
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$CoseProtectedHeaderMapCopyWith<_CoseProtectedHeaderMap> get copyWith =>
-      __$CoseProtectedHeaderMapCopyWithImpl<_CoseProtectedHeaderMap>(
-          this, _$identity);
+/// Create a copy of CoseProtectedHeaderMap
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CoseProtectedHeaderMapCopyWith<_CoseProtectedHeaderMap> get copyWith => __$CoseProtectedHeaderMapCopyWithImpl<_CoseProtectedHeaderMap>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _CoseProtectedHeaderMap &&
-            const DeepCollectionEquality().equals(other.bytes, bytes));
-  }
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(bytes));
 
-  @override
-  String toString() {
-    return 'CoseProtectedHeaderMap(bytes: $bytes)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseProtectedHeaderMap&&const DeepCollectionEquality().equals(other.bytes, bytes));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+
+@override
+String toString() {
+  return 'CoseProtectedHeaderMap(bytes: $bytes)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$CoseProtectedHeaderMapCopyWith<$Res>
-    implements $CoseProtectedHeaderMapCopyWith<$Res> {
-  factory _$CoseProtectedHeaderMapCopyWith(_CoseProtectedHeaderMap value,
-          $Res Function(_CoseProtectedHeaderMap) _then) =
-      __$CoseProtectedHeaderMapCopyWithImpl;
-  @override
-  @useResult
-  $Res call({Uint8List bytes});
-}
+abstract mixin class _$CoseProtectedHeaderMapCopyWith<$Res> implements $CoseProtectedHeaderMapCopyWith<$Res> {
+  factory _$CoseProtectedHeaderMapCopyWith(_CoseProtectedHeaderMap value, $Res Function(_CoseProtectedHeaderMap) _then) = __$CoseProtectedHeaderMapCopyWithImpl;
+@override @useResult
+$Res call({
+ Uint8List bytes
+});
 
+
+
+
+}
 /// @nodoc
 class __$CoseProtectedHeaderMapCopyWithImpl<$Res>
     implements _$CoseProtectedHeaderMapCopyWith<$Res> {
@@ -129,20 +127,16 @@ class __$CoseProtectedHeaderMapCopyWithImpl<$Res>
   final _CoseProtectedHeaderMap _self;
   final $Res Function(_CoseProtectedHeaderMap) _then;
 
-  /// Create a copy of CoseProtectedHeaderMap
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? bytes = null,
-  }) {
-    return _then(_CoseProtectedHeaderMap(
-      bytes: null == bytes
-          ? _self.bytes
-          : bytes // ignore: cast_nullable_to_non_nullable
-              as Uint8List,
-    ));
-  }
+/// Create a copy of CoseProtectedHeaderMap
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? bytes = null,}) {
+  return _then(_CoseProtectedHeaderMap(
+bytes: null == bytes ? _self.bytes : bytes // ignore: cast_nullable_to_non_nullable
+as Uint8List,
+  ));
+}
+
+
 }
 
 // dart format on

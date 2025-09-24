@@ -11,90 +11,100 @@ part of 'metadata.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$CBORMetadata {
-  CborValue get value;
 
-  /// Create a copy of CBORMetadata
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $CBORMetadataCopyWith<CBORMetadata> get copyWith =>
-      _$CBORMetadataCopyWithImpl<CBORMetadata>(
-          this as CBORMetadata, _$identity);
+ CborValue get value;
+/// Create a copy of CBORMetadata
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CBORMetadataCopyWith<CBORMetadata> get copyWith => _$CBORMetadataCopyWithImpl<CBORMetadata>(this as CBORMetadata, _$identity);
 
-  @override
-  String toString() {
-    return 'CBORMetadata(value: $value)';
-  }
+
+
+
+
+@override
+String toString() {
+  return 'CBORMetadata(value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $CBORMetadataCopyWith<$Res> {
-  factory $CBORMetadataCopyWith(
-          CBORMetadata value, $Res Function(CBORMetadata) _then) =
-      _$CBORMetadataCopyWithImpl;
-  @useResult
-  $Res call({CborValue value});
-}
+abstract mixin class $CBORMetadataCopyWith<$Res>  {
+  factory $CBORMetadataCopyWith(CBORMetadata value, $Res Function(CBORMetadata) _then) = _$CBORMetadataCopyWithImpl;
+@useResult
+$Res call({
+ CborValue value
+});
 
+
+
+
+}
 /// @nodoc
-class _$CBORMetadataCopyWithImpl<$Res> implements $CBORMetadataCopyWith<$Res> {
+class _$CBORMetadataCopyWithImpl<$Res>
+    implements $CBORMetadataCopyWith<$Res> {
   _$CBORMetadataCopyWithImpl(this._self, this._then);
 
   final CBORMetadata _self;
   final $Res Function(CBORMetadata) _then;
 
-  /// Create a copy of CBORMetadata
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? value = null,
-  }) {
-    return _then(_self.copyWith(
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as CborValue,
-    ));
-  }
+/// Create a copy of CBORMetadata
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? value = null,}) {
+  return _then(_self.copyWith(
+value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as CborValue,
+  ));
 }
 
+}
+
+
+
 /// @nodoc
+
 
 class _CBORMetadata extends CBORMetadata {
-  _CBORMetadata({required this.value}) : super._();
+   _CBORMetadata({required this.value}): super._();
+  
 
-  @override
-  final CborValue value;
+@override final  CborValue value;
 
-  /// Create a copy of CBORMetadata
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$CBORMetadataCopyWith<_CBORMetadata> get copyWith =>
-      __$CBORMetadataCopyWithImpl<_CBORMetadata>(this, _$identity);
+/// Create a copy of CBORMetadata
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CBORMetadataCopyWith<_CBORMetadata> get copyWith => __$CBORMetadataCopyWithImpl<_CBORMetadata>(this, _$identity);
 
-  @override
-  String toString() {
-    return 'CBORMetadata(value: $value)';
-  }
+
+
+
+
+@override
+String toString() {
+  return 'CBORMetadata(value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$CBORMetadataCopyWith<$Res>
-    implements $CBORMetadataCopyWith<$Res> {
-  factory _$CBORMetadataCopyWith(
-          _CBORMetadata value, $Res Function(_CBORMetadata) _then) =
-      __$CBORMetadataCopyWithImpl;
-  @override
-  @useResult
-  $Res call({CborValue value});
-}
+abstract mixin class _$CBORMetadataCopyWith<$Res> implements $CBORMetadataCopyWith<$Res> {
+  factory _$CBORMetadataCopyWith(_CBORMetadata value, $Res Function(_CBORMetadata) _then) = __$CBORMetadataCopyWithImpl;
+@override @useResult
+$Res call({
+ CborValue value
+});
 
+
+
+
+}
 /// @nodoc
 class __$CBORMetadataCopyWithImpl<$Res>
     implements _$CBORMetadataCopyWith<$Res> {
@@ -103,20 +113,16 @@ class __$CBORMetadataCopyWithImpl<$Res>
   final _CBORMetadata _self;
   final $Res Function(_CBORMetadata) _then;
 
-  /// Create a copy of CBORMetadata
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? value = null,
-  }) {
-    return _then(_CBORMetadata(
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as CborValue,
-    ));
-  }
+/// Create a copy of CBORMetadata
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_CBORMetadata(
+value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as CborValue,
+  ));
+}
+
+
 }
 
 // dart format on

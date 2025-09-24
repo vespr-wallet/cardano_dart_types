@@ -14,12 +14,12 @@ CardanoDerivedAddress _$CardanoDerivedAddressFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$CardanoDerivedAddressToJson(
-        CardanoDerivedAddress instance) =>
-    <String, dynamic>{
-      'type': _$AddressTypeEnumMap[instance.type]!,
-      'bytes': byteListConverter.toJson(instance.bytes),
-      'runtimeType': instance.$type,
-    };
+  CardanoDerivedAddress instance,
+) => <String, dynamic>{
+  'type': _$AddressTypeEnumMap[instance.type]!,
+  'bytes': byteListConverter.toJson(instance.bytes),
+  'runtimeType': instance.$type,
+};
 
 const _$AddressTypeEnumMap = {
   AddressType.base: 'base',
@@ -30,40 +30,33 @@ const _$AddressTypeEnumMap = {
 };
 
 CardanoDerivedDRep _$CardanoDerivedDRepFromJson(Map json) => CardanoDerivedDRep(
-      value: DRepDerivation.fromJson(
-          Map<String, dynamic>.from(json['value'] as Map)),
+  value: DRepDerivation.fromJson(
+    Map<String, dynamic>.from(json['value'] as Map),
+  ),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$CardanoDerivedDRepToJson(CardanoDerivedDRep instance) =>
+    <String, dynamic>{'value': instance.value, 'runtimeType': instance.$type};
+
+CardanoDerivedConstitutionalCommittee
+_$CardanoDerivedConstitutionalCommitteeFromJson(Map json) =>
+    CardanoDerivedConstitutionalCommittee(
+      value: ConstitutionalCommitee.fromJson(
+        Map<String, dynamic>.from(json['value'] as Map),
+      ),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$CardanoDerivedDRepToJson(CardanoDerivedDRep instance) =>
-    <String, dynamic>{
-      'value': instance.value,
-      'runtimeType': instance.$type,
-    };
-
-CardanoDerivedConstitutionalCommittee
-    _$CardanoDerivedConstitutionalCommitteeFromJson(Map json) =>
-        CardanoDerivedConstitutionalCommittee(
-          value: ConstitutionalCommitee.fromJson(
-              Map<String, dynamic>.from(json['value'] as Map)),
-          $type: json['runtimeType'] as String?,
-        );
-
 Map<String, dynamic> _$CardanoDerivedConstitutionalCommitteeToJson(
-        CardanoDerivedConstitutionalCommittee instance) =>
-    <String, dynamic>{
-      'value': instance.value,
-      'runtimeType': instance.$type,
-    };
+  CardanoDerivedConstitutionalCommittee instance,
+) => <String, dynamic>{'value': instance.value, 'runtimeType': instance.$type};
 
-_DRepDerivation _$DRepDerivationFromJson(Map json) => _DRepDerivation(
-      bytes: byteListConverter.fromJson(json['bytes'] as List),
-    );
+_DRepDerivation _$DRepDerivationFromJson(Map json) =>
+    _DRepDerivation(bytes: byteListConverter.fromJson(json['bytes'] as List));
 
 Map<String, dynamic> _$DRepDerivationToJson(_DRepDerivation instance) =>
-    <String, dynamic>{
-      'bytes': byteListConverter.toJson(instance.bytes),
-    };
+    <String, dynamic>{'bytes': byteListConverter.toJson(instance.bytes)};
 
 ConstitutionalCommiteeCold _$ConstitutionalCommiteeColdFromJson(Map json) =>
     ConstitutionalCommiteeCold(
@@ -72,11 +65,11 @@ ConstitutionalCommiteeCold _$ConstitutionalCommiteeColdFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$ConstitutionalCommiteeColdToJson(
-        ConstitutionalCommiteeCold instance) =>
-    <String, dynamic>{
-      'bytes': byteListConverter.toJson(instance.bytes),
-      'runtimeType': instance.$type,
-    };
+  ConstitutionalCommiteeCold instance,
+) => <String, dynamic>{
+  'bytes': byteListConverter.toJson(instance.bytes),
+  'runtimeType': instance.$type,
+};
 
 ConstitutionalCommiteeHot _$ConstitutionalCommiteeHotFromJson(Map json) =>
     ConstitutionalCommiteeHot(
@@ -85,8 +78,8 @@ ConstitutionalCommiteeHot _$ConstitutionalCommiteeHotFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$ConstitutionalCommiteeHotToJson(
-        ConstitutionalCommiteeHot instance) =>
-    <String, dynamic>{
-      'bytes': byteListConverter.toJson(instance.bytes),
-      'runtimeType': instance.$type,
-    };
+  ConstitutionalCommiteeHot instance,
+) => <String, dynamic>{
+  'bytes': byteListConverter.toJson(instance.bytes),
+  'runtimeType': instance.$type,
+};

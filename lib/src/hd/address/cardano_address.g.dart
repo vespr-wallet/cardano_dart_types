@@ -13,11 +13,11 @@ CardanoAddressByron _$CardanoAddressByronFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$CardanoAddressByronToJson(
-        CardanoAddressByron instance) =>
-    <String, dynamic>{
-      'bytes': byteListConverter.toJson(instance.bytes),
-      'runtimeType': instance.$type,
-    };
+  CardanoAddressByron instance,
+) => <String, dynamic>{
+  'bytes': byteListConverter.toJson(instance.bytes),
+  'runtimeType': instance.$type,
+};
 
 CardanoAddressPointer _$CardanoAddressPointerFromJson(Map json) =>
     CardanoAddressPointer(
@@ -26,16 +26,16 @@ CardanoAddressPointer _$CardanoAddressPointerFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$CardanoAddressPointerToJson(
-        CardanoAddressPointer instance) =>
-    <String, dynamic>{
-      'bytes': byteListConverter.toJson(instance.bytes),
-      'runtimeType': instance.$type,
-    };
+  CardanoAddressPointer instance,
+) => <String, dynamic>{
+  'bytes': byteListConverter.toJson(instance.bytes),
+  'runtimeType': instance.$type,
+};
 
 CardanoAddressBase _$CardanoAddressBaseFromJson(Map json) => CardanoAddressBase(
-      bytes: byteListConverter.fromJson(json['bytes'] as List),
-      $type: json['runtimeType'] as String?,
-    );
+  bytes: byteListConverter.fromJson(json['bytes'] as List),
+  $type: json['runtimeType'] as String?,
+);
 
 Map<String, dynamic> _$CardanoAddressBaseToJson(CardanoAddressBase instance) =>
     <String, dynamic>{
@@ -50,11 +50,11 @@ CardanoAddressEnterprise _$CardanoAddressEnterpriseFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$CardanoAddressEnterpriseToJson(
-        CardanoAddressEnterprise instance) =>
-    <String, dynamic>{
-      'bytes': byteListConverter.toJson(instance.bytes),
-      'runtimeType': instance.$type,
-    };
+  CardanoAddressEnterprise instance,
+) => <String, dynamic>{
+  'bytes': byteListConverter.toJson(instance.bytes),
+  'runtimeType': instance.$type,
+};
 
 CardanoAddressReward _$CardanoAddressRewardFromJson(Map json) =>
     CardanoAddressReward(
@@ -63,8 +63,8 @@ CardanoAddressReward _$CardanoAddressRewardFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$CardanoAddressRewardToJson(
-        CardanoAddressReward instance) =>
-    <String, dynamic>{
-      'bytes': byteListConverter.toJson(instance.bytes),
-      'runtimeType': instance.$type,
-    };
+  CardanoAddressReward instance,
+) => <String, dynamic>{
+  'bytes': byteListConverter.toJson(instance.bytes),
+  'runtimeType': instance.$type,
+};
