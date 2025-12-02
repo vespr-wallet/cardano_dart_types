@@ -52,7 +52,7 @@ $Res call({
 });
 
 
-$WitnessSetCopyWith<$Res> get witnessSet;$CBORMetadataCopyWith<$Res>? get auxiliaryData;
+$CardanoTransactionBodyCopyWith<$Res> get body;$WitnessSetCopyWith<$Res> get witnessSet;$CBORMetadataCopyWith<$Res>? get auxiliaryData;
 
 }
 /// @nodoc
@@ -75,6 +75,15 @@ as CBORMetadata?,
   ));
 }
 /// Create a copy of CardanoTransaction
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CardanoTransactionBodyCopyWith<$Res> get body {
+  
+  return $CardanoTransactionBodyCopyWith<$Res>(_self.body, (value) {
+    return _then(_self.copyWith(body: value));
+  });
+}/// Create a copy of CardanoTransaction
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -149,7 +158,7 @@ $Res call({
 });
 
 
-@override $WitnessSetCopyWith<$Res> get witnessSet;@override $CBORMetadataCopyWith<$Res>? get auxiliaryData;
+@override $CardanoTransactionBodyCopyWith<$Res> get body;@override $WitnessSetCopyWith<$Res> get witnessSet;@override $CBORMetadataCopyWith<$Res>? get auxiliaryData;
 
 }
 /// @nodoc
@@ -173,6 +182,15 @@ as CBORMetadata?,
 }
 
 /// Create a copy of CardanoTransaction
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CardanoTransactionBodyCopyWith<$Res> get body {
+  
+  return $CardanoTransactionBodyCopyWith<$Res>(_self.body, (value) {
+    return _then(_self.copyWith(body: value));
+  });
+}/// Create a copy of CardanoTransaction
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

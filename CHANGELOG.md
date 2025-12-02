@@ -1,9 +1,23 @@
+## 2.11.0
+
+Breaking Change:
+
+- [CardanoTransactionBody] Field "originalBlake2bHash256" can now be accessed as "blake2bHash256.value"
+
+Bug Fix:
+
+- [TxPreparedForSigning] now retains `tx.body.originalBlake2bHash256` after marshal/unmarshal to ensure consistency between native and web platforms
+
+**Note:** The `originalBlake2bHash256` is computed from the raw CBOR bytes before parsing into [CardanoTransaction]. This prevents issues where re-serializing the parsed body produces a slightly different hash, leading to invalid signatures. On native (VM), this hash was already used for signing. However, on web (due to marshaling/unmarshaling required for web workers), this hash was lost in transit—causing mobile to generate valid signatures while web signatures (sometimes) failed.
+
 ## 2.10.0
 
 Breaking Change:
+
 - [CardanoSigningPath] no longer tracks account index
 
 Other Changes:
+
 - Fixed ser/deser for Certificates containing 258 tag
 - Fixed CoseSig parsing
 

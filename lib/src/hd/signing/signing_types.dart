@@ -4,6 +4,7 @@ import "package:freezed_annotation/freezed_annotation.dart";
 
 import "../../../binary/binary_reader_impl.dart";
 import "../../../binary/binary_writer_impl.dart";
+import "../../../cardano_dart_types.dart";
 import "../../cardano/0_body/4_cert/credential.dart";
 import "../../cardano/1_witness_set/witness_set.dart";
 import "../../cardano/shared/asset.dart";
@@ -220,6 +221,7 @@ sealed class TxPreparedForSigning with _$TxPreparedForSigning {
 
   Uint8List marshal() {
     final BinaryWriterImpl writer = BinaryWriterImpl();
+    writer.writeByteList(tx.body.blake2bHash256.marshal());
     writer.writeByteList(tx.serializeAsBytes());
     writer.writeByteList(txDiff.marshal());
     writer.writeBytesList(utxosBeforeTx.map((e) => e.serializeAsBytes()).toList());
@@ -229,7 +231,15 @@ sealed class TxPreparedForSigning with _$TxPreparedForSigning {
 
   factory TxPreparedForSigning.unmarshal(Uint8List bytes) {
     final BinaryReaderImpl reader = BinaryReaderImpl(bytes);
-    final tx = CardanoTransaction.deserializeBytes(reader.readByteList());
+
+    final tx = () {
+      final blake2bHash256 = Blake2bHash256.unmarshal(reader.readByteList());
+      final deserializedTx = CardanoTransaction.deserializeBytes(reader.readByteList());
+
+      return deserializedTx.copyWith.body(
+        blake2bHash256: blake2bHash256,
+      );
+    }();
     final txDiff = TxDiff.unmarshal(reader.readByteList());
     final utxos = reader.readBytesList().map(Utxo.deserializeBytes).toList();
     final signingAddressesRequired = reader.readStringList().toSet();

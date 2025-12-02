@@ -4,6 +4,8 @@ import "package:cbor/cbor.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:hex/hex.dart";
 
+import "../../../binary/binary_reader_impl.dart";
+import "../../../binary/binary_writer_impl.dart";
 import "../../exceptions/parse_exceptions.dart";
 import "../../hd/ada_types.dart";
 import "../../hd/util/blake2bhash.dart";
@@ -24,8 +26,57 @@ import "5_withdraw/withdraw.dart";
 
 part "transaction_body.freezed.dart";
 
+// This typedef is a trick to allow type checking
+// against a private class.
+typedef Blake2bHash256Computed = _Blake2bHash256Computed;
+
+@freezed
+sealed class Blake2bHash256 with _$Blake2bHash256 {
+  const Blake2bHash256._();
+  const factory Blake2bHash256.passed({
+    required String blake2bHash256,
+  }) = Blake2bHash256Passed;
+
+  const factory Blake2bHash256._computed({
+    required String blake2bHash256,
+  }) = _Blake2bHash256Computed;
+
+  const factory Blake2bHash256.none() = Blake2bHash256None;
+
+  String? get value => switch (this) {
+    Blake2bHash256Passed(:final blake2bHash256) => blake2bHash256,
+    _Blake2bHash256Computed(:final blake2bHash256) => blake2bHash256,
+    Blake2bHash256None() => null,
+  };
+
+  int get type => switch (this) {
+    Blake2bHash256Passed() => 0,
+    _Blake2bHash256Computed() => 1,
+    Blake2bHash256None() => 2,
+  };
+
+  Uint8List marshal() {
+    final writer = BinaryWriterImpl();
+    writer.writeInt(type);
+    writer.writeString(value ?? "");
+    return writer.toBytes();
+  }
+
+  factory Blake2bHash256.unmarshal(Uint8List bytes) {
+    final reader = BinaryReaderImpl(bytes);
+    final type = reader.readInt();
+    final value = reader.readString();
+    return switch (type) {
+      0 => Blake2bHash256Passed(blake2bHash256: value),
+      1 => _Blake2bHash256Computed(blake2bHash256: value),
+      2 => const Blake2bHash256None(),
+      _ => throw Exception("Invalid Blake2bHash256 type: $type"),
+    };
+  }
+}
+
 /// Core of the cardano transaction that is signed.
-@Freezed(copyWith: false)
+@freezed
 sealed class CardanoTransactionBody with _$CardanoTransactionBody implements CborEncodable {
   CardanoTransactionBody._();
 
@@ -56,7 +107,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     CborInt? currentTreasuryValue, // 21
     CborInt? donation, // 22
   }) => CardanoTransactionBody._hidden(
-    originalBlake2bHash256: null,
+    blake2bHash256: const Blake2bHash256.none(),
     inputs: inputs,
     outputs: outputs,
     fee: fee,
@@ -81,7 +132,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
 
   factory CardanoTransactionBody._hidden({
     // Non-null when deserialized from hex/cbor
-    String? originalBlake2bHash256,
+    required Blake2bHash256 blake2bHash256,
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
@@ -111,7 +162,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
 
   factory CardanoTransactionBody._deserialized({
     // Serialization info
-    required String originalBlake2bHash256, // used for signing the tx
+    required Blake2bHash256 blake2bHash256, // used for signing the tx
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
@@ -138,7 +189,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required CborInt? currentTreasuryValue, // 21
     required CborInt? donation, // 22
   }) => CardanoTransactionBody._hidden(
-    originalBlake2bHash256: originalBlake2bHash256,
+    blake2bHash256: blake2bHash256,
     inputs: inputs,
     outputs: outputs,
     fee: fee,
@@ -174,7 +225,9 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required CborMap cMap,
     String? originalBodyBlake2bHash256, // used for signing the tx
   }) {
-    final bodyBlake2bHash256 = originalBodyBlake2bHash256 ?? blake2bHash256(cMap.uint8ListEncode()).hexEncode();
+    final bodyBlake2bHash256 = originalBodyBlake2bHash256 != null
+        ? Blake2bHash256.passed(blake2bHash256: originalBodyBlake2bHash256)
+        : Blake2bHash256._computed(blake2bHash256: blake2bHash256(cMap.uint8ListEncode()).hexEncode());
 
     final inputsCbor = cMap[const CborSmallInt(0)];
     final outputsCbor = cMap[const CborSmallInt(1)];
@@ -240,7 +293,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     }?.toList(growable: false);
 
     final result = CardanoTransactionBody._deserialized(
-      originalBlake2bHash256: bodyBlake2bHash256,
+      blake2bHash256: bodyBlake2bHash256,
       inputs: inputs,
       outputs: outputs,
       fee: fee,
@@ -506,5 +559,5 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     );
   }
 
-  String blake2bHash256Hex() => originalBlake2bHash256 ?? computeBlake2bHash256().hexEncode();
+  String blake2bHash256Hex() => this.blake2bHash256.value ?? computeBlake2bHash256().hexEncode();
 }

@@ -15,8 +15,9 @@ void main() async {
 
           final tx = CardanoTransaction.deserializeFromHex(testData.cborHex);
           final reEncoded = tx.serializeHexString();
-          expect(tx.body.originalBlake2bHash256, isNotNull);
-          expect(tx.body.computeBlake2bHash256().hexEncode(), tx.body.originalBlake2bHash256);
+          expect(tx.body.blake2bHash256.value, isNotNull);
+          expect(tx.body.blake2bHash256, isA<Blake2bHash256Computed>());
+          expect(tx.body.computeBlake2bHash256().hexEncode(), tx.body.blake2bHash256.value);
           expect(reEncoded, testData.cborHex);
         });
       }

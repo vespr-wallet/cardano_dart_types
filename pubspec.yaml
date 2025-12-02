@@ -1,6 +1,6 @@
 name: cardano_dart_types
 description: Part of Cardano Flutter SDK containing the data models.
-version: 2.10.0
+version: 2.11.0
 homepage: https://github.com/vespr-wallet/cardano_dart_types
 repository: https://github.com/vespr-wallet/cardano_dart_types
 issue_tracker: https://github.com/vespr-wallet/cardano_dart_types/issues
