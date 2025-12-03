@@ -32,31 +32,31 @@ void main() async {
 
         final tx = CardanoTransaction.deserializeFromHex(txHex);
 
-        // Verify originalKeyOrder was captured
-        expect(tx.body.originalKeyOrder, isNotNull);
-        expect(tx.body.originalKeyOrder, isNotEmpty);
+        // Verify nonStandardKeyOrder was captured
+        expect(tx.body.nonStandardKeyOrder, isNotNull);
+        expect(tx.body.nonStandardKeyOrder, isNotEmpty);
 
         // Re-serialize and verify exact byte match
         final reEncoded = tx.serializeHexString();
         expect(reEncoded, txHex, reason: "CBOR key order must be preserved during re-serialization");
       });
 
-      test("originalKeyOrder is preserved through copyWith", () {
+      test("nonStandardKeyOrder is preserved through copyWith", () {
         final txHex = _TestCaseTx.midnight.cborHex;
         final tx = CardanoTransaction.deserializeFromHex(txHex);
 
-        final originalKeyOrder = tx.body.originalKeyOrder;
+        final nonStandardKeyOrder = tx.body.nonStandardKeyOrder;
 
         // Use copyWith to modify the body
         final modifiedTx = tx.copyWith.body(
           fee: tx.body.fee + BigInt.one,
         );
 
-        // copyWith should preserve originalKeyOrder
-        expect(modifiedTx.body.originalKeyOrder, equals(originalKeyOrder));
+        // copyWith should preserve nonStandardKeyOrder
+        expect(modifiedTx.body.nonStandardKeyOrder, equals(nonStandardKeyOrder));
       });
 
-      test("manually created body has null originalKeyOrder and uses ascending order", () {
+      test("manually created body has null nonStandardKeyOrder and uses ascending order", () {
         final body = CardanoTransactionBody.create(
           inputs: const CardanoTransactionInputs(data: [], cborTags: []),
           outputs: [],
@@ -66,7 +66,7 @@ void main() async {
         );
 
         // Manually created body has no original key order
-        expect(body.originalKeyOrder, isNull);
+        expect(body.nonStandardKeyOrder, isNull);
 
         // Serialized output should have keys in ascending order: 0, 1, 2, 3, 8
         final serialized = body.serialize(forJson: false);

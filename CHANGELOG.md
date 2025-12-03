@@ -1,3 +1,9 @@
+## 2.11.2
+
+Bug Fixes:
+- [CardanoTransactionBody] Fixed empty `metadataHash` being dropped during re-serialization
+- [CardanoTransactionBody] Fixed `copyWith` breaking ascending key order when adding new fields to a parsed transaction
+
 ## 2.11.1
 
 Bug Fix:

@@ -107,7 +107,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     CborInt? donation, // 22
   }) => CardanoTransactionBody._hidden(
     blake2bHash256: const Blake2bHash256.none(),
-    originalKeyOrder: null,
+    nonStandardKeyOrder: null,
     inputs: inputs,
     outputs: outputs,
     fee: fee,
@@ -133,8 +133,12 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
   factory CardanoTransactionBody._hidden({
     // Non-null when deserialized from hex/cbor
     required Blake2bHash256 blake2bHash256,
-    // Original key order from CBOR (null for manually created bodies)
-    required List<int>? originalKeyOrder,
+    // Non-standard CBOR map key order (non-ascending). Only set when the original
+    // transaction had keys in non-ascending order, to preserve byte-exact re-serialization.
+    // NOTE: Non-standard key order is problematic - it breaks transaction signing on
+    // hardware wallets (Ledger, Trezor) which expect ascending key order. If you're
+    // building transactions, always use ascending order (leave this null).
+    required List<int>? nonStandardKeyOrder,
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
@@ -165,7 +169,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
   factory CardanoTransactionBody._deserialized({
     // Serialization info
     required Blake2bHash256 blake2bHash256, // used for signing the tx
-    required List<int> originalKeyOrder, // original CBOR key order
+    required List<int>? nonStandardKeyOrder, // non-ascending key order (null if standard ascending)
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
@@ -193,7 +197,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required CborInt? donation, // 22
   }) => CardanoTransactionBody._hidden(
     blake2bHash256: blake2bHash256,
-    originalKeyOrder: originalKeyOrder,
+    nonStandardKeyOrder: nonStandardKeyOrder,
     inputs: inputs,
     outputs: outputs,
     fee: fee,
@@ -233,8 +237,18 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
         ? Blake2bHash256.passed(blake2bHash256: originalBodyBlake2bHash256)
         : Blake2bHash256._computed(blake2bHash256: blake2bHash256(cMap.uint8ListEncode()).hexEncode());
 
-    // Capture original key order to preserve it during re-serialization
-    final originalKeyOrder = cMap.keys.map((k) => (k as CborSmallInt).toInt()).toList();
+    // Capture non-standard (non-ascending) key order to preserve it during re-serialization.
+    // If the keys are already in ascending order, we don't store them (leave as null).
+    // This is important because:
+    // 1. Ascending order is the standard/correct order for CBOR maps
+    // 2. If we stored ascending order and someone uses copyWith to add a new field,
+    //    the new field would be appended at the end, breaking the ascending order.
+    // 3. Hardware wallets (Ledger, Trezor) require ascending key order for signing.
+    // By leaving nonStandardKeyOrder as null for ascending-order maps, new fields
+    // will be properly sorted into the correct position.
+    final parsedKeyOrder = cMap.keys.map((k) => (k as CborSmallInt).toInt()).toList();
+    final isAscendingOrder = _isAscending(parsedKeyOrder);
+    final nonStandardKeyOrder = isAscendingOrder ? null : parsedKeyOrder;
 
     final inputsCbor = cMap[const CborSmallInt(0)];
     final outputsCbor = cMap[const CborSmallInt(1)];
@@ -301,7 +315,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
 
     final result = CardanoTransactionBody._deserialized(
       blake2bHash256: bodyBlake2bHash256,
-      originalKeyOrder: originalKeyOrder,
+      nonStandardKeyOrder: nonStandardKeyOrder,
       inputs: inputs,
       outputs: outputs,
       fee: fee,
@@ -564,11 +578,11 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
 
     // Build the final ordered list of entries
     final entries = <MapEntry<CborValue, CborValue>>[];
-    final originalKeyOrder = this.originalKeyOrder;
+    final nonStandardKeyOrder = this.nonStandardKeyOrder;
 
-    if (!forJson && originalKeyOrder != null) {
+    if (!forJson && nonStandardKeyOrder != null) {
       // Use original key order for binary CBOR (preserves exact byte representation)
-      for (final keyIdx in originalKeyOrder) {
+      for (final keyIdx in nonStandardKeyOrder) {
         final entry = entriesMap.remove(keyIdx);
         if (entry != null) {
           entries.add(entry);
@@ -591,4 +605,14 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
   }
 
   String blake2bHash256Hex() => this.blake2bHash256.value ?? computeBlake2bHash256().hexEncode();
+
+  /// Returns true if the list is in strictly ascending order.
+  static bool _isAscending(List<int> list) {
+    for (var i = 1; i < list.length; i++) {
+      if (list[i] <= list[i - 1]) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
