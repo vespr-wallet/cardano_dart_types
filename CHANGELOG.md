@@ -1,3 +1,8 @@
+## 2.11.1
+
+Bug Fix:
+- [CardanoTransactionBody] now retains original order of the map entries so that it generates identical CBOR when re-serialized (which is important to generate the correct tx hash required for signing)
+
 ## 2.11.0
 
 Breaking Change:

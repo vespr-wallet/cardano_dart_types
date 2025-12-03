@@ -210,7 +210,8 @@ String toString() {
 mixin _$CardanoTransactionBody {
 
 // Non-null when deserialized from hex/cbor
- Blake2bHash256 get blake2bHash256;// TX Body Fields
+ Blake2bHash256 get blake2bHash256;// Original key order from CBOR (null for manually created bodies)
+ List<int>? get originalKeyOrder;// TX Body Fields
  CardanoTransactionInputs get inputs;// 0
  List<CardanoTransactionOutput> get outputs;// 1
  BigInt get fee;// 2
@@ -245,16 +246,16 @@ $CardanoTransactionBodyCopyWith<CardanoTransactionBody> get copyWith => _$Cardan
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionBody&&(identical(other.blake2bHash256, blake2bHash256) || other.blake2bHash256 == blake2bHash256)&&(identical(other.inputs, inputs) || other.inputs == inputs)&&const DeepCollectionEquality().equals(other.outputs, outputs)&&(identical(other.fee, fee) || other.fee == fee)&&(identical(other.ttl, ttl) || other.ttl == ttl)&&(identical(other.certs, certs) || other.certs == certs)&&const DeepCollectionEquality().equals(other.withdrawals, withdrawals)&&const DeepCollectionEquality().equals(other.metadataHash, metadataHash)&&(identical(other.validityStartInterval, validityStartInterval) || other.validityStartInterval == validityStartInterval)&&const DeepCollectionEquality().equals(other.mint, mint)&&const DeepCollectionEquality().equals(other.scriptDataHash, scriptDataHash)&&(identical(other.collateral, collateral) || other.collateral == collateral)&&(identical(other.requiredSigners, requiredSigners) || other.requiredSigners == requiredSigners)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&(identical(other.collateralReturn, collateralReturn) || other.collateralReturn == collateralReturn)&&(identical(other.totalCollateral, totalCollateral) || other.totalCollateral == totalCollateral)&&(identical(other.referenceInputs, referenceInputs) || other.referenceInputs == referenceInputs)&&(identical(other.votingProcedures, votingProcedures) || other.votingProcedures == votingProcedures)&&const DeepCollectionEquality().equals(other.proposalProcedures, proposalProcedures)&&(identical(other.currentTreasuryValue, currentTreasuryValue) || other.currentTreasuryValue == currentTreasuryValue)&&(identical(other.donation, donation) || other.donation == donation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionBody&&(identical(other.blake2bHash256, blake2bHash256) || other.blake2bHash256 == blake2bHash256)&&const DeepCollectionEquality().equals(other.originalKeyOrder, originalKeyOrder)&&(identical(other.inputs, inputs) || other.inputs == inputs)&&const DeepCollectionEquality().equals(other.outputs, outputs)&&(identical(other.fee, fee) || other.fee == fee)&&(identical(other.ttl, ttl) || other.ttl == ttl)&&(identical(other.certs, certs) || other.certs == certs)&&const DeepCollectionEquality().equals(other.withdrawals, withdrawals)&&const DeepCollectionEquality().equals(other.metadataHash, metadataHash)&&(identical(other.validityStartInterval, validityStartInterval) || other.validityStartInterval == validityStartInterval)&&const DeepCollectionEquality().equals(other.mint, mint)&&const DeepCollectionEquality().equals(other.scriptDataHash, scriptDataHash)&&(identical(other.collateral, collateral) || other.collateral == collateral)&&(identical(other.requiredSigners, requiredSigners) || other.requiredSigners == requiredSigners)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&(identical(other.collateralReturn, collateralReturn) || other.collateralReturn == collateralReturn)&&(identical(other.totalCollateral, totalCollateral) || other.totalCollateral == totalCollateral)&&(identical(other.referenceInputs, referenceInputs) || other.referenceInputs == referenceInputs)&&(identical(other.votingProcedures, votingProcedures) || other.votingProcedures == votingProcedures)&&const DeepCollectionEquality().equals(other.proposalProcedures, proposalProcedures)&&(identical(other.currentTreasuryValue, currentTreasuryValue) || other.currentTreasuryValue == currentTreasuryValue)&&(identical(other.donation, donation) || other.donation == donation));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,blake2bHash256,inputs,const DeepCollectionEquality().hash(outputs),fee,ttl,certs,const DeepCollectionEquality().hash(withdrawals),const DeepCollectionEquality().hash(metadataHash),validityStartInterval,const DeepCollectionEquality().hash(mint),const DeepCollectionEquality().hash(scriptDataHash),collateral,requiredSigners,networkId,collateralReturn,totalCollateral,referenceInputs,votingProcedures,const DeepCollectionEquality().hash(proposalProcedures),currentTreasuryValue,donation]);
+int get hashCode => Object.hashAll([runtimeType,blake2bHash256,const DeepCollectionEquality().hash(originalKeyOrder),inputs,const DeepCollectionEquality().hash(outputs),fee,ttl,certs,const DeepCollectionEquality().hash(withdrawals),const DeepCollectionEquality().hash(metadataHash),validityStartInterval,const DeepCollectionEquality().hash(mint),const DeepCollectionEquality().hash(scriptDataHash),collateral,requiredSigners,networkId,collateralReturn,totalCollateral,referenceInputs,votingProcedures,const DeepCollectionEquality().hash(proposalProcedures),currentTreasuryValue,donation]);
 
 @override
 String toString() {
-  return 'CardanoTransactionBody(blake2bHash256: $blake2bHash256, inputs: $inputs, outputs: $outputs, fee: $fee, ttl: $ttl, certs: $certs, withdrawals: $withdrawals, metadataHash: $metadataHash, validityStartInterval: $validityStartInterval, mint: $mint, scriptDataHash: $scriptDataHash, collateral: $collateral, requiredSigners: $requiredSigners, networkId: $networkId, collateralReturn: $collateralReturn, totalCollateral: $totalCollateral, referenceInputs: $referenceInputs, votingProcedures: $votingProcedures, proposalProcedures: $proposalProcedures, currentTreasuryValue: $currentTreasuryValue, donation: $donation)';
+  return 'CardanoTransactionBody(blake2bHash256: $blake2bHash256, originalKeyOrder: $originalKeyOrder, inputs: $inputs, outputs: $outputs, fee: $fee, ttl: $ttl, certs: $certs, withdrawals: $withdrawals, metadataHash: $metadataHash, validityStartInterval: $validityStartInterval, mint: $mint, scriptDataHash: $scriptDataHash, collateral: $collateral, requiredSigners: $requiredSigners, networkId: $networkId, collateralReturn: $collateralReturn, totalCollateral: $totalCollateral, referenceInputs: $referenceInputs, votingProcedures: $votingProcedures, proposalProcedures: $proposalProcedures, currentTreasuryValue: $currentTreasuryValue, donation: $donation)';
 }
 
 
@@ -265,7 +266,7 @@ abstract mixin class $CardanoTransactionBodyCopyWith<$Res>  {
   factory $CardanoTransactionBodyCopyWith(CardanoTransactionBody value, $Res Function(CardanoTransactionBody) _then) = _$CardanoTransactionBodyCopyWithImpl;
 @useResult
 $Res call({
- Blake2bHash256 blake2bHash256, CardanoTransactionInputs inputs, List<CardanoTransactionOutput> outputs, BigInt fee, BigInt? ttl, Certificates? certs, List<Withdraw>? withdrawals, Uint8List? metadataHash, BigInt? validityStartInterval, List<MultiAsset>? mint, Uint8List? scriptDataHash, CardanoTransactionInputs? collateral, RequiredSigners? requiredSigners, NetworkId? networkId, CardanoTransactionOutput? collateralReturn, BigInt? totalCollateral, CardanoTransactionInputs? referenceInputs, VotingProcedures? votingProcedures, List<ProposalProcedure>? proposalProcedures, CborInt? currentTreasuryValue, CborInt? donation
+ Blake2bHash256 blake2bHash256, List<int>? originalKeyOrder, CardanoTransactionInputs inputs, List<CardanoTransactionOutput> outputs, BigInt fee, BigInt? ttl, Certificates? certs, List<Withdraw>? withdrawals, Uint8List? metadataHash, BigInt? validityStartInterval, List<MultiAsset>? mint, Uint8List? scriptDataHash, CardanoTransactionInputs? collateral, RequiredSigners? requiredSigners, NetworkId? networkId, CardanoTransactionOutput? collateralReturn, BigInt? totalCollateral, CardanoTransactionInputs? referenceInputs, VotingProcedures? votingProcedures, List<ProposalProcedure>? proposalProcedures, CborInt? currentTreasuryValue, CborInt? donation
 });
 
 
@@ -282,10 +283,11 @@ class _$CardanoTransactionBodyCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionBody
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? blake2bHash256 = null,Object? inputs = null,Object? outputs = null,Object? fee = null,Object? ttl = freezed,Object? certs = freezed,Object? withdrawals = freezed,Object? metadataHash = freezed,Object? validityStartInterval = freezed,Object? mint = freezed,Object? scriptDataHash = freezed,Object? collateral = freezed,Object? requiredSigners = freezed,Object? networkId = freezed,Object? collateralReturn = freezed,Object? totalCollateral = freezed,Object? referenceInputs = freezed,Object? votingProcedures = freezed,Object? proposalProcedures = freezed,Object? currentTreasuryValue = freezed,Object? donation = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? blake2bHash256 = null,Object? originalKeyOrder = freezed,Object? inputs = null,Object? outputs = null,Object? fee = null,Object? ttl = freezed,Object? certs = freezed,Object? withdrawals = freezed,Object? metadataHash = freezed,Object? validityStartInterval = freezed,Object? mint = freezed,Object? scriptDataHash = freezed,Object? collateral = freezed,Object? requiredSigners = freezed,Object? networkId = freezed,Object? collateralReturn = freezed,Object? totalCollateral = freezed,Object? referenceInputs = freezed,Object? votingProcedures = freezed,Object? proposalProcedures = freezed,Object? currentTreasuryValue = freezed,Object? donation = freezed,}) {
   return _then(_self.copyWith(
 blake2bHash256: null == blake2bHash256 ? _self.blake2bHash256 : blake2bHash256 // ignore: cast_nullable_to_non_nullable
-as Blake2bHash256,inputs: null == inputs ? _self.inputs : inputs // ignore: cast_nullable_to_non_nullable
+as Blake2bHash256,originalKeyOrder: freezed == originalKeyOrder ? _self.originalKeyOrder : originalKeyOrder // ignore: cast_nullable_to_non_nullable
+as List<int>?,inputs: null == inputs ? _self.inputs : inputs // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInputs,outputs: null == outputs ? _self.outputs : outputs // ignore: cast_nullable_to_non_nullable
 as List<CardanoTransactionOutput>,fee: null == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
 as BigInt,ttl: freezed == ttl ? _self.ttl : ttl // ignore: cast_nullable_to_non_nullable
@@ -407,11 +409,22 @@ $VotingProceduresCopyWith<$Res>? get votingProcedures {
 
 
 class _CardanoTransactionBody extends CardanoTransactionBody {
-   _CardanoTransactionBody({required this.blake2bHash256, required this.inputs, required final  List<CardanoTransactionOutput> outputs, required this.fee, required this.ttl, required this.certs, required final  List<Withdraw>? withdrawals, required this.metadataHash, required this.validityStartInterval, required final  List<MultiAsset>? mint, required this.scriptDataHash, required this.collateral, required this.requiredSigners, required this.networkId, required this.collateralReturn, required this.totalCollateral, required this.referenceInputs, required this.votingProcedures, required final  List<ProposalProcedure>? proposalProcedures, required this.currentTreasuryValue, required this.donation}): _outputs = outputs,_withdrawals = withdrawals,_mint = mint,_proposalProcedures = proposalProcedures,super._();
+   _CardanoTransactionBody({required this.blake2bHash256, required final  List<int>? originalKeyOrder, required this.inputs, required final  List<CardanoTransactionOutput> outputs, required this.fee, required this.ttl, required this.certs, required final  List<Withdraw>? withdrawals, required this.metadataHash, required this.validityStartInterval, required final  List<MultiAsset>? mint, required this.scriptDataHash, required this.collateral, required this.requiredSigners, required this.networkId, required this.collateralReturn, required this.totalCollateral, required this.referenceInputs, required this.votingProcedures, required final  List<ProposalProcedure>? proposalProcedures, required this.currentTreasuryValue, required this.donation}): _originalKeyOrder = originalKeyOrder,_outputs = outputs,_withdrawals = withdrawals,_mint = mint,_proposalProcedures = proposalProcedures,super._();
   
 
 // Non-null when deserialized from hex/cbor
 @override final  Blake2bHash256 blake2bHash256;
+// Original key order from CBOR (null for manually created bodies)
+ final  List<int>? _originalKeyOrder;
+// Original key order from CBOR (null for manually created bodies)
+@override List<int>? get originalKeyOrder {
+  final value = _originalKeyOrder;
+  if (value == null) return null;
+  if (_originalKeyOrder is EqualUnmodifiableListView) return _originalKeyOrder;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
 // TX Body Fields
 @override final  CardanoTransactionInputs inputs;
 // 0
@@ -501,16 +514,16 @@ _$CardanoTransactionBodyCopyWith<_CardanoTransactionBody> get copyWith => __$Car
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransactionBody&&(identical(other.blake2bHash256, blake2bHash256) || other.blake2bHash256 == blake2bHash256)&&(identical(other.inputs, inputs) || other.inputs == inputs)&&const DeepCollectionEquality().equals(other._outputs, _outputs)&&(identical(other.fee, fee) || other.fee == fee)&&(identical(other.ttl, ttl) || other.ttl == ttl)&&(identical(other.certs, certs) || other.certs == certs)&&const DeepCollectionEquality().equals(other._withdrawals, _withdrawals)&&const DeepCollectionEquality().equals(other.metadataHash, metadataHash)&&(identical(other.validityStartInterval, validityStartInterval) || other.validityStartInterval == validityStartInterval)&&const DeepCollectionEquality().equals(other._mint, _mint)&&const DeepCollectionEquality().equals(other.scriptDataHash, scriptDataHash)&&(identical(other.collateral, collateral) || other.collateral == collateral)&&(identical(other.requiredSigners, requiredSigners) || other.requiredSigners == requiredSigners)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&(identical(other.collateralReturn, collateralReturn) || other.collateralReturn == collateralReturn)&&(identical(other.totalCollateral, totalCollateral) || other.totalCollateral == totalCollateral)&&(identical(other.referenceInputs, referenceInputs) || other.referenceInputs == referenceInputs)&&(identical(other.votingProcedures, votingProcedures) || other.votingProcedures == votingProcedures)&&const DeepCollectionEquality().equals(other._proposalProcedures, _proposalProcedures)&&(identical(other.currentTreasuryValue, currentTreasuryValue) || other.currentTreasuryValue == currentTreasuryValue)&&(identical(other.donation, donation) || other.donation == donation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransactionBody&&(identical(other.blake2bHash256, blake2bHash256) || other.blake2bHash256 == blake2bHash256)&&const DeepCollectionEquality().equals(other._originalKeyOrder, _originalKeyOrder)&&(identical(other.inputs, inputs) || other.inputs == inputs)&&const DeepCollectionEquality().equals(other._outputs, _outputs)&&(identical(other.fee, fee) || other.fee == fee)&&(identical(other.ttl, ttl) || other.ttl == ttl)&&(identical(other.certs, certs) || other.certs == certs)&&const DeepCollectionEquality().equals(other._withdrawals, _withdrawals)&&const DeepCollectionEquality().equals(other.metadataHash, metadataHash)&&(identical(other.validityStartInterval, validityStartInterval) || other.validityStartInterval == validityStartInterval)&&const DeepCollectionEquality().equals(other._mint, _mint)&&const DeepCollectionEquality().equals(other.scriptDataHash, scriptDataHash)&&(identical(other.collateral, collateral) || other.collateral == collateral)&&(identical(other.requiredSigners, requiredSigners) || other.requiredSigners == requiredSigners)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&(identical(other.collateralReturn, collateralReturn) || other.collateralReturn == collateralReturn)&&(identical(other.totalCollateral, totalCollateral) || other.totalCollateral == totalCollateral)&&(identical(other.referenceInputs, referenceInputs) || other.referenceInputs == referenceInputs)&&(identical(other.votingProcedures, votingProcedures) || other.votingProcedures == votingProcedures)&&const DeepCollectionEquality().equals(other._proposalProcedures, _proposalProcedures)&&(identical(other.currentTreasuryValue, currentTreasuryValue) || other.currentTreasuryValue == currentTreasuryValue)&&(identical(other.donation, donation) || other.donation == donation));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,blake2bHash256,inputs,const DeepCollectionEquality().hash(_outputs),fee,ttl,certs,const DeepCollectionEquality().hash(_withdrawals),const DeepCollectionEquality().hash(metadataHash),validityStartInterval,const DeepCollectionEquality().hash(_mint),const DeepCollectionEquality().hash(scriptDataHash),collateral,requiredSigners,networkId,collateralReturn,totalCollateral,referenceInputs,votingProcedures,const DeepCollectionEquality().hash(_proposalProcedures),currentTreasuryValue,donation]);
+int get hashCode => Object.hashAll([runtimeType,blake2bHash256,const DeepCollectionEquality().hash(_originalKeyOrder),inputs,const DeepCollectionEquality().hash(_outputs),fee,ttl,certs,const DeepCollectionEquality().hash(_withdrawals),const DeepCollectionEquality().hash(metadataHash),validityStartInterval,const DeepCollectionEquality().hash(_mint),const DeepCollectionEquality().hash(scriptDataHash),collateral,requiredSigners,networkId,collateralReturn,totalCollateral,referenceInputs,votingProcedures,const DeepCollectionEquality().hash(_proposalProcedures),currentTreasuryValue,donation]);
 
 @override
 String toString() {
-  return 'CardanoTransactionBody._hidden(blake2bHash256: $blake2bHash256, inputs: $inputs, outputs: $outputs, fee: $fee, ttl: $ttl, certs: $certs, withdrawals: $withdrawals, metadataHash: $metadataHash, validityStartInterval: $validityStartInterval, mint: $mint, scriptDataHash: $scriptDataHash, collateral: $collateral, requiredSigners: $requiredSigners, networkId: $networkId, collateralReturn: $collateralReturn, totalCollateral: $totalCollateral, referenceInputs: $referenceInputs, votingProcedures: $votingProcedures, proposalProcedures: $proposalProcedures, currentTreasuryValue: $currentTreasuryValue, donation: $donation)';
+  return 'CardanoTransactionBody._hidden(blake2bHash256: $blake2bHash256, originalKeyOrder: $originalKeyOrder, inputs: $inputs, outputs: $outputs, fee: $fee, ttl: $ttl, certs: $certs, withdrawals: $withdrawals, metadataHash: $metadataHash, validityStartInterval: $validityStartInterval, mint: $mint, scriptDataHash: $scriptDataHash, collateral: $collateral, requiredSigners: $requiredSigners, networkId: $networkId, collateralReturn: $collateralReturn, totalCollateral: $totalCollateral, referenceInputs: $referenceInputs, votingProcedures: $votingProcedures, proposalProcedures: $proposalProcedures, currentTreasuryValue: $currentTreasuryValue, donation: $donation)';
 }
 
 
@@ -521,7 +534,7 @@ abstract mixin class _$CardanoTransactionBodyCopyWith<$Res> implements $CardanoT
   factory _$CardanoTransactionBodyCopyWith(_CardanoTransactionBody value, $Res Function(_CardanoTransactionBody) _then) = __$CardanoTransactionBodyCopyWithImpl;
 @override @useResult
 $Res call({
- Blake2bHash256 blake2bHash256, CardanoTransactionInputs inputs, List<CardanoTransactionOutput> outputs, BigInt fee, BigInt? ttl, Certificates? certs, List<Withdraw>? withdrawals, Uint8List? metadataHash, BigInt? validityStartInterval, List<MultiAsset>? mint, Uint8List? scriptDataHash, CardanoTransactionInputs? collateral, RequiredSigners? requiredSigners, NetworkId? networkId, CardanoTransactionOutput? collateralReturn, BigInt? totalCollateral, CardanoTransactionInputs? referenceInputs, VotingProcedures? votingProcedures, List<ProposalProcedure>? proposalProcedures, CborInt? currentTreasuryValue, CborInt? donation
+ Blake2bHash256 blake2bHash256, List<int>? originalKeyOrder, CardanoTransactionInputs inputs, List<CardanoTransactionOutput> outputs, BigInt fee, BigInt? ttl, Certificates? certs, List<Withdraw>? withdrawals, Uint8List? metadataHash, BigInt? validityStartInterval, List<MultiAsset>? mint, Uint8List? scriptDataHash, CardanoTransactionInputs? collateral, RequiredSigners? requiredSigners, NetworkId? networkId, CardanoTransactionOutput? collateralReturn, BigInt? totalCollateral, CardanoTransactionInputs? referenceInputs, VotingProcedures? votingProcedures, List<ProposalProcedure>? proposalProcedures, CborInt? currentTreasuryValue, CborInt? donation
 });
 
 
@@ -538,10 +551,11 @@ class __$CardanoTransactionBodyCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionBody
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? blake2bHash256 = null,Object? inputs = null,Object? outputs = null,Object? fee = null,Object? ttl = freezed,Object? certs = freezed,Object? withdrawals = freezed,Object? metadataHash = freezed,Object? validityStartInterval = freezed,Object? mint = freezed,Object? scriptDataHash = freezed,Object? collateral = freezed,Object? requiredSigners = freezed,Object? networkId = freezed,Object? collateralReturn = freezed,Object? totalCollateral = freezed,Object? referenceInputs = freezed,Object? votingProcedures = freezed,Object? proposalProcedures = freezed,Object? currentTreasuryValue = freezed,Object? donation = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? blake2bHash256 = null,Object? originalKeyOrder = freezed,Object? inputs = null,Object? outputs = null,Object? fee = null,Object? ttl = freezed,Object? certs = freezed,Object? withdrawals = freezed,Object? metadataHash = freezed,Object? validityStartInterval = freezed,Object? mint = freezed,Object? scriptDataHash = freezed,Object? collateral = freezed,Object? requiredSigners = freezed,Object? networkId = freezed,Object? collateralReturn = freezed,Object? totalCollateral = freezed,Object? referenceInputs = freezed,Object? votingProcedures = freezed,Object? proposalProcedures = freezed,Object? currentTreasuryValue = freezed,Object? donation = freezed,}) {
   return _then(_CardanoTransactionBody(
 blake2bHash256: null == blake2bHash256 ? _self.blake2bHash256 : blake2bHash256 // ignore: cast_nullable_to_non_nullable
-as Blake2bHash256,inputs: null == inputs ? _self.inputs : inputs // ignore: cast_nullable_to_non_nullable
+as Blake2bHash256,originalKeyOrder: freezed == originalKeyOrder ? _self._originalKeyOrder : originalKeyOrder // ignore: cast_nullable_to_non_nullable
+as List<int>?,inputs: null == inputs ? _self.inputs : inputs // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInputs,outputs: null == outputs ? _self._outputs : outputs // ignore: cast_nullable_to_non_nullable
 as List<CardanoTransactionOutput>,fee: null == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
 as BigInt,ttl: freezed == ttl ? _self.ttl : ttl // ignore: cast_nullable_to_non_nullable

@@ -42,6 +42,30 @@ void main() async {
         expect(body.serializeAsBytes().hexEncode(), expectedBody);
         expect(body.serializeHexString(), expectedBody);
       });
+
+      test("empty metadataHash is preserved during re-serialization", () {
+        // CBOR: a4 (map 4) 00 d9010280 (key 0: inputs with tag 258, empty) 01 80 (key 1: outputs, empty)
+        //       02 182a (key 2: fee = 42) 07 40 (key 7: metadataHash = empty bytes)
+        // This tests that an empty metadataHash (0x40 = empty bytes) is NOT dropped during re-serialization
+        const bodyWithEmptyMetadataHash = "a400d9010280018002182a0740";
+
+        final body = CardanoTransactionBody.deserializeHex(bodyWithEmptyMetadataHash);
+
+        // Verify metadataHash was parsed as empty (not null)
+        expect(
+          body.metadataHash,
+          isNotNull,
+          reason: "Empty metadataHash should be parsed as empty Uint8List, not null",
+        );
+        expect(body.metadataHash!.isEmpty, isTrue, reason: "metadataHash should be empty");
+
+        // Re-serialize and verify exact byte match - this will fail if isNotEmpty check drops the empty metadataHash
+        expect(
+          body.serializeHexString(),
+          bodyWithEmptyMetadataHash,
+          reason: "Empty metadataHash must be preserved during re-serialization",
+        );
+      });
     });
   });
 }

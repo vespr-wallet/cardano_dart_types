@@ -9,7 +9,6 @@ import "../../../binary/binary_writer_impl.dart";
 import "../../exceptions/parse_exceptions.dart";
 import "../../hd/ada_types.dart";
 import "../../hd/util/blake2bhash.dart";
-import "../../utils/iterable_extensions.dart";
 import "../../utils/sugar.dart";
 import "../../utils/transformations.dart";
 import "../cbor_encodable.dart";
@@ -108,6 +107,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     CborInt? donation, // 22
   }) => CardanoTransactionBody._hidden(
     blake2bHash256: const Blake2bHash256.none(),
+    originalKeyOrder: null,
     inputs: inputs,
     outputs: outputs,
     fee: fee,
@@ -133,6 +133,8 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
   factory CardanoTransactionBody._hidden({
     // Non-null when deserialized from hex/cbor
     required Blake2bHash256 blake2bHash256,
+    // Original key order from CBOR (null for manually created bodies)
+    required List<int>? originalKeyOrder,
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
@@ -163,6 +165,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
   factory CardanoTransactionBody._deserialized({
     // Serialization info
     required Blake2bHash256 blake2bHash256, // used for signing the tx
+    required List<int> originalKeyOrder, // original CBOR key order
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
@@ -190,6 +193,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required CborInt? donation, // 22
   }) => CardanoTransactionBody._hidden(
     blake2bHash256: blake2bHash256,
+    originalKeyOrder: originalKeyOrder,
     inputs: inputs,
     outputs: outputs,
     fee: fee,
@@ -228,6 +232,9 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     final bodyBlake2bHash256 = originalBodyBlake2bHash256 != null
         ? Blake2bHash256.passed(blake2bHash256: originalBodyBlake2bHash256)
         : Blake2bHash256._computed(blake2bHash256: blake2bHash256(cMap.uint8ListEncode()).hexEncode());
+
+    // Capture original key order to preserve it during re-serialization
+    final originalKeyOrder = cMap.keys.map((k) => (k as CborSmallInt).toInt()).toList();
 
     final inputsCbor = cMap[const CborSmallInt(0)];
     final outputsCbor = cMap[const CborSmallInt(1)];
@@ -294,6 +301,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
 
     final result = CardanoTransactionBody._deserialized(
       blake2bHash256: bodyBlake2bHash256,
+      originalKeyOrder: originalKeyOrder,
       inputs: inputs,
       outputs: outputs,
       fee: fee,
@@ -396,167 +404,190 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
 
   @override
   CborMap serialize({required bool forJson}) {
-    final inputsEntry = MapEntry(
-      forJson ? CborString("inputs") : const CborSmallInt(0),
+    // Helper to create map key
+    CborValue key(int idx, String name) => forJson ? CborString(name) : CborSmallInt(idx);
+
+    // Build all possible entries indexed by their numeric key
+    final entriesMap = <int, MapEntry<CborValue, CborValue>>{};
+
+    // Required fields
+    entriesMap[0] = MapEntry(
+      key(0, "inputs"),
       inputs.serialize(forJson: forJson),
     );
-
-    final outputsEntry = MapEntry(
-      forJson ? CborString("outputs") : const CborSmallInt(1),
+    entriesMap[1] = MapEntry(
+      key(1, "outputs"),
       outputs.serialize(forJson: forJson),
     );
-
-    final feeEntry = MapEntry(
-      forJson ? CborString("fee") : const CborSmallInt(2),
+    entriesMap[2] = MapEntry(
+      key(2, "fee"),
       fee.serialize(forJson: forJson),
     );
 
+    // Optional fields - only add if non-null
     final ttl = this.ttl;
-    final maybeTtlEntry = ttl == null
-        ? null
-        : MapEntry(
-            forJson ? CborString("ttl") : const CborSmallInt(3),
-            ttl.serialize(forJson: forJson),
-          );
+    if (ttl != null) {
+      entriesMap[3] = MapEntry(
+        key(3, "ttl"),
+        ttl.serialize(forJson: forJson),
+      );
+    }
 
     final certs = this.certs;
-    final maybeCertsEntry = certs == null
-        ? null
-        : MapEntry(
-            forJson ? CborString("certificates") : const CborSmallInt(4),
-            certs.serialize(forJson: forJson),
-          );
+    if (certs != null) {
+      entriesMap[4] = MapEntry(
+        key(4, "certificates"),
+        certs.serialize(forJson: forJson),
+      );
+    }
 
     final withdrawals = this.withdrawals;
-    final maybeWithdrawals = withdrawals == null
-        ? null
-        : MapEntry(
-            forJson ? CborString("withdrawals") : const CborSmallInt(5),
-            withdrawals.serialize(forJson: forJson),
-          );
+    if (withdrawals != null) {
+      entriesMap[5] = MapEntry(
+        key(5, "withdrawals"),
+        withdrawals.serialize(forJson: forJson),
+      );
+    }
 
     final metadataHash = this.metadataHash;
-    final maybeMetadataHash = metadataHash == null || metadataHash.isEmpty
-        ? null
-        : forJson
-        ? MapEntry(CborString("metadataHash"), CborString(HEX.encode(metadataHash)))
-        : MapEntry(const CborSmallInt(7), CborBytes(metadataHash));
+    if (metadataHash != null) {
+      entriesMap[7] = forJson
+          ? MapEntry(CborString("metadataHash"), CborString(HEX.encode(metadataHash)))
+          : MapEntry(const CborSmallInt(7), CborBytes(metadataHash));
+    }
 
     final validityStartInterval = this.validityStartInterval;
-    final maybeValidityStartInterval = validityStartInterval == null
-        ? null
-        : MapEntry(
-            forJson ? CborString("validityStartInterval") : const CborSmallInt(8),
-            CborInt(validityStartInterval),
-          );
+    if (validityStartInterval != null) {
+      entriesMap[8] = MapEntry(
+        key(8, "validityStartInterval"),
+        CborInt(validityStartInterval),
+      );
+    }
 
     final mint = this.mint;
-    final maybeMint = mint == null
-        ? null
-        : MapEntry(
-            forJson ? CborString("mint") : const CborSmallInt(9),
-            mint.serialize(forJson: forJson),
-          );
+    if (mint != null) {
+      entriesMap[9] = MapEntry(
+        key(9, "mint"),
+        mint.serialize(forJson: forJson),
+      );
+    }
 
-    final maybeScriptDataHash = scriptDataHash?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("scriptDataHash") : const CborSmallInt(11),
-        p0.serializeCbor(forJson: forJson),
-      ),
-    );
+    final scriptDataHash = this.scriptDataHash;
+    if (scriptDataHash != null) {
+      entriesMap[11] = MapEntry(
+        key(11, "scriptDataHash"),
+        scriptDataHash.serializeCbor(forJson: forJson),
+      );
+    }
 
-    final maybeCollateral = collateral?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("collateral") : const CborSmallInt(13),
-        p0.serialize(forJson: forJson),
-      ),
-    );
+    final collateral = this.collateral;
+    if (collateral != null) {
+      entriesMap[13] = MapEntry(
+        key(13, "collateral"),
+        collateral.serialize(forJson: forJson),
+      );
+    }
 
-    final maybeRequiredSigners = requiredSigners?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("requiredSigners") : const CborSmallInt(14),
-        p0.serialize(forJson: forJson),
-      ),
-    );
+    final requiredSigners = this.requiredSigners;
+    if (requiredSigners != null) {
+      entriesMap[14] = MapEntry(
+        key(14, "requiredSigners"),
+        requiredSigners.serialize(forJson: forJson),
+      );
+    }
 
-    final maybeNetworkId = networkId?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("networkId") : const CborSmallInt(15),
-        forJson ? CborString(p0.name) : CborSmallInt(p0.intValue),
-      ),
-    );
+    final networkId = this.networkId;
+    if (networkId != null) {
+      entriesMap[15] = MapEntry(
+        key(15, "networkId"),
+        forJson ? CborString(networkId.name) : CborSmallInt(networkId.intValue),
+      );
+    }
 
     // BABBAGE ERA
-    final maybeCollateralReturn = collateralReturn?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("collateralReturn") : const CborSmallInt(16),
-        p0.serialize(forJson: forJson),
-      ),
-    );
-    final maybeTotalCollateral = totalCollateral?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("totalCollateral") : const CborSmallInt(17),
-        p0.serialize(forJson: forJson),
-      ),
-    );
-    final maybeReferenceInputs = referenceInputs?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("referenceInputs") : const CborSmallInt(18),
-        p0.serialize(forJson: forJson),
-      ),
-    );
-    final maybeVotingProcedures = votingProcedures?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("votingProcedures") : const CborSmallInt(19),
-        p0.serialize(forJson: forJson),
-      ),
-    );
-    final maybeProposalProcedures = proposalProcedures?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("proposalProcedures") : const CborSmallInt(20),
-        CborList.of(p0.map((e) => e.serialize(forJson: forJson))),
-      ),
-    );
-    final maybeCurrentTreasuryValue = currentTreasuryValue?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("currentTreasuryValue") : const CborSmallInt(21),
-        p0,
-      ),
-    );
-    final maybeDonation = donation?.let(
-      (p0) => MapEntry(
-        forJson ? CborString("donation") : const CborSmallInt(22),
-        p0,
-      ),
-    );
+    final collateralReturn = this.collateralReturn;
+    if (collateralReturn != null) {
+      entriesMap[16] = MapEntry(
+        key(16, "collateralReturn"),
+        collateralReturn.serialize(forJson: forJson),
+      );
+    }
 
-    return CborMap.fromEntries(
-      [
-        inputsEntry, //0:inputs
-        outputsEntry, //1:outputs
-        feeEntry, //2:fee
-        // OPTIONAL
-        maybeTtlEntry, //3:ttl (optional)
-        maybeCertsEntry, //4:certs (optional)
-        maybeWithdrawals, //5:withdrawals (optional)
-        maybeMetadataHash, //7:metadataHash (optional)
-        maybeValidityStartInterval, //8:validityStartInterval (optional)
-        maybeMint, //9:mint (optional)
-        maybeScriptDataHash, //11:scriptDataHash
-        maybeCollateral, //13:collateral
-        maybeRequiredSigners, //14
-        maybeNetworkId, //15
-        //BABBAGE
-        maybeCollateralReturn, //16
-        maybeTotalCollateral, //17
-        maybeReferenceInputs, //18
-        // CONWAY
-        maybeVotingProcedures, //19
-        maybeProposalProcedures, //20
-        maybeCurrentTreasuryValue, //21
-        maybeDonation, //22
-      ].nonNulls(),
-    );
+    final totalCollateral = this.totalCollateral;
+    if (totalCollateral != null) {
+      entriesMap[17] = MapEntry(
+        key(17, "totalCollateral"),
+        totalCollateral.serialize(forJson: forJson),
+      );
+    }
+
+    final referenceInputs = this.referenceInputs;
+    if (referenceInputs != null) {
+      entriesMap[18] = MapEntry(
+        key(18, "referenceInputs"),
+        referenceInputs.serialize(forJson: forJson),
+      );
+    }
+
+    // CONWAY ERA
+    final votingProcedures = this.votingProcedures;
+    if (votingProcedures != null) {
+      entriesMap[19] = MapEntry(
+        key(19, "votingProcedures"),
+        votingProcedures.serialize(forJson: forJson),
+      );
+    }
+
+    final proposalProcedures = this.proposalProcedures;
+    if (proposalProcedures != null) {
+      entriesMap[20] = MapEntry(
+        key(20, "proposalProcedures"),
+        CborList.of(proposalProcedures.map((e) => e.serialize(forJson: forJson))),
+      );
+    }
+
+    final currentTreasuryValue = this.currentTreasuryValue;
+    if (currentTreasuryValue != null) {
+      entriesMap[21] = MapEntry(
+        key(21, "currentTreasuryValue"),
+        currentTreasuryValue,
+      );
+    }
+
+    final donation = this.donation;
+    if (donation != null) {
+      entriesMap[22] = MapEntry(
+        key(22, "donation"),
+        donation,
+      );
+    }
+
+    // Build the final ordered list of entries
+    final entries = <MapEntry<CborValue, CborValue>>[];
+    final originalKeyOrder = this.originalKeyOrder;
+
+    if (!forJson && originalKeyOrder != null) {
+      // Use original key order for binary CBOR (preserves exact byte representation)
+      for (final keyIdx in originalKeyOrder) {
+        final entry = entriesMap.remove(keyIdx);
+        if (entry != null) {
+          entries.add(entry);
+        }
+      }
+      // Append any new keys (from modifications) in ascending order
+      final remainingKeys = entriesMap.keys.toList()..sort();
+      for (final keyIdx in remainingKeys) {
+        entries.add(entriesMap[keyIdx]!);
+      }
+    } else {
+      // Default ascending order (for JSON or manually created bodies)
+      final keys = entriesMap.keys.toList()..sort();
+      for (final keyIdx in keys) {
+        entries.add(entriesMap[keyIdx]!);
+      }
+    }
+
+    return CborMap.fromEntries(entries);
   }
 
   String blake2bHash256Hex() => this.blake2bHash256.value ?? computeBlake2bHash256().hexEncode();

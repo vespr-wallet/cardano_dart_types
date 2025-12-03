@@ -23,6 +23,62 @@ void main() async {
       }
     });
 
+    group("preserves original CBOR key order", () {
+      test("body with non-ascending key order preserves exact bytes", () {
+        // This test uses a transaction where the body map keys are NOT in ascending order
+        // The "midnight" tx has keys in order: 0, 13, 1, 2, 3, 7, 8, 11, 14, 16, 17, 18
+        // (inputs, collateral, outputs, fee, ttl, auxDataHash, validityStart, scriptDataHash, requiredSigners, collateralReturn, totalCollateral, refInputs)
+        final txHex = _TestCaseTx.midnight.cborHex;
+
+        final tx = CardanoTransaction.deserializeFromHex(txHex);
+
+        // Verify originalKeyOrder was captured
+        expect(tx.body.originalKeyOrder, isNotNull);
+        expect(tx.body.originalKeyOrder, isNotEmpty);
+
+        // Re-serialize and verify exact byte match
+        final reEncoded = tx.serializeHexString();
+        expect(reEncoded, txHex, reason: "CBOR key order must be preserved during re-serialization");
+      });
+
+      test("originalKeyOrder is preserved through copyWith", () {
+        final txHex = _TestCaseTx.midnight.cborHex;
+        final tx = CardanoTransaction.deserializeFromHex(txHex);
+
+        final originalKeyOrder = tx.body.originalKeyOrder;
+
+        // Use copyWith to modify the body
+        final modifiedTx = tx.copyWith.body(
+          fee: tx.body.fee + BigInt.one,
+        );
+
+        // copyWith should preserve originalKeyOrder
+        expect(modifiedTx.body.originalKeyOrder, equals(originalKeyOrder));
+      });
+
+      test("manually created body has null originalKeyOrder and uses ascending order", () {
+        final body = CardanoTransactionBody.create(
+          inputs: const CardanoTransactionInputs(data: [], cborTags: []),
+          outputs: [],
+          fee: BigInt.from(200000),
+          ttl: BigInt.from(50000000),
+          validityStartInterval: BigInt.from(40000000),
+        );
+
+        // Manually created body has no original key order
+        expect(body.originalKeyOrder, isNull);
+
+        // Serialized output should have keys in ascending order: 0, 1, 2, 3, 8
+        final serialized = body.serialize(forJson: false);
+        final keys = serialized.keys.map((k) => (k as CborSmallInt).toInt()).toList();
+        expect(
+          keys,
+          equals([0, 1, 2, 3, 8]),
+          reason: "Manually created body should serialize with ascending key order",
+        );
+      });
+    });
+
     test(
       "hash is constant",
       () {
@@ -62,6 +118,9 @@ void main() async {
 }
 
 enum _TestCaseTx {
+  midnight(
+    "84a900d90102828258208d3c1d0b0f5ea8b279f08e8c8e184e32c228c14cb7e4f08258169d067c78238c00825820f5847e225e23a502871371ca5c14853a8b8cd17a23e76db5e77f28e317791a58000dd9010281825820f5847e225e23a502871371ca5c14853a8b8cd17a23e76db5e77f28e317791a580012d90102818258205176e99f4c35315fa79d86610736ac05a3d9babfa5c28e080a1e9c256b3073c5000183a300581d707d592b91a8428a726ca3b1a33fd743acc6a9126e4dedd2d3171dac3a01821a001c79f6a1581c3f59c95f17042bf404aa62006ba9330c75b97ecb86ec45b4a588c9cba14019ca26028201d81858bed8799f5820841b04174c0bb218eb9c52668314f05aed5ccb01693d611f2363f74eb18b181d1b0000019aca1e0ef81a000927c0d87a9f5f584000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000584000000000000000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000ffffff825839008f614af851c3c50da5b02ee7c720f2e80d198923c1131a61c246934859d3ed00f5db9c9917a83797d3c6c80473230178451e3bb466bb997f821a00112a2ea1581c3f59c95f17042bf404aa62006ba9330c75b97ecb86ec45b4a588c9cba140185c82583900d88976e598de99bdf1ddba231b669e34c47fe288350563aa7df69ffc77d99f162c9ca80b62f0d97500d95c6fc3260683f37a507d0fa265f11a05de3d861082583900d88976e598de99bdf1ddba231b669e34c47fe288350563aa7df69ffc77d99f162c9ca80b62f0d97500d95c6fc3260683f37a507d0fa265f11a05ec2b0e111a0009b5f2021a0006794c081a0679ff490b58202f1180b859ced0bb0fa75451ca3c39aa960bba4cb9839503f338523f82c351c3a105a182000082d87a9fd8799f0f185c9fd8799f58203e26f855ddcbc4659eba8488f9ac0bc46fdaff0f1dd2e9a25e593b7dfe731dcd182cffd8799f5820131e2ba2dec04ff98edb32f42ce1acd08acb4f3c0a0067bf03c71b291a095a5b1862ffd8799f5820b824b01e47bfa586f9ab9fc1f4a1f1261eb66228328b0152b465280cc8fbd4f118e9ffd8799f58207f9c42f2cc2ec02ba282775c076846314df01763b9c467527160a3ccdf7cefca190148ffd8799f582009296f770d4c8b46338a36c52aeb17d1b9dbcc41bb374d893162de3be9cea89d1902f8ffd8799f582084fee93cb1d244915534bac910094b089c6ec92e26c1d000b98f07ca40b2e8111905e4ffd8799f582050f687b3ca766a3a327f5c30b31e14748241e10a963f1736634b3a07b002aa77190b84ffd8799f5820934724f28183df7b1b0e8612513468e7c39ee22603d051db65d0cc944853f83c191a48ffd8799f5820564a5b96df2bf5cd5cc508aa46c02010b2cf4a738d5fe9df40c9c94c64fc70b51930d5ffd8799f5820d1280dbbf9be14ca9a6b1e64030ab666c9d37f8e5fee2f93c278a1ef123878e219683affff18dbffff821a001033c01a114b0662f5f6",
+  ),
   ashiyapool(
     "84a500d9010281825820e53823731fd5b7e1fa1166b98f9bb76448b041fd39ff47e97e0a5447851f4a5300018182583901ad02b09b9643135c6ae5ae519f8dde9d1f17c4d8c3033bc1d3cf75652d5854ccbc49b6bdedc774f70bfa2180e636ca289766ca91252df0df1a003b09b9021a0002c95904d901028282008200581c2d5854ccbc49b6bdedc774f70bfa2180e636ca289766ca91252df0df83028200581c2d5854ccbc49b6bdedc774f70bfa2180e636ca289766ca91252df0df581ca79aedbfe592557a1779f521f4b9c7693f89f36d449970c0974efe320758209ce748ae809e9da48d57bc3498c5b1e8a1a0d686564f591499fa2587aaf4e237a0f5a11902a2a1636d7367847744656c656761746520746f2041736869796120506f6f6c7838706f6f6c31353764776d306c396a66326835396d653735736c6677773864796c636e756d64676a766870737968666d6c727934636e343461782b496e636c75646573207374616b6520726567697374726174696f6e20283220414441206465706f736974296e617368697961706f6f6c2e636f6d",
   ),
