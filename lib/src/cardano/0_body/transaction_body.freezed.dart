@@ -210,7 +210,11 @@ String toString() {
 mixin _$CardanoTransactionBody {
 
 // Non-null when deserialized from hex/cbor
- Blake2bHash256 get blake2bHash256;// Original key order from CBOR (null for manually created bodies)
+ Blake2bHash256 get blake2bHash256;// Non-standard CBOR map key order (non-ascending). Only set when the original
+// transaction had keys in non-ascending order, to preserve byte-exact re-serialization.
+// NOTE: Non-standard key order is problematic - it breaks transaction signing on
+// hardware wallets (Ledger, Trezor) which expect ascending key order. If you're
+// building transactions, always use ascending order (leave this null).
  List<int>? get nonStandardKeyOrder;// TX Body Fields
  CardanoTransactionInputs get inputs;// 0
  List<CardanoTransactionOutput> get outputs;// 1
@@ -414,9 +418,17 @@ class _CardanoTransactionBody extends CardanoTransactionBody {
 
 // Non-null when deserialized from hex/cbor
 @override final  Blake2bHash256 blake2bHash256;
-// Original key order from CBOR (null for manually created bodies)
+// Non-standard CBOR map key order (non-ascending). Only set when the original
+// transaction had keys in non-ascending order, to preserve byte-exact re-serialization.
+// NOTE: Non-standard key order is problematic - it breaks transaction signing on
+// hardware wallets (Ledger, Trezor) which expect ascending key order. If you're
+// building transactions, always use ascending order (leave this null).
  final  List<int>? _nonStandardKeyOrder;
-// Original key order from CBOR (null for manually created bodies)
+// Non-standard CBOR map key order (non-ascending). Only set when the original
+// transaction had keys in non-ascending order, to preserve byte-exact re-serialization.
+// NOTE: Non-standard key order is problematic - it breaks transaction signing on
+// hardware wallets (Ledger, Trezor) which expect ascending key order. If you're
+// building transactions, always use ascending order (leave this null).
 @override List<int>? get nonStandardKeyOrder {
   final value = _nonStandardKeyOrder;
   if (value == null) return null;
