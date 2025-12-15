@@ -1,8 +1,8 @@
 export "package:cbor/cbor.dart";
 
 export "binary/binary_reader.dart";
-export "binary/binary_reader_impl.dart";
-export "binary/binary_writer_impl.dart";
+export "binary/binary_writer.dart";
+export "binary/binary_x.dart";
 export "src/cardano/0_body/0_inputs/transaction_input.dart";
 export "src/cardano/0_body/0_inputs/transaction_inputs.dart";
 export "src/cardano/0_body/14_required_signers/required_signers.dart";

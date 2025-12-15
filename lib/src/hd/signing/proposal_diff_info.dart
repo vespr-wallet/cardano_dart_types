@@ -17,14 +17,14 @@ sealed class ProposalDiffInfo with _$ProposalDiffInfo {
   const ProposalDiffInfo._();
 
   Uint8List marshal() {
-    final BinaryWriterImpl writer = BinaryWriterImpl();
+    final writer = BinaryWriter();
     writer.writeByteList(proposalId.serializeAsBytes());
     writer.writeByteList(proposal.serializeAsBytes());
     return writer.toBytes();
   }
 
   factory ProposalDiffInfo.unmarshal(Uint8List bytes) {
-    final BinaryReaderImpl reader = BinaryReaderImpl(bytes);
+    final reader = BinaryReader(bytes);
     final proposalId = GovActionId.deserialize(cborDecode(reader.readByteList()));
     final proposal = GovAction.deserialize(cborDecode(reader.readByteList()));
     return ProposalDiffInfo(proposalId: proposalId, proposal: proposal);

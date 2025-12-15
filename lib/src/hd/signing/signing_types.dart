@@ -2,10 +2,10 @@ import "package:bip32_ed25519/bip32_ed25519.dart";
 import "package:cbor/cbor.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
-import "../../../binary/binary_reader_impl.dart";
-import "../../../binary/binary_writer_impl.dart";
-import "../../../cardano_dart_types.dart";
+import "../../../binary/binary_reader.dart";
+import "../../../binary/binary_writer.dart";
 import "../../cardano/0_body/4_cert/credential.dart";
+import "../../cardano/0_body/transaction_body.dart";
 import "../../cardano/1_witness_set/witness_set.dart";
 import "../../cardano/shared/asset.dart";
 import "../../cardano/shared/drep.dart";
@@ -40,7 +40,7 @@ sealed class TxDiff with _$TxDiff {
   const TxDiff._();
 
   Uint8List marshal() {
-    final BinaryWriterImpl writer = BinaryWriterImpl();
+    final writer = BinaryWriter();
     writer.writeByteList(diff.serializeAsBytes());
     writer.writeBytesList(usedUtxos.map((e) => e.serializeAsBytes()).toList());
     writer.write(stakeDelegationPoolId);
@@ -57,7 +57,7 @@ sealed class TxDiff with _$TxDiff {
   }
 
   factory TxDiff.unmarshal(Uint8List bytes) {
-    final BinaryReaderImpl reader = BinaryReaderImpl(bytes);
+    final reader = BinaryReader(bytes);
     final diff = Value.deserializeBytes(reader.readByteList());
     final usedUtxos = reader.readBytesList().map(Utxo.deserializeBytes).toList();
     final stakeDelegationPoolId = reader.read() as String?;
@@ -114,7 +114,7 @@ sealed class TxSigningBundle with _$TxSigningBundle {
   const TxSigningBundle._();
 
   Uint8List marshal() {
-    final BinaryWriterImpl writer = BinaryWriterImpl();
+    final writer = BinaryWriter();
     writer.writeString(receiveAddressBech32);
     writer.writeInt(networkId.intValue);
     writer.writeBytesList(txsData.map((e) => e.marshal()).toList());
@@ -133,7 +133,7 @@ sealed class TxSigningBundle with _$TxSigningBundle {
   }
 
   factory TxSigningBundle.unmarshal(Uint8List bytes) {
-    final BinaryReaderImpl reader = BinaryReaderImpl(bytes);
+    final reader = BinaryReader(bytes);
     final receiveAddressBech32 = reader.readString();
     final networkId = NetworkId.fromIntValue(reader.readInt());
     final txsData = reader.readBytesList().map(TxPreparedForSigning.unmarshal).toList();
@@ -186,7 +186,7 @@ sealed class TxSignedBundle with _$TxSignedBundle {
   const TxSignedBundle._();
 
   Uint8List marshal() {
-    final BinaryWriterImpl writer = BinaryWriterImpl();
+    final writer = BinaryWriter();
     writer.writeString(receiveAddressBech32);
     writer.writeInt(networkId.intValue);
     writer.writeBytesList(txsData.map((e) => e.marshal()).toList());
@@ -195,7 +195,7 @@ sealed class TxSignedBundle with _$TxSignedBundle {
   }
 
   factory TxSignedBundle.unmarshal(Uint8List bytes) {
-    final BinaryReaderImpl reader = BinaryReaderImpl(bytes);
+    final reader = BinaryReader(bytes);
     final receiveAddressBech32 = reader.readString();
     final networkId = NetworkId.fromIntValue(reader.readInt());
     final txsData = reader.readBytesList().map(TxAndSignature.unmarshal).toList();
@@ -220,7 +220,7 @@ sealed class TxPreparedForSigning with _$TxPreparedForSigning {
   const TxPreparedForSigning._();
 
   Uint8List marshal() {
-    final BinaryWriterImpl writer = BinaryWriterImpl();
+    final writer = BinaryWriter();
     writer.writeByteList(tx.body.blake2bHash256.marshal());
     writer.writeByteList(tx.serializeAsBytes());
     writer.writeByteList(txDiff.marshal());
@@ -230,7 +230,7 @@ sealed class TxPreparedForSigning with _$TxPreparedForSigning {
   }
 
   factory TxPreparedForSigning.unmarshal(Uint8List bytes) {
-    final BinaryReaderImpl reader = BinaryReaderImpl(bytes);
+    final reader = BinaryReader(bytes);
 
     final tx = () {
       final blake2bHash256 = Blake2bHash256.unmarshal(reader.readByteList());
@@ -264,7 +264,7 @@ sealed class TxAndSignature with _$TxAndSignature {
   const TxAndSignature._();
 
   Uint8List marshal() {
-    final BinaryWriterImpl writer = BinaryWriterImpl();
+    final writer = BinaryWriter();
     writer.writeByteList(tx.serializeAsBytes());
     writer.writeByteList(txDiff.marshal());
     writer.writeBytesList(utxosBeforeTx.map((e) => e.serializeAsBytes()).toList());
@@ -274,7 +274,7 @@ sealed class TxAndSignature with _$TxAndSignature {
   }
 
   factory TxAndSignature.unmarshal(Uint8List bytes) {
-    final BinaryReaderImpl reader = BinaryReaderImpl(bytes);
+    final reader = BinaryReader(bytes);
     final tx = CardanoTransaction.deserializeBytes(reader.readByteList());
     final txDiff = TxDiff.unmarshal(reader.readByteList());
     final utxos = reader.readBytesList().map(Utxo.deserializeBytes).toList();

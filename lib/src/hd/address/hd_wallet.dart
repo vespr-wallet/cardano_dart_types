@@ -1,6 +1,6 @@
 import "package:bip32_ed25519/cardano.dart";
-import "../../../binary/binary_reader_impl.dart";
-import "../../../binary/binary_writer_impl.dart";
+import "../../../binary/binary_reader.dart";
+import "../../../binary/binary_writer.dart";
 import "cardano_address.dart";
 
 /// Private/signing and public/varification key pair.
@@ -28,7 +28,7 @@ class CardanoAddressKit extends Bip32KeyPair {
   }) : super();
 
   factory CardanoAddressKit.unmarshal(Uint8List data) {
-    final reader = BinaryReaderImpl(data);
+    final reader = BinaryReader(data);
     return CardanoAddressKit(
       account: reader.readInt(),
       role: Bip32KeyRole.fromDerivationIndex(reader.readInt()),
@@ -40,7 +40,7 @@ class CardanoAddressKit extends Bip32KeyPair {
   }
 
   Uint8List marshal() {
-    final writer = BinaryWriterImpl();
+    final writer = BinaryWriter();
     writer.writeInt(account);
     writer.writeInt(role.derivationIndex);
     writer.writeInt(index);

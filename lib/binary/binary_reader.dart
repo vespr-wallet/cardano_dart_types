@@ -1,97 +1,306 @@
 import "dart:convert";
 import "dart:typed_data";
 
-/// The [BinaryReader] is used to bring data back from the binary format on the
-/// disk.
-abstract class BinaryReader {
-  /// The UTF-8 decoder is used to decode Strings.
+import "./frame.dart";
+import "binary_exceptions.dart";
+
+T useBinaryReader<T>(Uint8List bytes, T Function(BinaryReader reader) callback) {
+  final reader = BinaryReader(bytes);
+  return callback(reader);
+}
+
+/// Not part of public API
+class BinaryReader {
   static const utf8Decoder = Utf8Decoder();
 
-  /// The number of bytes left in this entry.
-  int get availableBytes;
+  final ByteData _byteData;
 
-  /// The number of read bytes.
-  int get usedBytes;
+  final int _bufferLimit;
+  int _offset = 0;
 
-  /// Skip n bytes.
-  void skip(int bytes);
+  /// Not part of public API
+  BinaryReader(Uint8List list, [int? bufferLength])
+    : _byteData = ByteData.sublistView(
+        list,
+        /* start: */ 0,
+        /* end: */ bufferLength ?? list.length,
+      ),
+      _bufferLimit = bufferLength ?? (list.length);
 
-  /// Read a single byte.
-  int readByte();
+  @pragma("vm:prefer-inline")
+  @pragma("wasm:prefer-inline")
+  @pragma("dart2js:tryInline")
+  int get availableBytes => _bufferLimit - _offset;
 
-  /// Get a [Uint8List] view which contains the next [bytes] bytes.
-  Uint8List viewBytes(int bytes);
+  int get usedBytes => _offset;
 
-  /// Get a [Uint8List] view which contains the next [bytes] bytes. This does
-  /// not advance the internal read position.
-  Uint8List peekBytes(int bytes);
+  @pragma("vm:prefer-inline")
+  @pragma("wasm:prefer-inline")
+  @pragma("dart2js:tryInline")
+  void _requireBytes(int bytes) {
+    if (_offset + bytes > _bufferLimit) {
+      throw BinaryRangeErrorException(
+        requiredBytes: bytes,
+        availableBytes: availableBytes,
+      );
+    }
+  }
 
-  /// Read two bytes as 16-bit unsigned integer.
-  int readWord();
+  @pragma("vm:prefer-inline")
+  @pragma("wasm:prefer-inline")
+  @pragma("dart2js:tryInline")
+  void skip(int bytes) {
+    _requireBytes(bytes);
+    _offset += bytes;
+  }
 
-  /// Read four bytes as 32-bit signed integer.
-  int readInt32();
+  @pragma("vm:prefer-inline")
+  @pragma("wasm:prefer-inline")
+  @pragma("dart2js:tryInline")
+  int readByte() {
+    _requireBytes(1);
+    return _byteData.getInt8(_offset++);
+  }
 
-  /// Read four bytes as 32-bit unsigned integer.
-  int readUint32();
+  @pragma("vm:prefer-inline")
+  @pragma("wasm:prefer-inline")
+  @pragma("dart2js:tryInline")
+  Uint8List viewBytes(int bytes) {
+    _requireBytes(bytes);
+    _offset += bytes;
+    return Uint8List.sublistView(
+      /* data: */ _byteData,
+      /* start: */ _offset - bytes,
+      /* end: */ _offset,
+    );
+  }
 
-  /// Read eight bytes as 64-bit signed integer.
-  int readInt();
+  ByteData peekBytes(int bytes) {
+    _requireBytes(bytes);
+    return ByteData.sublistView(
+      /* data: */ _byteData,
+      /* start: */ _offset,
+      /* end: */ _offset + bytes,
+    );
+    // return _list.view(_offset, bytes);
+  }
 
-  /// Read eight bytes as 64-bit double.
-  double readDouble();
+  int readWord() {
+    _requireBytes(2);
+    _offset += 2;
+    return _byteData.getInt16(_offset - 2, Endian.little);
+  }
 
-  /// Read a boolean.
-  bool readBool();
+  int readInt32() {
+    _requireBytes(4);
+    _offset += 4;
+    return _byteData.getInt32(_offset - 4, Endian.little);
+  }
 
-  /// Read [byteCount] bytes and decode an UTF-8 String.
-  ///
-  /// If [byteCount] is not provided, it is read first.
-  String readString([
-    int? byteCount,
-    Converter<List<int>, String> decoder = utf8Decoder,
-  ]);
+  @pragma("vm:prefer-inline")
+  @pragma("wasm:prefer-inline")
+  @pragma("dart2js:tryInline")
+  int readUint32() {
+    _requireBytes(4);
+    _offset += 4;
+    return _byteData.getUint32(_offset - 4, Endian.little);
+  }
 
-  /// Read a list of bytes with [length].
-  ///
-  /// If [length] is not provided, it is read first.
-  Uint8List readByteList([int? length]);
+  /// Not part of public API
+  int peekUint32() {
+    _requireBytes(4);
+    return _byteData.getUint32(_offset, Endian.little);
+  }
 
-  /// Read a list of integers with [length].
-  ///
-  /// If [length] is not provided, it is read first.
-  List<int> readIntList([int? length]);
+  int readInt() => readDouble().toInt();
 
-  /// Read a list of doubles with [length].
-  ///
-  /// If [length] is not provided, it is read first.
-  List<double> readDoubleList([int? length]);
+  BigInt readBigInt() => BigInt.parse(readString());
 
-  /// Read a list of booleans with [length].
-  ///
-  /// If [length] is not provided, it is read first.
-  List<bool> readBoolList([int? length]);
+  double readDouble() {
+    _requireBytes(8);
+    _offset += 8;
+    return _byteData.getFloat64(_offset - 8, Endian.little);
+  }
 
-  /// Read a list of Strings with [length].
-  ///
-  /// If [length] is not provided, it is read first.
-  List<String> readStringList([
-    int? length,
-    Converter<List<int>, String> decoder = utf8Decoder,
-  ]);
+  bool readBool() {
+    return readByte() > 0;
+  }
 
-  /// Read a list with [length].
-  ///
-  /// If [length] is not provided, it is read first.
-  List readList([int? length]);
+  int? readOptionalByte() {
+    final typeId = readByte();
+    return switch (FrameValueType.fromBinaryValue(typeId)) {
+      FrameValueType.nullT => null,
+      FrameValueType.intT => readByte(),
+      _ => throw UnexpectedBinaryTypeException(
+        expectedTypeId: FrameValueType.intT,
+        actualTypeId: typeId,
+      ),
+    };
+  }
 
-  /// Read a map with [length] entries.
-  ///
-  /// If [length] is not provided, it is read first.
-  Map readMap([int? length]);
+  String? readOptionalString([int? byteCount, Converter<List<int>, String> decoder = BinaryReader.utf8Decoder]) {
+    final typeId = readByte();
+    return switch (FrameValueType.fromBinaryValue(typeId)) {
+      FrameValueType.nullT => null,
+      FrameValueType.stringT => readString(byteCount, decoder),
+      _ => throw UnexpectedBinaryTypeException(
+        expectedTypeId: FrameValueType.stringT,
+        actualTypeId: typeId,
+      ),
+    };
+  }
 
-  /// Read and decode any value.
-  ///
-  /// If [typeId] is not provided, it is read first.
-  dynamic read([int? typeId]);
+  String readString([int? byteCount, Converter<List<int>, String> decoder = BinaryReader.utf8Decoder]) {
+    byteCount ??= readUint32();
+    final view = viewBytes(byteCount);
+    return decoder.convert(view);
+  }
+
+  Uint8List? readOptionalByteList([int? length]) {
+    final typeId = readByte();
+    return switch (FrameValueType.fromBinaryValue(typeId)) {
+      FrameValueType.nullT => null,
+      FrameValueType.byteListT => readByteList(length),
+      _ => throw UnexpectedBinaryTypeException(
+        expectedTypeId: FrameValueType.byteListT,
+        actualTypeId: typeId,
+      ),
+    };
+  }
+
+  Uint8List readByteList([int? length]) {
+    length ??= readUint32();
+    _requireBytes(length);
+    final byteList = Uint8List.sublistView(
+      /* data: */ _byteData,
+      /* start: */ _offset,
+      /* end: */ _offset + length,
+    );
+
+    _offset += length;
+    return byteList;
+  }
+
+  List<int> readIntList([int? length]) {
+    length ??= readUint32();
+    _requireBytes(length * 8);
+    final byteData = _byteData;
+    final list = List<int>.filled(length, 0, growable: true);
+    for (var i = 0; i < length; i++) {
+      list[i] = byteData.getInt64(_offset, Endian.little);
+      _offset += 8;
+    }
+    return list;
+  }
+
+  List<double> readDoubleList([int? length]) {
+    length ??= readUint32();
+    _requireBytes(length * 8);
+    final byteData = _byteData;
+    final list = List<double>.filled(length, 0.0, growable: true);
+    for (var i = 0; i < length; i++) {
+      list[i] = byteData.getFloat64(_offset, Endian.little);
+      _offset += 8;
+    }
+    return list;
+  }
+
+  List<bool> readBoolList([int? length]) {
+    length ??= readUint32();
+    _requireBytes(length);
+    final list = List<bool>.filled(length, false, growable: true);
+    for (var i = 0; i < length; i++) {
+      list[i] = _byteData.getInt8(_offset++) > 0;
+    }
+    return list;
+  }
+
+  List<String>? readOptionalStringList([int? length, Converter<List<int>, String> decoder = BinaryReader.utf8Decoder]) {
+    final typeId = readByte();
+    return switch (FrameValueType.fromBinaryValue(typeId)) {
+      FrameValueType.nullT => null,
+      FrameValueType.stringListT => readStringList(length, decoder),
+      _ => throw UnexpectedBinaryTypeException(
+        expectedTypeId: FrameValueType.stringListT,
+        actualTypeId: typeId,
+      ),
+    };
+  }
+
+  List<String> readStringList([int? length, Converter<List<int>, String> decoder = BinaryReader.utf8Decoder]) {
+    length ??= readUint32();
+    final list = List<String>.filled(length, "", growable: true);
+    for (var i = 0; i < length; i++) {
+      list[i] = readString(null, decoder);
+    }
+    return list;
+  }
+
+  List readList([int? length]) {
+    length ??= readUint32();
+    final list = List<dynamic>.filled(length, null, growable: true);
+    for (var i = 0; i < length; i++) {
+      list[i] = read();
+    }
+    return list;
+  }
+
+  List<Uint8List>? readOptionalBytesList([int? length]) {
+    final typeId = readByte();
+    return switch (FrameValueType.fromBinaryValue(typeId)) {
+      FrameValueType.nullT => null,
+      FrameValueType.bytesListT => readBytesList(length),
+      _ => throw UnexpectedBinaryTypeException(
+        expectedTypeId: FrameValueType.bytesListT,
+        actualTypeId: typeId,
+      ),
+    };
+  }
+
+  List<Uint8List> readBytesList([int? length]) {
+    length ??= readUint32();
+    return List<Uint8List>.generate(length, (index) => readByteList());
+  }
+
+  Map readMap([int? length]) {
+    length ??= readUint32();
+    final map = <dynamic, dynamic>{};
+    for (var i = 0; i < length; i++) {
+      map[read()] = read();
+    }
+    return map;
+  }
+
+  /// Not part of public API
+  dynamic readKey() {
+    final keyType = readByte();
+    if (keyType == FrameKeyType.uintT) {
+      return readUint32();
+    } else if (keyType == FrameKeyType.utf8StringT) {
+      final byteCount = readByte();
+      return BinaryReader.utf8Decoder.convert(viewBytes(byteCount));
+    } else {
+      throw BinaryCorruptedException("Unsupported key type. Frame might be corrupted.");
+    }
+  }
+
+  dynamic read([int? typeId]) {
+    typeId ??= readByte();
+    return switch (FrameValueType.fromBinaryValue(typeId)) {
+      FrameValueType.nullT => null,
+      FrameValueType.intT => readInt(),
+      FrameValueType.doubleT => readDouble(),
+      FrameValueType.boolT => readBool(),
+      FrameValueType.stringT => readString(),
+      FrameValueType.byteListT => readByteList(),
+      FrameValueType.intListT => readIntList(),
+      FrameValueType.doubleListT => readDoubleList(),
+      FrameValueType.boolListT => readBoolList(),
+      FrameValueType.stringListT => readStringList(),
+      FrameValueType.listT => readList(),
+      FrameValueType.mapT => readMap(),
+      FrameValueType.bytesListT => readBytesList(),
+      null => throw UnknownBinaryTypeException(typeId: typeId, message: "Failed to read value"),
+    };
+  }
 }

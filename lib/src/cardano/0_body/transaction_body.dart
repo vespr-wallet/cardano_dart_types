@@ -4,8 +4,8 @@ import "package:cbor/cbor.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:hex/hex.dart";
 
-import "../../../binary/binary_reader_impl.dart";
-import "../../../binary/binary_writer_impl.dart";
+import "../../../binary/binary_reader.dart";
+import "../../../binary/binary_writer.dart";
 import "../../exceptions/parse_exceptions.dart";
 import "../../hd/ada_types.dart";
 import "../../hd/util/blake2bhash.dart";
@@ -54,15 +54,12 @@ sealed class Blake2bHash256 with _$Blake2bHash256 {
     Blake2bHash256None() => 2,
   };
 
-  Uint8List marshal() {
-    final writer = BinaryWriterImpl();
+  Uint8List marshal() => useBinaryWriter((writer) {
     writer.writeInt(type);
     writer.writeString(value ?? "");
-    return writer.toBytes();
-  }
+  });
 
-  factory Blake2bHash256.unmarshal(Uint8List bytes) {
-    final reader = BinaryReaderImpl(bytes);
+  factory Blake2bHash256.unmarshal(Uint8List bytes) => useBinaryReader(bytes, (reader) {
     final type = reader.readInt();
     final value = reader.readString();
     return switch (type) {
@@ -71,7 +68,7 @@ sealed class Blake2bHash256 with _$Blake2bHash256 {
       2 => const Blake2bHash256None(),
       _ => throw Exception("Invalid Blake2bHash256 type: $type"),
     };
-  }
+  });
 }
 
 /// Core of the cardano transaction that is signed.

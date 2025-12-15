@@ -1,3 +1,5 @@
+import "dart:collection";
+
 /// Not part of public API
 class Frame {
   /// Not part of public API
@@ -100,43 +102,29 @@ class FrameKeyType {
 }
 
 /// Possible value types
-class FrameValueType {
-  /// null
-  static const nullT = 0;
+enum FrameValueType {
+  nullT(binaryValue: 0),
+  intT(binaryValue: 1),
+  doubleT(binaryValue: 2),
+  boolT(binaryValue: 3),
+  stringT(binaryValue: 4),
+  byteListT(binaryValue: 5), // Uint8List
+  intListT(binaryValue: 6), // List<int>
+  doubleListT(binaryValue: 7), // List<double>
+  boolListT(binaryValue: 8), // List<bool>
+  stringListT(binaryValue: 9), // List<String>
+  listT(binaryValue: 10), // List<dynamic>
+  mapT(binaryValue: 11), // Map<dynamic, dynamic>
+  bytesListT(binaryValue: 12) // List<Uint8List>
+  ;
 
-  /// int
-  static const intT = 1;
+  final int binaryValue;
 
-  /// double
-  static const doubleT = 2;
+  static final Map<int, FrameValueType> _binaryValueToType = UnmodifiableMapView({
+    for (final type in values) type.binaryValue: type,
+  });
 
-  /// bool
-  static const boolT = 3;
+  static FrameValueType? fromBinaryValue(int binaryValue) => _binaryValueToType[binaryValue];
 
-  /// String
-  static const stringT = 4;
-
-  /// Uint8List
-  static const byteListT = 5;
-
-  /// List<int>
-  static const intListT = 6;
-
-  /// List<double>
-  static const doubleListT = 7;
-
-  /// List<bool>
-  static const boolListT = 8;
-
-  /// List<String>
-  static const stringListT = 9;
-
-  /// List<dynamic>
-  static const listT = 10;
-
-  /// Map<dynamic, dynamic>
-  static const mapT = 11;
-
-  /// List<HiveObject>
-  static const hiveListT = 12;
+  const FrameValueType({required this.binaryValue});
 }

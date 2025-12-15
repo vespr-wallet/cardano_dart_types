@@ -4,8 +4,8 @@ import "dart:typed_data";
 
 import "package:freezed_annotation/freezed_annotation.dart";
 
-import "../../binary/binary_reader_impl.dart";
-import "../../binary/binary_writer_impl.dart";
+import "../../binary/binary_reader.dart";
+import "../../binary/binary_writer.dart";
 
 part "data_signature.freezed.dart";
 
@@ -22,7 +22,7 @@ sealed class DataSignature with _$DataSignature {
   factory DataSignature.fromJson(Map<String, dynamic> json) => _DataSignature.fromJson(json);
 
   factory DataSignature.unmarshal(Uint8List bytes) {
-    final reader = BinaryReaderImpl(bytes);
+    final reader = BinaryReader(bytes);
     final coseKeyHex = reader.readString();
     final coseSignHex = reader.readString();
     return DataSignature(
@@ -32,7 +32,7 @@ sealed class DataSignature with _$DataSignature {
   }
 
   Uint8List marshal() {
-    final writer = BinaryWriterImpl();
+    final writer = BinaryWriter();
     writer.writeString(coseKeyHex);
     writer.writeString(coseSignHex);
     return writer.toBytes();
