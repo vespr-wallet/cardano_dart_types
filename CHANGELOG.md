@@ -1,3 +1,16 @@
+## 2.12.0
+
+Breaking Change for some mostly internally used classes:
+- Renamed `BinaryReaderImpl` to `BinaryReader` (file: `binary_reader_impl.dart` -> `binary_reader.dart`)
+- Renamed `BinaryWriterImpl` to `BinaryWriter` (file: `binary_writer_impl.dart` -> `binary_writer.dart`)
+
+New:
+- Created specific binary exceptions sealed class (`binary_exceptions.dart`)
+
+Other Changes:
+- Added exhaustive round-trip tests for BinaryReader/BinaryWriter (122 test cases)
+
+
 ## 2.11.2
 
 Bug Fixes:
