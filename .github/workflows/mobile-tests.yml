@@ -33,21 +33,10 @@ jobs:
         run: flutter analyze --no-fatal-infos
 
       - name: Run tests (VM)
-        run: |
-          flutter test --coverage --file-reporter="json:coverage/app-results.json" --test-randomize-ordering-seed random
+        run: dart test
 
       - name: Run tests (JS/dart2js)
         run: dart test -P js
 
       - name: Run tests (WASM/dart2wasm)
         run: dart test -P wasm
-
-      - name: Test Report
-        uses: dorny/test-reporter@v2
-        if: always()
-        with:
-          name: Flutter Tests
-          path: 'coverage/*.json'
-          reporter: flutter-json
-          fail-on-error: true
-        continue-on-error: true
