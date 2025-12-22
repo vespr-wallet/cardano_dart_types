@@ -1,3 +1,12 @@
+## 2.12.1
+
+Bug Fix:
+- Fixed `writeIntList`/`readIntList` crashing on dart2js (Int64 accessor not supported)
+
+Other Changes:
+- Added platform detection for web to use Float64 encoding as fallback
+- Added `dart_test.yaml` presets for JS (`-P js`) and WASM (`-P wasm`) testing
+
 ## 2.12.0
 
 Breaking Change for some mostly internally used classes:
