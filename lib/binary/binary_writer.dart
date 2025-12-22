@@ -3,6 +3,7 @@
 import "dart:convert";
 import "dart:typed_data";
 
+import "../platform_util/platform_info.dart";
 import "./binary_x.dart";
 import "./frame.dart";
 import "binary_exceptions.dart";
@@ -189,7 +190,13 @@ class BinaryWriter {
     _reserveBytes(length * 8);
     final byteData = _byteData;
     for (var i = 0; i < length; i++) {
-      byteData.setInt64(_offset, list[i], Endian.little);
+      if (isWeb) {
+        // Use Float64 for dart2js compatibility (setInt64 not supported)
+        byteData.setFloat64(_offset, list[i].toDouble(), Endian.little);
+      } else {
+        byteData.setInt64(_offset, list[i], Endian.little);
+      }
+
       _offset += 8;
     }
   }

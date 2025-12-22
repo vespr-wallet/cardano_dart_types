@@ -1,6 +1,7 @@
 import "dart:convert";
 import "dart:typed_data";
 
+import "../platform_util/platform_info.dart";
 import "./frame.dart";
 import "binary_exceptions.dart";
 
@@ -187,7 +188,12 @@ class BinaryReader {
     final byteData = _byteData;
     final list = List<int>.filled(length, 0, growable: true);
     for (var i = 0; i < length; i++) {
-      list[i] = byteData.getInt64(_offset, Endian.little);
+      if (isWeb) {
+        // Use Float64 for dart2js compatibility (getInt64 not supported)
+        list[i] = byteData.getFloat64(_offset, Endian.little).toInt();
+      } else {
+        list[i] = byteData.getInt64(_offset, Endian.little);
+      }
       _offset += 8;
     }
     return list;
