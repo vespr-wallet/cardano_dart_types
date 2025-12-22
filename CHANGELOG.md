@@ -1,34 +1,40 @@
 ## 2.12.1
 
 Bug Fix:
+
 - Fixed `writeIntList`/`readIntList` crashing on dart2js (Int64 accessor not supported)
 
 Other Changes:
+
 - Added platform detection for web to use Float64 encoding as fallback
 - Added `dart_test.yaml` presets for JS (`-P js`) and WASM (`-P wasm`) testing
 
 ## 2.12.0
 
 Breaking Change for some mostly internally used classes:
+
 - Renamed `BinaryReaderImpl` to `BinaryReader` (file: `binary_reader_impl.dart` -> `binary_reader.dart`)
 - Renamed `BinaryWriterImpl` to `BinaryWriter` (file: `binary_writer_impl.dart` -> `binary_writer.dart`)
 
 New:
+
 - Created specific binary exceptions sealed class (`binary_exceptions.dart`)
 
 Other Changes:
-- Added exhaustive round-trip tests for BinaryReader/BinaryWriter (122 test cases)
 
+- Added exhaustive round-trip tests for BinaryReader/BinaryWriter (122 test cases)
 
 ## 2.11.2
 
 Bug Fixes:
+
 - [CardanoTransactionBody] Fixed empty `metadataHash` being dropped during re-serialization
 - [CardanoTransactionBody] Fixed `copyWith` breaking ascending key order when adding new fields to a parsed transaction
 
 ## 2.11.1
 
 Bug Fix:
+
 - [CardanoTransactionBody] now retains original order of the map entries so that it generates identical CBOR when re-serialized (which is important to generate the correct tx hash required for signing)
 
 ## 2.11.0
