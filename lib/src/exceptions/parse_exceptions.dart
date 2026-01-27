@@ -2,6 +2,22 @@ class CardanoValueParseException extends TransactionParseException {
   CardanoValueParseException(super.message);
 }
 
+class PolicyIdParseException extends TransactionParseException {
+  PolicyIdParseException(super.message);
+}
+
+class AssetNameParseException extends TransactionParseException {
+  AssetNameParseException(super.message);
+}
+
+class AddressParseException extends TransactionParseException {
+  AddressParseException(super.message);
+}
+
+class TransactionHashParseException extends TransactionParseException {
+  TransactionHashParseException(super.message);
+}
+
 class TransactionOutputParseException extends TransactionParseException {
   TransactionOutputParseException(super.message);
 }

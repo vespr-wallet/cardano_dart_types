@@ -15,14 +15,14 @@ void main() async {
 
     test("address is correct", () async {
       expect(
-        parsedUtxo.content.addressBytes.addressBase58Orbech32Encode(),
+        parsedUtxo.content.address.base58OrBech32Value,
         "addr1q8k5nkddh5r9jg5shxskqv3ht44hn4xlwcx26rvme224tlzpn8mxk9kwn66cf8kev3el4nsztvhfhj7lrc6j44pk9xqsafxu96",
       );
     });
 
     test("tx identifier is correct", () async {
       expect(
-        parsedUtxo.identifier.transactionHash,
+        parsedUtxo.identifier.transactionHash.value.hexEncode(),
         "448cc2a4477cf6383e7d4fe13fb2f3cbef71db3af4ae92f5c0e692e006fab017",
       );
 
@@ -41,14 +41,14 @@ void main() async {
 
     test("address is correct", () async {
       expect(
-        parsedUtxo.content.addressBytes.addressBase58Orbech32Encode(),
+        parsedUtxo.content.address.base58OrBech32Value,
         "addr1q94n8g5j6kcektn6faudqpldwczs6zj0a4dskerv0jskjhaca5a7ya2s2sl5zz30wury9vdsc22g3pe32wgxz5nqa75qvzzv0u",
       );
     });
 
     test("tx identifier is correct", () async {
       expect(
-        parsedUtxo.identifier.transactionHash,
+        parsedUtxo.identifier.transactionHash.value.hexEncode(),
         "73952449efe72265d2e6ff654e46ffd025006437a4bcb672f3f6e9919adda012",
       );
 

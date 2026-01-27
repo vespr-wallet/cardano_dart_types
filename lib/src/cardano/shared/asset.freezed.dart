@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Value {
 
- BigInt get lovelace;
+ CborInt get lovelace;
 /// Create a copy of Value
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -38,7 +38,7 @@ abstract mixin class $ValueCopyWith<$Res>  {
   factory $ValueCopyWith(Value value, $Res Function(Value) _then) = _$ValueCopyWithImpl;
 @useResult
 $Res call({
- BigInt lovelace
+ CborInt lovelace
 });
 
 
@@ -58,7 +58,7 @@ class _$ValueCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? lovelace = null,}) {
   return _then(_self.copyWith(
 lovelace: null == lovelace ? _self.lovelace : lovelace // ignore: cast_nullable_to_non_nullable
-as BigInt,
+as CborInt,
   ));
 }
 
@@ -73,7 +73,7 @@ class Value_v0 extends Value {
   const Value_v0({required this.lovelace}): super._();
   
 
-@override final  BigInt lovelace;
+@override final  CborInt lovelace;
 
 /// Create a copy of Value
 /// with the given fields replaced by the non-null parameter values.
@@ -98,7 +98,7 @@ abstract mixin class $Value_v0CopyWith<$Res> implements $ValueCopyWith<$Res> {
   factory $Value_v0CopyWith(Value_v0 value, $Res Function(Value_v0) _then) = _$Value_v0CopyWithImpl;
 @override @useResult
 $Res call({
- BigInt lovelace
+ CborInt lovelace
 });
 
 
@@ -118,7 +118,7 @@ class _$Value_v0CopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? lovelace = null,}) {
   return _then(Value_v0(
 lovelace: null == lovelace ? _self.lovelace : lovelace // ignore: cast_nullable_to_non_nullable
-as BigInt,
+as CborInt,
   ));
 }
 
@@ -132,7 +132,7 @@ class Value_v1 extends Value {
   const Value_v1({required this.lovelace, required final  List<MultiAsset> mA}): _mA = mA,super._();
   
 
-@override final  BigInt lovelace;
+@override final  CborInt lovelace;
  final  List<MultiAsset> _mA;
  List<MultiAsset> get mA {
   if (_mA is EqualUnmodifiableListView) return _mA;
@@ -164,7 +164,7 @@ abstract mixin class $Value_v1CopyWith<$Res> implements $ValueCopyWith<$Res> {
   factory $Value_v1CopyWith(Value_v1 value, $Res Function(Value_v1) _then) = _$Value_v1CopyWithImpl;
 @override @useResult
 $Res call({
- BigInt lovelace, List<MultiAsset> mA
+ CborInt lovelace, List<MultiAsset> mA
 });
 
 
@@ -184,7 +184,7 @@ class _$Value_v1CopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? lovelace = null,Object? mA = null,}) {
   return _then(Value_v1(
 lovelace: null == lovelace ? _self.lovelace : lovelace // ignore: cast_nullable_to_non_nullable
-as BigInt,mA: null == mA ? _self._mA : mA // ignore: cast_nullable_to_non_nullable
+as CborInt,mA: null == mA ? _self._mA : mA // ignore: cast_nullable_to_non_nullable
 as List<MultiAsset>,
   ));
 }
@@ -195,8 +195,7 @@ as List<MultiAsset>,
 /// @nodoc
 mixin _$MultiAsset {
 
- String get policyId;// hex encoded
- List<Asset> get assets;
+ PolicyId get policyId; List<Asset> get assets;
 /// Create a copy of MultiAsset
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -220,11 +219,11 @@ abstract mixin class $MultiAssetCopyWith<$Res>  {
   factory $MultiAssetCopyWith(MultiAsset value, $Res Function(MultiAsset) _then) = _$MultiAssetCopyWithImpl;
 @useResult
 $Res call({
- String policyId, List<Asset> assets
+ PolicyId policyId, List<Asset> assets
 });
 
 
-
+$PolicyIdCopyWith<$Res> get policyId;
 
 }
 /// @nodoc
@@ -240,11 +239,20 @@ class _$MultiAssetCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? policyId = null,Object? assets = null,}) {
   return _then(_self.copyWith(
 policyId: null == policyId ? _self.policyId : policyId // ignore: cast_nullable_to_non_nullable
-as String,assets: null == assets ? _self.assets : assets // ignore: cast_nullable_to_non_nullable
+as PolicyId,assets: null == assets ? _self.assets : assets // ignore: cast_nullable_to_non_nullable
 as List<Asset>,
   ));
 }
-
+/// Create a copy of MultiAsset
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PolicyIdCopyWith<$Res> get policyId {
+  
+  return $PolicyIdCopyWith<$Res>(_self.policyId, (value) {
+    return _then(_self.copyWith(policyId: value));
+  });
+}
 }
 
 
@@ -256,10 +264,8 @@ class _MultiAsset extends MultiAsset {
   const _MultiAsset({required this.policyId, required final  List<Asset> assets}): _assets = assets,super._();
   
 
-@override final  String policyId;
-// hex encoded
+@override final  PolicyId policyId;
  final  List<Asset> _assets;
-// hex encoded
 @override List<Asset> get assets {
   if (_assets is EqualUnmodifiableListView) return _assets;
   // ignore: implicit_dynamic_type
@@ -290,11 +296,11 @@ abstract mixin class _$MultiAssetCopyWith<$Res> implements $MultiAssetCopyWith<$
   factory _$MultiAssetCopyWith(_MultiAsset value, $Res Function(_MultiAsset) _then) = __$MultiAssetCopyWithImpl;
 @override @useResult
 $Res call({
- String policyId, List<Asset> assets
+ PolicyId policyId, List<Asset> assets
 });
 
 
-
+@override $PolicyIdCopyWith<$Res> get policyId;
 
 }
 /// @nodoc
@@ -310,19 +316,27 @@ class __$MultiAssetCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? policyId = null,Object? assets = null,}) {
   return _then(_MultiAsset(
 policyId: null == policyId ? _self.policyId : policyId // ignore: cast_nullable_to_non_nullable
-as String,assets: null == assets ? _self._assets : assets // ignore: cast_nullable_to_non_nullable
+as PolicyId,assets: null == assets ? _self._assets : assets // ignore: cast_nullable_to_non_nullable
 as List<Asset>,
   ));
 }
 
-
+/// Create a copy of MultiAsset
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PolicyIdCopyWith<$Res> get policyId {
+  
+  return $PolicyIdCopyWith<$Res>(_self.policyId, (value) {
+    return _then(_self.copyWith(policyId: value));
+  });
+}
 }
 
 /// @nodoc
 mixin _$Asset {
 
- String get hexName;// hex encoded
- BigInt get value;
+ AssetName get assetName; CborInt get value;
 /// Create a copy of Asset
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -333,16 +347,16 @@ $AssetCopyWith<Asset> get copyWith => _$AssetCopyWithImpl<Asset>(this as Asset, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Asset&&(identical(other.hexName, hexName) || other.hexName == hexName)&&(identical(other.value, value) || other.value == value));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Asset&&(identical(other.assetName, assetName) || other.assetName == assetName)&&(identical(other.value, value) || other.value == value));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,hexName,value);
+int get hashCode => Object.hash(runtimeType,assetName,value);
 
 @override
 String toString() {
-  return 'Asset(hexName: $hexName, value: $value)';
+  return 'Asset(assetName: $assetName, value: $value)';
 }
 
 
@@ -353,11 +367,11 @@ abstract mixin class $AssetCopyWith<$Res>  {
   factory $AssetCopyWith(Asset value, $Res Function(Asset) _then) = _$AssetCopyWithImpl;
 @useResult
 $Res call({
- String hexName, BigInt value
+ AssetName assetName, CborInt value
 });
 
 
-
+$AssetNameCopyWith<$Res> get assetName;
 
 }
 /// @nodoc
@@ -370,14 +384,23 @@ class _$AssetCopyWithImpl<$Res>
 
 /// Create a copy of Asset
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? hexName = null,Object? value = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? assetName = null,Object? value = null,}) {
   return _then(_self.copyWith(
-hexName: null == hexName ? _self.hexName : hexName // ignore: cast_nullable_to_non_nullable
-as String,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as BigInt,
+assetName: null == assetName ? _self.assetName : assetName // ignore: cast_nullable_to_non_nullable
+as AssetName,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as CborInt,
   ));
 }
-
+/// Create a copy of Asset
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AssetNameCopyWith<$Res> get assetName {
+  
+  return $AssetNameCopyWith<$Res>(_self.assetName, (value) {
+    return _then(_self.copyWith(assetName: value));
+  });
+}
 }
 
 
@@ -386,12 +409,11 @@ as BigInt,
 
 
 class _Asset extends Asset {
-  const _Asset({required this.hexName, required this.value}): super._();
+  const _Asset({required this.assetName, required this.value}): super._();
   
 
-@override final  String hexName;
-// hex encoded
-@override final  BigInt value;
+@override final  AssetName assetName;
+@override final  CborInt value;
 
 /// Create a copy of Asset
 /// with the given fields replaced by the non-null parameter values.
@@ -403,16 +425,16 @@ _$AssetCopyWith<_Asset> get copyWith => __$AssetCopyWithImpl<_Asset>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Asset&&(identical(other.hexName, hexName) || other.hexName == hexName)&&(identical(other.value, value) || other.value == value));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Asset&&(identical(other.assetName, assetName) || other.assetName == assetName)&&(identical(other.value, value) || other.value == value));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,hexName,value);
+int get hashCode => Object.hash(runtimeType,assetName,value);
 
 @override
 String toString() {
-  return 'Asset(hexName: $hexName, value: $value)';
+  return 'Asset(assetName: $assetName, value: $value)';
 }
 
 
@@ -423,11 +445,11 @@ abstract mixin class _$AssetCopyWith<$Res> implements $AssetCopyWith<$Res> {
   factory _$AssetCopyWith(_Asset value, $Res Function(_Asset) _then) = __$AssetCopyWithImpl;
 @override @useResult
 $Res call({
- String hexName, BigInt value
+ AssetName assetName, CborInt value
 });
 
 
-
+@override $AssetNameCopyWith<$Res> get assetName;
 
 }
 /// @nodoc
@@ -440,15 +462,24 @@ class __$AssetCopyWithImpl<$Res>
 
 /// Create a copy of Asset
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? hexName = null,Object? value = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? assetName = null,Object? value = null,}) {
   return _then(_Asset(
-hexName: null == hexName ? _self.hexName : hexName // ignore: cast_nullable_to_non_nullable
-as String,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as BigInt,
+assetName: null == assetName ? _self.assetName : assetName // ignore: cast_nullable_to_non_nullable
+as AssetName,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as CborInt,
   ));
 }
 
-
+/// Create a copy of Asset
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AssetNameCopyWith<$Res> get assetName {
+  
+  return $AssetNameCopyWith<$Res>(_self.assetName, (value) {
+    return _then(_self.copyWith(assetName: value));
+  });
+}
 }
 
 // dart format on

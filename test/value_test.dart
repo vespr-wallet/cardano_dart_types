@@ -1,4 +1,7 @@
 import "package:cardano_dart_types/src/cardano/shared/asset.dart";
+import "package:cardano_dart_types/src/cardano/shared/asset_name.dart";
+import "package:cardano_dart_types/src/cardano/shared/policy.dart";
+import "package:cardano_dart_types/src/utils/cbor_x.dart";
 import "package:cardano_dart_types/src/utils/transformations.dart";
 import "package:test/test.dart";
 
@@ -17,101 +20,101 @@ void main() async {
     });
     group("operations", () {
       final first = Value.v1(
-        lovelace: BigInt.parse("1"),
+        lovelace: BigInt.parse("1").toCborInt(),
         mA: [
           MultiAsset(
             // fully cancel out on add (oposite amounts)
-            policyId: "530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8a",
+            policyId: PolicyId.fromHex("530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8a"),
             assets: [
               Asset(
-                hexName: "344672653568323835",
-                value: BigInt.parse("-1"),
+                assetName: AssetName.fromHex("344672653568323835"),
+                value: BigInt.parse("-1").toCborInt(),
               ),
               Asset(
-                hexName: "4343303030313030303030303030303030303031313430303332",
-                value: BigInt.one,
+                assetName: AssetName.fromHex("4343303030313030303030303030303030303031313430303332"),
+                value: BigInt.one.toCborInt(),
               ),
             ],
           ),
           MultiAsset(
             // cancel out first 2 of 3 on add ; cancel out last on subtract
-            policyId: "851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0",
+            policyId: PolicyId.fromHex("851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0"),
             assets: [
               Asset(
-                hexName: "344672653568323835",
-                value: BigInt.parse("-20"),
+                assetName: AssetName.fromHex("344672653568323835"),
+                value: BigInt.parse("-20").toCborInt(),
               ),
               Asset(
-                hexName: "4343303030313030303030303030303030303031313430303332",
-                value: BigInt.parse("200"),
+                assetName: AssetName.fromHex("4343303030313030303030303030303030303031313430303332"),
+                value: BigInt.parse("200").toCborInt(),
               ),
               Asset(
-                hexName: "44494e47",
-                value: BigInt.parse("5"),
+                assetName: AssetName.fromHex("44494e47"),
+                value: BigInt.parse("5").toCborInt(),
               ),
             ],
           ),
           MultiAsset(
             // doesn't exist in other
-            policyId: "ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0",
+            policyId: PolicyId.fromHex("ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0"),
             assets: [
               Asset(
-                hexName: "4343303030313030303030303030303030303031313430303332",
-                value: BigInt.parse("4"),
+                assetName: AssetName.fromHex("4343303030313030303030303030303030303031313430303332"),
+                value: BigInt.parse("4").toCborInt(),
               ),
               Asset(
-                hexName: "344672653568323835",
-                value: BigInt.parse("-4"),
+                assetName: AssetName.fromHex("344672653568323835"),
+                value: BigInt.parse("-4").toCborInt(),
               ),
             ],
           ),
         ],
       );
       final second = Value.v1(
-        lovelace: BigInt.parse("-1"),
+        lovelace: BigInt.parse("-1").toCborInt(),
         mA: [
           MultiAsset(
             // fully cancel out (oposite amounts)
-            policyId: "530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8a",
+            policyId: PolicyId.fromHex("530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8a"),
             assets: [
               Asset(
-                hexName: "344672653568323835",
-                value: BigInt.parse("1"),
+                assetName: AssetName.fromHex("344672653568323835"),
+                value: BigInt.parse("1").toCborInt(),
               ),
               Asset(
-                hexName: "4343303030313030303030303030303030303031313430303332",
-                value: BigInt.parse("-1"),
+                assetName: AssetName.fromHex("4343303030313030303030303030303030303031313430303332"),
+                value: BigInt.parse("-1").toCborInt(),
               ),
             ],
           ),
           MultiAsset(
-            policyId: "851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0",
+            policyId: PolicyId.fromHex("851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0"),
             assets: [
               Asset(
-                hexName: "4e5458",
-                value: BigInt.parse("2"),
+                assetName: AssetName.fromHex("4e5458"),
+                value: BigInt.parse("2").toCborInt(),
               ),
               Asset(
-                hexName: "4343303030313030303030303030303030303031313430303332",
-                value: BigInt.parse("-200"),
+                assetName: AssetName.fromHex("4343303030313030303030303030303030303031313430303332"),
+                value: BigInt.parse("-200").toCborInt(),
               ),
               Asset(
-                hexName: "44494e47",
-                value: BigInt.parse("5"),
+                assetName: AssetName.fromHex("44494e47"),
+                value: BigInt.parse("5").toCborInt(),
               ),
               Asset(
-                hexName: "344672653568323835",
-                value: BigInt.parse("20"),
+                assetName: AssetName.fromHex("344672653568323835"),
+                value: BigInt.parse("20").toCborInt(),
               ),
             ],
           ),
           MultiAsset(
             // doesn't exist in other
-            policyId: "edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e99344479",
+            policyId: PolicyId.fromHex("edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e99344479"),
             assets: [
               Asset(
-                hexName: "44494e47",
-                value: BigInt.parse("2"),
+                assetName: AssetName.fromHex("44494e47"),
+                value: BigInt.parse("2").toCborInt(),
               ),
             ],
           ),
@@ -119,43 +122,43 @@ void main() async {
       );
       test("addition", () async {
         final expected = Value.v1(
-          lovelace: BigInt.parse("0"),
+          lovelace: BigInt.parse("0").toCborInt(),
           mA: [
             MultiAsset(
               // cancel out first 2 of 3
-              policyId: "851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0",
+              policyId: PolicyId.fromHex("851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0"),
               assets: [
                 Asset(
-                  hexName: "44494e47",
-                  value: BigInt.parse("10"),
+                  assetName: AssetName.fromHex("44494e47"),
+                  value: BigInt.parse("10").toCborInt(),
                 ),
                 Asset(
-                  hexName: "4e5458",
-                  value: BigInt.parse("2"),
-                )
-              ],
-            ),
-            MultiAsset(
-              // doesn't exist in other
-              policyId: "ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0",
-              assets: [
-                Asset(
-                  hexName: "4343303030313030303030303030303030303031313430303332",
-                  value: BigInt.parse("4"),
-                ),
-                Asset(
-                  hexName: "344672653568323835",
-                  value: BigInt.parse("-4"),
+                  assetName: AssetName.fromHex("4e5458"),
+                  value: BigInt.parse("2").toCborInt(),
                 ),
               ],
             ),
             MultiAsset(
               // doesn't exist in other
-              policyId: "edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e99344479",
+              policyId: PolicyId.fromHex("ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0"),
               assets: [
                 Asset(
-                  hexName: "44494e47",
-                  value: BigInt.parse("2"),
+                  assetName: AssetName.fromHex("4343303030313030303030303030303030303031313430303332"),
+                  value: BigInt.parse("4").toCborInt(),
+                ),
+                Asset(
+                  assetName: AssetName.fromHex("344672653568323835"),
+                  value: BigInt.parse("-4").toCborInt(),
+                ),
+              ],
+            ),
+            MultiAsset(
+              // doesn't exist in other
+              policyId: PolicyId.fromHex("edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e99344479"),
+              assets: [
+                Asset(
+                  assetName: AssetName.fromHex("44494e47"),
+                  value: BigInt.parse("2").toCborInt(),
                 ),
               ],
             ),
@@ -167,61 +170,61 @@ void main() async {
 
       test("subtraction", () async {
         final expected = Value.v1(
-          lovelace: BigInt.parse("2"),
+          lovelace: BigInt.parse("2").toCborInt(),
           mA: [
             MultiAsset(
               // fully cancel out (oposite amounts)
-              policyId: "530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8a",
+              policyId: PolicyId.fromHex("530a197fe7c275f204c3396b3782fc738f4968f0c81dd2291cf07b8a"),
               assets: [
                 Asset(
-                  hexName: "344672653568323835",
-                  value: BigInt.parse("-2"),
+                  assetName: AssetName.fromHex("344672653568323835"),
+                  value: BigInt.parse("-2").toCborInt(),
                 ),
                 Asset(
-                  hexName: "4343303030313030303030303030303030303031313430303332",
-                  value: BigInt.parse("2"),
+                  assetName: AssetName.fromHex("4343303030313030303030303030303030303031313430303332"),
+                  value: BigInt.parse("2").toCborInt(),
                 ),
               ],
             ),
             MultiAsset(
               // cancel out first 2 of 3 on add ; cancel out last on subtract
-              policyId: "851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0",
+              policyId: PolicyId.fromHex("851ab97a83e9d630cc007bf4a084b553a01aede72ef3f31a646478e0"),
               assets: [
                 Asset(
-                  hexName: "344672653568323835",
-                  value: BigInt.parse("-40"),
+                  assetName: AssetName.fromHex("344672653568323835"),
+                  value: BigInt.parse("-40").toCborInt(),
                 ),
                 Asset(
-                  hexName: "4343303030313030303030303030303030303031313430303332",
-                  value: BigInt.parse("400"),
+                  assetName: AssetName.fromHex("4343303030313030303030303030303030303031313430303332"),
+                  value: BigInt.parse("400").toCborInt(),
                 ),
                 Asset(
-                  hexName: "4e5458",
-                  value: BigInt.parse("-2"),
+                  assetName: AssetName.fromHex("4e5458"),
+                  value: BigInt.parse("-2").toCborInt(),
                 ),
               ],
             ),
             MultiAsset(
               // doesn't exist in other
-              policyId: "ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0",
+              policyId: PolicyId.fromHex("ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0"),
               assets: [
                 Asset(
-                  hexName: "4343303030313030303030303030303030303031313430303332",
-                  value: BigInt.parse("4"),
+                  assetName: AssetName.fromHex("4343303030313030303030303030303030303031313430303332"),
+                  value: BigInt.parse("4").toCborInt(),
                 ),
                 Asset(
-                  hexName: "344672653568323835",
-                  value: BigInt.parse("-4"),
+                  assetName: AssetName.fromHex("344672653568323835"),
+                  value: BigInt.parse("-4").toCborInt(),
                 ),
               ],
             ),
             MultiAsset(
               // doesn't exist in other
-              policyId: "edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e99344479",
+              policyId: PolicyId.fromHex("edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e99344479"),
               assets: [
                 Asset(
-                  hexName: "44494e47",
-                  value: BigInt.parse("-2"),
+                  assetName: AssetName.fromHex("44494e47"),
+                  value: BigInt.parse("-2").toCborInt(),
                 ),
               ],
             ),
@@ -232,9 +235,9 @@ void main() async {
       });
 
       test("v0 equals v1 if same lovelace", () async {
-        final a0 = Value.v0(lovelace: BigInt.from(20));
-        final a1 = Value.v1(lovelace: BigInt.from(20), mA: const []);
-        final a2 = Value.v1(lovelace: BigInt.from(21), mA: const []);
+        final a0 = Value.v0(lovelace: BigInt.from(20).toCborInt());
+        final a1 = Value.v1(lovelace: BigInt.from(20).toCborInt(), mA: const []);
+        final a2 = Value.v1(lovelace: BigInt.from(21).toCborInt(), mA: const []);
 
         expect(a1, equals(a0));
         expect(a1.hashCode, equals(a0.hashCode));
@@ -245,16 +248,16 @@ void main() async {
       test("same lovelace and mA equals unordered", () async {
         final a0 = first + second;
         final a1 = second + first;
-        final a2 = a0.copyWith(lovelace: BigInt.from(123));
+        final a2 = a0.copyWith(lovelace: BigInt.from(123).toCborInt());
         final a0Reversed = switch (a0) {
           Value_v0() => a0,
           Value_v1() => a0.copyWith(
-              mA: a0
-                  .mA //
-                  .reversed
-                  .map((e) => e.copyWith(assets: e.assets.reversed.toList()))
-                  .toList(),
-            ),
+            mA: a0
+                .mA //
+                .reversed
+                .map((e) => e.copyWith(assets: e.assets.reversed.toList()))
+                .toList(),
+          ),
         };
 
         expect(a0, equals(a0Reversed));

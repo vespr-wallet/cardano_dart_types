@@ -1,3 +1,28 @@
+## 3.0.0
+
+Breaking Changes:
+
+This release introduces wrapper types that preserve CBOR metadata (lengthType, tags) for accurate re-encoding of parsed transactions.
+
+- **[CardanoTransactionInput]** `transactionHash` changed from `String` to `TransactionHash`
+- **[CardanoTransactionInput]** Added `lengthType` and `cborTags` fields
+- **[CardanoTransactionOutput]** `addressBytes` renamed to `address` and type changed from `Uint8List` to `Address`
+- **[CardanoTransactionBody]** `fee`, `ttl`, `validityStartInterval`, `totalCollateral` changed from `BigInt`/`BigInt?` to `CborInt`/`CborInt?`
+- **[Value]** `lovelace` changed from `BigInt` to `CborInt`
+- **[MultiAsset]** `policyId` changed from `String` to `PolicyId`
+- **[Asset]** `hexName` renamed to `assetName` and type changed from `String` to `AssetName`
+- **[Asset]** `value` changed from `BigInt` to `CborInt`
+- Removed `CborBigIntExtensions.serialize()` from `util.dart`
+
+New:
+
+- Added `Address` wrapper class with `fromHex()`, `fromBase58OrBech32()` factories and `hexValue`, `base58OrBech32Value` getters
+- Added `TransactionHash` wrapper class with `fromHex()` factory and `hexValue` getter
+- Added `PolicyId` wrapper class with `fromHex()` factory and `hexValue` getter
+- Added `AssetName` wrapper class with `fromHex()` factory and `hexValue` getter
+- Added `cbor_x.dart` with `BigIntX.toCborInt()`, `BigIntX.toCborBigInt()`, and `IntX.toCborInt()` extensions
+- Added `PolicyIdParseException`, `AssetNameParseException`, `AddressParseException`, `TransactionHashParseException`
+
 ## 2.12.1
 
 Bug Fix:

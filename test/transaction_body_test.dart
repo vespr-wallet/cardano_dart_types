@@ -70,7 +70,7 @@ void main() async {
       test("copyWith on ascending-order body preserves ascending order when adding new field", () {
         // CBOR: a4 (map 4) with keys 0, 1, 2, 8 in ascending order (with gap at 3-7)
         // 00 d9010280 (key 0: inputs)
-        // 01 80 (key 1: outputs)  
+        // 01 80 (key 1: outputs)
         // 02 182a (key 2: fee = 42)
         // 08 1903e8 (key 8: validityStartInterval = 1000)
         const bodyWithAscendingKeys = "a400d9010280018002182a081903e8";
@@ -78,7 +78,7 @@ void main() async {
         final body = CardanoTransactionBody.deserializeHex(bodyWithAscendingKeys);
 
         // Use copyWith to add ttl (key 3), which should come BETWEEN key 2 and key 8
-        final modifiedBody = body.copyWith(ttl: BigInt.from(5000));
+        final modifiedBody = body.copyWith(ttl: BigInt.from(5000).toCborInt());
 
         // The serialized output MUST have ascending key order: 0, 1, 2, 3, 8
         // NOT broken order: 0, 1, 2, 8, 3 (which would happen if 3 is appended)
