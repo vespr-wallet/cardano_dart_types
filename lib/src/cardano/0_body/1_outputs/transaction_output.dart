@@ -9,6 +9,7 @@ import "../../../utils/sugar.dart";
 import "../../../utils/transformations.dart";
 import "../../1_witness_set/4_plutus_data/plutus_data.dart";
 import "../../cbor_encodable.dart";
+import "../../shared/address.dart";
 import "../../shared/asset.dart";
 import "../../transaction.dart";
 import "2_datum/output_datum.dart";
@@ -21,14 +22,14 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
   CardanoTransactionOutput._();
 
   factory CardanoTransactionOutput.legacy({
-    required Uint8List addressBytes, // address bytes (convert to bech32 for shelley and base58 for byron)
+    required Address address,
     required Value value,
     required OutputDatum_Hash? outDatumHash,
     required CborLengthType lengthType,
   }) = CardanoTransactionOutput_Legacy;
 
   factory CardanoTransactionOutput.postAlonzo({
-    required Uint8List addressBytes, // address bytes (convert to bech32 for shelley and base58 for byron)
+    required Address address,
     required Value value,
     required OutputDatum? outDatum,
     required Uint8List? scriptRef,
@@ -43,7 +44,7 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
 
   @override
   String toString() {
-    final addr = addressBytes.addressBase58Orbech32Encode();
+    final addr = address.base58OrBech32Value;
     return switch (this) {
       CardanoTransactionOutput_PostAlonzo(scriptRef: final scriptRef) =>
         "CardanoTransactionOutput.postAlonzo(addressBytes: $addr, value: $value, "
@@ -80,7 +81,7 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
   }
 
   factory CardanoTransactionOutput.deserializePostAlonzo({required CborMap cMap}) {
-    final address = cMap[const CborSmallInt(0)]! as CborBytes;
+    final address = Address.deserialize(cMap[const CborSmallInt(0)]!);
     final cardanoValue = _parseCborValue(
       cMap[const CborSmallInt(1)].require(argumentName: "deserializePostAlonzo: cMap[const CborSmallInt(1)]"),
       source: "deserializePostAlonzo",
@@ -111,7 +112,7 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
     final scriptRef = cborMaybeScriptRef?.let((p0) => (p0 as CborBytes).bytes.toUint8List());
 
     final result = CardanoTransactionOutput_PostAlonzo(
-      addressBytes: address.bytes.toUint8List(),
+      address: address,
       value: cardanoValue,
       outDatum: datum,
       scriptRef: scriptRef,
@@ -128,7 +129,7 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
       throw TransactionOutputParseException("deserializeAlonzo: Length is ${cList.length} instead of 2 оr 3");
     }
 
-    final cborAddress = cList[0] as CborBytes;
+    final cborAddress = cList[0];
     final cborValue = cList[1];
     final cborMaybeDatum = cList.length == 3 ? cList[2] : null;
 
@@ -143,7 +144,7 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
     final value = _parseCborValue(cborValue, source: "deserializeAlonzo");
 
     final result = CardanoTransactionOutput.legacy(
-      addressBytes: cborAddress.bytes.toUint8List(),
+      address: Address.deserialize(cborAddress),
       value: value,
       outDatumHash: datum,
       lengthType: cList.type,
@@ -169,7 +170,7 @@ extension _CardanoTxOutputPostAlonzoExtensions on CardanoTransactionOutput_PostA
       if (forJson) MapEntry(CborString("type"), CborString("postAlonzo")),
       MapEntry(
         forJson ? CborString("address") : const CborSmallInt(0),
-        forJson ? CborString(addressBytes.addressBase58Orbech32Encode()) : CborBytes(addressBytes),
+        address.serialize(forJson: forJson),
       ),
       MapEntry(
         forJson ? CborString("Value") : const CborSmallInt(1),
@@ -204,7 +205,7 @@ extension _CardanoTxOutputLegacyExtensions on CardanoTransactionOutput_Legacy {
   CborList _serializeLegacy({required bool forJson}) => CborList.of(
     [
       if (forJson) CborString("type: legacy"),
-      forJson ? CborString(addressBytes.addressBase58Orbech32Encode()) : CborBytes(addressBytes),
+      address.serialize(forJson: forJson),
       value.serialize(forJson: forJson),
       datum?.serialize(forJson: forJson),
     ].nonNulls(),

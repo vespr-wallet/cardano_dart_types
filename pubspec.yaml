@@ -1,6 +1,6 @@
 name: cardano_dart_types
 description: Part of Cardano Flutter SDK containing the data models.
-version: 2.12.1
+version: 3.0.0
 homepage: https://github.com/vespr-wallet/cardano_dart_types
 repository: https://github.com/vespr-wallet/cardano_dart_types
 issue_tracker: https://github.com/vespr-wallet/cardano_dart_types/issues
@@ -9,12 +9,9 @@ environment:
   sdk: ">=3.8.0 <4.0.0"
 
 dependencies:
-  bip32_ed25519: ^0.6.0 # for generating/deriving keys
-  cbor:
-    ^6.3.3 # to encode/decode cbor transactions
-    #  git:
-    #    url: https://github.com/vespr-wallet/cbor.git
-    #    ref: 2d46b32519e9ed5a07e8e2528e00fa0a9e0770e7
+  bip32_ed25519: ^0.6.2 # for generating/deriving keys
+  cbor: ^6.5.0 # to encode/decode cbor transactions
+
   # pinenacl: ^0.6.0 # for cryptographic signatures and hashing
   # bip39: ^1.0.6 # to generate mnemonics and convert them to entropy
   # bip39:
@@ -30,8 +27,8 @@ dependencies:
 
 dev_dependencies:
   build_runner: any
-  freezed: ^3.2.3
-  json_serializable: ^6.11.1
+  freezed: ^3.2.4
+  json_serializable: ^6.11.4
   lints: ^6.0.0
   test: ^1.26.3
   # dependency_validator: ^4.0.0

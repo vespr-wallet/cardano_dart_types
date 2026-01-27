@@ -14,8 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CardanoTransactionInput {
 
- String get transactionHash;//hex
- int get index;
+ TransactionHash get transactionHash; int get index; CborLengthType get lengthType; List<int> get cborTags;
 /// Create a copy of CardanoTransactionInput
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +25,16 @@ $CardanoTransactionInputCopyWith<CardanoTransactionInput> get copyWith => _$Card
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionInput&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionInput&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.cborTags, cborTags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,transactionHash,index);
+int get hashCode => Object.hash(runtimeType,transactionHash,index,lengthType,const DeepCollectionEquality().hash(cborTags));
 
 @override
 String toString() {
-  return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index)';
+  return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index, lengthType: $lengthType, cborTags: $cborTags)';
 }
 
 
@@ -46,11 +45,11 @@ abstract mixin class $CardanoTransactionInputCopyWith<$Res>  {
   factory $CardanoTransactionInputCopyWith(CardanoTransactionInput value, $Res Function(CardanoTransactionInput) _then) = _$CardanoTransactionInputCopyWithImpl;
 @useResult
 $Res call({
- String transactionHash, int index
+ TransactionHash transactionHash, int index, CborLengthType lengthType, List<int> cborTags
 });
 
 
-
+$TransactionHashCopyWith<$Res> get transactionHash;
 
 }
 /// @nodoc
@@ -63,14 +62,25 @@ class _$CardanoTransactionInputCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionInput
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? transactionHash = null,Object? index = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? transactionHash = null,Object? index = null,Object? lengthType = null,Object? cborTags = null,}) {
   return _then(_self.copyWith(
 transactionHash: null == transactionHash ? _self.transactionHash : transactionHash // ignore: cast_nullable_to_non_nullable
-as String,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
-as int,
+as TransactionHash,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,cborTags: null == cborTags ? _self.cborTags : cborTags // ignore: cast_nullable_to_non_nullable
+as List<int>,
   ));
 }
-
+/// Create a copy of CardanoTransactionInput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TransactionHashCopyWith<$Res> get transactionHash {
+  
+  return $TransactionHashCopyWith<$Res>(_self.transactionHash, (value) {
+    return _then(_self.copyWith(transactionHash: value));
+  });
+}
 }
 
 
@@ -79,12 +89,19 @@ as int,
 
 
 class _CardanoTransactionInput extends CardanoTransactionInput {
-  const _CardanoTransactionInput({required this.transactionHash, required this.index}): super._();
+  const _CardanoTransactionInput({required this.transactionHash, required this.index, this.lengthType = CborLengthType.definite, final  List<int> cborTags = const []}): _cborTags = cborTags,super._();
   
 
-@override final  String transactionHash;
-//hex
+@override final  TransactionHash transactionHash;
 @override final  int index;
+@override@JsonKey() final  CborLengthType lengthType;
+ final  List<int> _cborTags;
+@override@JsonKey() List<int> get cborTags {
+  if (_cborTags is EqualUnmodifiableListView) return _cborTags;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_cborTags);
+}
+
 
 /// Create a copy of CardanoTransactionInput
 /// with the given fields replaced by the non-null parameter values.
@@ -96,16 +113,16 @@ _$CardanoTransactionInputCopyWith<_CardanoTransactionInput> get copyWith => __$C
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransactionInput&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransactionInput&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,transactionHash,index);
+int get hashCode => Object.hash(runtimeType,transactionHash,index,lengthType,const DeepCollectionEquality().hash(_cborTags));
 
 @override
 String toString() {
-  return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index)';
+  return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index, lengthType: $lengthType, cborTags: $cborTags)';
 }
 
 
@@ -116,11 +133,11 @@ abstract mixin class _$CardanoTransactionInputCopyWith<$Res> implements $Cardano
   factory _$CardanoTransactionInputCopyWith(_CardanoTransactionInput value, $Res Function(_CardanoTransactionInput) _then) = __$CardanoTransactionInputCopyWithImpl;
 @override @useResult
 $Res call({
- String transactionHash, int index
+ TransactionHash transactionHash, int index, CborLengthType lengthType, List<int> cborTags
 });
 
 
-
+@override $TransactionHashCopyWith<$Res> get transactionHash;
 
 }
 /// @nodoc
@@ -133,15 +150,26 @@ class __$CardanoTransactionInputCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionInput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? transactionHash = null,Object? index = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? transactionHash = null,Object? index = null,Object? lengthType = null,Object? cborTags = null,}) {
   return _then(_CardanoTransactionInput(
 transactionHash: null == transactionHash ? _self.transactionHash : transactionHash // ignore: cast_nullable_to_non_nullable
-as String,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
-as int,
+as TransactionHash,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,cborTags: null == cborTags ? _self._cborTags : cborTags // ignore: cast_nullable_to_non_nullable
+as List<int>,
   ));
 }
 
-
+/// Create a copy of CardanoTransactionInput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TransactionHashCopyWith<$Res> get transactionHash {
+  
+  return $TransactionHashCopyWith<$Res>(_self.transactionHash, (value) {
+    return _then(_self.copyWith(transactionHash: value));
+  });
+}
 }
 
 // dart format on

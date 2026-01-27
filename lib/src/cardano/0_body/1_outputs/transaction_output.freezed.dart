@@ -14,8 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CardanoTransactionOutput {
 
- OutputDatum? get datum; Uint8List get addressBytes;// address bytes (convert to bech32 for shelley and base58 for byron)
- Value get value; CborLengthType get lengthType;
+ OutputDatum? get datum; Address get address; Value get value; CborLengthType get lengthType;
 /// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,12 +25,12 @@ $CardanoTransactionOutputCopyWith<CardanoTransactionOutput> get copyWith => _$Ca
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput&&(identical(other.datum, datum) || other.datum == datum)&&const DeepCollectionEquality().equals(other.addressBytes, addressBytes)&&(identical(other.value, value) || other.value == value)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput&&(identical(other.datum, datum) || other.datum == datum)&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,datum,const DeepCollectionEquality().hash(addressBytes),value,lengthType);
+int get hashCode => Object.hash(runtimeType,datum,address,value,lengthType);
 
 
 
@@ -42,11 +41,11 @@ abstract mixin class $CardanoTransactionOutputCopyWith<$Res>  {
   factory $CardanoTransactionOutputCopyWith(CardanoTransactionOutput value, $Res Function(CardanoTransactionOutput) _then) = _$CardanoTransactionOutputCopyWithImpl;
 @useResult
 $Res call({
- Uint8List addressBytes, Value value, CborLengthType lengthType
+ Address address, Value value, CborLengthType lengthType
 });
 
 
-$ValueCopyWith<$Res> get value;
+$AddressCopyWith<$Res> get address;$ValueCopyWith<$Res> get value;
 
 }
 /// @nodoc
@@ -59,15 +58,24 @@ class _$CardanoTransactionOutputCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? addressBytes = null,Object? value = null,Object? lengthType = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? address = null,Object? value = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
-addressBytes: null == addressBytes ? _self.addressBytes : addressBytes // ignore: cast_nullable_to_non_nullable
-as Uint8List,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as Address,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as Value,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
 as CborLengthType,
   ));
 }
 /// Create a copy of CardanoTransactionOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AddressCopyWith<$Res> get address {
+  
+  return $AddressCopyWith<$Res>(_self.address, (value) {
+    return _then(_self.copyWith(address: value));
+  });
+}/// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -85,11 +93,10 @@ $ValueCopyWith<$Res> get value {
 
 
 class CardanoTransactionOutput_Legacy extends CardanoTransactionOutput {
-   CardanoTransactionOutput_Legacy({required this.addressBytes, required this.value, required this.outDatumHash, required this.lengthType}): super._();
+   CardanoTransactionOutput_Legacy({required this.address, required this.value, required this.outDatumHash, required this.lengthType}): super._();
   
 
-@override final  Uint8List addressBytes;
-// address bytes (convert to bech32 for shelley and base58 for byron)
+@override final  Address address;
 @override final  Value value;
  final  OutputDatum_Hash? outDatumHash;
 @override final  CborLengthType lengthType;
@@ -104,12 +111,12 @@ $CardanoTransactionOutput_LegacyCopyWith<CardanoTransactionOutput_Legacy> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_Legacy&&const DeepCollectionEquality().equals(other.addressBytes, addressBytes)&&(identical(other.value, value) || other.value == value)&&const DeepCollectionEquality().equals(other.outDatumHash, outDatumHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_Legacy&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&const DeepCollectionEquality().equals(other.outDatumHash, outDatumHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(addressBytes),value,const DeepCollectionEquality().hash(outDatumHash),lengthType);
+int get hashCode => Object.hash(runtimeType,address,value,const DeepCollectionEquality().hash(outDatumHash),lengthType);
 
 
 
@@ -120,11 +127,11 @@ abstract mixin class $CardanoTransactionOutput_LegacyCopyWith<$Res> implements $
   factory $CardanoTransactionOutput_LegacyCopyWith(CardanoTransactionOutput_Legacy value, $Res Function(CardanoTransactionOutput_Legacy) _then) = _$CardanoTransactionOutput_LegacyCopyWithImpl;
 @override @useResult
 $Res call({
- Uint8List addressBytes, Value value, OutputDatum_Hash? outDatumHash, CborLengthType lengthType
+ Address address, Value value, OutputDatum_Hash? outDatumHash, CborLengthType lengthType
 });
 
 
-@override $ValueCopyWith<$Res> get value;
+@override $AddressCopyWith<$Res> get address;@override $ValueCopyWith<$Res> get value;
 
 }
 /// @nodoc
@@ -137,10 +144,10 @@ class _$CardanoTransactionOutput_LegacyCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? addressBytes = null,Object? value = null,Object? outDatumHash = freezed,Object? lengthType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? address = null,Object? value = null,Object? outDatumHash = freezed,Object? lengthType = null,}) {
   return _then(CardanoTransactionOutput_Legacy(
-addressBytes: null == addressBytes ? _self.addressBytes : addressBytes // ignore: cast_nullable_to_non_nullable
-as Uint8List,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as Address,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as Value,outDatumHash: freezed == outDatumHash ? _self.outDatumHash : outDatumHash // ignore: cast_nullable_to_non_nullable
 as OutputDatum_Hash?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
 as CborLengthType,
@@ -148,6 +155,15 @@ as CborLengthType,
 }
 
 /// Create a copy of CardanoTransactionOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AddressCopyWith<$Res> get address {
+  
+  return $AddressCopyWith<$Res>(_self.address, (value) {
+    return _then(_self.copyWith(address: value));
+  });
+}/// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -163,11 +179,10 @@ $ValueCopyWith<$Res> get value {
 
 
 class CardanoTransactionOutput_PostAlonzo extends CardanoTransactionOutput {
-   CardanoTransactionOutput_PostAlonzo({required this.addressBytes, required this.value, required this.outDatum, required this.scriptRef, required this.lengthType}): super._();
+   CardanoTransactionOutput_PostAlonzo({required this.address, required this.value, required this.outDatum, required this.scriptRef, required this.lengthType}): super._();
   
 
-@override final  Uint8List addressBytes;
-// address bytes (convert to bech32 for shelley and base58 for byron)
+@override final  Address address;
 @override final  Value value;
  final  OutputDatum? outDatum;
  final  Uint8List? scriptRef;
@@ -183,12 +198,12 @@ $CardanoTransactionOutput_PostAlonzoCopyWith<CardanoTransactionOutput_PostAlonzo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_PostAlonzo&&const DeepCollectionEquality().equals(other.addressBytes, addressBytes)&&(identical(other.value, value) || other.value == value)&&(identical(other.outDatum, outDatum) || other.outDatum == outDatum)&&const DeepCollectionEquality().equals(other.scriptRef, scriptRef)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_PostAlonzo&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&(identical(other.outDatum, outDatum) || other.outDatum == outDatum)&&const DeepCollectionEquality().equals(other.scriptRef, scriptRef)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(addressBytes),value,outDatum,const DeepCollectionEquality().hash(scriptRef),lengthType);
+int get hashCode => Object.hash(runtimeType,address,value,outDatum,const DeepCollectionEquality().hash(scriptRef),lengthType);
 
 
 
@@ -199,11 +214,11 @@ abstract mixin class $CardanoTransactionOutput_PostAlonzoCopyWith<$Res> implemen
   factory $CardanoTransactionOutput_PostAlonzoCopyWith(CardanoTransactionOutput_PostAlonzo value, $Res Function(CardanoTransactionOutput_PostAlonzo) _then) = _$CardanoTransactionOutput_PostAlonzoCopyWithImpl;
 @override @useResult
 $Res call({
- Uint8List addressBytes, Value value, OutputDatum? outDatum, Uint8List? scriptRef, CborLengthType lengthType
+ Address address, Value value, OutputDatum? outDatum, Uint8List? scriptRef, CborLengthType lengthType
 });
 
 
-@override $ValueCopyWith<$Res> get value;$OutputDatumCopyWith<$Res>? get outDatum;
+@override $AddressCopyWith<$Res> get address;@override $ValueCopyWith<$Res> get value;$OutputDatumCopyWith<$Res>? get outDatum;
 
 }
 /// @nodoc
@@ -216,10 +231,10 @@ class _$CardanoTransactionOutput_PostAlonzoCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? addressBytes = null,Object? value = null,Object? outDatum = freezed,Object? scriptRef = freezed,Object? lengthType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? address = null,Object? value = null,Object? outDatum = freezed,Object? scriptRef = freezed,Object? lengthType = null,}) {
   return _then(CardanoTransactionOutput_PostAlonzo(
-addressBytes: null == addressBytes ? _self.addressBytes : addressBytes // ignore: cast_nullable_to_non_nullable
-as Uint8List,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as Address,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as Value,outDatum: freezed == outDatum ? _self.outDatum : outDatum // ignore: cast_nullable_to_non_nullable
 as OutputDatum?,scriptRef: freezed == scriptRef ? _self.scriptRef : scriptRef // ignore: cast_nullable_to_non_nullable
 as Uint8List?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
@@ -228,6 +243,15 @@ as CborLengthType,
 }
 
 /// Create a copy of CardanoTransactionOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AddressCopyWith<$Res> get address {
+  
+  return $AddressCopyWith<$Res>(_self.address, (value) {
+    return _then(_self.copyWith(address: value));
+  });
+}/// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

@@ -12,6 +12,7 @@ import "../hd/signing/proposal_diff_info.dart";
 import "../hd/signing/signing_types.dart";
 import "../hd/signing/vote_info.dart";
 import "../hd/util/CborDeserializationException.dart";
+import "../utils/cbor_x.dart";
 import "../utils/transformations.dart";
 import "0_body/19_voting/gov_action_id.dart";
 import "0_body/4_cert/certificate.dart";
@@ -166,29 +167,30 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
 
     final withdrawals = body.withdrawals
         ?.where((item) => item.stakeAddressBech32 == stakeBech32Address)
-        .fold(BigInt.zero, (previousValue, element) => previousValue + element.coin);
+        .fold(BigInt.zero, (previousValue, element) => previousValue + element.coin)
+        .toCborInt();
 
     const deepEq = DeepCollectionEquality();
     final incoming =
         outputs //
-            .where((item) => deepEq.equals(item.addressBytes, receiveAddress.bytes))
+            .where((item) => deepEq.equals(item.address.value, receiveAddress.bytes))
             .fold(
-              Value.v0(lovelace: BigInt.zero),
+              Value.v0(lovelace: CborInt(BigInt.zero)),
               (previousValue, element) => previousValue + element.value,
             );
 
     final utxoByHashAndId = walletUtxos.groupFoldBy(
-      (e) => "${e.identifier.transactionHash}#${e.identifier.index}",
+      (e) => "${e.identifier.transactionHash.hexValue}#${e.identifier.index}",
       (previous, element) => element,
     );
     final consumedUtxosFromThisWallet = body
         .inputs
         .data //
-        .map((e) => utxoByHashAndId["${e.transactionHash}#${e.index}"])
+        .map((e) => utxoByHashAndId["${e.transactionHash.hexValue}#${e.index}"])
         .nonNulls;
 
     final outgoing = consumedUtxosFromThisWallet.fold(
-      Value.v0(lovelace: withdrawals ?? BigInt.zero),
+      Value.v0(lovelace: withdrawals ?? CborInt(BigInt.zero)),
       (previousValue, element) => previousValue + element.content.value,
     );
 

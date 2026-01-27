@@ -14,7 +14,6 @@ import "../../utils/transformations.dart";
 import "../cbor_encodable.dart";
 import "../shared/asset.dart";
 import "../transaction.dart";
-import "../util.dart";
 import "0_inputs/transaction_inputs.dart";
 import "14_required_signers/required_signers.dart";
 import "19_voting/voting_procedures.dart";
@@ -80,14 +79,14 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
-    required BigInt fee, // 2
+    required CborInt fee, // 2
     // OPTIONAL
-    BigInt? ttl, // 3
+    CborInt? ttl, // 3
     Certificates? certs, // 4
     List<Withdraw>? withdrawals, // 5
     // 6 - update ; what is it?
     Uint8List? metadataHash, // 7
-    BigInt? validityStartInterval, // 8
+    CborInt? validityStartInterval, // 8
     List<MultiAsset>? mint, // 9
     Uint8List? scriptDataHash, // 11
     CardanoTransactionInputs? collateral, // 13
@@ -95,7 +94,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     NetworkId? networkId, // 15
     // BABBAGE ERA
     CardanoTransactionOutput? collateralReturn, // 16
-    BigInt? totalCollateral, // 17
+    CborInt? totalCollateral, // 17
     CardanoTransactionInputs? referenceInputs, // 18
     // CONWAY ERA
     VotingProcedures? votingProcedures, // 19
@@ -139,14 +138,14 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
-    required BigInt fee, // 2
+    required CborInt fee, // 2
     // OPTIONAL
-    required BigInt? ttl, // 3
+    required CborInt? ttl, // 3
     required Certificates? certs, // 4
     required List<Withdraw>? withdrawals, // 5
     // 6 - update ; what is it?
     required Uint8List? metadataHash, // 7
-    required BigInt? validityStartInterval, // 8
+    required CborInt? validityStartInterval, // 8
     required List<MultiAsset>? mint, // 9
     required Uint8List? scriptDataHash, // 11
     required CardanoTransactionInputs? collateral, // 13
@@ -154,7 +153,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required NetworkId? networkId, // 15
     // BABBAGE ERA
     required CardanoTransactionOutput? collateralReturn, // 16
-    required BigInt? totalCollateral, // 17
+    required CborInt? totalCollateral, // 17
     required CardanoTransactionInputs? referenceInputs, // 18
     // CONWAY ERA
     required VotingProcedures? votingProcedures, // 19
@@ -170,14 +169,14 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
-    required BigInt fee, // 2
+    required CborInt fee, // 2
     // OPTIONAL
-    required BigInt? ttl, // 3
+    required CborInt? ttl, // 3
     required Certificates? certs, // 4
     required List<Withdraw>? withdrawals, // 5
     // 6 - update ; what is it?
     required Uint8List? metadataHash, // 7
-    required BigInt? validityStartInterval, // 8
+    required CborInt? validityStartInterval, // 8
     required List<MultiAsset>? mint, // 9
     required Uint8List? scriptDataHash, // 11
     required CardanoTransactionInputs? collateral, // 13
@@ -185,7 +184,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required NetworkId? networkId, // 15
     // BABBAGE ERA
     required CardanoTransactionOutput? collateralReturn, // 16
-    required BigInt? totalCollateral, // 17
+    required CborInt? totalCollateral, // 17
     required CardanoTransactionInputs? referenceInputs, // 18
     // CONWAY ERA
     required VotingProcedures? votingProcedures, // 19
@@ -271,8 +270,8 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
 
     final inputs = CardanoTransactionInputs.deserialize(inputsCbor!);
     final outputs = (outputsCbor! as CborList).map(CardanoTransactionOutput.deserialize).toList();
-    final fee = (feeCbor! as CborInt).toBigInt();
-    final ttl = ttlCbor == null ? null : (ttlCbor as CborInt).toBigInt();
+    final fee = feeCbor! as CborInt;
+    final ttl = ttlCbor as CborInt?;
     final certs = certsCbor != null ? Certificates.deserialize(certsCbor) : null;
     final withdrawals = withdrawalsCbor?.let((cValue) {
       final withdrawalsCborMap = cValue as CborMap;
@@ -284,9 +283,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
       throw TransactionBodyParseException("updateCbor not implemented");
     }
     final metadataHash = metadataHashCbor == null ? null : (metadataHashCbor as CborBytes).bytes.toUint8List();
-    final validityStartInterval = validityStartIntervalCbor == null
-        ? null
-        : (validityStartIntervalCbor as CborInt).toBigInt();
+    final validityStartInterval = validityStartIntervalCbor as CborInt?;
     final mint = (mintCbor == null)
         ? null
         : (mintCbor as CborMap).entries.map((entry) => MultiAsset.deserialize(cMapEntry: entry)).toList();
@@ -295,7 +292,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     final requiredSigners = requiredSignersCbor?.let(RequiredSigners.deserialize);
     final networkId = networkIdCbor?.let((p0) => NetworkId.fromIntValue((p0 as CborSmallInt).toInt()));
     final collateralReturn = collateralReturnCbor?.let(CardanoTransactionOutput.deserialize);
-    final totalCollateral = totalCollateralCbor?.let((p0) => (p0 as CborInt).toBigInt());
+    final totalCollateral = totalCollateralCbor as CborInt?;
     final referenceInputs = referenceInputsCbor?.let(CardanoTransactionInputs.deserialize);
     final votingProcedures =
         votingProceduresCbor ==
@@ -432,7 +429,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     );
     entriesMap[2] = MapEntry(
       key(2, "fee"),
-      fee.serialize(forJson: forJson),
+      fee,
     );
 
     // Optional fields - only add if non-null
@@ -440,7 +437,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     if (ttl != null) {
       entriesMap[3] = MapEntry(
         key(3, "ttl"),
-        ttl.serialize(forJson: forJson),
+        ttl,
       );
     }
 
@@ -471,7 +468,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     if (validityStartInterval != null) {
       entriesMap[8] = MapEntry(
         key(8, "validityStartInterval"),
-        CborInt(validityStartInterval),
+        validityStartInterval,
       );
     }
 
@@ -528,7 +525,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     if (totalCollateral != null) {
       entriesMap[17] = MapEntry(
         key(17, "totalCollateral"),
-        totalCollateral.serialize(forJson: forJson),
+        totalCollateral,
       );
     }
 

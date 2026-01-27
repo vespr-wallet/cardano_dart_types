@@ -10,8 +10,10 @@ part "transaction_input.freezed.dart";
 @freezed
 sealed class CardanoTransactionInput with _$CardanoTransactionInput implements CborEncodable {
   const factory CardanoTransactionInput({
-    required String transactionHash, //hex
+    required TransactionHash transactionHash,
     required int index,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+    @Default([]) List<int> cborTags,
   }) = _CardanoTransactionInput;
   const CardanoTransactionInput._();
 
@@ -19,9 +21,11 @@ sealed class CardanoTransactionInput with _$CardanoTransactionInput implements C
   CborList serialize({required bool forJson}) {
     return CborList.of(
       [
-        forJson ? CborString(transactionHash) : CborBytes(transactionHash.hexDecode()),
+        transactionHash.serialize(forJson: forJson),
         CborSmallInt(index),
       ],
+      type: lengthType,
+      tags: cborTags,
     );
   }
 
@@ -33,8 +37,10 @@ sealed class CardanoTransactionInput with _$CardanoTransactionInput implements C
     }
 
     final result = CardanoTransactionInput(
-      transactionHash: (cList[0] as CborBytes).bytes.toUint8List().hexEncode(),
+      transactionHash: TransactionHash.deserialize(cList[0]),
       index: (cList[1] as CborSmallInt).toInt(),
+      lengthType: cList.type,
+      cborTags: cList.tags,
     );
 
     conditionalAssert(() => result.serializeHexString() == cList.hexEncode());

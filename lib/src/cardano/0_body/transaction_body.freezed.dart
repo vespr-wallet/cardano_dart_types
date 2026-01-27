@@ -218,14 +218,14 @@ mixin _$CardanoTransactionBody {
  List<int>? get nonStandardKeyOrder;// TX Body Fields
  CardanoTransactionInputs get inputs;// 0
  List<CardanoTransactionOutput> get outputs;// 1
- BigInt get fee;// 2
+ CborInt get fee;// 2
 // OPTIONAL
- BigInt? get ttl;// 3
+ CborInt? get ttl;// 3
  Certificates? get certs;// 4
  List<Withdraw>? get withdrawals;// 5
 // 6 - update ; what is it?
  Uint8List? get metadataHash;// 7
- BigInt? get validityStartInterval;// 8
+ CborInt? get validityStartInterval;// 8
  List<MultiAsset>? get mint;// 9
  Uint8List? get scriptDataHash;// 11
  CardanoTransactionInputs? get collateral;// 13
@@ -233,7 +233,7 @@ mixin _$CardanoTransactionBody {
  NetworkId? get networkId;// 15
 // BABBAGE ERA
  CardanoTransactionOutput? get collateralReturn;// 16
- BigInt? get totalCollateral;// 17
+ CborInt? get totalCollateral;// 17
  CardanoTransactionInputs? get referenceInputs;// 18
 // CONWAY ERA
  VotingProcedures? get votingProcedures;// 19
@@ -270,7 +270,7 @@ abstract mixin class $CardanoTransactionBodyCopyWith<$Res>  {
   factory $CardanoTransactionBodyCopyWith(CardanoTransactionBody value, $Res Function(CardanoTransactionBody) _then) = _$CardanoTransactionBodyCopyWithImpl;
 @useResult
 $Res call({
- Blake2bHash256 blake2bHash256, List<int>? nonStandardKeyOrder, CardanoTransactionInputs inputs, List<CardanoTransactionOutput> outputs, BigInt fee, BigInt? ttl, Certificates? certs, List<Withdraw>? withdrawals, Uint8List? metadataHash, BigInt? validityStartInterval, List<MultiAsset>? mint, Uint8List? scriptDataHash, CardanoTransactionInputs? collateral, RequiredSigners? requiredSigners, NetworkId? networkId, CardanoTransactionOutput? collateralReturn, BigInt? totalCollateral, CardanoTransactionInputs? referenceInputs, VotingProcedures? votingProcedures, List<ProposalProcedure>? proposalProcedures, CborInt? currentTreasuryValue, CborInt? donation
+ Blake2bHash256 blake2bHash256, List<int>? nonStandardKeyOrder, CardanoTransactionInputs inputs, List<CardanoTransactionOutput> outputs, CborInt fee, CborInt? ttl, Certificates? certs, List<Withdraw>? withdrawals, Uint8List? metadataHash, CborInt? validityStartInterval, List<MultiAsset>? mint, Uint8List? scriptDataHash, CardanoTransactionInputs? collateral, RequiredSigners? requiredSigners, NetworkId? networkId, CardanoTransactionOutput? collateralReturn, CborInt? totalCollateral, CardanoTransactionInputs? referenceInputs, VotingProcedures? votingProcedures, List<ProposalProcedure>? proposalProcedures, CborInt? currentTreasuryValue, CborInt? donation
 });
 
 
@@ -294,19 +294,19 @@ as Blake2bHash256,nonStandardKeyOrder: freezed == nonStandardKeyOrder ? _self.no
 as List<int>?,inputs: null == inputs ? _self.inputs : inputs // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInputs,outputs: null == outputs ? _self.outputs : outputs // ignore: cast_nullable_to_non_nullable
 as List<CardanoTransactionOutput>,fee: null == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
-as BigInt,ttl: freezed == ttl ? _self.ttl : ttl // ignore: cast_nullable_to_non_nullable
-as BigInt?,certs: freezed == certs ? _self.certs : certs // ignore: cast_nullable_to_non_nullable
+as CborInt,ttl: freezed == ttl ? _self.ttl : ttl // ignore: cast_nullable_to_non_nullable
+as CborInt?,certs: freezed == certs ? _self.certs : certs // ignore: cast_nullable_to_non_nullable
 as Certificates?,withdrawals: freezed == withdrawals ? _self.withdrawals : withdrawals // ignore: cast_nullable_to_non_nullable
 as List<Withdraw>?,metadataHash: freezed == metadataHash ? _self.metadataHash : metadataHash // ignore: cast_nullable_to_non_nullable
 as Uint8List?,validityStartInterval: freezed == validityStartInterval ? _self.validityStartInterval : validityStartInterval // ignore: cast_nullable_to_non_nullable
-as BigInt?,mint: freezed == mint ? _self.mint : mint // ignore: cast_nullable_to_non_nullable
+as CborInt?,mint: freezed == mint ? _self.mint : mint // ignore: cast_nullable_to_non_nullable
 as List<MultiAsset>?,scriptDataHash: freezed == scriptDataHash ? _self.scriptDataHash : scriptDataHash // ignore: cast_nullable_to_non_nullable
 as Uint8List?,collateral: freezed == collateral ? _self.collateral : collateral // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInputs?,requiredSigners: freezed == requiredSigners ? _self.requiredSigners : requiredSigners // ignore: cast_nullable_to_non_nullable
 as RequiredSigners?,networkId: freezed == networkId ? _self.networkId : networkId // ignore: cast_nullable_to_non_nullable
 as NetworkId?,collateralReturn: freezed == collateralReturn ? _self.collateralReturn : collateralReturn // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionOutput?,totalCollateral: freezed == totalCollateral ? _self.totalCollateral : totalCollateral // ignore: cast_nullable_to_non_nullable
-as BigInt?,referenceInputs: freezed == referenceInputs ? _self.referenceInputs : referenceInputs // ignore: cast_nullable_to_non_nullable
+as CborInt?,referenceInputs: freezed == referenceInputs ? _self.referenceInputs : referenceInputs // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInputs?,votingProcedures: freezed == votingProcedures ? _self.votingProcedures : votingProcedures // ignore: cast_nullable_to_non_nullable
 as VotingProcedures?,proposalProcedures: freezed == proposalProcedures ? _self.proposalProcedures : proposalProcedures // ignore: cast_nullable_to_non_nullable
 as List<ProposalProcedure>?,currentTreasuryValue: freezed == currentTreasuryValue ? _self.currentTreasuryValue : currentTreasuryValue // ignore: cast_nullable_to_non_nullable
@@ -449,10 +449,10 @@ class _CardanoTransactionBody extends CardanoTransactionBody {
 }
 
 // 1
-@override final  BigInt fee;
+@override final  CborInt fee;
 // 2
 // OPTIONAL
-@override final  BigInt? ttl;
+@override final  CborInt? ttl;
 // 3
 @override final  Certificates? certs;
 // 4
@@ -470,7 +470,7 @@ class _CardanoTransactionBody extends CardanoTransactionBody {
 // 6 - update ; what is it?
 @override final  Uint8List? metadataHash;
 // 7
-@override final  BigInt? validityStartInterval;
+@override final  CborInt? validityStartInterval;
 // 8
  final  List<MultiAsset>? _mint;
 // 8
@@ -494,7 +494,7 @@ class _CardanoTransactionBody extends CardanoTransactionBody {
 // BABBAGE ERA
 @override final  CardanoTransactionOutput? collateralReturn;
 // 16
-@override final  BigInt? totalCollateral;
+@override final  CborInt? totalCollateral;
 // 17
 @override final  CardanoTransactionInputs? referenceInputs;
 // 18
@@ -546,7 +546,7 @@ abstract mixin class _$CardanoTransactionBodyCopyWith<$Res> implements $CardanoT
   factory _$CardanoTransactionBodyCopyWith(_CardanoTransactionBody value, $Res Function(_CardanoTransactionBody) _then) = __$CardanoTransactionBodyCopyWithImpl;
 @override @useResult
 $Res call({
- Blake2bHash256 blake2bHash256, List<int>? nonStandardKeyOrder, CardanoTransactionInputs inputs, List<CardanoTransactionOutput> outputs, BigInt fee, BigInt? ttl, Certificates? certs, List<Withdraw>? withdrawals, Uint8List? metadataHash, BigInt? validityStartInterval, List<MultiAsset>? mint, Uint8List? scriptDataHash, CardanoTransactionInputs? collateral, RequiredSigners? requiredSigners, NetworkId? networkId, CardanoTransactionOutput? collateralReturn, BigInt? totalCollateral, CardanoTransactionInputs? referenceInputs, VotingProcedures? votingProcedures, List<ProposalProcedure>? proposalProcedures, CborInt? currentTreasuryValue, CborInt? donation
+ Blake2bHash256 blake2bHash256, List<int>? nonStandardKeyOrder, CardanoTransactionInputs inputs, List<CardanoTransactionOutput> outputs, CborInt fee, CborInt? ttl, Certificates? certs, List<Withdraw>? withdrawals, Uint8List? metadataHash, CborInt? validityStartInterval, List<MultiAsset>? mint, Uint8List? scriptDataHash, CardanoTransactionInputs? collateral, RequiredSigners? requiredSigners, NetworkId? networkId, CardanoTransactionOutput? collateralReturn, CborInt? totalCollateral, CardanoTransactionInputs? referenceInputs, VotingProcedures? votingProcedures, List<ProposalProcedure>? proposalProcedures, CborInt? currentTreasuryValue, CborInt? donation
 });
 
 
@@ -570,19 +570,19 @@ as Blake2bHash256,nonStandardKeyOrder: freezed == nonStandardKeyOrder ? _self._n
 as List<int>?,inputs: null == inputs ? _self.inputs : inputs // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInputs,outputs: null == outputs ? _self._outputs : outputs // ignore: cast_nullable_to_non_nullable
 as List<CardanoTransactionOutput>,fee: null == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
-as BigInt,ttl: freezed == ttl ? _self.ttl : ttl // ignore: cast_nullable_to_non_nullable
-as BigInt?,certs: freezed == certs ? _self.certs : certs // ignore: cast_nullable_to_non_nullable
+as CborInt,ttl: freezed == ttl ? _self.ttl : ttl // ignore: cast_nullable_to_non_nullable
+as CborInt?,certs: freezed == certs ? _self.certs : certs // ignore: cast_nullable_to_non_nullable
 as Certificates?,withdrawals: freezed == withdrawals ? _self._withdrawals : withdrawals // ignore: cast_nullable_to_non_nullable
 as List<Withdraw>?,metadataHash: freezed == metadataHash ? _self.metadataHash : metadataHash // ignore: cast_nullable_to_non_nullable
 as Uint8List?,validityStartInterval: freezed == validityStartInterval ? _self.validityStartInterval : validityStartInterval // ignore: cast_nullable_to_non_nullable
-as BigInt?,mint: freezed == mint ? _self._mint : mint // ignore: cast_nullable_to_non_nullable
+as CborInt?,mint: freezed == mint ? _self._mint : mint // ignore: cast_nullable_to_non_nullable
 as List<MultiAsset>?,scriptDataHash: freezed == scriptDataHash ? _self.scriptDataHash : scriptDataHash // ignore: cast_nullable_to_non_nullable
 as Uint8List?,collateral: freezed == collateral ? _self.collateral : collateral // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInputs?,requiredSigners: freezed == requiredSigners ? _self.requiredSigners : requiredSigners // ignore: cast_nullable_to_non_nullable
 as RequiredSigners?,networkId: freezed == networkId ? _self.networkId : networkId // ignore: cast_nullable_to_non_nullable
 as NetworkId?,collateralReturn: freezed == collateralReturn ? _self.collateralReturn : collateralReturn // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionOutput?,totalCollateral: freezed == totalCollateral ? _self.totalCollateral : totalCollateral // ignore: cast_nullable_to_non_nullable
-as BigInt?,referenceInputs: freezed == referenceInputs ? _self.referenceInputs : referenceInputs // ignore: cast_nullable_to_non_nullable
+as CborInt?,referenceInputs: freezed == referenceInputs ? _self.referenceInputs : referenceInputs // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInputs?,votingProcedures: freezed == votingProcedures ? _self.votingProcedures : votingProcedures // ignore: cast_nullable_to_non_nullable
 as VotingProcedures?,proposalProcedures: freezed == proposalProcedures ? _self._proposalProcedures : proposalProcedures // ignore: cast_nullable_to_non_nullable
 as List<ProposalProcedure>?,currentTreasuryValue: freezed == currentTreasuryValue ? _self.currentTreasuryValue : currentTreasuryValue // ignore: cast_nullable_to_non_nullable

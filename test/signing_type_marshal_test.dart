@@ -4,7 +4,7 @@ import "package:test/test.dart";
 void main() async {
   group("TxPreparedForSigning marshal/unmarshal", () {
     TxDiff createMinimalTxDiff() => TxDiff(
-      diff: Value.v1(lovelace: BigInt.one, mA: const []),
+      diff: Value.v1(lovelace: BigInt.one.toCborInt(), mA: const []),
       usedUtxos: [],
       stakeDelegationPoolId: null,
       dRepDelegation: null,
@@ -60,25 +60,32 @@ void main() async {
         tx: tx,
         txDiff: TxDiff(
           diff: Value.v1(
-            lovelace: BigInt.from(1000000),
+            lovelace: BigInt.from(1000000).toCborInt(),
             mA: [
               MultiAsset(
-                policyId: "9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d77",
-                assets: [Asset(hexName: "53554e444145", value: BigInt.from(200))],
+                policyId: PolicyId.fromHex("9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d77"),
+                assets: [
+                  Asset(
+                    assetName: AssetName.fromHex("53554e444145"),
+                    value: BigInt.from(200).toCborInt(),
+                  ),
+                ],
               ),
             ],
           ),
           usedUtxos: [
             Utxo(
-              identifier: const CardanoTransactionInput(
-                transactionHash: "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112",
+              identifier: CardanoTransactionInput(
+                transactionHash: TransactionHash.fromHex(
+                  "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112",
+                ),
                 index: 2,
               ),
               content: CardanoTransactionOutput.postAlonzo(
-                addressBytes:
-                    "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk"
-                        .bech32Decode(),
-                value: Value.v1(lovelace: BigInt.from(3), mA: const []),
+                address: Address.fromBase58OrBech32(
+                  "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk",
+                ),
+                value: Value.v1(lovelace: BigInt.from(3).toCborInt(), mA: const []),
                 outDatum: null,
                 scriptRef: null,
                 lengthType: CborLengthType.definite,
@@ -98,15 +105,17 @@ void main() async {
         ),
         utxosBeforeTx: [
           Utxo(
-            identifier: const CardanoTransactionInput(
-              transactionHash: "568bb7e850346328656323708badb70f4050feef6b37af4424a26b411cb9ae28",
+            identifier: CardanoTransactionInput(
+              transactionHash: TransactionHash(
+                value: "568bb7e850346328656323708badb70f4050feef6b37af4424a26b411cb9ae28".hexDecode(),
+              ),
               index: 13,
             ),
             content: CardanoTransactionOutput.postAlonzo(
-              addressBytes:
-                  "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk"
-                      .bech32Decode(),
-              value: Value.v1(lovelace: BigInt.from(5000000), mA: const []),
+              address: Address.fromBase58OrBech32(
+                "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk",
+              ),
+              value: Value.v1(lovelace: BigInt.from(5000000).toCborInt(), mA: const []),
               outDatum: null,
               scriptRef: null,
               lengthType: CborLengthType.definite,
@@ -168,7 +177,7 @@ void main() async {
         body: CardanoTransactionBody.create(
           inputs: const CardanoTransactionInputs(data: [], cborTags: []),
           outputs: const [],
-          fee: BigInt.one,
+          fee: BigInt.one.toCborInt(),
         ),
         witnessSet: const WitnessSet(),
         isValidDi: true,
@@ -255,23 +264,25 @@ void main() async {
   group("tx diff", () {
     test("no nulls", () {
       final txDiff = TxDiff(
-        diff: Value.v1(lovelace: BigInt.one, mA: const []),
+        diff: Value.v1(lovelace: BigInt.one.toCborInt(), mA: const []),
         usedUtxos: [
           Utxo(
-            identifier: const CardanoTransactionInput(
-              transactionHash: "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112",
+            identifier: CardanoTransactionInput(
+              transactionHash: TransactionHash(
+                value: "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112".hexDecode(),
+              ),
               index: 2,
             ),
             content: CardanoTransactionOutput.postAlonzo(
-              addressBytes:
-                  "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk"
-                      .bech32Decode(),
+              address: Address.fromBase58OrBech32(
+                "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk",
+              ),
               value: Value.v1(
-                lovelace: BigInt.from(3),
+                lovelace: BigInt.from(3).toCborInt(),
                 mA: [
                   MultiAsset(
-                    policyId: "9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d77",
-                    assets: [Asset(hexName: "53554e444145", value: BigInt.from(200))],
+                    policyId: PolicyId.fromHex("9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d77"),
+                    assets: [Asset(assetName: AssetName.fromHex("53554e444145"), value: BigInt.from(200).toCborInt())],
                   ),
                 ],
               ),
@@ -347,23 +358,25 @@ void main() async {
 
     test("some nulls", () {
       final txDiff = TxDiff(
-        diff: Value.v1(lovelace: BigInt.one, mA: const []),
+        diff: Value.v1(lovelace: BigInt.one.toCborInt(), mA: const []),
         usedUtxos: [
           Utxo(
-            identifier: const CardanoTransactionInput(
-              transactionHash: "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112",
+            identifier: CardanoTransactionInput(
+              transactionHash: TransactionHash(
+                value: "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112".hexDecode(),
+              ),
               index: 2,
             ),
             content: CardanoTransactionOutput.postAlonzo(
-              addressBytes:
-                  "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk"
-                      .bech32Decode(),
+              address: Address.fromBase58OrBech32(
+                "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk",
+              ),
               value: Value.v1(
-                lovelace: BigInt.from(3),
+                lovelace: BigInt.from(3).toCborInt(),
                 mA: [
                   MultiAsset(
-                    policyId: "9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d77",
-                    assets: [Asset(hexName: "53554e444145", value: BigInt.from(200))],
+                    policyId: PolicyId.fromHex("9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d77"),
+                    assets: [Asset(assetName: AssetName.fromHex("53554e444145"), value: BigInt.from(200).toCborInt())],
                   ),
                 ],
               ),
@@ -426,23 +439,25 @@ void main() async {
 
     test("many nulls", () {
       final txDiff = TxDiff(
-        diff: Value.v1(lovelace: BigInt.one, mA: const []),
+        diff: Value.v1(lovelace: BigInt.one.toCborInt(), mA: const []),
         usedUtxos: [
           Utxo(
-            identifier: const CardanoTransactionInput(
-              transactionHash: "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112",
+            identifier: CardanoTransactionInput(
+              transactionHash: TransactionHash(
+                value: "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112".hexDecode(),
+              ),
               index: 2,
             ),
             content: CardanoTransactionOutput.postAlonzo(
-              addressBytes:
-                  "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk"
-                      .bech32Decode(),
+              address: Address.fromBase58OrBech32(
+                "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk",
+              ),
               value: Value.v1(
-                lovelace: BigInt.from(3),
+                lovelace: BigInt.from(3).toCborInt(),
                 mA: [
                   MultiAsset(
-                    policyId: "9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d77",
-                    assets: [Asset(hexName: "53554e444145", value: BigInt.from(200))],
+                    policyId: PolicyId.fromHex("9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d77"),
+                    assets: [Asset(assetName: AssetName.fromHex("53554e444145"), value: BigInt.from(200).toCborInt())],
                   ),
                 ],
               ),
