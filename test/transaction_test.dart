@@ -114,6 +114,132 @@ void main() async {
         expect(tx.hashCode, tx.hashCode);
       },
     );
+
+    group("diff", () {
+      test("correctly matches UTXOs by transaction hash", () {
+        // This test verifies that the diff() method correctly matches
+        // transaction inputs with wallet UTXOs using the hex value of
+        // the transaction hash (not the TransactionHash.toString() representation)
+
+        const txHash = "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112";
+        const addressBech32 =
+            "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk";
+
+        // Create a transaction with one input (with cborTags to simulate parsed tx)
+        final tx = CardanoTransaction(
+          overrideBodyMetadataHash: false,
+          body: CardanoTransactionBody.create(
+            inputs: CardanoTransactionInputs(
+              data: [
+                CardanoTransactionInput(
+                  transactionHash: TransactionHash(
+                    value: txHash.hexDecode(),
+                    cborTags: const [64], // different tags than UTXO
+                  ),
+                  index: 2,
+                ),
+              ],
+              cborTags: const [],
+            ),
+            outputs: [],
+            fee: BigInt.from(200000).toCborInt(),
+          ),
+          witnessSet: emptyWitnessSet,
+          isValidDi: true,
+          auxiliaryData: null,
+        );
+
+        // Create a matching UTXO with the same transaction hash but different CBOR metadata
+        // This simulates real-world scenario where tx and utxo are parsed from different sources
+        final matchingUtxo = Utxo(
+          identifier: CardanoTransactionInput(
+            transactionHash: TransactionHash.fromHex(txHash), // no cborTags
+            index: 2,
+          ),
+          content: CardanoTransactionOutput.postAlonzo(
+            address: Address.fromBase58OrBech32(addressBech32),
+            value: Value.v0(lovelace: BigInt.from(5000000).toCborInt()),
+            outDatum: null,
+            scriptRef: null,
+            lengthType: CborLengthType.definite,
+          ),
+        );
+
+        // Call diff with the matching UTXO
+        final txDiff = tx.diff(
+          receiveAddressBech32: addressBech32,
+          drepCredential: "0" * 56, // dummy credential
+          constitutionalCommitteeColdCredential: "0" * 56,
+          constitutionalCommitteeHotCredential: "0" * 56,
+          walletUtxos: [matchingUtxo],
+        );
+
+        // The UTXO should be found and included in usedUtxos
+        // Before the fix, this would be empty because the hash lookup would fail
+        expect(
+          txDiff.usedUtxos.length,
+          1,
+          reason: "UTXO should be matched by transaction hash hex value",
+        );
+        expect(
+          txDiff.usedUtxos.first.identifier.transactionHash.hexValue,
+          txHash,
+        );
+        expect(txDiff.usedUtxos.first.identifier.index, 2);
+      });
+
+      test("does not match UTXOs with different transaction hash", () {
+        const txHashInTx = "71762f767d96f92a73151ed44c7895b5c7e1253da68469b3dc9f3505398a8112";
+        const txHashInUtxo = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        const addressBech32 =
+            "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk";
+
+        final tx = CardanoTransaction(
+          overrideBodyMetadataHash: false,
+          body: CardanoTransactionBody.create(
+            inputs: CardanoTransactionInputs(
+              data: [
+                CardanoTransactionInput(
+                  transactionHash: TransactionHash.fromHex(txHashInTx),
+                  index: 0,
+                ),
+              ],
+              cborTags: const [],
+            ),
+            outputs: [],
+            fee: BigInt.from(200000).toCborInt(),
+          ),
+          witnessSet: emptyWitnessSet,
+          isValidDi: true,
+          auxiliaryData: null,
+        );
+
+        // UTXO with different transaction hash should not match
+        final nonMatchingUtxo = Utxo(
+          identifier: CardanoTransactionInput(
+            transactionHash: TransactionHash.fromHex(txHashInUtxo),
+            index: 0,
+          ),
+          content: CardanoTransactionOutput.postAlonzo(
+            address: Address.fromBase58OrBech32(addressBech32),
+            value: Value.v0(lovelace: BigInt.from(5000000).toCborInt()),
+            outDatum: null,
+            scriptRef: null,
+            lengthType: CborLengthType.definite,
+          ),
+        );
+
+        final txDiff = tx.diff(
+          receiveAddressBech32: addressBech32,
+          drepCredential: "0" * 56,
+          constitutionalCommitteeColdCredential: "0" * 56,
+          constitutionalCommitteeHotCredential: "0" * 56,
+          walletUtxos: [nonMatchingUtxo],
+        );
+
+        expect(txDiff.usedUtxos, isEmpty);
+      });
+    });
   });
 }
 

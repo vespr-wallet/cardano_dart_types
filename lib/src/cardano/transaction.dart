@@ -180,13 +180,13 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
             );
 
     final utxoByHashAndId = walletUtxos.groupFoldBy(
-      (e) => "${e.identifier.transactionHash}#${e.identifier.index}",
+      (e) => "${e.identifier.transactionHash.hexValue}#${e.identifier.index}",
       (previous, element) => element,
     );
     final consumedUtxosFromThisWallet = body
         .inputs
         .data //
-        .map((e) => utxoByHashAndId["${e.transactionHash}#${e.index}"])
+        .map((e) => utxoByHashAndId["${e.transactionHash.hexValue}#${e.index}"])
         .nonNulls;
 
     final outgoing = consumedUtxosFromThisWallet.fold(

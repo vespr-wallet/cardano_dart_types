@@ -27,7 +27,7 @@ sealed class TransactionHash with _$TransactionHash implements CborEncodable {
         ? CborString(value.hexEncode())
         : CborBytes(
             value,
-            // lengthType: cValue.type,
+            // lengthType: cValue.type, TODO: first fix cbor package to accept lengthType for bytes
             tags: cborTags,
           );
   }
@@ -40,7 +40,7 @@ sealed class TransactionHash with _$TransactionHash implements CborEncodable {
     }
     return TransactionHash(
       value: cValue.bytes,
-      // lengthType: cValue.type, // TODO: first fix cbor package to accept lengthType for bytes
+      lengthType: cValue.type,
       cborTags: cValue.tags,
     );
   }
