@@ -7,6 +7,7 @@ import "../../utils/iterable_extensions.dart";
 import "../../utils/sugar.dart";
 import "../../utils/transformations.dart";
 import "../cbor_encodable.dart";
+import "../preserved_cbor_map.dart";
 import "../transaction.dart";
 import "0_v_key/witness_v_key.dart";
 import "1_native_scripts/native_script.dart";
@@ -44,6 +45,9 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
     ListWithCborType<PlutusScriptV2>? iplutusScriptV2,
     ListWithCborType<PlutusScriptV3>? iplutusScriptV3,
     List<int>? iCborTags,
+    // Original CBOR of a deserialized witness set whose typed re-encoding differs from it. Keeps
+    // untouched fields byte-exact (e.g. redeemers, which are covered by the script data hash).
+    PreservedCborMap? preservedCbor,
   }) = _WitnessSet;
   const WitnessSet._();
 
@@ -106,6 +110,8 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
         mergeCborTags(iplutusScriptV3?.tags, other.iplutusScriptV3?.tags),
       ).nullIfEmpty(),
       iCborTags: mergeCborTags(iCborTags, other.iCborTags),
+      // restore() only re-emits original fields whose typed encoding is unchanged by the merge
+      preservedCbor: preservedCbor ?? other.preservedCbor,
     );
   }
 
@@ -209,7 +215,7 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
           ),
         );
 
-    final result = WitnessSet(
+    final typedResult = WitnessSet(
       ivkeyWitnesses: vkeyWitnesses,
       inativeScripts: nativeScripts,
       ibootstrap: bootstrap,
@@ -221,34 +227,8 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
       iCborTags: cMap.tags,
     );
 
-    conditionalAssert(
-      () {
-        final encoded = result.serialize(forJson: false);
-        final encodedKeys = encoded.keys.toList(growable: false);
-
-        final inputKeys = cMap.keys.toList(growable: false);
-        if (encodedKeys.length != inputKeys.length) {
-          throw Exception("Keys length mismatch: ${encodedKeys.length} != ${inputKeys.length}");
-        }
-
-        for (var i = 0; i < encodedKeys.length; i++) {
-          final encodedKey = encodedKeys[i];
-          final inputKey = inputKeys[i];
-          if (encodedKey != inputKey) {
-            throw Exception("Key mismatch: $encodedKey != $inputKey");
-          }
-          final encodedValue = encoded[encodedKey];
-          final inputValue = cMap[inputKey];
-          if (encodedValue?.hexEncode() != inputValue?.hexEncode()) {
-            throw Exception(
-              "Value mismatch for key $encodedKey: ${encodedValue?.hexEncode()} != ${inputValue?.hexEncode()}",
-            );
-          }
-        }
-
-        return true;
-      },
-      "witness_set: all",
+    final result = typedResult.copyWith(
+      preservedCbor: PreservedCborMap.capture(original: cMap, typed: typedResult.serialize(forJson: false)),
     );
 
     conditionalAssert(() => result.serializeHexString() == cMap.hexEncode());
@@ -369,17 +349,24 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
       ),
     );
 
+    final entries = [
+      witnessesEntry,
+      scriptsEntry,
+      bootstrapEntry,
+      plutusV1ScriptEntry,
+      plutusDataEntry,
+      redeemerEntry,
+      plutusScriptV2Entry,
+      plutusScriptV3Entry,
+    ].nonNulls(); // remove empty entries for smaller CBOR size
+
+    final preservedCbor = this.preservedCbor;
+    if (!forJson && preservedCbor != null) {
+      return preservedCbor.restore({for (final e in entries) (e.key as CborSmallInt).toInt(): e.value});
+    }
+
     return CborMap.fromEntries(
-      [
-        witnessesEntry,
-        scriptsEntry,
-        bootstrapEntry,
-        plutusV1ScriptEntry,
-        plutusDataEntry,
-        redeemerEntry,
-        plutusScriptV2Entry,
-        plutusScriptV3Entry,
-      ].nonNulls(), // remove empty entries for smaller CBOR size
+      entries,
       tags: iCborTags ?? [],
       type: CborLengthType.definite,
     );

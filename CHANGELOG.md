@@ -1,3 +1,20 @@
+## 3.1.0
+
+Bug Fix:
+
+- Parsed transactions now re-serialize byte-exact, including encodings the typed models can't express (indefinite-length arrays/maps, non-ascending key order in nested maps such as outputs, witness set key order, indefinite tx array). Previously the body was hashed (and signed) as parsed but re-serialized differently, so a signature would not match a re-serialized body.
+- Merging witness sets (`+`, `copyWithAdditionalSignatures`) keeps the original encoding of untouched fields (e.g. redeemers, which are covered by the script data hash)
+
+New:
+
+- Added `PreservedCborMap`, kept on `CardanoTransactionBody.preservedCbor` and `WitnessSet.preservedCbor` when the typed re-encoding differs from the parsed CBOR. Fields modified via `copyWith` fall back to their typed encoding.
+- Added `CardanoTransactionBody.hasAscendingKeyOrder` and `CardanoTransaction.hasAscendingBodyKeyOrder` (hardware wallets can't sign bodies with non-ascending key order)
+- Added `CardanoTransaction.cborLengthType`
+
+Changes:
+
+- **[CardanoTransactionBody]** `nonStandardKeyOrder` is now a getter derived from `preservedCbor` (no longer a `copyWith` parameter)
+
 ## 3.0.0
 
 Breaking Changes:

@@ -1,3 +1,5 @@
+import "dart:typed_data";
+
 import "package:cardano_dart_types/cardano_dart_types.dart";
 import "package:test/test.dart";
 
@@ -19,8 +21,106 @@ void main() async {
           expect(tx.body.blake2bHash256, isA<Blake2bHash256Computed>());
           expect(tx.body.computeBlake2bHash256().hexEncode(), tx.body.blake2bHash256.value);
           expect(reEncoded, testData.cborHex);
+          // the typed model alone must reproduce these (preservation only kicks in for what it can't express)
+          if (tx.hasAscendingBodyKeyOrder) expect(tx.body.preservedCbor, isNull);
+          expect(tx.witnessSet.preservedCbor, isNull);
         });
       }
+    });
+
+    group("round-trips non-canonical encodings byte-exact", () {
+      // the debug asserts check that the typed model alone is lossless, which is not the case here
+      setUp(() => debugAssertEnabled = false);
+      tearDown(() => debugAssertEnabled = true);
+
+      for (final testData in _TestCaseTx.values) {
+        test(testData.name, () {
+          final root = testData.cborHex.cborDecode();
+          final paths = _containerPaths(root);
+          final variants = [
+            // every array/map, one at a time, re-encoded as indefinite-length
+            for (final p in paths.keys) _rebuild(root, "", (path) => path == p, indefinite: true),
+            // every multi-entry map, one at a time, with its entries reversed
+            for (final p in paths.keys.where((p) => paths[p]!)) _rebuild(root, "", (path) => path == p),
+          ];
+
+          for (final variant in variants) {
+            final hex = variant.hexEncode();
+            final tx = CardanoTransaction.deserializeFromHex(hex);
+            expect(tx.serializeHexString(), hex);
+            expect(tx.body.computeBlake2bHash256().hexEncode(), tx.body.blake2bHash256Hex());
+          }
+        });
+      }
+
+      test("signed body hash matches the re-serialized body (indefinite-length inputs)", () {
+        const txHex = "84a3009fff01800200a0f5f6";
+        final tx = CardanoTransaction.deserializeFromHex(txHex);
+
+        final submittedBody = CardanoTransactionBody.deserializeHex(tx.body.serializeHexString());
+        expect(submittedBody.blake2bHash256Hex(), tx.body.blake2bHash256Hex());
+        expect(tx.serializeHexString(), txHex);
+      });
+
+      test("modified fields fall back to typed encoding, untouched fields keep theirs", () {
+        final tx = CardanoTransaction.deserializeFromHex("84a3009fff01800200a0f5f6");
+
+        final modified = tx.copyWith.body(fee: 1.toCborInt());
+
+        // inputs still indefinite (9f ff), fee re-encoded from the typed value
+        expect(modified.body.serializeHexString(), "a3009fff01800201");
+      });
+
+      test("witness set merge keeps original encoding of untouched fields", () {
+        final original = _TestCaseTx.values
+            .map((t) => t.cborHex.cborDecode() as CborList)
+            .firstWhere((tx) => (tx[1] as CborMap).containsKey(const CborSmallInt(5)));
+        final withIndefiniteRedeemers = _rebuild(original, "", (path) => path == "[1]{05}", indefinite: true);
+        final redeemersHex = ((withIndefiniteRedeemers as CborList)[1] as CborMap)[const CborSmallInt(5)]!.hexEncode();
+
+        final tx = CardanoTransaction.deserializeFromHex(withIndefiniteRedeemers.hexEncode());
+        final signed = tx.copyWithAdditionalSignatures(
+          WitnessSet(
+            ivkeyWitnesses: ListWithCborType(
+              [WitnessVKey(vkey: Uint8List(32), signature: Uint8List(64))],
+              CborLengthType.definite,
+              null,
+            ),
+          ),
+        );
+
+        final signedWitnesses = signed.witnessSet.serialize(forJson: false);
+        expect(signedWitnesses[const CborSmallInt(5)]!.hexEncode(), redeemersHex);
+        expect(signed.witnessSet.vkeyWitnesses.length, tx.witnessSet.vkeyWitnesses.length + 1);
+      });
+    });
+
+    group("hasAscendingKeyOrder", () {
+      test("true for ascending and manually created bodies", () {
+        final tx = CardanoTransaction.deserializeFromHex(_TestCaseTx.sentryF8.cborHex);
+        expect(tx.hasAscendingBodyKeyOrder, isTrue);
+        expect(
+          CardanoTransactionBody.create(
+            inputs: const CardanoTransactionInputs(data: [], cborTags: []),
+            outputs: [],
+            fee: 1.toCborInt(),
+          ).hasAscendingKeyOrder,
+          isTrue,
+        );
+      });
+
+      test("true for ascending bodies with non-canonical nested encoding", () {
+        final tx = CardanoTransaction.deserializeFromHex("84a3009fff01800200a0f5f6");
+        expect(tx.body.preservedCbor, isNotNull);
+        expect(tx.hasAscendingBodyKeyOrder, isTrue);
+      });
+
+      test("false for non-ascending bodies, also after modifications", () {
+        final tx = CardanoTransaction.deserializeFromHex(_TestCaseTx.midnight.cborHex);
+        expect(tx.hasAscendingBodyKeyOrder, isFalse);
+        expect(tx.body.hasAscendingKeyOrder, isFalse);
+        expect(tx.copyWith.body(fee: 1.toCborInt()).hasAscendingBodyKeyOrder, isFalse);
+      });
     });
 
     group("preserves original CBOR key order", () {
@@ -241,6 +341,45 @@ void main() async {
       });
     });
   });
+}
+
+/// Path of every array/map in [v] -> whether it is a map with more than one entry.
+Map<String, bool> _containerPaths(CborValue v, [String path = ""]) => switch (v) {
+  CborList() => {
+    path: false,
+    for (var i = 0; i < v.length; i++) ..._containerPaths(v[i], "$path[$i]"),
+  },
+  CborMap() => {
+    path: v.length > 1,
+    for (final e in v.entries) ..._containerPaths(e.value, "$path{${e.key.hexEncode()}}"),
+  },
+  _ => {},
+};
+
+/// Copy of [v] where containers matching [isTarget] become indefinite-length or, if not
+/// [indefinite], get their map entries reversed.
+CborValue _rebuild(
+  CborValue v,
+  String path,
+  bool Function(String path) isTarget, {
+  bool indefinite = false,
+}) {
+  final hit = isTarget(path);
+  return switch (v) {
+    CborList() => CborList(
+      [for (var i = 0; i < v.length; i++) _rebuild(v[i], "$path[$i]", isTarget, indefinite: indefinite)],
+      tags: v.tags,
+      type: hit && indefinite ? CborLengthType.indefinite : v.type,
+    ),
+    CborMap() => CborMap.fromEntries(
+      (hit && !indefinite ? v.entries.toList().reversed : v.entries).map(
+        (e) => MapEntry(e.key, _rebuild(e.value, "$path{${e.key.hexEncode()}}", isTarget, indefinite: indefinite)),
+      ),
+      tags: v.tags,
+      type: hit && indefinite ? CborLengthType.indefinite : v.type,
+    ),
+    _ => v,
+  };
 }
 
 enum _TestCaseTx {

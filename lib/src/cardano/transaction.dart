@@ -20,11 +20,15 @@ import "0_body/transaction_body.dart";
 import "1_witness_set/witness_set.dart";
 import "cbor_encodable.dart";
 import "metadata.dart";
+import "preserved_cbor_map.dart";
 import "shared/asset.dart";
 import "shared/utxo.dart";
 
 part "transaction.freezed.dart";
 
+/// Asserts (in debug mode) that the typed models re-encode parsed CBOR exactly. Useful to catch model
+/// gaps on canonical input; leave it off when parsing arbitrary transactions, whose non-canonical
+/// encodings are preserved by [PreservedCborMap] rather than by the typed models.
 bool debugAssertEnabled = false;
 
 void conditionalAssert(bool Function() fct, [String? message]) {
@@ -80,10 +84,14 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     required WitnessSet witnessSet, // 1
     required bool isValidDi, // 2
     required CBORMetadata? auxiliaryData, // 3
+    @Default(CborLengthType.definite) CborLengthType cborLengthType,
   }) = _CardanoTransaction;
 
   CardanoTransaction copyWithAdditionalSignatures(WitnessSet additionalWitnessSet) =>
       copyWith(witnessSet: witnessSet + additionalWitnessSet);
+
+  /// See [CardanoTransactionBody.hasAscendingKeyOrder].
+  bool get hasAscendingBodyKeyOrder => body.hasAscendingKeyOrder;
 
   factory CardanoTransaction.deserializeBytes(Uint8List transactionBytes) {
     final list = cbor.decode(transactionBytes) as CborList;
@@ -103,6 +111,7 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
       cWitnessSet: tx[1] as CborMap,
       cIsValidDi: cIsValidDi is CborBool ? cIsValidDi : const CborBool(true),
       cAuxData: cAuxData,
+      cborLengthType: tx.type,
     );
 
     conditionalAssert(() => const DeepCollectionEquality().equals(result.serializeAsBytes(), transactionBytes));
@@ -120,17 +129,18 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     required CborMap cWitnessSet,
     required CborBool cIsValidDi,
     required CborValue cAuxData,
+    CborLengthType cborLengthType = CborLengthType.definite,
   }) {
     final body = CardanoTransactionBody.deserialize(cMap: cBody);
     final WitnessSet witnessSet = WitnessSet.deserialize(cMap: cWitnessSet);
     final CBORMetadata auxiliaryData = CBORMetadata.deserialize(cValue: cAuxData);
 
-    return CardanoTransaction(
+    return CardanoTransaction._hidden(
       body: body,
       witnessSet: witnessSet,
       isValidDi: cIsValidDi.value,
       auxiliaryData: auxiliaryData,
-      overrideBodyMetadataHash: false,
+      cborLengthType: cborLengthType,
     );
   }
 
@@ -143,6 +153,7 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
         CborBool(isValidDi),
         auxiliaryData?.serialize(forJson: forJson) ?? const CborNull(),
       ],
+      type: cborLengthType,
     );
   }
 
