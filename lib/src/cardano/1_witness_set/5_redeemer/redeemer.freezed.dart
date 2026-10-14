@@ -98,13 +98,14 @@ $ExUnitsCopyWith<$Res> get exUnits {
 
 
 class Redeemer_PreConway extends Redeemer {
-  const Redeemer_PreConway({required this.redeemerTag, required this.index, required this.plutusData, required this.exUnits}): super._();
+  const Redeemer_PreConway({required this.redeemerTag, required this.index, required this.plutusData, required this.exUnits, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  RedeemerTag redeemerTag;
 @override final  int index;
 @override final  PlutusData plutusData;
 @override final  ExUnits exUnits;
+@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Redeemer
 /// with the given fields replaced by the non-null parameter values.
@@ -116,16 +117,16 @@ $Redeemer_PreConwayCopyWith<Redeemer_PreConway> get copyWith => _$Redeemer_PreCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer_PreConway&&(identical(other.redeemerTag, redeemerTag) || other.redeemerTag == redeemerTag)&&(identical(other.index, index) || other.index == index)&&(identical(other.plutusData, plutusData) || other.plutusData == plutusData)&&(identical(other.exUnits, exUnits) || other.exUnits == exUnits));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer_PreConway&&(identical(other.redeemerTag, redeemerTag) || other.redeemerTag == redeemerTag)&&(identical(other.index, index) || other.index == index)&&(identical(other.plutusData, plutusData) || other.plutusData == plutusData)&&(identical(other.exUnits, exUnits) || other.exUnits == exUnits)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,redeemerTag,index,plutusData,exUnits);
+int get hashCode => Object.hash(runtimeType,redeemerTag,index,plutusData,exUnits,lengthType);
 
 @override
 String toString() {
-  return 'Redeemer.preConway(redeemerTag: $redeemerTag, index: $index, plutusData: $plutusData, exUnits: $exUnits)';
+  return 'Redeemer.preConway(redeemerTag: $redeemerTag, index: $index, plutusData: $plutusData, exUnits: $exUnits, lengthType: $lengthType)';
 }
 
 
@@ -136,7 +137,7 @@ abstract mixin class $Redeemer_PreConwayCopyWith<$Res> implements $RedeemerCopyW
   factory $Redeemer_PreConwayCopyWith(Redeemer_PreConway value, $Res Function(Redeemer_PreConway) _then) = _$Redeemer_PreConwayCopyWithImpl;
 @override @useResult
 $Res call({
- RedeemerTag redeemerTag, int index, PlutusData plutusData, ExUnits exUnits
+ RedeemerTag redeemerTag, int index, PlutusData plutusData, ExUnits exUnits, CborLengthType lengthType
 });
 
 
@@ -153,13 +154,14 @@ class _$Redeemer_PreConwayCopyWithImpl<$Res>
 
 /// Create a copy of Redeemer
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? redeemerTag = null,Object? index = null,Object? plutusData = null,Object? exUnits = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? redeemerTag = null,Object? index = null,Object? plutusData = null,Object? exUnits = null,Object? lengthType = null,}) {
   return _then(Redeemer_PreConway(
 redeemerTag: null == redeemerTag ? _self.redeemerTag : redeemerTag // ignore: cast_nullable_to_non_nullable
 as RedeemerTag,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
 as int,plutusData: null == plutusData ? _self.plutusData : plutusData // ignore: cast_nullable_to_non_nullable
 as PlutusData,exUnits: null == exUnits ? _self.exUnits : exUnits // ignore: cast_nullable_to_non_nullable
-as ExUnits,
+as ExUnits,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -188,13 +190,15 @@ $ExUnitsCopyWith<$Res> get exUnits {
 
 
 class Redeemer_Conway extends Redeemer {
-  const Redeemer_Conway({required this.redeemerTag, required this.index, required this.plutusData, required this.exUnits}): super._();
+  const Redeemer_Conway({required this.redeemerTag, required this.index, required this.plutusData, required this.exUnits, this.keyLengthType = CborLengthType.definite, this.valueLengthType = CborLengthType.definite}): super._();
   
 
 @override final  RedeemerTag redeemerTag;
 @override final  int index;
 @override final  PlutusData plutusData;
 @override final  ExUnits exUnits;
+@JsonKey() final  CborLengthType keyLengthType;
+@JsonKey() final  CborLengthType valueLengthType;
 
 /// Create a copy of Redeemer
 /// with the given fields replaced by the non-null parameter values.
@@ -206,16 +210,16 @@ $Redeemer_ConwayCopyWith<Redeemer_Conway> get copyWith => _$Redeemer_ConwayCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer_Conway&&(identical(other.redeemerTag, redeemerTag) || other.redeemerTag == redeemerTag)&&(identical(other.index, index) || other.index == index)&&(identical(other.plutusData, plutusData) || other.plutusData == plutusData)&&(identical(other.exUnits, exUnits) || other.exUnits == exUnits));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer_Conway&&(identical(other.redeemerTag, redeemerTag) || other.redeemerTag == redeemerTag)&&(identical(other.index, index) || other.index == index)&&(identical(other.plutusData, plutusData) || other.plutusData == plutusData)&&(identical(other.exUnits, exUnits) || other.exUnits == exUnits)&&(identical(other.keyLengthType, keyLengthType) || other.keyLengthType == keyLengthType)&&(identical(other.valueLengthType, valueLengthType) || other.valueLengthType == valueLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,redeemerTag,index,plutusData,exUnits);
+int get hashCode => Object.hash(runtimeType,redeemerTag,index,plutusData,exUnits,keyLengthType,valueLengthType);
 
 @override
 String toString() {
-  return 'Redeemer.conway(redeemerTag: $redeemerTag, index: $index, plutusData: $plutusData, exUnits: $exUnits)';
+  return 'Redeemer.conway(redeemerTag: $redeemerTag, index: $index, plutusData: $plutusData, exUnits: $exUnits, keyLengthType: $keyLengthType, valueLengthType: $valueLengthType)';
 }
 
 
@@ -226,7 +230,7 @@ abstract mixin class $Redeemer_ConwayCopyWith<$Res> implements $RedeemerCopyWith
   factory $Redeemer_ConwayCopyWith(Redeemer_Conway value, $Res Function(Redeemer_Conway) _then) = _$Redeemer_ConwayCopyWithImpl;
 @override @useResult
 $Res call({
- RedeemerTag redeemerTag, int index, PlutusData plutusData, ExUnits exUnits
+ RedeemerTag redeemerTag, int index, PlutusData plutusData, ExUnits exUnits, CborLengthType keyLengthType, CborLengthType valueLengthType
 });
 
 
@@ -243,13 +247,15 @@ class _$Redeemer_ConwayCopyWithImpl<$Res>
 
 /// Create a copy of Redeemer
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? redeemerTag = null,Object? index = null,Object? plutusData = null,Object? exUnits = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? redeemerTag = null,Object? index = null,Object? plutusData = null,Object? exUnits = null,Object? keyLengthType = null,Object? valueLengthType = null,}) {
   return _then(Redeemer_Conway(
 redeemerTag: null == redeemerTag ? _self.redeemerTag : redeemerTag // ignore: cast_nullable_to_non_nullable
 as RedeemerTag,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
 as int,plutusData: null == plutusData ? _self.plutusData : plutusData // ignore: cast_nullable_to_non_nullable
 as PlutusData,exUnits: null == exUnits ? _self.exUnits : exUnits // ignore: cast_nullable_to_non_nullable
-as ExUnits,
+as ExUnits,keyLengthType: null == keyLengthType ? _self.keyLengthType : keyLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,valueLengthType: null == valueLengthType ? _self.valueLengthType : valueLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

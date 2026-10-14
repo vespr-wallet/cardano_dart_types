@@ -12,14 +12,18 @@ sealed class ProtocolVersion with _$ProtocolVersion implements CborEncodable {
   const factory ProtocolVersion({
     required int major,
     required int minor,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _ProtocolVersion;
   const ProtocolVersion._();
 
   @override
-  CborValue serialize({required bool forJson}) => CborList([
-    CborSmallInt(major),
-    CborSmallInt(minor),
-  ]);
+  CborValue serialize({required bool forJson}) => CborList(
+    [
+      CborSmallInt(major),
+      CborSmallInt(minor),
+    ],
+    type: lengthType,
+  );
 
   factory ProtocolVersion.deserialize(CborValue cValue) {
     if (cValue is! CborList) {
@@ -47,6 +51,7 @@ sealed class ProtocolVersion with _$ProtocolVersion implements CborEncodable {
     return ProtocolVersion(
       major: major.toInt(),
       minor: minor.toInt(),
+      lengthType: cValue.type,
     );
   }
 }

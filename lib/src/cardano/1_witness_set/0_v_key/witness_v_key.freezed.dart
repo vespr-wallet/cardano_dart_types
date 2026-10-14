@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$WitnessVKey {
 
- Uint8List get vkey; Uint8List get signature;
+ Uint8List get vkey; Uint8List get signature; CborLengthType get lengthType;
 /// Create a copy of WitnessVKey
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $WitnessVKeyCopyWith<WitnessVKey> get copyWith => _$WitnessVKeyCopyWithImpl<Witn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WitnessVKey&&const DeepCollectionEquality().equals(other.vkey, vkey)&&const DeepCollectionEquality().equals(other.signature, signature));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WitnessVKey&&const DeepCollectionEquality().equals(other.vkey, vkey)&&const DeepCollectionEquality().equals(other.signature, signature)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(vkey),const DeepCollectionEquality().hash(signature));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(vkey),const DeepCollectionEquality().hash(signature),lengthType);
 
 @override
 String toString() {
-  return 'WitnessVKey(vkey: $vkey, signature: $signature)';
+  return 'WitnessVKey(vkey: $vkey, signature: $signature, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $WitnessVKeyCopyWith<$Res>  {
   factory $WitnessVKeyCopyWith(WitnessVKey value, $Res Function(WitnessVKey) _then) = _$WitnessVKeyCopyWithImpl;
 @useResult
 $Res call({
- Uint8List vkey, Uint8List signature
+ Uint8List vkey, Uint8List signature, CborLengthType lengthType
 });
 
 
@@ -62,11 +62,12 @@ class _$WitnessVKeyCopyWithImpl<$Res>
 
 /// Create a copy of WitnessVKey
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? vkey = null,Object? signature = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? vkey = null,Object? signature = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 vkey: null == vkey ? _self.vkey : vkey // ignore: cast_nullable_to_non_nullable
 as Uint8List,signature: null == signature ? _self.signature : signature // ignore: cast_nullable_to_non_nullable
-as Uint8List,
+as Uint8List,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -78,11 +79,12 @@ as Uint8List,
 
 
 class _WitnessVKey extends WitnessVKey {
-  const _WitnessVKey({required this.vkey, required this.signature}): super._();
+  const _WitnessVKey({required this.vkey, required this.signature, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  Uint8List vkey;
 @override final  Uint8List signature;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of WitnessVKey
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +96,16 @@ _$WitnessVKeyCopyWith<_WitnessVKey> get copyWith => __$WitnessVKeyCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WitnessVKey&&const DeepCollectionEquality().equals(other.vkey, vkey)&&const DeepCollectionEquality().equals(other.signature, signature));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WitnessVKey&&const DeepCollectionEquality().equals(other.vkey, vkey)&&const DeepCollectionEquality().equals(other.signature, signature)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(vkey),const DeepCollectionEquality().hash(signature));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(vkey),const DeepCollectionEquality().hash(signature),lengthType);
 
 @override
 String toString() {
-  return 'WitnessVKey(vkey: $vkey, signature: $signature)';
+  return 'WitnessVKey(vkey: $vkey, signature: $signature, lengthType: $lengthType)';
 }
 
 
@@ -114,7 +116,7 @@ abstract mixin class _$WitnessVKeyCopyWith<$Res> implements $WitnessVKeyCopyWith
   factory _$WitnessVKeyCopyWith(_WitnessVKey value, $Res Function(_WitnessVKey) _then) = __$WitnessVKeyCopyWithImpl;
 @override @useResult
 $Res call({
- Uint8List vkey, Uint8List signature
+ Uint8List vkey, Uint8List signature, CborLengthType lengthType
 });
 
 
@@ -131,11 +133,12 @@ class __$WitnessVKeyCopyWithImpl<$Res>
 
 /// Create a copy of WitnessVKey
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? vkey = null,Object? signature = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? vkey = null,Object? signature = null,Object? lengthType = null,}) {
   return _then(_WitnessVKey(
 vkey: null == vkey ? _self.vkey : vkey // ignore: cast_nullable_to_non_nullable
 as Uint8List,signature: null == signature ? _self.signature : signature // ignore: cast_nullable_to_non_nullable
-as Uint8List,
+as Uint8List,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

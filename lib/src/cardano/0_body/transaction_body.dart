@@ -9,10 +9,10 @@ import "../../../binary/binary_writer.dart";
 import "../../exceptions/parse_exceptions.dart";
 import "../../hd/ada_types.dart";
 import "../../hd/util/blake2bhash.dart";
+import "../../utils/cbor.dart";
 import "../../utils/sugar.dart";
 import "../../utils/transformations.dart";
 import "../cbor_encodable.dart";
-import "../preserved_cbor_map.dart";
 import "../shared/asset.dart";
 import "../transaction.dart";
 import "0_inputs/transaction_inputs.dart";
@@ -104,7 +104,13 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     CborInt? donation, // 22
   }) => CardanoTransactionBody._hidden(
     blake2bHash256: const Blake2bHash256.none(),
-    preservedCbor: null,
+    nonStandardKeyOrder: null,
+    lengthType: CborLengthType.definite,
+    outputsLengthType: CborLengthType.definite,
+    withdrawalsLengthType: CborLengthType.definite,
+    mintLengthType: CborLengthType.definite,
+    proposalProceduresLengthType: CborLengthType.definite,
+    proposalProceduresCborTags: const [],
     inputs: inputs,
     outputs: outputs,
     fee: fee,
@@ -130,10 +136,19 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
   factory CardanoTransactionBody._hidden({
     // Non-null when deserialized from hex/cbor
     required Blake2bHash256 blake2bHash256,
-    // Original CBOR of a deserialized body whose typed re-encoding differs from it (non-ascending
-    // key order, indefinite lengths, ...). Used to re-serialize the body byte-exact so it matches
-    // the hash that gets signed. Null for manually created bodies or already-canonical ones.
-    required PreservedCborMap? preservedCbor,
+    // Non-standard CBOR map key order (non-ascending). Only set when the original
+    // transaction had keys in non-ascending order, to preserve byte-exact re-serialization.
+    // NOTE: Non-standard key order is problematic - it breaks transaction signing on
+    // hardware wallets (Ledger, Trezor) which expect ascending key order. If you're
+    // building transactions, always use ascending order (leave this null).
+    required List<int>? nonStandardKeyOrder,
+    // CBOR encoding details of a deserialized body, preserved for byte-exact re-serialization
+    required CborLengthType lengthType,
+    required CborLengthType outputsLengthType,
+    required CborLengthType withdrawalsLengthType,
+    required CborLengthType mintLengthType,
+    required CborLengthType proposalProceduresLengthType,
+    required List<int> proposalProceduresCborTags,
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
@@ -164,6 +179,13 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
   factory CardanoTransactionBody._deserialized({
     // Serialization info
     required Blake2bHash256 blake2bHash256, // used for signing the tx
+    required List<int>? nonStandardKeyOrder, // non-ascending key order (null if standard ascending)
+    required CborLengthType lengthType,
+    required CborLengthType outputsLengthType,
+    required CborLengthType withdrawalsLengthType,
+    required CborLengthType mintLengthType,
+    required CborLengthType proposalProceduresLengthType,
+    required List<int> proposalProceduresCborTags,
     // TX Body Fields
     required CardanoTransactionInputs inputs, // 0
     required List<CardanoTransactionOutput> outputs, // 1
@@ -191,7 +213,13 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     required CborInt? donation, // 22
   }) => CardanoTransactionBody._hidden(
     blake2bHash256: blake2bHash256,
-    preservedCbor: null,
+    nonStandardKeyOrder: nonStandardKeyOrder,
+    lengthType: lengthType,
+    outputsLengthType: outputsLengthType,
+    withdrawalsLengthType: withdrawalsLengthType,
+    mintLengthType: mintLengthType,
+    proposalProceduresLengthType: proposalProceduresLengthType,
+    proposalProceduresCborTags: proposalProceduresCborTags,
     inputs: inputs,
     outputs: outputs,
     fee: fee,
@@ -230,6 +258,17 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     final bodyBlake2bHash256 = originalBodyBlake2bHash256 != null
         ? Blake2bHash256.passed(blake2bHash256: originalBodyBlake2bHash256)
         : Blake2bHash256._computed(blake2bHash256: blake2bHash256(cMap.uint8ListEncode()).hexEncode());
+
+    // Capture non-standard (non-ascending) key order to preserve it during re-serialization.
+    // If the keys are already in ascending order, we don't store them (leave as null).
+    // This is important because:
+    // 1. Ascending order is the standard/correct order for CBOR maps
+    // 2. If we stored ascending order and someone uses copyWith to add a new field,
+    //    the new field would be appended at the end, breaking the ascending order.
+    // 3. Hardware wallets (Ledger, Trezor) require ascending key order for signing.
+    // By leaving nonStandardKeyOrder as null for ascending-order maps, new fields
+    // will be properly sorted into the correct position.
+    final nonStandardKeyOrder = nonAscendingKeyOrder(cMap);
 
     final inputsCbor = cMap[const CborSmallInt(0)];
     final outputsCbor = cMap[const CborSmallInt(1)];
@@ -292,8 +331,15 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
       ),
     }?.toList(growable: false);
 
-    final typedResult = CardanoTransactionBody._deserialized(
+    final result = CardanoTransactionBody._deserialized(
       blake2bHash256: bodyBlake2bHash256,
+      nonStandardKeyOrder: nonStandardKeyOrder,
+      lengthType: cMap.type,
+      outputsLengthType: (outputsCbor as CborList).type,
+      withdrawalsLengthType: (withdrawalsCbor as CborMap?)?.type ?? CborLengthType.definite,
+      mintLengthType: (mintCbor as CborMap?)?.type ?? CborLengthType.definite,
+      proposalProceduresLengthType: (proposalProceduresCbor as CborList?)?.type ?? CborLengthType.definite,
+      proposalProceduresCborTags: proposalProceduresCbor?.tags ?? const [],
       inputs: inputs,
       outputs: outputs,
       fee: fee,
@@ -316,12 +362,82 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
       donation: donationCbor as CborInt?,
     );
 
-    // The typed model can't express every valid encoding (e.g. indefinite-length arrays, nested key
-    // order), so keep the original CBOR around to re-serialize exactly what was parsed (and hashed).
-    final result = typedResult.copyWith(
-      preservedCbor: PreservedCborMap.capture(original: cMap, typed: typedResult.serialize(forJson: false)),
+    conditionalAssert(
+      () => inputs.serialize(forJson: false).hexEncode() == inputsCbor.hexEncode(),
+      "transaction_body: inputs",
     );
+    conditionalAssert(
+      () =>
+          outputs.serialize(forJson: false, lengthType: result.outputsLengthType).hexEncode() ==
+          outputsCbor.hexEncode(),
+      "transaction_body: outputs",
+    );
+    conditionalAssert(
+      () => certsCbor == null || certs!.serialize(forJson: false).hexEncode() == certsCbor.hexEncode(),
+      "transaction_body: certs",
+    );
+    conditionalAssert(
+      () =>
+          withdrawalsCbor == null ||
+          withdrawals!.serialize(forJson: false, lengthType: result.withdrawalsLengthType).hexEncode() ==
+              withdrawalsCbor.hexEncode(),
+      "transaction_body: withdrawals",
+    );
+    conditionalAssert(
+      () =>
+          mintCbor == null ||
+          mint!.serialize(forJson: false, lengthType: result.mintLengthType).hexEncode() == mintCbor.hexEncode(),
+      "transaction_body: mint",
+    );
+    conditionalAssert(
+      () => metadataHashCbor == null || CborBytes(metadataHash!).hexEncode() == metadataHashCbor.hexEncode(),
+      "transaction_body: metadataHash",
+    );
+    conditionalAssert(
+      () => scriptDataHashCbor == null || CborBytes(scriptDataHash!).hexEncode() == scriptDataHashCbor.hexEncode(),
+      "transaction_body: scriptDataHash",
+    );
+    conditionalAssert(
+      () => collateral?.serialize(forJson: false).hexEncode() == collateralCbor?.hexEncode(),
+      "transaction_body: collateral",
+    );
+    conditionalAssert(
+      () => collateralReturn?.serialize(forJson: false).hexEncode() == collateralReturnCbor?.hexEncode(),
+      "transaction_body: collateralReturn",
+    );
+    conditionalAssert(
+      () => referenceInputs?.serialize(forJson: false).hexEncode() == referenceInputsCbor?.hexEncode(),
+      "transaction_body: referenceInputs",
+    );
+    conditionalAssert(
+      () {
+        final encoded = result.serialize(forJson: false);
+        final encodedKeys = encoded.keys.toList(growable: false);
 
+        final inputKeys = cMap.keys.toList(growable: false);
+        if (encodedKeys.length != inputKeys.length) {
+          throw Exception("Keys length mismatch: ${encodedKeys.length} != ${inputKeys.length}");
+        }
+
+        for (var i = 0; i < encodedKeys.length; i++) {
+          final encodedKey = encodedKeys[i];
+          final inputKey = inputKeys[i];
+          if (encodedKey != inputKey) {
+            throw Exception("Key mismatch: $encodedKey != $inputKey");
+          }
+          final encodedValue = encoded[encodedKey];
+          final inputValue = cMap[inputKey];
+          if (encodedValue?.hexEncode() != inputValue?.hexEncode()) {
+            throw Exception(
+              "Value mismatch for key $encodedKey: ${encodedValue?.hexEncode()} != ${inputValue?.hexEncode()}",
+            );
+          }
+        }
+
+        return true;
+      },
+      "transaction_body: all",
+    );
     conditionalAssert(
       () => result.serializeHexString() == cMap.hexEncode(),
       "transaction_body: serializeHexString",
@@ -345,7 +461,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     );
     entriesMap[1] = MapEntry(
       key(1, "outputs"),
-      outputs.serialize(forJson: forJson),
+      outputs.serialize(forJson: forJson, lengthType: outputsLengthType),
     );
     entriesMap[2] = MapEntry(
       key(2, "fee"),
@@ -373,7 +489,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     if (withdrawals != null) {
       entriesMap[5] = MapEntry(
         key(5, "withdrawals"),
-        withdrawals.serialize(forJson: forJson),
+        withdrawals.serialize(forJson: forJson, lengthType: withdrawalsLengthType),
       );
     }
 
@@ -396,7 +512,7 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     if (mint != null) {
       entriesMap[9] = MapEntry(
         key(9, "mint"),
-        mint.serialize(forJson: forJson),
+        mint.serialize(forJson: forJson, lengthType: mintLengthType),
       );
     }
 
@@ -470,7 +586,11 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     if (proposalProcedures != null) {
       entriesMap[20] = MapEntry(
         key(20, "proposalProcedures"),
-        CborList.of(proposalProcedures.map((e) => e.serialize(forJson: forJson))),
+        CborList.of(
+          proposalProcedures.map((e) => e.serialize(forJson: forJson)),
+          type: proposalProceduresLengthType,
+          tags: proposalProceduresCborTags,
+        ),
       );
     }
 
@@ -490,27 +610,16 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
       );
     }
 
-    final preservedCbor = this.preservedCbor;
-    if (!forJson && preservedCbor != null) {
-      return preservedCbor.restore(entriesMap.map((k, entry) => MapEntry(k, entry.value)));
-    }
-
-    // Default ascending order (for JSON or manually created bodies)
-    final keys = entriesMap.keys.toList()..sort();
-    return CborMap.fromEntries(keys.map((k) => entriesMap[k]!));
+    // Original key order for binary CBOR (byte-exact re-serialization); ascending for JSON and new bodies
+    return CborMap.fromEntries(
+      orderEntries(entriesMap, forJson ? null : nonStandardKeyOrder),
+      type: forJson ? CborLengthType.definite : lengthType,
+    );
   }
 
   String blake2bHash256Hex() => this.blake2bHash256.value ?? computeBlake2bHash256().hexEncode();
 
-  /// Original key order of a deserialized body, if it was not ascending (null otherwise).
-  List<int>? get nonStandardKeyOrder =>
-      preservedCbor?.keyOrder.let((order) => PreservedCborMap.isAscending(order) ? null : order);
-
   /// Whether the body map keys serialize in ascending order. Hardware wallets (Ledger, Trezor)
   /// rebuild the body canonically before signing, so they can't sign a body where this is false.
-  bool get hasAscendingKeyOrder =>
-      preservedCbor == null ||
-      PreservedCborMap.isAscending(
-        serialize(forJson: false).keys.map((k) => (k as CborSmallInt).toInt()).toList(growable: false),
-      );
+  bool get hasAscendingKeyOrder => nonAscendingKeyOrder(serialize(forJson: false)) == null;
 }

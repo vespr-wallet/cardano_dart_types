@@ -15,6 +15,11 @@ part "voting_procedures.freezed.dart";
 sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
   const factory VotingProcedures({
     required Map<Voter, Map<GovActionId, VotingProcedure>> voting,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+
+    /// Length type of each voter's inner `{gov_action_id => voting_procedure}` map. Voters missing
+    /// from this map (e.g. added via copyWith) are encoded with definite length.
+    @Default(<Voter, CborLengthType>{}) Map<Voter, CborLengthType> votesLengthTypes,
   }) = _VotingProcedures;
   const VotingProcedures._();
 
@@ -25,18 +30,22 @@ sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
       );
     }
 
-    final voting = Map.fromEntries(
-      cValue.entries.map(
-        (e) {
-          final voter = Voter.deserialize(e.key);
-          final votingProcedure = _deserializeVotingProcedureMap(e.value);
+    final voting = <Voter, Map<GovActionId, VotingProcedure>>{};
+    final votesLengthTypes = <Voter, CborLengthType>{};
+    for (final e in cValue.entries) {
+      final voter = Voter.deserialize(e.key);
+      final votesCbor = e.value;
+      voting[voter] = _deserializeVotingProcedureMap(votesCbor);
+      if (votesCbor is CborMap && votesCbor.type != CborLengthType.definite) {
+        votesLengthTypes[voter] = votesCbor.type;
+      }
+    }
 
-          return MapEntry(voter, votingProcedure);
-        },
-      ),
+    return VotingProcedures(
+      voting: voting,
+      lengthType: cValue.type,
+      votesLengthTypes: votesLengthTypes,
     );
-
-    return VotingProcedures(voting: voting);
   }
 
   @override
@@ -48,10 +57,14 @@ sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
 
         return MapEntry(
           voter.serialize(forJson: forJson),
-          votingProcedureMap.serialize(forJson: forJson),
+          votingProcedureMap.serialize(
+            forJson: forJson,
+            lengthType: votesLengthTypes[voter] ?? CborLengthType.definite,
+          ),
         );
       },
     ),
+    type: lengthType,
   );
 }
 
@@ -75,7 +88,7 @@ Map<GovActionId, VotingProcedure> _deserializeVotingProcedureMap(CborValue cMap)
 }
 
 extension VotingProcedureMapX on Map<GovActionId, VotingProcedure> {
-  CborMap serialize({required bool forJson}) {
+  CborMap serialize({required bool forJson, CborLengthType lengthType = CborLengthType.definite}) {
     return CborMap.fromEntries(
       entries.map(
         (e) {
@@ -88,6 +101,7 @@ extension VotingProcedureMapX on Map<GovActionId, VotingProcedure> {
           );
         },
       ),
+      type: lengthType,
     );
   }
 }

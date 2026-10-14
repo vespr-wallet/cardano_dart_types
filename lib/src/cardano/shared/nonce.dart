@@ -14,6 +14,7 @@ part "nonce.freezed.dart";
 sealed class Nonce with _$Nonce implements CborEncodable {
   const factory Nonce({
     required Uint8List? nonceHash,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _Nonce;
   const Nonce._();
 
@@ -35,9 +36,10 @@ sealed class Nonce with _$Nonce implements CborEncodable {
       );
     }
     return switch (i.toInt()) {
-      0 => const Nonce(nonceHash: null),
+      0 => Nonce(nonceHash: null, lengthType: cValue.type),
       1 => Nonce(
         nonceHash: (cValue[1] as CborBytes).bytes.toUint8List(),
+        lengthType: cValue.type,
       ),
       _ => throw CborDeserializationException(
         "Nonce deserialization failed. Invalid Nonce type ${i.toInt()}",
@@ -50,9 +52,12 @@ sealed class Nonce with _$Nonce implements CborEncodable {
     final nonceHash = this.nonceHash;
     return forJson
         ? CborString(nonceHash == null ? "Nonce with no hash" : "Nonce with hash: ${nonceHash.hexEncode()}")
-        : CborList([
-            CborSmallInt(nonceHash == null ? 0 : 1),
-            if (nonceHash != null) CborBytes(nonceHash),
-          ]);
+        : CborList(
+            [
+              CborSmallInt(nonceHash == null ? 0 : 1),
+              if (nonceHash != null) CborBytes(nonceHash),
+            ],
+            type: lengthType,
+          );
   }
 }

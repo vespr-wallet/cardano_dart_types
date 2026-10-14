@@ -18,7 +18,11 @@ extension _BechExt on Iterable<int> {
 /// A witness is a public key and a signature (a signed hash of the body) used for on-chain validation.
 @freezed
 sealed class WitnessVKey with _$WitnessVKey implements CborEncodable {
-  const factory WitnessVKey({required Uint8List vkey, required Uint8List signature}) = _WitnessVKey;
+  const factory WitnessVKey({
+    required Uint8List vkey,
+    required Uint8List signature,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+  }) = _WitnessVKey;
   const WitnessVKey._();
 
   @override
@@ -28,12 +32,14 @@ sealed class WitnessVKey with _$WitnessVKey implements CborEncodable {
       forJson ? CborString(vkey.vkeyBech32Encode()) : CborBytes(vkey),
       forJson ? CborString(signature.hexEncode()) : CborBytes(signature),
     ],
+    type: lengthType,
   );
 
   factory WitnessVKey.deserialize({required CborList cList}) {
     return WitnessVKey(
       vkey: (cList[0] as CborBytes).bytes.toUint8List(),
       signature: (cList[1] as CborBytes).bytes.toUint8List(),
+      lengthType: cList.type,
     );
   }
 

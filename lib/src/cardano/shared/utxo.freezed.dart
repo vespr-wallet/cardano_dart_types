@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Utxo {
 
- CardanoTransactionInput get identifier; CardanoTransactionOutput get content;
+ CardanoTransactionInput get identifier; CardanoTransactionOutput get content; CborLengthType get lengthType;
 /// Create a copy of Utxo
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $UtxoCopyWith<Utxo> get copyWith => _$UtxoCopyWithImpl<Utxo>(this as Utxo, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Utxo&&(identical(other.identifier, identifier) || other.identifier == identifier)&&(identical(other.content, content) || other.content == content));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Utxo&&(identical(other.identifier, identifier) || other.identifier == identifier)&&(identical(other.content, content) || other.content == content)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,identifier,content);
+int get hashCode => Object.hash(runtimeType,identifier,content,lengthType);
 
 @override
 String toString() {
-  return 'Utxo(identifier: $identifier, content: $content)';
+  return 'Utxo(identifier: $identifier, content: $content, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $UtxoCopyWith<$Res>  {
   factory $UtxoCopyWith(Utxo value, $Res Function(Utxo) _then) = _$UtxoCopyWithImpl;
 @useResult
 $Res call({
- CardanoTransactionInput identifier, CardanoTransactionOutput content
+ CardanoTransactionInput identifier, CardanoTransactionOutput content, CborLengthType lengthType
 });
 
 
@@ -62,11 +62,12 @@ class _$UtxoCopyWithImpl<$Res>
 
 /// Create a copy of Utxo
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? identifier = null,Object? content = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? identifier = null,Object? content = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 identifier: null == identifier ? _self.identifier : identifier // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInput,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
-as CardanoTransactionOutput,
+as CardanoTransactionOutput,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 /// Create a copy of Utxo
@@ -96,11 +97,12 @@ $CardanoTransactionOutputCopyWith<$Res> get content {
 
 
 class _Utxo extends Utxo {
-  const _Utxo({required this.identifier, required this.content}): super._();
+  const _Utxo({required this.identifier, required this.content, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  CardanoTransactionInput identifier;
 @override final  CardanoTransactionOutput content;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Utxo
 /// with the given fields replaced by the non-null parameter values.
@@ -112,16 +114,16 @@ _$UtxoCopyWith<_Utxo> get copyWith => __$UtxoCopyWithImpl<_Utxo>(this, _$identit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Utxo&&(identical(other.identifier, identifier) || other.identifier == identifier)&&(identical(other.content, content) || other.content == content));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Utxo&&(identical(other.identifier, identifier) || other.identifier == identifier)&&(identical(other.content, content) || other.content == content)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,identifier,content);
+int get hashCode => Object.hash(runtimeType,identifier,content,lengthType);
 
 @override
 String toString() {
-  return 'Utxo(identifier: $identifier, content: $content)';
+  return 'Utxo(identifier: $identifier, content: $content, lengthType: $lengthType)';
 }
 
 
@@ -132,7 +134,7 @@ abstract mixin class _$UtxoCopyWith<$Res> implements $UtxoCopyWith<$Res> {
   factory _$UtxoCopyWith(_Utxo value, $Res Function(_Utxo) _then) = __$UtxoCopyWithImpl;
 @override @useResult
 $Res call({
- CardanoTransactionInput identifier, CardanoTransactionOutput content
+ CardanoTransactionInput identifier, CardanoTransactionOutput content, CborLengthType lengthType
 });
 
 
@@ -149,11 +151,12 @@ class __$UtxoCopyWithImpl<$Res>
 
 /// Create a copy of Utxo
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? identifier = null,Object? content = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? identifier = null,Object? content = null,Object? lengthType = null,}) {
   return _then(_Utxo(
 identifier: null == identifier ? _self.identifier : identifier // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionInput,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
-as CardanoTransactionOutput,
+as CardanoTransactionOutput,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

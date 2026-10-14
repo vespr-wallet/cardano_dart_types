@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Credential {
 
- CredType get type; Uint8List get vKeyHash;
+ CredType get type; Uint8List get vKeyHash; CborLengthType get lengthType;
 /// Create a copy of Credential
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CredentialCopyWith<Credential> get copyWith => _$CredentialCopyWithImpl<Credent
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Credential&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Credential&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(vKeyHash));
+int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(vKeyHash),lengthType);
 
 @override
 String toString() {
-  return 'Credential(type: $type, vKeyHash: $vKeyHash)';
+  return 'Credential(type: $type, vKeyHash: $vKeyHash, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CredentialCopyWith<$Res>  {
   factory $CredentialCopyWith(Credential value, $Res Function(Credential) _then) = _$CredentialCopyWithImpl;
 @useResult
 $Res call({
- CredType type, Uint8List vKeyHash
+ CredType type, Uint8List vKeyHash, CborLengthType lengthType
 });
 
 
@@ -62,11 +62,12 @@ class _$CredentialCopyWithImpl<$Res>
 
 /// Create a copy of Credential
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? vKeyHash = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? vKeyHash = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as CredType,vKeyHash: null == vKeyHash ? _self.vKeyHash : vKeyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,
+as Uint8List,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -78,11 +79,12 @@ as Uint8List,
 
 
 class _Credential extends Credential {
-  const _Credential(this.type, this.vKeyHash): super._();
+  const _Credential(this.type, this.vKeyHash, {this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  CredType type;
 @override final  Uint8List vKeyHash;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Credential
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +96,16 @@ _$CredentialCopyWith<_Credential> get copyWith => __$CredentialCopyWithImpl<_Cre
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Credential&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Credential&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(vKeyHash));
+int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(vKeyHash),lengthType);
 
 @override
 String toString() {
-  return 'Credential(type: $type, vKeyHash: $vKeyHash)';
+  return 'Credential(type: $type, vKeyHash: $vKeyHash, lengthType: $lengthType)';
 }
 
 
@@ -114,7 +116,7 @@ abstract mixin class _$CredentialCopyWith<$Res> implements $CredentialCopyWith<$
   factory _$CredentialCopyWith(_Credential value, $Res Function(_Credential) _then) = __$CredentialCopyWithImpl;
 @override @useResult
 $Res call({
- CredType type, Uint8List vKeyHash
+ CredType type, Uint8List vKeyHash, CborLengthType lengthType
 });
 
 
@@ -131,11 +133,12 @@ class __$CredentialCopyWithImpl<$Res>
 
 /// Create a copy of Credential
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? vKeyHash = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? vKeyHash = null,Object? lengthType = null,}) {
   return _then(_Credential(
 null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as CredType,null == vKeyHash ? _self.vKeyHash : vKeyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,
+as Uint8List,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

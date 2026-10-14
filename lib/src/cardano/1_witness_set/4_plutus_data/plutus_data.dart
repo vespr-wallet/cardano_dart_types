@@ -56,8 +56,9 @@ sealed class PlutusData with _$PlutusData implements CborEncodable {
         final alternative = cValue[0] as CborSmallInt;
         final data = cValue[1] as CborList;
 
+        // general form #6.102([alternative, fields]): the alternative is stored as-is, it is not a compact tag
         return PlutusData.constr(
-          _compactCborTagToAlternative(alternative.toInt()),
+          alternative.toInt(),
           _deserialisePlutusData_List(data),
           cValue.tags,
           cValue.type,
@@ -88,31 +89,9 @@ sealed class PlutusData with _$PlutusData implements CborEncodable {
   }
 }
 
-int _compactCborTagToAlternative(int cborTag) {
-  // return cborTag; // Not sure this is needed
-  if (cborTag >= 121 && cborTag <= 127) {
-    return cborTag - 121;
-  } else if (cborTag >= 1280 && cborTag <= 1400) {
-    return cborTag - 1280 + 7;
-  } else {
-    return cborTag;
-  }
-}
-
-int _alternativeToCompactCborTag(int altTag) {
-  // return altTag; // Not sure this is needed
-  if (altTag <= 6) {
-    return altTag + 121;
-  } else if (altTag <= 127) {
-    return altTag + 1280 - 7;
-  } else {
-    return altTag;
-  }
-}
-
 CborValue _serializePlutusData_Constr(PlutusData_Constr d, {required bool forJson}) => CborList(
   [
-    CborSmallInt(forJson ? d.alternative : _alternativeToCompactCborTag(d.alternative)),
+    CborSmallInt(d.alternative),
     _serializePlutusData_List(d.data, forJson: forJson),
   ],
   tags: d.tags,

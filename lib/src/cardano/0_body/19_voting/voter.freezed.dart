@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Voter {
 
- VoterType get voterType; Uint8List get vKeyHash;
+ VoterType get voterType; Uint8List get vKeyHash; CborLengthType get lengthType;
 /// Create a copy of Voter
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $VoterCopyWith<Voter> get copyWith => _$VoterCopyWithImpl<Voter>(this as Voter, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Voter&&(identical(other.voterType, voterType) || other.voterType == voterType)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Voter&&(identical(other.voterType, voterType) || other.voterType == voterType)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,voterType,const DeepCollectionEquality().hash(vKeyHash));
+int get hashCode => Object.hash(runtimeType,voterType,const DeepCollectionEquality().hash(vKeyHash),lengthType);
 
 @override
 String toString() {
-  return 'Voter(voterType: $voterType, vKeyHash: $vKeyHash)';
+  return 'Voter(voterType: $voterType, vKeyHash: $vKeyHash, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $VoterCopyWith<$Res>  {
   factory $VoterCopyWith(Voter value, $Res Function(Voter) _then) = _$VoterCopyWithImpl;
 @useResult
 $Res call({
- VoterType voterType, Uint8List vKeyHash
+ VoterType voterType, Uint8List vKeyHash, CborLengthType lengthType
 });
 
 
@@ -62,11 +62,12 @@ class _$VoterCopyWithImpl<$Res>
 
 /// Create a copy of Voter
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? voterType = null,Object? vKeyHash = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? voterType = null,Object? vKeyHash = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 voterType: null == voterType ? _self.voterType : voterType // ignore: cast_nullable_to_non_nullable
 as VoterType,vKeyHash: null == vKeyHash ? _self.vKeyHash : vKeyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,
+as Uint8List,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -78,11 +79,12 @@ as Uint8List,
 
 
 class _Voter extends Voter {
-  const _Voter({required this.voterType, required this.vKeyHash}): super._();
+  const _Voter({required this.voterType, required this.vKeyHash, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  VoterType voterType;
 @override final  Uint8List vKeyHash;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Voter
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +96,16 @@ _$VoterCopyWith<_Voter> get copyWith => __$VoterCopyWithImpl<_Voter>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Voter&&(identical(other.voterType, voterType) || other.voterType == voterType)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Voter&&(identical(other.voterType, voterType) || other.voterType == voterType)&&const DeepCollectionEquality().equals(other.vKeyHash, vKeyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,voterType,const DeepCollectionEquality().hash(vKeyHash));
+int get hashCode => Object.hash(runtimeType,voterType,const DeepCollectionEquality().hash(vKeyHash),lengthType);
 
 @override
 String toString() {
-  return 'Voter(voterType: $voterType, vKeyHash: $vKeyHash)';
+  return 'Voter(voterType: $voterType, vKeyHash: $vKeyHash, lengthType: $lengthType)';
 }
 
 
@@ -114,7 +116,7 @@ abstract mixin class _$VoterCopyWith<$Res> implements $VoterCopyWith<$Res> {
   factory _$VoterCopyWith(_Voter value, $Res Function(_Voter) _then) = __$VoterCopyWithImpl;
 @override @useResult
 $Res call({
- VoterType voterType, Uint8List vKeyHash
+ VoterType voterType, Uint8List vKeyHash, CborLengthType lengthType
 });
 
 
@@ -131,11 +133,12 @@ class __$VoterCopyWithImpl<$Res>
 
 /// Create a copy of Voter
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? voterType = null,Object? vKeyHash = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? voterType = null,Object? vKeyHash = null,Object? lengthType = null,}) {
   return _then(_Voter(
 voterType: null == voterType ? _self.voterType : voterType // ignore: cast_nullable_to_non_nullable
 as VoterType,vKeyHash: null == vKeyHash ? _self.vKeyHash : vKeyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List,
+as Uint8List,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

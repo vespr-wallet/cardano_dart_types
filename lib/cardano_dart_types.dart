@@ -35,7 +35,6 @@ export "src/cardano/1_witness_set/5_redeemer/redeemer.dart";
 export "src/cardano/1_witness_set/6_plutus_script_v2/plutus_script_v2.dart";
 export "src/cardano/1_witness_set/witness_set.dart";
 export "src/cardano/metadata.dart";
-export "src/cardano/preserved_cbor_map.dart";
 export "src/cardano/shared/address.dart";
 export "src/cardano/shared/anchor.dart";
 export "src/cardano/shared/asset.dart";

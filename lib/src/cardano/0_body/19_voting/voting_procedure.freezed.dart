@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$VotingProcedure {
 
- Vote get vote; Anchor? get anchor;
+ Vote get vote; Anchor? get anchor; CborLengthType get lengthType;
 /// Create a copy of VotingProcedure
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $VotingProcedureCopyWith<VotingProcedure> get copyWith => _$VotingProcedureCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VotingProcedure&&(identical(other.vote, vote) || other.vote == vote)&&(identical(other.anchor, anchor) || other.anchor == anchor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VotingProcedure&&(identical(other.vote, vote) || other.vote == vote)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,vote,anchor);
+int get hashCode => Object.hash(runtimeType,vote,anchor,lengthType);
 
 @override
 String toString() {
-  return 'VotingProcedure(vote: $vote, anchor: $anchor)';
+  return 'VotingProcedure(vote: $vote, anchor: $anchor, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $VotingProcedureCopyWith<$Res>  {
   factory $VotingProcedureCopyWith(VotingProcedure value, $Res Function(VotingProcedure) _then) = _$VotingProcedureCopyWithImpl;
 @useResult
 $Res call({
- Vote vote, Anchor? anchor
+ Vote vote, Anchor? anchor, CborLengthType lengthType
 });
 
 
@@ -62,11 +62,12 @@ class _$VotingProcedureCopyWithImpl<$Res>
 
 /// Create a copy of VotingProcedure
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? vote = null,Object? anchor = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? vote = null,Object? anchor = freezed,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 vote: null == vote ? _self.vote : vote // ignore: cast_nullable_to_non_nullable
 as Vote,anchor: freezed == anchor ? _self.anchor : anchor // ignore: cast_nullable_to_non_nullable
-as Anchor?,
+as Anchor?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 /// Create a copy of VotingProcedure
@@ -90,11 +91,12 @@ $AnchorCopyWith<$Res>? get anchor {
 
 
 class _VotingProcedure extends VotingProcedure {
-  const _VotingProcedure({required this.vote, required this.anchor}): super._();
+  const _VotingProcedure({required this.vote, required this.anchor, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  Vote vote;
 @override final  Anchor? anchor;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of VotingProcedure
 /// with the given fields replaced by the non-null parameter values.
@@ -106,16 +108,16 @@ _$VotingProcedureCopyWith<_VotingProcedure> get copyWith => __$VotingProcedureCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VotingProcedure&&(identical(other.vote, vote) || other.vote == vote)&&(identical(other.anchor, anchor) || other.anchor == anchor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VotingProcedure&&(identical(other.vote, vote) || other.vote == vote)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,vote,anchor);
+int get hashCode => Object.hash(runtimeType,vote,anchor,lengthType);
 
 @override
 String toString() {
-  return 'VotingProcedure(vote: $vote, anchor: $anchor)';
+  return 'VotingProcedure(vote: $vote, anchor: $anchor, lengthType: $lengthType)';
 }
 
 
@@ -126,7 +128,7 @@ abstract mixin class _$VotingProcedureCopyWith<$Res> implements $VotingProcedure
   factory _$VotingProcedureCopyWith(_VotingProcedure value, $Res Function(_VotingProcedure) _then) = __$VotingProcedureCopyWithImpl;
 @override @useResult
 $Res call({
- Vote vote, Anchor? anchor
+ Vote vote, Anchor? anchor, CborLengthType lengthType
 });
 
 
@@ -143,11 +145,12 @@ class __$VotingProcedureCopyWithImpl<$Res>
 
 /// Create a copy of VotingProcedure
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? vote = null,Object? anchor = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? vote = null,Object? anchor = freezed,Object? lengthType = null,}) {
   return _then(_VotingProcedure(
 vote: null == vote ? _self.vote : vote // ignore: cast_nullable_to_non_nullable
 as Vote,anchor: freezed == anchor ? _self.anchor : anchor // ignore: cast_nullable_to_non_nullable
-as Anchor?,
+as Anchor?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

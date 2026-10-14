@@ -21,10 +21,10 @@ sealed class Certificates with _$Certificates implements CborEncodable {
 
   @override
   CborValue serialize({required bool forJson}) => CborList.of(
-        certificates.map((certificate) => certificate.serialize(forJson: forJson)),
-        tags: cborTags,
-        type: lengthType,
-      );
+    certificates.map((certificate) => certificate.serialize(forJson: forJson)),
+    tags: cborTags,
+    type: lengthType,
+  );
 
   factory Certificates.deserialize(CborValue value) {
     if (value is! CborList) {

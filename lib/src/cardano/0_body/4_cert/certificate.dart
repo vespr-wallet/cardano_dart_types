@@ -24,16 +24,19 @@ sealed class Certificate with _$Certificate implements CborEncodable {
   // Deprecated in conway era
   factory Certificate.stakeRegistrationLegacy({
     required Credential stakeCredential,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_StakeRegistrationLegacy;
 
   // Deprecated in conway era
   factory Certificate.stakeDeRegistrationLegacy({
     required Credential stakeCredential,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_StakeDeRegistrationLegacy;
 
   factory Certificate.stakeDelegation({
     required Credential stakeCredential,
     required StakePoolId stakePoolId,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_StakeDelegation;
 
   @Assert("pledge.toBigInt() >= BigInt.from(0)")
@@ -46,14 +49,18 @@ sealed class Certificate with _$Certificate implements CborEncodable {
     required RationalNumber margin, // margin
     required Uint8List rewardAccount, // decoded address bytes (can be encoded to bech32 directly)
     required List<Uint8List> poolOwners, // decoded pool owner address key hash 28
+    @Default(CborLengthType.definite) CborLengthType poolOwnersLengthType, // encoding of the pool owners list/set
+    @Default([]) List<int> poolOwnersCborTags, // e.g. 258 when the pool owners are encoded as a tagged set
     required CborValue relays, // relays ; we don't bother to decode this for now
     required PoolMetadata? poolMetadata,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_PoolRegistration;
 
   @Assert("epoch.toBigInt() >= BigInt.from(0)")
   factory Certificate.poolRetirement({
     required StakePoolId operator, // pool key hash 28 bytes
     required CborInt epoch,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_PoolRetirement;
 
   // introduced in conway era
@@ -61,6 +68,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
   factory Certificate.stakeRegistration({
     required Credential stakeCredential,
     required CborInt coin,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_StakeRegistration;
 
   // introduced in conway era
@@ -68,12 +76,14 @@ sealed class Certificate with _$Certificate implements CborEncodable {
   factory Certificate.stakeDeRegistration({
     required Credential stakeCredential,
     required CborInt coin,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_StakeDeRegistration;
 
   // introduced in conway era
   factory Certificate.voteDelegation({
     required Credential stakeCredential,
     required Drep dRep,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_VoteDelegation;
 
   // introduced in conway era
@@ -82,6 +92,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
     required Credential stakeCredential,
     required StakePoolId stakePoolId,
     required Drep dRep,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_StakeVoteDelegation;
 
   // introduced in conway era
@@ -91,6 +102,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
     required Credential stakeCredential,
     required StakePoolId stakePoolId,
     required CborInt coin,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_StakeRegistrationDelegation;
 
   // introduced in conway era
@@ -100,6 +112,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
     required Credential stakeCredential,
     required Drep dRep,
     required CborInt coin,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_VoteRegistrationDelegation;
 
   // introduced in conway era
@@ -110,6 +123,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
     required StakePoolId stakePoolId,
     required Drep dRep,
     required CborInt coin,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_StakeVoteRegistrationDelegation;
 
   // introduced in conway era
@@ -117,6 +131,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
   factory Certificate.authorizeCommitteeHot({
     required Credential committeeColdCredential,
     required Credential committeeHotCredential,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_AuthorizeCommitteeHot;
 
   // introduced in conway era
@@ -124,6 +139,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
   factory Certificate.resignCommitteeCold({
     required Credential committeeColdCredential,
     required Anchor? anchor,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_ResignCommitteeCold;
 
   // introduced in conway era
@@ -133,6 +149,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
     required Credential dRepCredential,
     required CborInt coin,
     required Anchor? anchor,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_RegisterDRep;
 
   // introduced in conway era
@@ -141,6 +158,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
   factory Certificate.unregisterDRep({
     required Credential dRepCredential,
     required CborInt coin,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_UnregisterDRep;
 
   // introduced in conway era
@@ -148,6 +166,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
   factory Certificate.updateDRep({
     required Credential dRepCredential,
     required Anchor? anchor,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Certificate_UpdateDRep;
 
   factory Certificate.deserialize(CborValue cList) {
@@ -245,7 +264,11 @@ sealed class Certificate with _$Certificate implements CborEncodable {
             thisCert.cost,
             thisCert.margin.serialize(forJson: forJson),
             forJson ? CborString(thisCert.rewardAccount.addressBech32Encode()) : CborBytes(thisCert.rewardAccount),
-            CborList.of(thisCert.poolOwners.map(CborBytes.new)),
+            CborList.of(
+              thisCert.poolOwners.map(CborBytes.new),
+              tags: thisCert.poolOwnersCborTags,
+              type: thisCert.poolOwnersLengthType,
+            ),
             thisCert.relays,
             thisCert.poolMetadata?.serialize(forJson: forJson) ?? const CborNull(),
           ],
@@ -309,6 +332,7 @@ sealed class Certificate with _$Certificate implements CborEncodable {
           ],
         },
       ],
+      type: lengthType,
     );
   }
 }
@@ -334,7 +358,7 @@ Certificate_StakeRegistrationLegacy _deserializeStakeRegistrationLegacy({require
   final cStakeCred = cList[1];
   final stakeCredentials = Credential.deserialize(cStakeCred);
 
-  return Certificate_StakeRegistrationLegacy(stakeCredential: stakeCredentials);
+  return Certificate_StakeRegistrationLegacy(stakeCredential: stakeCredentials, lengthType: cList.type);
 }
 
 Certificate_StakeDeRegistrationLegacy _deserializeStakeDeRegistrationLegacy({required CborList cList}) {
@@ -352,7 +376,7 @@ Certificate_StakeDeRegistrationLegacy _deserializeStakeDeRegistrationLegacy({req
   final cStakeCred = cList[1];
   final stakeCredentials = Credential.deserialize(cStakeCred);
 
-  return Certificate_StakeDeRegistrationLegacy(stakeCredential: stakeCredentials);
+  return Certificate_StakeDeRegistrationLegacy(stakeCredential: stakeCredentials, lengthType: cList.type);
 }
 
 Certificate_StakeDelegation _deserializeStakeDelegation({required CborList cList}) {
@@ -373,7 +397,11 @@ Certificate_StakeDelegation _deserializeStakeDelegation({required CborList cList
   final cPoolKeyHashId = cList[2] as CborBytes;
   final stakePoolId = StakePoolId.deserialize(cPoolKeyHashId);
 
-  return Certificate_StakeDelegation(stakeCredential: stakeCredentials, stakePoolId: stakePoolId);
+  return Certificate_StakeDelegation(
+    stakeCredential: stakeCredentials,
+    stakePoolId: stakePoolId,
+    lengthType: cList.type,
+  );
 }
 
 Certificate_PoolRegistration _deserializePoolRegistration({required CborList cList}) {
@@ -419,8 +447,11 @@ Certificate_PoolRegistration _deserializePoolRegistration({required CborList cLi
     margin: margin,
     rewardAccount: rewardAccount,
     poolOwners: poolOwners,
+    poolOwnersLengthType: cPoolOwners.type,
+    poolOwnersCborTags: cPoolOwners.tags,
     relays: cRelays,
     poolMetadata: poolMetadata,
+    lengthType: cList.type,
   );
 }
 
@@ -441,7 +472,7 @@ Certificate_PoolRetirement _deserializePoolRetirement({required CborList cList})
 
   final cEpoch = cList[2] as CborInt;
 
-  return Certificate_PoolRetirement(operator: operator, epoch: cEpoch);
+  return Certificate_PoolRetirement(operator: operator, epoch: cEpoch, lengthType: cList.type);
 }
 
 Certificate_StakeRegistration _parseStakeRegistrationConway({required CborList cList}) {
@@ -461,7 +492,7 @@ Certificate_StakeRegistration _parseStakeRegistrationConway({required CborList c
 
   final cCoin = cList[2] as CborInt;
 
-  return Certificate_StakeRegistration(stakeCredential: stakeCredentials, coin: cCoin);
+  return Certificate_StakeRegistration(stakeCredential: stakeCredentials, coin: cCoin, lengthType: cList.type);
 }
 
 Certificate_StakeDeRegistration _parseStakeDeRegistrationConway({required CborList cList}) {
@@ -481,7 +512,7 @@ Certificate_StakeDeRegistration _parseStakeDeRegistrationConway({required CborLi
 
   final cCoin = cList[2] as CborInt;
 
-  return Certificate_StakeDeRegistration(stakeCredential: stakeCredentials, coin: cCoin);
+  return Certificate_StakeDeRegistration(stakeCredential: stakeCredentials, coin: cCoin, lengthType: cList.type);
 }
 
 Certificate_VoteDelegation _parseVoteDelegation({required CborList cList}) {
@@ -502,7 +533,7 @@ Certificate_VoteDelegation _parseVoteDelegation({required CborList cList}) {
   final cDRep = cList[2] as CborList;
   final dRep = Drep.deserialize(cDRep);
 
-  return Certificate_VoteDelegation(stakeCredential: stakeCredentials, dRep: dRep);
+  return Certificate_VoteDelegation(stakeCredential: stakeCredentials, dRep: dRep, lengthType: cList.type);
 }
 
 Certificate_StakeVoteDelegation _parseStakeVoteDelegation({required CborList cList}) {
@@ -526,7 +557,12 @@ Certificate_StakeVoteDelegation _parseStakeVoteDelegation({required CborList cLi
   final cDRep = cList[3] as CborList;
   final dRep = Drep.deserialize(cDRep);
 
-  return Certificate_StakeVoteDelegation(stakeCredential: stakeCredentials, stakePoolId: stakePoolId, dRep: dRep);
+  return Certificate_StakeVoteDelegation(
+    stakeCredential: stakeCredentials,
+    stakePoolId: stakePoolId,
+    dRep: dRep,
+    lengthType: cList.type,
+  );
 }
 
 Certificate_StakeRegistrationDelegation _parseStakeRegistrationDelegation({required CborList cList}) {
@@ -555,6 +591,7 @@ Certificate_StakeRegistrationDelegation _parseStakeRegistrationDelegation({requi
     stakeCredential: stakeCredentials,
     stakePoolId: stakePoolId,
     coin: cCoin,
+    lengthType: cList.type,
   );
 }
 
@@ -580,7 +617,12 @@ Certificate_VoteRegistrationDelegation _parseVoteRegistrationDelegation({require
 
   final cCoin = cList[3] as CborInt;
 
-  return Certificate_VoteRegistrationDelegation(stakeCredential: stakeCredentials, dRep: dRep, coin: cCoin);
+  return Certificate_VoteRegistrationDelegation(
+    stakeCredential: stakeCredentials,
+    dRep: dRep,
+    coin: cCoin,
+    lengthType: cList.type,
+  );
 }
 
 Certificate_StakeVoteRegistrationDelegation _parseStakeVoteRegistrationDelegation({required CborList cList}) {
@@ -613,6 +655,7 @@ Certificate_StakeVoteRegistrationDelegation _parseStakeVoteRegistrationDelegatio
     stakePoolId: stakePoolId,
     dRep: dRep,
     coin: cCoin,
+    lengthType: cList.type,
   );
 }
 
@@ -639,6 +682,7 @@ Certificate_AuthorizeCommitteeHot _parseAuthorizeCommitteeHot({required CborList
   return Certificate_AuthorizeCommitteeHot(
     committeeColdCredential: committeeColdCredential,
     committeeHotCredential: committeeHotCredential,
+    lengthType: cList.type,
   );
 }
 
@@ -671,6 +715,7 @@ Certificate_ResignCommitteeCold _parseResignCommitteeCold({required CborList cLi
   return Certificate_ResignCommitteeCold(
     committeeColdCredential: committeeColdCredential,
     anchor: anchor,
+    lengthType: cList.type,
   );
 }
 
@@ -706,6 +751,7 @@ Certificate_RegisterDRep _parseRegisterDRep({required CborList cList}) {
     dRepCredential: dRepCredential,
     coin: cCoin,
     anchor: anchor,
+    lengthType: cList.type,
   );
 }
 
@@ -731,6 +777,7 @@ Certificate_UnregisterDRep _parseUnregisterDRep({required CborList cList}) {
   return Certificate_UnregisterDRep(
     dRepCredential: dRepCredential,
     coin: cCoin,
+    lengthType: cList.type,
   );
 }
 
@@ -763,5 +810,6 @@ Certificate_UpdateDRep _parseUpdateDRep({required CborList cList}) {
   return Certificate_UpdateDRep(
     dRepCredential: dRepCredential,
     anchor: anchor,
+    lengthType: cList.type,
   );
 }

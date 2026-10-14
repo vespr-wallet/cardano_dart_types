@@ -179,7 +179,7 @@ $ValueCopyWith<$Res> get value {
 
 
 class CardanoTransactionOutput_PostAlonzo extends CardanoTransactionOutput {
-   CardanoTransactionOutput_PostAlonzo({required this.address, required this.value, required this.outDatum, required this.scriptRef, required this.lengthType}): super._();
+   CardanoTransactionOutput_PostAlonzo({required this.address, required this.value, required this.outDatum, required this.scriptRef, required this.lengthType, this.datumOptionLengthType = CborLengthType.definite, final  List<int>? nonStandardKeyOrder}): _nonStandardKeyOrder = nonStandardKeyOrder,super._();
   
 
 @override final  Address address;
@@ -187,6 +187,18 @@ class CardanoTransactionOutput_PostAlonzo extends CardanoTransactionOutput {
  final  OutputDatum? outDatum;
  final  Uint8List? scriptRef;
 @override final  CborLengthType lengthType;
+@JsonKey() final  CborLengthType datumOptionLengthType;
+// Original map key order when not ascending (null = ascending)
+ final  List<int>? _nonStandardKeyOrder;
+// Original map key order when not ascending (null = ascending)
+ List<int>? get nonStandardKeyOrder {
+  final value = _nonStandardKeyOrder;
+  if (value == null) return null;
+  if (_nonStandardKeyOrder is EqualUnmodifiableListView) return _nonStandardKeyOrder;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
 
 /// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
@@ -198,12 +210,12 @@ $CardanoTransactionOutput_PostAlonzoCopyWith<CardanoTransactionOutput_PostAlonzo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_PostAlonzo&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&(identical(other.outDatum, outDatum) || other.outDatum == outDatum)&&const DeepCollectionEquality().equals(other.scriptRef, scriptRef)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_PostAlonzo&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&(identical(other.outDatum, outDatum) || other.outDatum == outDatum)&&const DeepCollectionEquality().equals(other.scriptRef, scriptRef)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.datumOptionLengthType, datumOptionLengthType) || other.datumOptionLengthType == datumOptionLengthType)&&const DeepCollectionEquality().equals(other._nonStandardKeyOrder, _nonStandardKeyOrder));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,address,value,outDatum,const DeepCollectionEquality().hash(scriptRef),lengthType);
+int get hashCode => Object.hash(runtimeType,address,value,outDatum,const DeepCollectionEquality().hash(scriptRef),lengthType,datumOptionLengthType,const DeepCollectionEquality().hash(_nonStandardKeyOrder));
 
 
 
@@ -214,7 +226,7 @@ abstract mixin class $CardanoTransactionOutput_PostAlonzoCopyWith<$Res> implemen
   factory $CardanoTransactionOutput_PostAlonzoCopyWith(CardanoTransactionOutput_PostAlonzo value, $Res Function(CardanoTransactionOutput_PostAlonzo) _then) = _$CardanoTransactionOutput_PostAlonzoCopyWithImpl;
 @override @useResult
 $Res call({
- Address address, Value value, OutputDatum? outDatum, Uint8List? scriptRef, CborLengthType lengthType
+ Address address, Value value, OutputDatum? outDatum, Uint8List? scriptRef, CborLengthType lengthType, CborLengthType datumOptionLengthType, List<int>? nonStandardKeyOrder
 });
 
 
@@ -231,14 +243,16 @@ class _$CardanoTransactionOutput_PostAlonzoCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? address = null,Object? value = null,Object? outDatum = freezed,Object? scriptRef = freezed,Object? lengthType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? address = null,Object? value = null,Object? outDatum = freezed,Object? scriptRef = freezed,Object? lengthType = null,Object? datumOptionLengthType = null,Object? nonStandardKeyOrder = freezed,}) {
   return _then(CardanoTransactionOutput_PostAlonzo(
 address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as Address,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as Value,outDatum: freezed == outDatum ? _self.outDatum : outDatum // ignore: cast_nullable_to_non_nullable
 as OutputDatum?,scriptRef: freezed == scriptRef ? _self.scriptRef : scriptRef // ignore: cast_nullable_to_non_nullable
 as Uint8List?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
-as CborLengthType,
+as CborLengthType,datumOptionLengthType: null == datumOptionLengthType ? _self.datumOptionLengthType : datumOptionLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,nonStandardKeyOrder: freezed == nonStandardKeyOrder ? _self._nonStandardKeyOrder : nonStandardKeyOrder // ignore: cast_nullable_to_non_nullable
+as List<int>?,
   ));
 }
 

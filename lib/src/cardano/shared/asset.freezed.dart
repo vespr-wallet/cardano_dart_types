@@ -129,7 +129,7 @@ as CborInt,
 
 
 class Value_v1 extends Value {
-  const Value_v1({required this.lovelace, required final  List<MultiAsset> mA}): _mA = mA,super._();
+  const Value_v1({required this.lovelace, required final  List<MultiAsset> mA, this.lengthType = CborLengthType.definite, this.multiAssetsLengthType = CborLengthType.definite}): _mA = mA,super._();
   
 
 @override final  CborInt lovelace;
@@ -140,6 +140,8 @@ class Value_v1 extends Value {
   return EqualUnmodifiableListView(_mA);
 }
 
+@JsonKey() final  CborLengthType lengthType;
+@JsonKey() final  CborLengthType multiAssetsLengthType;
 
 /// Create a copy of Value
 /// with the given fields replaced by the non-null parameter values.
@@ -153,7 +155,7 @@ $Value_v1CopyWith<Value_v1> get copyWith => _$Value_v1CopyWithImpl<Value_v1>(thi
 
 @override
 String toString() {
-  return 'Value.v1(lovelace: $lovelace, mA: $mA)';
+  return 'Value.v1(lovelace: $lovelace, mA: $mA, lengthType: $lengthType, multiAssetsLengthType: $multiAssetsLengthType)';
 }
 
 
@@ -164,7 +166,7 @@ abstract mixin class $Value_v1CopyWith<$Res> implements $ValueCopyWith<$Res> {
   factory $Value_v1CopyWith(Value_v1 value, $Res Function(Value_v1) _then) = _$Value_v1CopyWithImpl;
 @override @useResult
 $Res call({
- CborInt lovelace, List<MultiAsset> mA
+ CborInt lovelace, List<MultiAsset> mA, CborLengthType lengthType, CborLengthType multiAssetsLengthType
 });
 
 
@@ -181,11 +183,13 @@ class _$Value_v1CopyWithImpl<$Res>
 
 /// Create a copy of Value
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? lovelace = null,Object? mA = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? lovelace = null,Object? mA = null,Object? lengthType = null,Object? multiAssetsLengthType = null,}) {
   return _then(Value_v1(
 lovelace: null == lovelace ? _self.lovelace : lovelace // ignore: cast_nullable_to_non_nullable
 as CborInt,mA: null == mA ? _self._mA : mA // ignore: cast_nullable_to_non_nullable
-as List<MultiAsset>,
+as List<MultiAsset>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,multiAssetsLengthType: null == multiAssetsLengthType ? _self.multiAssetsLengthType : multiAssetsLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -195,7 +199,7 @@ as List<MultiAsset>,
 /// @nodoc
 mixin _$MultiAsset {
 
- PolicyId get policyId; List<Asset> get assets;
+ PolicyId get policyId; List<Asset> get assets; CborLengthType get lengthType;
 /// Create a copy of MultiAsset
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -208,7 +212,7 @@ $MultiAssetCopyWith<MultiAsset> get copyWith => _$MultiAssetCopyWithImpl<MultiAs
 
 @override
 String toString() {
-  return 'MultiAsset(policyId: $policyId, assets: $assets)';
+  return 'MultiAsset(policyId: $policyId, assets: $assets, lengthType: $lengthType)';
 }
 
 
@@ -219,7 +223,7 @@ abstract mixin class $MultiAssetCopyWith<$Res>  {
   factory $MultiAssetCopyWith(MultiAsset value, $Res Function(MultiAsset) _then) = _$MultiAssetCopyWithImpl;
 @useResult
 $Res call({
- PolicyId policyId, List<Asset> assets
+ PolicyId policyId, List<Asset> assets, CborLengthType lengthType
 });
 
 
@@ -236,11 +240,12 @@ class _$MultiAssetCopyWithImpl<$Res>
 
 /// Create a copy of MultiAsset
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? policyId = null,Object? assets = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? policyId = null,Object? assets = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 policyId: null == policyId ? _self.policyId : policyId // ignore: cast_nullable_to_non_nullable
 as PolicyId,assets: null == assets ? _self.assets : assets // ignore: cast_nullable_to_non_nullable
-as List<Asset>,
+as List<Asset>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 /// Create a copy of MultiAsset
@@ -261,7 +266,7 @@ $PolicyIdCopyWith<$Res> get policyId {
 
 
 class _MultiAsset extends MultiAsset {
-  const _MultiAsset({required this.policyId, required final  List<Asset> assets}): _assets = assets,super._();
+  const _MultiAsset({required this.policyId, required final  List<Asset> assets, this.lengthType = CborLengthType.definite}): _assets = assets,super._();
   
 
 @override final  PolicyId policyId;
@@ -272,6 +277,7 @@ class _MultiAsset extends MultiAsset {
   return EqualUnmodifiableListView(_assets);
 }
 
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of MultiAsset
 /// with the given fields replaced by the non-null parameter values.
@@ -285,7 +291,7 @@ _$MultiAssetCopyWith<_MultiAsset> get copyWith => __$MultiAssetCopyWithImpl<_Mul
 
 @override
 String toString() {
-  return 'MultiAsset(policyId: $policyId, assets: $assets)';
+  return 'MultiAsset(policyId: $policyId, assets: $assets, lengthType: $lengthType)';
 }
 
 
@@ -296,7 +302,7 @@ abstract mixin class _$MultiAssetCopyWith<$Res> implements $MultiAssetCopyWith<$
   factory _$MultiAssetCopyWith(_MultiAsset value, $Res Function(_MultiAsset) _then) = __$MultiAssetCopyWithImpl;
 @override @useResult
 $Res call({
- PolicyId policyId, List<Asset> assets
+ PolicyId policyId, List<Asset> assets, CborLengthType lengthType
 });
 
 
@@ -313,11 +319,12 @@ class __$MultiAssetCopyWithImpl<$Res>
 
 /// Create a copy of MultiAsset
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? policyId = null,Object? assets = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? policyId = null,Object? assets = null,Object? lengthType = null,}) {
   return _then(_MultiAsset(
 policyId: null == policyId ? _self.policyId : policyId // ignore: cast_nullable_to_non_nullable
 as PolicyId,assets: null == assets ? _self._assets : assets // ignore: cast_nullable_to_non_nullable
-as List<Asset>,
+as List<Asset>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

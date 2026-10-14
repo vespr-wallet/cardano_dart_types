@@ -14,6 +14,7 @@ sealed class CardanoTransactionInputs with _$CardanoTransactionInputs implements
   const factory CardanoTransactionInputs({
     required List<CardanoTransactionInput> data,
     required List<int> cborTags, // [258] tag may be sent in Conway era | passed for ledger serialization
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _CardanoTransactionInputs;
   const CardanoTransactionInputs._();
 
@@ -27,6 +28,7 @@ sealed class CardanoTransactionInputs with _$CardanoTransactionInputs implements
     return CardanoTransactionInputs(
       data: cValue.map((e) => CardanoTransactionInput.deserialize(cList: e as CborList)).toList(),
       cborTags: cValue.tags,
+      lengthType: cValue.type,
     );
   }
 
@@ -38,7 +40,7 @@ sealed class CardanoTransactionInputs with _$CardanoTransactionInputs implements
         ...forJson ? [CborString("tags: $cborTags")] : [],
       ],
       tags: cborTags,
-      type: CborLengthType.definite,
+      type: lengthType,
     );
   }
 }

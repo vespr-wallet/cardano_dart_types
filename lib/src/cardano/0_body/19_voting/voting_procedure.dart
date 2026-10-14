@@ -15,6 +15,7 @@ sealed class VotingProcedure with _$VotingProcedure implements CborEncodable {
   const factory VotingProcedure({
     required Vote vote,
     required Anchor? anchor,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _VotingProcedure;
   const VotingProcedure._();
 
@@ -22,10 +23,13 @@ sealed class VotingProcedure with _$VotingProcedure implements CborEncodable {
   CborValue serialize({required bool forJson}) {
     final anchor = this.anchor;
 
-    return CborList([
-      vote.serialize(forJson: forJson),
-      anchor == null ? const CborNull() : anchor.serialize(forJson: forJson),
-    ]);
+    return CborList(
+      [
+        vote.serialize(forJson: forJson),
+        anchor == null ? const CborNull() : anchor.serialize(forJson: forJson),
+      ],
+      type: lengthType,
+    );
   }
 
   static VotingProcedure deserialize(CborValue cList) {
@@ -46,6 +50,7 @@ sealed class VotingProcedure with _$VotingProcedure implements CborEncodable {
     return VotingProcedure(
       vote: vote,
       anchor: anchor,
+      lengthType: cList.type,
     );
   }
 }

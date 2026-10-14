@@ -11,6 +11,7 @@ sealed class ExUnits with _$ExUnits implements CborEncodable {
   const factory ExUnits({
     required BigInt mem,
     required BigInt steps,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _ExUnits;
   const ExUnits._();
 
@@ -25,12 +26,16 @@ sealed class ExUnits with _$ExUnits implements CborEncodable {
     return ExUnits(
       mem: (cborValue[0] as CborInt).toBigInt(),
       steps: (cborValue[1] as CborInt).toBigInt(),
+      lengthType: cborValue.type,
     );
   }
 
   @override
-  CborValue serialize({required bool forJson}) => CborList.of([
-    CborInt(mem),
-    CborInt(steps),
-  ]);
+  CborValue serialize({required bool forJson}) => CborList.of(
+    [
+      CborInt(mem),
+      CborInt(steps),
+    ],
+    type: lengthType,
+  );
 }

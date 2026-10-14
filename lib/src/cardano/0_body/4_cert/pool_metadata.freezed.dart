@@ -79,12 +79,12 @@ as CborLengthType,
 
 
 class _PoolMetadata extends PoolMetadata {
-   _PoolMetadata({required this.metadataUrl, required this.metadataHash, required this.cborLengthType}): super._();
+   _PoolMetadata({required this.metadataUrl, required this.metadataHash, this.cborLengthType = CborLengthType.definite}): super._();
   
 
 @override final  String metadataUrl;
 @override final  Uint8List metadataHash;
-@override final  CborLengthType cborLengthType;
+@override@JsonKey() final  CborLengthType cborLengthType;
 
 /// Create a copy of PoolMetadata
 /// with the given fields replaced by the non-null parameter values.
