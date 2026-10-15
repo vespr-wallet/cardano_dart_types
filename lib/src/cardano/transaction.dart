@@ -219,6 +219,9 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
 
     final bodyHash = body.blake2bHash256Hex();
 
+    bool isWalletStake(Uint8List vKeyHash) => vKeyHash.deepEquals(stakeCredentialsBytes);
+    bool isWalletDRep(Uint8List vKeyHash) => vKeyHash.deepEquals(drepCredentialBytes);
+
     return TxDiff(
       diff: diff,
       usedUtxos: consumedUtxosFromThisWallet.toList(),
@@ -333,12 +336,15 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           )
           .nonNulls
           .lastOrNull,
+      // Certificates apply in order, so the last one that registers or deregisters the wallet's credential decides
+      // its state after the transaction. Certificates of other credentials do not change it.
       dRepDeregistration:
           body.certs?.certificates
               .map(
                 (e) => switch (e) {
-                  Certificate_UnregisterDRep() => e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes),
-                  _ => false,
+                  Certificate_RegisterDRep() when isWalletDRep(e.dRepCredential.vKeyHash) => false,
+                  Certificate_UnregisterDRep() when isWalletDRep(e.dRepCredential.vKeyHash) => true,
+                  _ => null,
                 },
               )
               .nonNulls
@@ -348,11 +354,14 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           body.certs?.certificates
               .map(
                 (e) => switch (e) {
-                  Certificate_StakeDeRegistrationLegacy() => e.stakeCredential.vKeyHash.deepEquals(
-                    stakeCredentialsBytes,
-                  ),
-                  Certificate_StakeDeRegistration() => e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes),
-                  _ => false,
+                  Certificate_StakeRegistrationLegacy() when isWalletStake(e.stakeCredential.vKeyHash) => false,
+                  Certificate_StakeRegistration() when isWalletStake(e.stakeCredential.vKeyHash) => false,
+                  Certificate_StakeRegistrationDelegation() when isWalletStake(e.stakeCredential.vKeyHash) => false,
+                  Certificate_VoteRegistrationDelegation() when isWalletStake(e.stakeCredential.vKeyHash) => false,
+                  Certificate_StakeVoteRegistrationDelegation() when isWalletStake(e.stakeCredential.vKeyHash) => false,
+                  Certificate_StakeDeRegistrationLegacy() when isWalletStake(e.stakeCredential.vKeyHash) => true,
+                  Certificate_StakeDeRegistration() when isWalletStake(e.stakeCredential.vKeyHash) => true,
+                  _ => null,
                 },
               )
               .nonNulls
