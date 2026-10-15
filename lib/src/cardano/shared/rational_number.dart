@@ -18,15 +18,6 @@ sealed class RationalNumber with _$RationalNumber implements CborEncodable {
   RationalNumber._();
 
   factory RationalNumber.deserialize(CborValue cValue) {
-    if (cValue is CborRationalNumber) {
-      return RationalNumber(
-        numerator: cValue.numerator.toBigInt(),
-        denominator: cValue.denominator.toBigInt(),
-        lengthType: cValue.type,
-        cborTags: cValue.tags,
-      );
-    }
-
     if (cValue is CborList) {
       if (cValue.length != 2) {
         throw Exception(
@@ -41,8 +32,14 @@ sealed class RationalNumber with _$RationalNumber implements CborEncodable {
       );
     }
 
-    throw Exception(
-      "RationalNumber deserialization failed. Expected a cbor rational number but got ${cValue.runtimeType}",
+    if (cValue is! CborRationalNumber) {
+      throw Exception(
+        "RationalNumber deserialization failed. Expected a cbor rational number but got ${cValue.runtimeType}",
+      );
+    }
+    return RationalNumber(
+      numerator: cValue.numerator.toBigInt(),
+      denominator: cValue.denominator.toBigInt(),
     );
   }
 

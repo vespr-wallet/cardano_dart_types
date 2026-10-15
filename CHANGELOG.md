@@ -1,5 +1,9 @@
 ## 3.1.0
 
+Breaking Changes:
+
+- **[VotingProcedures]** `voting` is now `Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)>` (each voter's votes paired with the length type of their map)
+
 Bug Fix:
 
 - Parsed transactions now re-serialize byte-exact for any valid encoding of lists/maps: every model records the length type (definite/indefinite) of the arrays/maps it was parsed from, set tags (258) and the key order of int-keyed maps (body, post-Alonzo outputs, witness set, protocol param updates). Previously the body was hashed (and signed) as parsed but re-serialized differently, so the signature would not match the submitted body.

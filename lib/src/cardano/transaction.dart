@@ -211,7 +211,7 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
               voter.vKeyHash.deepEquals(drepCredentialBytes) ||
               voter.vKeyHash.deepEquals(constitutionalCommitteeHotCredentialBytes);
           if (!isThisWallet) return <VoteInfo>[];
-          final votes = pair.value;
+          final (votes, _) = pair.value;
           return votes.entries.map((v) => VoteInfo(action: v.key, vote: v.value.vote)).toList();
         })
         .flattened

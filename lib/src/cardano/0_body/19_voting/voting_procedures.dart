@@ -14,12 +14,9 @@ part "voting_procedures.freezed.dart";
 @freezed
 sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
   const factory VotingProcedures({
-    required Map<Voter, Map<GovActionId, VotingProcedure>> voting,
+    // each voter's votes with the cbor length type of that inner map
+    required Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)> voting,
     @Default(CborLengthType.definite) CborLengthType lengthType,
-
-    /// Length type of each voter's inner `{gov_action_id => voting_procedure}` map. Voters missing
-    /// from this map (e.g. added via copyWith) are encoded with definite length.
-    @Default(<Voter, CborLengthType>{}) Map<Voter, CborLengthType> votesLengthTypes,
   }) = _VotingProcedures;
   const VotingProcedures._();
 
@@ -30,21 +27,12 @@ sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
       );
     }
 
-    final voting = <Voter, Map<GovActionId, VotingProcedure>>{};
-    final votesLengthTypes = <Voter, CborLengthType>{};
-    for (final e in cValue.entries) {
-      final voter = Voter.deserialize(e.key);
-      final votesCbor = e.value;
-      voting[voter] = _deserializeVotingProcedureMap(votesCbor);
-      if (votesCbor is CborMap && votesCbor.type != CborLengthType.definite) {
-        votesLengthTypes[voter] = votesCbor.type;
-      }
-    }
-
     return VotingProcedures(
-      voting: voting,
+      voting: {
+        for (final e in cValue.entries)
+          Voter.deserialize(e.key): (_deserializeVotingProcedureMap(e.value), (e.value as CborMap).type),
+      },
       lengthType: cValue.type,
-      votesLengthTypes: votesLengthTypes,
     );
   }
 
@@ -53,14 +41,11 @@ sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
     voting.entries.map(
       (e) {
         final voter = e.key;
-        final votingProcedureMap = e.value;
+        final (votingProcedureMap, votesLengthType) = e.value;
 
         return MapEntry(
           voter.serialize(forJson: forJson),
-          votingProcedureMap.serialize(
-            forJson: forJson,
-            lengthType: votesLengthTypes[voter] ?? CborLengthType.definite,
-          ),
+          votingProcedureMap.serialize(forJson: forJson, lengthType: votesLengthType),
         );
       },
     ),

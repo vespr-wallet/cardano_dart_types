@@ -14,9 +14,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$VotingProcedures {
 
- Map<Voter, Map<GovActionId, VotingProcedure>> get voting; CborLengthType get lengthType;/// Length type of each voter's inner `{gov_action_id => voting_procedure}` map. Voters missing
-/// from this map (e.g. added via copyWith) are encoded with definite length.
- Map<Voter, CborLengthType> get votesLengthTypes;
+// each voter's votes with the cbor length type of that inner map
+ Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)> get voting; CborLengthType get lengthType;
 /// Create a copy of VotingProcedures
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,16 +26,16 @@ $VotingProceduresCopyWith<VotingProcedures> get copyWith => _$VotingProceduresCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VotingProcedures&&const DeepCollectionEquality().equals(other.voting, voting)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.votesLengthTypes, votesLengthTypes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VotingProcedures&&const DeepCollectionEquality().equals(other.voting, voting)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(voting),lengthType,const DeepCollectionEquality().hash(votesLengthTypes));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(voting),lengthType);
 
 @override
 String toString() {
-  return 'VotingProcedures(voting: $voting, lengthType: $lengthType, votesLengthTypes: $votesLengthTypes)';
+  return 'VotingProcedures(voting: $voting, lengthType: $lengthType)';
 }
 
 
@@ -47,7 +46,7 @@ abstract mixin class $VotingProceduresCopyWith<$Res>  {
   factory $VotingProceduresCopyWith(VotingProcedures value, $Res Function(VotingProcedures) _then) = _$VotingProceduresCopyWithImpl;
 @useResult
 $Res call({
- Map<Voter, Map<GovActionId, VotingProcedure>> voting, CborLengthType lengthType, Map<Voter, CborLengthType> votesLengthTypes
+ Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)> voting, CborLengthType lengthType
 });
 
 
@@ -64,12 +63,11 @@ class _$VotingProceduresCopyWithImpl<$Res>
 
 /// Create a copy of VotingProcedures
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? voting = null,Object? lengthType = null,Object? votesLengthTypes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? voting = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 voting: null == voting ? _self.voting : voting // ignore: cast_nullable_to_non_nullable
-as Map<Voter, Map<GovActionId, VotingProcedure>>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
-as CborLengthType,votesLengthTypes: null == votesLengthTypes ? _self.votesLengthTypes : votesLengthTypes // ignore: cast_nullable_to_non_nullable
-as Map<Voter, CborLengthType>,
+as Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -81,28 +79,19 @@ as Map<Voter, CborLengthType>,
 
 
 class _VotingProcedures extends VotingProcedures {
-  const _VotingProcedures({required final  Map<Voter, Map<GovActionId, VotingProcedure>> voting, this.lengthType = CborLengthType.definite, final  Map<Voter, CborLengthType> votesLengthTypes = const <Voter, CborLengthType>{}}): _voting = voting,_votesLengthTypes = votesLengthTypes,super._();
+  const _VotingProcedures({required final  Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)> voting, this.lengthType = CborLengthType.definite}): _voting = voting,super._();
   
 
- final  Map<Voter, Map<GovActionId, VotingProcedure>> _voting;
-@override Map<Voter, Map<GovActionId, VotingProcedure>> get voting {
+// each voter's votes with the cbor length type of that inner map
+ final  Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)> _voting;
+// each voter's votes with the cbor length type of that inner map
+@override Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)> get voting {
   if (_voting is EqualUnmodifiableMapView) return _voting;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_voting);
 }
 
 @override@JsonKey() final  CborLengthType lengthType;
-/// Length type of each voter's inner `{gov_action_id => voting_procedure}` map. Voters missing
-/// from this map (e.g. added via copyWith) are encoded with definite length.
- final  Map<Voter, CborLengthType> _votesLengthTypes;
-/// Length type of each voter's inner `{gov_action_id => voting_procedure}` map. Voters missing
-/// from this map (e.g. added via copyWith) are encoded with definite length.
-@override@JsonKey() Map<Voter, CborLengthType> get votesLengthTypes {
-  if (_votesLengthTypes is EqualUnmodifiableMapView) return _votesLengthTypes;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_votesLengthTypes);
-}
-
 
 /// Create a copy of VotingProcedures
 /// with the given fields replaced by the non-null parameter values.
@@ -114,16 +103,16 @@ _$VotingProceduresCopyWith<_VotingProcedures> get copyWith => __$VotingProcedure
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VotingProcedures&&const DeepCollectionEquality().equals(other._voting, _voting)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other._votesLengthTypes, _votesLengthTypes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VotingProcedures&&const DeepCollectionEquality().equals(other._voting, _voting)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_voting),lengthType,const DeepCollectionEquality().hash(_votesLengthTypes));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_voting),lengthType);
 
 @override
 String toString() {
-  return 'VotingProcedures(voting: $voting, lengthType: $lengthType, votesLengthTypes: $votesLengthTypes)';
+  return 'VotingProcedures(voting: $voting, lengthType: $lengthType)';
 }
 
 
@@ -134,7 +123,7 @@ abstract mixin class _$VotingProceduresCopyWith<$Res> implements $VotingProcedur
   factory _$VotingProceduresCopyWith(_VotingProcedures value, $Res Function(_VotingProcedures) _then) = __$VotingProceduresCopyWithImpl;
 @override @useResult
 $Res call({
- Map<Voter, Map<GovActionId, VotingProcedure>> voting, CborLengthType lengthType, Map<Voter, CborLengthType> votesLengthTypes
+ Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)> voting, CborLengthType lengthType
 });
 
 
@@ -151,12 +140,11 @@ class __$VotingProceduresCopyWithImpl<$Res>
 
 /// Create a copy of VotingProcedures
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? voting = null,Object? lengthType = null,Object? votesLengthTypes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? voting = null,Object? lengthType = null,}) {
   return _then(_VotingProcedures(
 voting: null == voting ? _self._voting : voting // ignore: cast_nullable_to_non_nullable
-as Map<Voter, Map<GovActionId, VotingProcedure>>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
-as CborLengthType,votesLengthTypes: null == votesLengthTypes ? _self._votesLengthTypes : votesLengthTypes // ignore: cast_nullable_to_non_nullable
-as Map<Voter, CborLengthType>,
+as Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
