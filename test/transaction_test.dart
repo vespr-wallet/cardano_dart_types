@@ -389,6 +389,24 @@ void main() async {
           expect(txDiff.stakeDeregistration, isFalse);
           expect(txDiff.dRepDeregistration, isFalse);
         });
+
+        test("last stake registration change wins", () {
+          final deregistration = Certificate.stakeDeRegistration(stakeCredential: walletStakeCredential, coin: deposit);
+          final registration = Certificate.stakeRegistration(stakeCredential: walletStakeCredential, coin: deposit);
+          expect(diffWithCerts([deregistration, registration, unrelatedCert]).stakeDeregistration, isFalse);
+          expect(diffWithCerts([registration, deregistration, unrelatedCert]).stakeDeregistration, isTrue);
+        });
+
+        test("last DRep registration change wins", () {
+          final deregistration = Certificate.unregisterDRep(dRepCredential: walletDRepCredential, coin: deposit);
+          final registration = Certificate.registerDRep(
+            dRepCredential: walletDRepCredential,
+            coin: deposit,
+            anchor: null,
+          );
+          expect(diffWithCerts([deregistration, registration, unrelatedCert]).dRepDeregistration, isFalse);
+          expect(diffWithCerts([registration, deregistration, unrelatedCert]).dRepDeregistration, isTrue);
+        });
       });
     });
   });
