@@ -77,11 +77,11 @@ as CborLengthType,
 
 
 class Drep_AddrKeyHash extends Drep {
-   Drep_AddrKeyHash({required this.hash, required this.lengthType}): super._();
+   Drep_AddrKeyHash({required this.hash, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  String hash;
-@override final  CborLengthType lengthType;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Drep
 /// with the given fields replaced by the non-null parameter values.
@@ -145,11 +145,11 @@ as CborLengthType,
 
 
 class Drep_ScriptHash extends Drep {
-   Drep_ScriptHash({required this.hash, required this.lengthType}): super._();
+   Drep_ScriptHash({required this.hash, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  String hash;
-@override final  CborLengthType lengthType;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Drep
 /// with the given fields replaced by the non-null parameter values.
@@ -213,10 +213,10 @@ as CborLengthType,
 
 
 class Drep_Abstain extends Drep {
-   Drep_Abstain({required this.lengthType}): super._();
+   Drep_Abstain({this.lengthType = CborLengthType.definite}): super._();
   
 
-@override final  CborLengthType lengthType;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Drep
 /// with the given fields replaced by the non-null parameter values.
@@ -279,10 +279,10 @@ as CborLengthType,
 
 
 class Drep_NoConfidence extends Drep {
-   Drep_NoConfidence({required this.lengthType}): super._();
+   Drep_NoConfidence({this.lengthType = CborLengthType.definite}): super._();
   
 
-@override final  CborLengthType lengthType;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Drep
 /// with the given fields replaced by the non-null parameter values.

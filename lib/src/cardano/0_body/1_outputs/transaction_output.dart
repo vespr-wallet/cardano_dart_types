@@ -4,6 +4,7 @@ import "package:cbor/cbor.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
 import "../../../exceptions/parse_exceptions.dart";
+import "../../../utils/cbor.dart";
 import "../../../utils/iterable_extensions.dart";
 import "../../../utils/sugar.dart";
 import "../../../utils/transformations.dart";
@@ -34,6 +35,9 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
     required OutputDatum? outDatum,
     required Uint8List? scriptRef,
     required CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType datumOptionLengthType,
+    // Original map key order when not ascending (null = ascending)
+    List<int>? nonStandardKeyOrder,
   }) = CardanoTransactionOutput_PostAlonzo;
 
   @override
@@ -89,10 +93,10 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
     final cborMaybeDatum = cMap[const CborSmallInt(2)];
     final cborMaybeScriptRef = cMap[const CborSmallInt(3)];
 
-    final datum = cborMaybeDatum?.let((cborDatum) {
-      if (cborDatum is! CborList) {
-        throw TransactionOutputParseException("deserializePostAlonzo: cborDatum type: ${cborDatum.runtimeType}");
-      }
+    if (cborMaybeDatum != null && cborMaybeDatum is! CborList) {
+      throw TransactionOutputParseException("deserializePostAlonzo: cborDatum type: ${cborMaybeDatum.runtimeType}");
+    }
+    final datum = (cborMaybeDatum as CborList?)?.let((cborDatum) {
       if (cborDatum.length != 2) {
         throw TransactionOutputParseException("deserializePostAlonzo: cborDatum length: ${cborDatum.length}");
       }
@@ -117,6 +121,8 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
       outDatum: datum,
       scriptRef: scriptRef,
       lengthType: cMap.type,
+      datumOptionLengthType: cborMaybeDatum?.type ?? CborLengthType.definite,
+      nonStandardKeyOrder: nonAscendingKeyOrder(cMap),
     );
 
     conditionalAssert(() => result.serializeHexString() == cMap.hexEncode());
@@ -165,40 +171,49 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
 }
 
 extension _CardanoTxOutputPostAlonzoExtensions on CardanoTransactionOutput_PostAlonzo {
-  CborMap _serializePostAlonzo({required bool forJson}) => CborMap.fromEntries(
-    [
-      if (forJson) MapEntry(CborString("type"), CborString("postAlonzo")),
-      MapEntry(
+  CborMap _serializePostAlonzo({required bool forJson}) {
+    final datum = this.datum;
+    final scriptRef = this.scriptRef;
+    final entries = {
+      0: MapEntry<CborValue, CborValue>(
         forJson ? CborString("address") : const CborSmallInt(0),
         address.serialize(forJson: forJson),
       ),
-      MapEntry(
+      1: MapEntry<CborValue, CborValue>(
         forJson ? CborString("Value") : const CborSmallInt(1),
         value.serialize(forJson: forJson),
       ),
-      datum?.let(
-        (p0) => MapEntry(
+      if (datum != null)
+        2: MapEntry<CborValue, CborValue>(
           forJson ? CborString("datum") : const CborSmallInt(2),
-          CborList([
-            CborSmallInt(
-              switch (p0) {
-                OutputDatum_Hash() => 0,
-                OutputDatum_Inline() => 1,
-              },
-            ),
-            p0.serialize(forJson: forJson),
-          ]),
+          CborList(
+            [
+              CborSmallInt(
+                switch (datum) {
+                  OutputDatum_Hash() => 0,
+                  OutputDatum_Inline() => 1,
+                },
+              ),
+              datum.serialize(forJson: forJson),
+            ],
+            type: datumOptionLengthType,
+          ),
         ),
-      ),
-      scriptRef?.let(
-        (p0) => MapEntry(
+      if (scriptRef != null)
+        3: MapEntry<CborValue, CborValue>(
           forJson ? CborString("scriptRef") : const CborSmallInt(3),
-          forJson ? CborString(p0.hexEncode()) : CborBytes(p0, tags: [24]),
+          forJson ? CborString(scriptRef.hexEncode()) : CborBytes(scriptRef, tags: [24]),
         ),
-      ),
-    ].nonNulls(),
-    type: lengthType,
-  );
+    };
+
+    return CborMap.fromEntries(
+      [
+        if (forJson) MapEntry(CborString("type"), CborString("postAlonzo")),
+        ...orderEntries(entries, nonStandardKeyOrder),
+      ],
+      type: lengthType,
+    );
+  }
 }
 
 extension _CardanoTxOutputLegacyExtensions on CardanoTransactionOutput_Legacy {
@@ -214,7 +229,8 @@ extension _CardanoTxOutputLegacyExtensions on CardanoTransactionOutput_Legacy {
 }
 
 extension TransactionOutputIterableExtension on Iterable<CardanoTransactionOutput> {
-  CborValue serialize({required bool forJson}) => CborList.of(
+  CborValue serialize({required bool forJson, CborLengthType lengthType = CborLengthType.definite}) => CborList.of(
     map((output) => output.serialize(forJson: forJson)),
+    type: lengthType,
   );
 }

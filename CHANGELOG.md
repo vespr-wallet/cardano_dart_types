@@ -1,3 +1,26 @@
+## 3.1.0
+
+Breaking Changes:
+
+- **[VotingProcedures]** `voting` is now `Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)>` (each voter's votes paired with the length type of their map)
+
+Bug Fix:
+
+- Parsed transactions now re-serialize byte-exact for any valid encoding of lists/maps: every model records the length type (definite/indefinite) of the arrays/maps it was parsed from, set tags (258) and the key order of int-keyed maps (body, post-Alonzo outputs, witness set, protocol param updates). Previously the body was hashed (and signed) as parsed but re-serialized differently, so the signature would not match the submitted body.
+- Merging witness sets (`+`, `copyWithAdditionalSignatures`) keeps the encoding of untouched fields (e.g. redeemers, which are covered by the script data hash)
+- `ProtocolParamUpdate` no longer drops the Conway keys (25-33)
+
+New:
+
+- Added `lengthType` (default `CborLengthType.definite`) to `CardanoTransaction`, `CardanoTransactionInputs`, `RequiredSigners`, `Value`, `MultiAsset`, `WitnessSet`, `WitnessVKey`, `WitnessBootstrap`, `ExUnits`, `NativeScript`, `Certificate`, `Credential`, `RationalNumber`, governance types and others; plus per-collection length types where a model owns nested lists/maps (e.g. `CardanoTransactionBody.outputsLengthType`, `Redeemer.conway(keyLengthType, valueLengthType)`)
+- Added `nonStandardKeyOrder` to `WitnessSet`, post-Alonzo `CardanoTransactionOutput` and `ProtocolParamUpdate` (null = ascending; keys added later are appended in ascending order)
+- Added `CardanoTransactionBody.hasAscendingKeyOrder` and `CardanoTransaction.hasAscendingBodyKeyOrder` (hardware wallets such as Ledger can't sign bodies with non-ascending key order)
+
+Notes:
+
+- Encoding details are part of model equality, e.g. a `Credential` parsed from an indefinite-length array is not `==` to one built with the default encoding.
+- Out of scope: chunked (indefinite-length) byte/text strings and non-minimal integer encodings are not preserved.
+
 ## 3.0.0
 
 Breaking Changes:

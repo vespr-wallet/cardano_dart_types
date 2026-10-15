@@ -17,7 +17,8 @@ mixin _$CardanoTransaction {
  CardanoTransactionBody get body;// 0
  WitnessSet get witnessSet;// 1
  bool get isValidDi;// 2
- CBORMetadata? get auxiliaryData;
+ CBORMetadata? get auxiliaryData;// 3
+ CborLengthType get lengthType;
 /// Create a copy of CardanoTransaction
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +29,16 @@ $CardanoTransactionCopyWith<CardanoTransaction> get copyWith => _$CardanoTransac
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransaction&&(identical(other.body, body) || other.body == body)&&(identical(other.witnessSet, witnessSet) || other.witnessSet == witnessSet)&&(identical(other.isValidDi, isValidDi) || other.isValidDi == isValidDi)&&(identical(other.auxiliaryData, auxiliaryData) || other.auxiliaryData == auxiliaryData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransaction&&(identical(other.body, body) || other.body == body)&&(identical(other.witnessSet, witnessSet) || other.witnessSet == witnessSet)&&(identical(other.isValidDi, isValidDi) || other.isValidDi == isValidDi)&&(identical(other.auxiliaryData, auxiliaryData) || other.auxiliaryData == auxiliaryData)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,body,witnessSet,isValidDi,auxiliaryData);
+int get hashCode => Object.hash(runtimeType,body,witnessSet,isValidDi,auxiliaryData,lengthType);
 
 @override
 String toString() {
-  return 'CardanoTransaction(body: $body, witnessSet: $witnessSet, isValidDi: $isValidDi, auxiliaryData: $auxiliaryData)';
+  return 'CardanoTransaction(body: $body, witnessSet: $witnessSet, isValidDi: $isValidDi, auxiliaryData: $auxiliaryData, lengthType: $lengthType)';
 }
 
 
@@ -48,7 +49,7 @@ abstract mixin class $CardanoTransactionCopyWith<$Res>  {
   factory $CardanoTransactionCopyWith(CardanoTransaction value, $Res Function(CardanoTransaction) _then) = _$CardanoTransactionCopyWithImpl;
 @useResult
 $Res call({
- CardanoTransactionBody body, WitnessSet witnessSet, bool isValidDi, CBORMetadata? auxiliaryData
+ CardanoTransactionBody body, WitnessSet witnessSet, bool isValidDi, CBORMetadata? auxiliaryData, CborLengthType lengthType
 });
 
 
@@ -65,13 +66,14 @@ class _$CardanoTransactionCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransaction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? body = null,Object? witnessSet = null,Object? isValidDi = null,Object? auxiliaryData = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? body = null,Object? witnessSet = null,Object? isValidDi = null,Object? auxiliaryData = freezed,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionBody,witnessSet: null == witnessSet ? _self.witnessSet : witnessSet // ignore: cast_nullable_to_non_nullable
 as WitnessSet,isValidDi: null == isValidDi ? _self.isValidDi : isValidDi // ignore: cast_nullable_to_non_nullable
 as bool,auxiliaryData: freezed == auxiliaryData ? _self.auxiliaryData : auxiliaryData // ignore: cast_nullable_to_non_nullable
-as CBORMetadata?,
+as CBORMetadata?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 /// Create a copy of CardanoTransaction
@@ -113,7 +115,7 @@ $CBORMetadataCopyWith<$Res>? get auxiliaryData {
 
 
 class _CardanoTransaction extends CardanoTransaction {
-  const _CardanoTransaction({required this.body, required this.witnessSet, required this.isValidDi, required this.auxiliaryData}): super._();
+  const _CardanoTransaction({required this.body, required this.witnessSet, required this.isValidDi, required this.auxiliaryData, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  CardanoTransactionBody body;
@@ -123,6 +125,8 @@ class _CardanoTransaction extends CardanoTransaction {
 @override final  bool isValidDi;
 // 2
 @override final  CBORMetadata? auxiliaryData;
+// 3
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of CardanoTransaction
 /// with the given fields replaced by the non-null parameter values.
@@ -134,16 +138,16 @@ _$CardanoTransactionCopyWith<_CardanoTransaction> get copyWith => __$CardanoTran
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransaction&&(identical(other.body, body) || other.body == body)&&(identical(other.witnessSet, witnessSet) || other.witnessSet == witnessSet)&&(identical(other.isValidDi, isValidDi) || other.isValidDi == isValidDi)&&(identical(other.auxiliaryData, auxiliaryData) || other.auxiliaryData == auxiliaryData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransaction&&(identical(other.body, body) || other.body == body)&&(identical(other.witnessSet, witnessSet) || other.witnessSet == witnessSet)&&(identical(other.isValidDi, isValidDi) || other.isValidDi == isValidDi)&&(identical(other.auxiliaryData, auxiliaryData) || other.auxiliaryData == auxiliaryData)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,body,witnessSet,isValidDi,auxiliaryData);
+int get hashCode => Object.hash(runtimeType,body,witnessSet,isValidDi,auxiliaryData,lengthType);
 
 @override
 String toString() {
-  return 'CardanoTransaction._hidden(body: $body, witnessSet: $witnessSet, isValidDi: $isValidDi, auxiliaryData: $auxiliaryData)';
+  return 'CardanoTransaction._hidden(body: $body, witnessSet: $witnessSet, isValidDi: $isValidDi, auxiliaryData: $auxiliaryData, lengthType: $lengthType)';
 }
 
 
@@ -154,7 +158,7 @@ abstract mixin class _$CardanoTransactionCopyWith<$Res> implements $CardanoTrans
   factory _$CardanoTransactionCopyWith(_CardanoTransaction value, $Res Function(_CardanoTransaction) _then) = __$CardanoTransactionCopyWithImpl;
 @override @useResult
 $Res call({
- CardanoTransactionBody body, WitnessSet witnessSet, bool isValidDi, CBORMetadata? auxiliaryData
+ CardanoTransactionBody body, WitnessSet witnessSet, bool isValidDi, CBORMetadata? auxiliaryData, CborLengthType lengthType
 });
 
 
@@ -171,13 +175,14 @@ class __$CardanoTransactionCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransaction
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? body = null,Object? witnessSet = null,Object? isValidDi = null,Object? auxiliaryData = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? body = null,Object? witnessSet = null,Object? isValidDi = null,Object? auxiliaryData = freezed,Object? lengthType = null,}) {
   return _then(_CardanoTransaction(
 body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
 as CardanoTransactionBody,witnessSet: null == witnessSet ? _self.witnessSet : witnessSet // ignore: cast_nullable_to_non_nullable
 as WitnessSet,isValidDi: null == isValidDi ? _self.isValidDi : isValidDi // ignore: cast_nullable_to_non_nullable
 as bool,auxiliaryData: freezed == auxiliaryData ? _self.auxiliaryData : auxiliaryData // ignore: cast_nullable_to_non_nullable
-as CBORMetadata?,
+as CBORMetadata?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

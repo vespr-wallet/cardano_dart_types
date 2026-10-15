@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProtocolVersion {
 
- int get major; int get minor;
+ int get major; int get minor; CborLengthType get lengthType;
 /// Create a copy of ProtocolVersion
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ProtocolVersionCopyWith<ProtocolVersion> get copyWith => _$ProtocolVersionCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProtocolVersion&&(identical(other.major, major) || other.major == major)&&(identical(other.minor, minor) || other.minor == minor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProtocolVersion&&(identical(other.major, major) || other.major == major)&&(identical(other.minor, minor) || other.minor == minor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,major,minor);
+int get hashCode => Object.hash(runtimeType,major,minor,lengthType);
 
 @override
 String toString() {
-  return 'ProtocolVersion(major: $major, minor: $minor)';
+  return 'ProtocolVersion(major: $major, minor: $minor, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ProtocolVersionCopyWith<$Res>  {
   factory $ProtocolVersionCopyWith(ProtocolVersion value, $Res Function(ProtocolVersion) _then) = _$ProtocolVersionCopyWithImpl;
 @useResult
 $Res call({
- int major, int minor
+ int major, int minor, CborLengthType lengthType
 });
 
 
@@ -62,11 +62,12 @@ class _$ProtocolVersionCopyWithImpl<$Res>
 
 /// Create a copy of ProtocolVersion
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? major = null,Object? minor = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? major = null,Object? minor = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 major: null == major ? _self.major : major // ignore: cast_nullable_to_non_nullable
 as int,minor: null == minor ? _self.minor : minor // ignore: cast_nullable_to_non_nullable
-as int,
+as int,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -78,11 +79,12 @@ as int,
 
 
 class _ProtocolVersion extends ProtocolVersion {
-  const _ProtocolVersion({required this.major, required this.minor}): super._();
+  const _ProtocolVersion({required this.major, required this.minor, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  int major;
 @override final  int minor;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of ProtocolVersion
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +96,16 @@ _$ProtocolVersionCopyWith<_ProtocolVersion> get copyWith => __$ProtocolVersionCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProtocolVersion&&(identical(other.major, major) || other.major == major)&&(identical(other.minor, minor) || other.minor == minor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProtocolVersion&&(identical(other.major, major) || other.major == major)&&(identical(other.minor, minor) || other.minor == minor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,major,minor);
+int get hashCode => Object.hash(runtimeType,major,minor,lengthType);
 
 @override
 String toString() {
-  return 'ProtocolVersion(major: $major, minor: $minor)';
+  return 'ProtocolVersion(major: $major, minor: $minor, lengthType: $lengthType)';
 }
 
 
@@ -114,7 +116,7 @@ abstract mixin class _$ProtocolVersionCopyWith<$Res> implements $ProtocolVersion
   factory _$ProtocolVersionCopyWith(_ProtocolVersion value, $Res Function(_ProtocolVersion) _then) = __$ProtocolVersionCopyWithImpl;
 @override @useResult
 $Res call({
- int major, int minor
+ int major, int minor, CborLengthType lengthType
 });
 
 
@@ -131,11 +133,12 @@ class __$ProtocolVersionCopyWithImpl<$Res>
 
 /// Create a copy of ProtocolVersion
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? major = null,Object? minor = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? major = null,Object? minor = null,Object? lengthType = null,}) {
   return _then(_ProtocolVersion(
 major: null == major ? _self.major : major // ignore: cast_nullable_to_non_nullable
 as int,minor: null == minor ? _self.minor : minor // ignore: cast_nullable_to_non_nullable
-as int,
+as int,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

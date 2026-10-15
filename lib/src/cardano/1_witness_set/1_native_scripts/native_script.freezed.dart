@@ -14,30 +14,61 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NativeScript {
 
-
+ CborLengthType get lengthType;
+/// Create a copy of NativeScript
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$NativeScriptCopyWith<NativeScript> get copyWith => _$NativeScriptCopyWithImpl<NativeScript>(this as NativeScript, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,lengthType);
 
 @override
 String toString() {
-  return 'NativeScript()';
+  return 'NativeScript(lengthType: $lengthType)';
 }
 
 
 }
 
 /// @nodoc
-class $NativeScriptCopyWith<$Res>  {
-$NativeScriptCopyWith(NativeScript _, $Res Function(NativeScript) __);
+abstract mixin class $NativeScriptCopyWith<$Res>  {
+  factory $NativeScriptCopyWith(NativeScript value, $Res Function(NativeScript) _then) = _$NativeScriptCopyWithImpl;
+@useResult
+$Res call({
+ CborLengthType lengthType
+});
+
+
+
+
+}
+/// @nodoc
+class _$NativeScriptCopyWithImpl<$Res>
+    implements $NativeScriptCopyWith<$Res> {
+  _$NativeScriptCopyWithImpl(this._self, this._then);
+
+  final NativeScript _self;
+  final $Res Function(NativeScript) _then;
+
+/// Create a copy of NativeScript
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? lengthType = null,}) {
+  return _then(_self.copyWith(
+lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
+  ));
+}
+
 }
 
 
@@ -46,14 +77,15 @@ $NativeScriptCopyWith(NativeScript _, $Res Function(NativeScript) __);
 
 
 class NativeScript_PubKey extends NativeScript {
-  const NativeScript_PubKey({required this.blob}): super._();
+  const NativeScript_PubKey({required this.blob, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  Uint8List blob;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $NativeScript_PubKeyCopyWith<NativeScript_PubKey> get copyWith => _$NativeScript_PubKeyCopyWithImpl<NativeScript_PubKey>(this, _$identity);
 
@@ -61,16 +93,16 @@ $NativeScript_PubKeyCopyWith<NativeScript_PubKey> get copyWith => _$NativeScript
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_PubKey&&const DeepCollectionEquality().equals(other.blob, blob));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_PubKey&&const DeepCollectionEquality().equals(other.blob, blob)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(blob));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(blob),lengthType);
 
 @override
 String toString() {
-  return 'NativeScript.pubKey(blob: $blob)';
+  return 'NativeScript.pubKey(blob: $blob, lengthType: $lengthType)';
 }
 
 
@@ -79,9 +111,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $NativeScript_PubKeyCopyWith<$Res> implements $NativeScriptCopyWith<$Res> {
   factory $NativeScript_PubKeyCopyWith(NativeScript_PubKey value, $Res Function(NativeScript_PubKey) _then) = _$NativeScript_PubKeyCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Uint8List blob
+ Uint8List blob, CborLengthType lengthType
 });
 
 
@@ -98,10 +130,11 @@ class _$NativeScript_PubKeyCopyWithImpl<$Res>
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? blob = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? blob = null,Object? lengthType = null,}) {
   return _then(NativeScript_PubKey(
 blob: null == blob ? _self.blob : blob // ignore: cast_nullable_to_non_nullable
-as Uint8List,
+as Uint8List,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -112,7 +145,7 @@ as Uint8List,
 
 
 class NativeScript_All extends NativeScript {
-  const NativeScript_All({required final  List<NativeScript> scripts}): _scripts = scripts,super._();
+  const NativeScript_All({required final  List<NativeScript> scripts, this.lengthType = CborLengthType.definite, this.scriptsLengthType = CborLengthType.definite}): _scripts = scripts,super._();
   
 
  final  List<NativeScript> _scripts;
@@ -122,10 +155,12 @@ class NativeScript_All extends NativeScript {
   return EqualUnmodifiableListView(_scripts);
 }
 
+@override@JsonKey() final  CborLengthType lengthType;
+@JsonKey() final  CborLengthType scriptsLengthType;
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $NativeScript_AllCopyWith<NativeScript_All> get copyWith => _$NativeScript_AllCopyWithImpl<NativeScript_All>(this, _$identity);
 
@@ -133,16 +168,16 @@ $NativeScript_AllCopyWith<NativeScript_All> get copyWith => _$NativeScript_AllCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_All&&const DeepCollectionEquality().equals(other._scripts, _scripts));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_All&&const DeepCollectionEquality().equals(other._scripts, _scripts)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.scriptsLengthType, scriptsLengthType) || other.scriptsLengthType == scriptsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts),lengthType,scriptsLengthType);
 
 @override
 String toString() {
-  return 'NativeScript.all(scripts: $scripts)';
+  return 'NativeScript.all(scripts: $scripts, lengthType: $lengthType, scriptsLengthType: $scriptsLengthType)';
 }
 
 
@@ -151,9 +186,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $NativeScript_AllCopyWith<$Res> implements $NativeScriptCopyWith<$Res> {
   factory $NativeScript_AllCopyWith(NativeScript_All value, $Res Function(NativeScript_All) _then) = _$NativeScript_AllCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- List<NativeScript> scripts
+ List<NativeScript> scripts, CborLengthType lengthType, CborLengthType scriptsLengthType
 });
 
 
@@ -170,10 +205,12 @@ class _$NativeScript_AllCopyWithImpl<$Res>
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? scripts = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? scripts = null,Object? lengthType = null,Object? scriptsLengthType = null,}) {
   return _then(NativeScript_All(
 scripts: null == scripts ? _self._scripts : scripts // ignore: cast_nullable_to_non_nullable
-as List<NativeScript>,
+as List<NativeScript>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,scriptsLengthType: null == scriptsLengthType ? _self.scriptsLengthType : scriptsLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -184,7 +221,7 @@ as List<NativeScript>,
 
 
 class NativeScript_Any extends NativeScript {
-  const NativeScript_Any({required final  List<NativeScript> scripts}): _scripts = scripts,super._();
+  const NativeScript_Any({required final  List<NativeScript> scripts, this.lengthType = CborLengthType.definite, this.scriptsLengthType = CborLengthType.definite}): _scripts = scripts,super._();
   
 
  final  List<NativeScript> _scripts;
@@ -194,10 +231,12 @@ class NativeScript_Any extends NativeScript {
   return EqualUnmodifiableListView(_scripts);
 }
 
+@override@JsonKey() final  CborLengthType lengthType;
+@JsonKey() final  CborLengthType scriptsLengthType;
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $NativeScript_AnyCopyWith<NativeScript_Any> get copyWith => _$NativeScript_AnyCopyWithImpl<NativeScript_Any>(this, _$identity);
 
@@ -205,16 +244,16 @@ $NativeScript_AnyCopyWith<NativeScript_Any> get copyWith => _$NativeScript_AnyCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_Any&&const DeepCollectionEquality().equals(other._scripts, _scripts));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_Any&&const DeepCollectionEquality().equals(other._scripts, _scripts)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.scriptsLengthType, scriptsLengthType) || other.scriptsLengthType == scriptsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts),lengthType,scriptsLengthType);
 
 @override
 String toString() {
-  return 'NativeScript.any(scripts: $scripts)';
+  return 'NativeScript.any(scripts: $scripts, lengthType: $lengthType, scriptsLengthType: $scriptsLengthType)';
 }
 
 
@@ -223,9 +262,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $NativeScript_AnyCopyWith<$Res> implements $NativeScriptCopyWith<$Res> {
   factory $NativeScript_AnyCopyWith(NativeScript_Any value, $Res Function(NativeScript_Any) _then) = _$NativeScript_AnyCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- List<NativeScript> scripts
+ List<NativeScript> scripts, CborLengthType lengthType, CborLengthType scriptsLengthType
 });
 
 
@@ -242,10 +281,12 @@ class _$NativeScript_AnyCopyWithImpl<$Res>
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? scripts = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? scripts = null,Object? lengthType = null,Object? scriptsLengthType = null,}) {
   return _then(NativeScript_Any(
 scripts: null == scripts ? _self._scripts : scripts // ignore: cast_nullable_to_non_nullable
-as List<NativeScript>,
+as List<NativeScript>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,scriptsLengthType: null == scriptsLengthType ? _self.scriptsLengthType : scriptsLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -256,7 +297,7 @@ as List<NativeScript>,
 
 
 class NativeScript_AtLeast extends NativeScript {
-  const NativeScript_AtLeast({required this.required, required final  List<NativeScript> scripts}): _scripts = scripts,super._();
+  const NativeScript_AtLeast({required this.required, required final  List<NativeScript> scripts, this.lengthType = CborLengthType.definite, this.scriptsLengthType = CborLengthType.definite}): _scripts = scripts,super._();
   
 
  final  int required;
@@ -267,10 +308,12 @@ class NativeScript_AtLeast extends NativeScript {
   return EqualUnmodifiableListView(_scripts);
 }
 
+@override@JsonKey() final  CborLengthType lengthType;
+@JsonKey() final  CborLengthType scriptsLengthType;
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $NativeScript_AtLeastCopyWith<NativeScript_AtLeast> get copyWith => _$NativeScript_AtLeastCopyWithImpl<NativeScript_AtLeast>(this, _$identity);
 
@@ -278,16 +321,16 @@ $NativeScript_AtLeastCopyWith<NativeScript_AtLeast> get copyWith => _$NativeScri
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_AtLeast&&(identical(other.required, required) || other.required == required)&&const DeepCollectionEquality().equals(other._scripts, _scripts));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_AtLeast&&(identical(other.required, required) || other.required == required)&&const DeepCollectionEquality().equals(other._scripts, _scripts)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.scriptsLengthType, scriptsLengthType) || other.scriptsLengthType == scriptsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,required,const DeepCollectionEquality().hash(_scripts));
+int get hashCode => Object.hash(runtimeType,required,const DeepCollectionEquality().hash(_scripts),lengthType,scriptsLengthType);
 
 @override
 String toString() {
-  return 'NativeScript.atLeast(required: $required, scripts: $scripts)';
+  return 'NativeScript.atLeast(required: $required, scripts: $scripts, lengthType: $lengthType, scriptsLengthType: $scriptsLengthType)';
 }
 
 
@@ -296,9 +339,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $NativeScript_AtLeastCopyWith<$Res> implements $NativeScriptCopyWith<$Res> {
   factory $NativeScript_AtLeastCopyWith(NativeScript_AtLeast value, $Res Function(NativeScript_AtLeast) _then) = _$NativeScript_AtLeastCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- int required, List<NativeScript> scripts
+ int required, List<NativeScript> scripts, CborLengthType lengthType, CborLengthType scriptsLengthType
 });
 
 
@@ -315,11 +358,13 @@ class _$NativeScript_AtLeastCopyWithImpl<$Res>
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? required = null,Object? scripts = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? required = null,Object? scripts = null,Object? lengthType = null,Object? scriptsLengthType = null,}) {
   return _then(NativeScript_AtLeast(
 required: null == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
 as int,scripts: null == scripts ? _self._scripts : scripts // ignore: cast_nullable_to_non_nullable
-as List<NativeScript>,
+as List<NativeScript>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,scriptsLengthType: null == scriptsLengthType ? _self.scriptsLengthType : scriptsLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -330,14 +375,15 @@ as List<NativeScript>,
 
 
 class NativeScript_RequireTimeAfter extends NativeScript {
-  const NativeScript_RequireTimeAfter({required this.slot}): super._();
+  const NativeScript_RequireTimeAfter({required this.slot, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  BigInt slot;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $NativeScript_RequireTimeAfterCopyWith<NativeScript_RequireTimeAfter> get copyWith => _$NativeScript_RequireTimeAfterCopyWithImpl<NativeScript_RequireTimeAfter>(this, _$identity);
 
@@ -345,16 +391,16 @@ $NativeScript_RequireTimeAfterCopyWith<NativeScript_RequireTimeAfter> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_RequireTimeAfter&&(identical(other.slot, slot) || other.slot == slot));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_RequireTimeAfter&&(identical(other.slot, slot) || other.slot == slot)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,slot);
+int get hashCode => Object.hash(runtimeType,slot,lengthType);
 
 @override
 String toString() {
-  return 'NativeScript.requireTimeAfter(slot: $slot)';
+  return 'NativeScript.requireTimeAfter(slot: $slot, lengthType: $lengthType)';
 }
 
 
@@ -363,9 +409,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $NativeScript_RequireTimeAfterCopyWith<$Res> implements $NativeScriptCopyWith<$Res> {
   factory $NativeScript_RequireTimeAfterCopyWith(NativeScript_RequireTimeAfter value, $Res Function(NativeScript_RequireTimeAfter) _then) = _$NativeScript_RequireTimeAfterCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- BigInt slot
+ BigInt slot, CborLengthType lengthType
 });
 
 
@@ -382,10 +428,11 @@ class _$NativeScript_RequireTimeAfterCopyWithImpl<$Res>
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? slot = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? slot = null,Object? lengthType = null,}) {
   return _then(NativeScript_RequireTimeAfter(
 slot: null == slot ? _self.slot : slot // ignore: cast_nullable_to_non_nullable
-as BigInt,
+as BigInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -396,14 +443,15 @@ as BigInt,
 
 
 class NativeScript_RequireTimeBefore extends NativeScript {
-  const NativeScript_RequireTimeBefore({required this.slot}): super._();
+  const NativeScript_RequireTimeBefore({required this.slot, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  BigInt slot;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $NativeScript_RequireTimeBeforeCopyWith<NativeScript_RequireTimeBefore> get copyWith => _$NativeScript_RequireTimeBeforeCopyWithImpl<NativeScript_RequireTimeBefore>(this, _$identity);
 
@@ -411,16 +459,16 @@ $NativeScript_RequireTimeBeforeCopyWith<NativeScript_RequireTimeBefore> get copy
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_RequireTimeBefore&&(identical(other.slot, slot) || other.slot == slot));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_RequireTimeBefore&&(identical(other.slot, slot) || other.slot == slot)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,slot);
+int get hashCode => Object.hash(runtimeType,slot,lengthType);
 
 @override
 String toString() {
-  return 'NativeScript.requireTimeBefore(slot: $slot)';
+  return 'NativeScript.requireTimeBefore(slot: $slot, lengthType: $lengthType)';
 }
 
 
@@ -429,9 +477,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $NativeScript_RequireTimeBeforeCopyWith<$Res> implements $NativeScriptCopyWith<$Res> {
   factory $NativeScript_RequireTimeBeforeCopyWith(NativeScript_RequireTimeBefore value, $Res Function(NativeScript_RequireTimeBefore) _then) = _$NativeScript_RequireTimeBeforeCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- BigInt slot
+ BigInt slot, CborLengthType lengthType
 });
 
 
@@ -448,10 +496,11 @@ class _$NativeScript_RequireTimeBeforeCopyWithImpl<$Res>
 
 /// Create a copy of NativeScript
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? slot = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? slot = null,Object? lengthType = null,}) {
   return _then(NativeScript_RequireTimeBefore(
 slot: null == slot ? _self.slot : slot // ignore: cast_nullable_to_non_nullable
-as BigInt,
+as BigInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

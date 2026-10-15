@@ -14,30 +14,61 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Certificate {
 
- int get certType;
+ int get certType; CborLengthType get lengthType;
+/// Create a copy of Certificate
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CertificateCopyWith<Certificate> get copyWith => _$CertificateCopyWithImpl<Certificate>(this as Certificate, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate&&(identical(other.certType, certType) || other.certType == certType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate&&(identical(other.certType, certType) || other.certType == certType)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,certType);
+int get hashCode => Object.hash(runtimeType,certType,lengthType);
 
 @override
 String toString() {
-  return 'Certificate(certType: $certType)';
+  return 'Certificate(certType: $certType, lengthType: $lengthType)';
 }
 
 
 }
 
 /// @nodoc
-class $CertificateCopyWith<$Res>  {
-$CertificateCopyWith(Certificate _, $Res Function(Certificate) __);
+abstract mixin class $CertificateCopyWith<$Res>  {
+  factory $CertificateCopyWith(Certificate value, $Res Function(Certificate) _then) = _$CertificateCopyWithImpl;
+@useResult
+$Res call({
+ CborLengthType lengthType
+});
+
+
+
+
+}
+/// @nodoc
+class _$CertificateCopyWithImpl<$Res>
+    implements $CertificateCopyWith<$Res> {
+  _$CertificateCopyWithImpl(this._self, this._then);
+
+  final Certificate _self;
+  final $Res Function(Certificate) _then;
+
+/// Create a copy of Certificate
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? lengthType = null,}) {
+  return _then(_self.copyWith(
+lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
+  ));
+}
+
 }
 
 
@@ -46,14 +77,15 @@ $CertificateCopyWith(Certificate _, $Res Function(Certificate) __);
 
 
 class Certificate_StakeRegistrationLegacy extends Certificate {
-   Certificate_StakeRegistrationLegacy({required this.stakeCredential}): super._();
+   Certificate_StakeRegistrationLegacy({required this.stakeCredential, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  Credential stakeCredential;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_StakeRegistrationLegacyCopyWith<Certificate_StakeRegistrationLegacy> get copyWith => _$Certificate_StakeRegistrationLegacyCopyWithImpl<Certificate_StakeRegistrationLegacy>(this, _$identity);
 
@@ -61,16 +93,16 @@ $Certificate_StakeRegistrationLegacyCopyWith<Certificate_StakeRegistrationLegacy
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistrationLegacy&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistrationLegacy&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential);
+int get hashCode => Object.hash(runtimeType,stakeCredential,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.stakeRegistrationLegacy(stakeCredential: $stakeCredential)';
+  return 'Certificate.stakeRegistrationLegacy(stakeCredential: $stakeCredential, lengthType: $lengthType)';
 }
 
 
@@ -79,9 +111,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_StakeRegistrationLegacyCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_StakeRegistrationLegacyCopyWith(Certificate_StakeRegistrationLegacy value, $Res Function(Certificate_StakeRegistrationLegacy) _then) = _$Certificate_StakeRegistrationLegacyCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential
+ Credential stakeCredential, CborLengthType lengthType
 });
 
 
@@ -98,10 +130,11 @@ class _$Certificate_StakeRegistrationLegacyCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? lengthType = null,}) {
   return _then(Certificate_StakeRegistrationLegacy(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
-as Credential,
+as Credential,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -121,14 +154,15 @@ $CredentialCopyWith<$Res> get stakeCredential {
 
 
 class Certificate_StakeDeRegistrationLegacy extends Certificate {
-   Certificate_StakeDeRegistrationLegacy({required this.stakeCredential}): super._();
+   Certificate_StakeDeRegistrationLegacy({required this.stakeCredential, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  Credential stakeCredential;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_StakeDeRegistrationLegacyCopyWith<Certificate_StakeDeRegistrationLegacy> get copyWith => _$Certificate_StakeDeRegistrationLegacyCopyWithImpl<Certificate_StakeDeRegistrationLegacy>(this, _$identity);
 
@@ -136,16 +170,16 @@ $Certificate_StakeDeRegistrationLegacyCopyWith<Certificate_StakeDeRegistrationLe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDeRegistrationLegacy&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDeRegistrationLegacy&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential);
+int get hashCode => Object.hash(runtimeType,stakeCredential,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.stakeDeRegistrationLegacy(stakeCredential: $stakeCredential)';
+  return 'Certificate.stakeDeRegistrationLegacy(stakeCredential: $stakeCredential, lengthType: $lengthType)';
 }
 
 
@@ -154,9 +188,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_StakeDeRegistrationLegacyCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_StakeDeRegistrationLegacyCopyWith(Certificate_StakeDeRegistrationLegacy value, $Res Function(Certificate_StakeDeRegistrationLegacy) _then) = _$Certificate_StakeDeRegistrationLegacyCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential
+ Credential stakeCredential, CborLengthType lengthType
 });
 
 
@@ -173,10 +207,11 @@ class _$Certificate_StakeDeRegistrationLegacyCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? lengthType = null,}) {
   return _then(Certificate_StakeDeRegistrationLegacy(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
-as Credential,
+as Credential,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -196,15 +231,16 @@ $CredentialCopyWith<$Res> get stakeCredential {
 
 
 class Certificate_StakeDelegation extends Certificate {
-   Certificate_StakeDelegation({required this.stakeCredential, required this.stakePoolId}): super._();
+   Certificate_StakeDelegation({required this.stakeCredential, required this.stakePoolId, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  Credential stakeCredential;
  final  StakePoolId stakePoolId;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_StakeDelegationCopyWith<Certificate_StakeDelegation> get copyWith => _$Certificate_StakeDelegationCopyWithImpl<Certificate_StakeDelegation>(this, _$identity);
 
@@ -212,16 +248,16 @@ $Certificate_StakeDelegationCopyWith<Certificate_StakeDelegation> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId);
+int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.stakeDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId)';
+  return 'Certificate.stakeDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, lengthType: $lengthType)';
 }
 
 
@@ -230,9 +266,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_StakeDelegationCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_StakeDelegationCopyWith(Certificate_StakeDelegation value, $Res Function(Certificate_StakeDelegation) _then) = _$Certificate_StakeDelegationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential, StakePoolId stakePoolId
+ Credential stakeCredential, StakePoolId stakePoolId, CborLengthType lengthType
 });
 
 
@@ -249,11 +285,12 @@ class _$Certificate_StakeDelegationCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? stakePoolId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? stakePoolId = null,Object? lengthType = null,}) {
   return _then(Certificate_StakeDelegation(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
 as Credential,stakePoolId: null == stakePoolId ? _self.stakePoolId : stakePoolId // ignore: cast_nullable_to_non_nullable
-as StakePoolId,
+as StakePoolId,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -282,7 +319,7 @@ $StakePoolIdCopyWith<$Res> get stakePoolId {
 
 
 class Certificate_PoolRegistration extends Certificate {
-   Certificate_PoolRegistration({required this.operator, required this.vrfKeyHash, required this.pledge, required this.cost, required this.margin, required this.rewardAccount, required final  List<Uint8List> poolOwners, required this.relays, required this.poolMetadata}): assert(pledge.toBigInt() >= BigInt.from(0)),assert(cost.toBigInt() >= BigInt.from(0)),_poolOwners = poolOwners,super._();
+   Certificate_PoolRegistration({required this.operator, required this.vrfKeyHash, required this.pledge, required this.cost, required this.margin, required this.rewardAccount, required final  List<Uint8List> poolOwners, this.poolOwnersLengthType = CborLengthType.definite, final  List<int> poolOwnersCborTags = const [], required this.relays, required this.poolMetadata, this.lengthType = CborLengthType.definite}): assert(pledge.toBigInt() >= BigInt.from(0)),assert(cost.toBigInt() >= BigInt.from(0)),_poolOwners = poolOwners,_poolOwnersCborTags = poolOwnersCborTags,super._();
   
 
  final  StakePoolId operator;
@@ -306,13 +343,25 @@ class Certificate_PoolRegistration extends Certificate {
 }
 
 // decoded pool owner address key hash 28
+@JsonKey() final  CborLengthType poolOwnersLengthType;
+// encoding of the pool owners list/set
+ final  List<int> _poolOwnersCborTags;
+// encoding of the pool owners list/set
+@JsonKey() List<int> get poolOwnersCborTags {
+  if (_poolOwnersCborTags is EqualUnmodifiableListView) return _poolOwnersCborTags;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_poolOwnersCborTags);
+}
+
+// e.g. 258 when the pool owners are encoded as a tagged set
  final  CborValue relays;
 // relays ; we don't bother to decode this for now
  final  PoolMetadata? poolMetadata;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_PoolRegistrationCopyWith<Certificate_PoolRegistration> get copyWith => _$Certificate_PoolRegistrationCopyWithImpl<Certificate_PoolRegistration>(this, _$identity);
 
@@ -320,16 +369,16 @@ $Certificate_PoolRegistrationCopyWith<Certificate_PoolRegistration> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_PoolRegistration&&(identical(other.operator, operator) || other.operator == operator)&&const DeepCollectionEquality().equals(other.vrfKeyHash, vrfKeyHash)&&(identical(other.pledge, pledge) || other.pledge == pledge)&&(identical(other.cost, cost) || other.cost == cost)&&(identical(other.margin, margin) || other.margin == margin)&&const DeepCollectionEquality().equals(other.rewardAccount, rewardAccount)&&const DeepCollectionEquality().equals(other._poolOwners, _poolOwners)&&(identical(other.relays, relays) || other.relays == relays)&&(identical(other.poolMetadata, poolMetadata) || other.poolMetadata == poolMetadata));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_PoolRegistration&&(identical(other.operator, operator) || other.operator == operator)&&const DeepCollectionEquality().equals(other.vrfKeyHash, vrfKeyHash)&&(identical(other.pledge, pledge) || other.pledge == pledge)&&(identical(other.cost, cost) || other.cost == cost)&&(identical(other.margin, margin) || other.margin == margin)&&const DeepCollectionEquality().equals(other.rewardAccount, rewardAccount)&&const DeepCollectionEquality().equals(other._poolOwners, _poolOwners)&&(identical(other.poolOwnersLengthType, poolOwnersLengthType) || other.poolOwnersLengthType == poolOwnersLengthType)&&const DeepCollectionEquality().equals(other._poolOwnersCborTags, _poolOwnersCborTags)&&(identical(other.relays, relays) || other.relays == relays)&&(identical(other.poolMetadata, poolMetadata) || other.poolMetadata == poolMetadata)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,operator,const DeepCollectionEquality().hash(vrfKeyHash),pledge,cost,margin,const DeepCollectionEquality().hash(rewardAccount),const DeepCollectionEquality().hash(_poolOwners),relays,poolMetadata);
+int get hashCode => Object.hash(runtimeType,operator,const DeepCollectionEquality().hash(vrfKeyHash),pledge,cost,margin,const DeepCollectionEquality().hash(rewardAccount),const DeepCollectionEquality().hash(_poolOwners),poolOwnersLengthType,const DeepCollectionEquality().hash(_poolOwnersCborTags),relays,poolMetadata,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.poolRegistration(operator: $operator, vrfKeyHash: $vrfKeyHash, pledge: $pledge, cost: $cost, margin: $margin, rewardAccount: $rewardAccount, poolOwners: $poolOwners, relays: $relays, poolMetadata: $poolMetadata)';
+  return 'Certificate.poolRegistration(operator: $operator, vrfKeyHash: $vrfKeyHash, pledge: $pledge, cost: $cost, margin: $margin, rewardAccount: $rewardAccount, poolOwners: $poolOwners, poolOwnersLengthType: $poolOwnersLengthType, poolOwnersCborTags: $poolOwnersCborTags, relays: $relays, poolMetadata: $poolMetadata, lengthType: $lengthType)';
 }
 
 
@@ -338,9 +387,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_PoolRegistrationCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_PoolRegistrationCopyWith(Certificate_PoolRegistration value, $Res Function(Certificate_PoolRegistration) _then) = _$Certificate_PoolRegistrationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- StakePoolId operator, Uint8List vrfKeyHash, CborInt pledge, CborInt cost, RationalNumber margin, Uint8List rewardAccount, List<Uint8List> poolOwners, CborValue relays, PoolMetadata? poolMetadata
+ StakePoolId operator, Uint8List vrfKeyHash, CborInt pledge, CborInt cost, RationalNumber margin, Uint8List rewardAccount, List<Uint8List> poolOwners, CborLengthType poolOwnersLengthType, List<int> poolOwnersCborTags, CborValue relays, PoolMetadata? poolMetadata, CborLengthType lengthType
 });
 
 
@@ -357,7 +406,7 @@ class _$Certificate_PoolRegistrationCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? operator = null,Object? vrfKeyHash = null,Object? pledge = null,Object? cost = null,Object? margin = null,Object? rewardAccount = null,Object? poolOwners = null,Object? relays = null,Object? poolMetadata = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? operator = null,Object? vrfKeyHash = null,Object? pledge = null,Object? cost = null,Object? margin = null,Object? rewardAccount = null,Object? poolOwners = null,Object? poolOwnersLengthType = null,Object? poolOwnersCborTags = null,Object? relays = null,Object? poolMetadata = freezed,Object? lengthType = null,}) {
   return _then(Certificate_PoolRegistration(
 operator: null == operator ? _self.operator : operator // ignore: cast_nullable_to_non_nullable
 as StakePoolId,vrfKeyHash: null == vrfKeyHash ? _self.vrfKeyHash : vrfKeyHash // ignore: cast_nullable_to_non_nullable
@@ -366,9 +415,12 @@ as CborInt,cost: null == cost ? _self.cost : cost // ignore: cast_nullable_to_no
 as CborInt,margin: null == margin ? _self.margin : margin // ignore: cast_nullable_to_non_nullable
 as RationalNumber,rewardAccount: null == rewardAccount ? _self.rewardAccount : rewardAccount // ignore: cast_nullable_to_non_nullable
 as Uint8List,poolOwners: null == poolOwners ? _self._poolOwners : poolOwners // ignore: cast_nullable_to_non_nullable
-as List<Uint8List>,relays: null == relays ? _self.relays : relays // ignore: cast_nullable_to_non_nullable
+as List<Uint8List>,poolOwnersLengthType: null == poolOwnersLengthType ? _self.poolOwnersLengthType : poolOwnersLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,poolOwnersCborTags: null == poolOwnersCborTags ? _self._poolOwnersCborTags : poolOwnersCborTags // ignore: cast_nullable_to_non_nullable
+as List<int>,relays: null == relays ? _self.relays : relays // ignore: cast_nullable_to_non_nullable
 as CborValue,poolMetadata: freezed == poolMetadata ? _self.poolMetadata : poolMetadata // ignore: cast_nullable_to_non_nullable
-as PoolMetadata?,
+as PoolMetadata?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -409,16 +461,17 @@ $PoolMetadataCopyWith<$Res>? get poolMetadata {
 
 
 class Certificate_PoolRetirement extends Certificate {
-   Certificate_PoolRetirement({required this.operator, required this.epoch}): assert(epoch.toBigInt() >= BigInt.from(0)),super._();
+   Certificate_PoolRetirement({required this.operator, required this.epoch, this.lengthType = CborLengthType.definite}): assert(epoch.toBigInt() >= BigInt.from(0)),super._();
   
 
  final  StakePoolId operator;
 // pool key hash 28 bytes
  final  CborInt epoch;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_PoolRetirementCopyWith<Certificate_PoolRetirement> get copyWith => _$Certificate_PoolRetirementCopyWithImpl<Certificate_PoolRetirement>(this, _$identity);
 
@@ -426,16 +479,16 @@ $Certificate_PoolRetirementCopyWith<Certificate_PoolRetirement> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_PoolRetirement&&(identical(other.operator, operator) || other.operator == operator)&&(identical(other.epoch, epoch) || other.epoch == epoch));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_PoolRetirement&&(identical(other.operator, operator) || other.operator == operator)&&(identical(other.epoch, epoch) || other.epoch == epoch)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,operator,epoch);
+int get hashCode => Object.hash(runtimeType,operator,epoch,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.poolRetirement(operator: $operator, epoch: $epoch)';
+  return 'Certificate.poolRetirement(operator: $operator, epoch: $epoch, lengthType: $lengthType)';
 }
 
 
@@ -444,9 +497,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_PoolRetirementCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_PoolRetirementCopyWith(Certificate_PoolRetirement value, $Res Function(Certificate_PoolRetirement) _then) = _$Certificate_PoolRetirementCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- StakePoolId operator, CborInt epoch
+ StakePoolId operator, CborInt epoch, CborLengthType lengthType
 });
 
 
@@ -463,11 +516,12 @@ class _$Certificate_PoolRetirementCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? operator = null,Object? epoch = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? operator = null,Object? epoch = null,Object? lengthType = null,}) {
   return _then(Certificate_PoolRetirement(
 operator: null == operator ? _self.operator : operator // ignore: cast_nullable_to_non_nullable
 as StakePoolId,epoch: null == epoch ? _self.epoch : epoch // ignore: cast_nullable_to_non_nullable
-as CborInt,
+as CborInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -487,15 +541,16 @@ $StakePoolIdCopyWith<$Res> get operator {
 
 
 class Certificate_StakeRegistration extends Certificate {
-   Certificate_StakeRegistration({required this.stakeCredential, required this.coin}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
+   Certificate_StakeRegistration({required this.stakeCredential, required this.coin, this.lengthType = CborLengthType.definite}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
   
 
  final  Credential stakeCredential;
  final  CborInt coin;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_StakeRegistrationCopyWith<Certificate_StakeRegistration> get copyWith => _$Certificate_StakeRegistrationCopyWithImpl<Certificate_StakeRegistration>(this, _$identity);
 
@@ -503,16 +558,16 @@ $Certificate_StakeRegistrationCopyWith<Certificate_StakeRegistration> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistration&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.coin, coin) || other.coin == coin));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistration&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,coin);
+int get hashCode => Object.hash(runtimeType,stakeCredential,coin,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.stakeRegistration(stakeCredential: $stakeCredential, coin: $coin)';
+  return 'Certificate.stakeRegistration(stakeCredential: $stakeCredential, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -521,9 +576,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_StakeRegistrationCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_StakeRegistrationCopyWith(Certificate_StakeRegistration value, $Res Function(Certificate_StakeRegistration) _then) = _$Certificate_StakeRegistrationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential, CborInt coin
+ Credential stakeCredential, CborInt coin, CborLengthType lengthType
 });
 
 
@@ -540,11 +595,12 @@ class _$Certificate_StakeRegistrationCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? coin = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? coin = null,Object? lengthType = null,}) {
   return _then(Certificate_StakeRegistration(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
 as Credential,coin: null == coin ? _self.coin : coin // ignore: cast_nullable_to_non_nullable
-as CborInt,
+as CborInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -564,15 +620,16 @@ $CredentialCopyWith<$Res> get stakeCredential {
 
 
 class Certificate_StakeDeRegistration extends Certificate {
-   Certificate_StakeDeRegistration({required this.stakeCredential, required this.coin}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
+   Certificate_StakeDeRegistration({required this.stakeCredential, required this.coin, this.lengthType = CborLengthType.definite}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
   
 
  final  Credential stakeCredential;
  final  CborInt coin;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_StakeDeRegistrationCopyWith<Certificate_StakeDeRegistration> get copyWith => _$Certificate_StakeDeRegistrationCopyWithImpl<Certificate_StakeDeRegistration>(this, _$identity);
 
@@ -580,16 +637,16 @@ $Certificate_StakeDeRegistrationCopyWith<Certificate_StakeDeRegistration> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDeRegistration&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.coin, coin) || other.coin == coin));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDeRegistration&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,coin);
+int get hashCode => Object.hash(runtimeType,stakeCredential,coin,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.stakeDeRegistration(stakeCredential: $stakeCredential, coin: $coin)';
+  return 'Certificate.stakeDeRegistration(stakeCredential: $stakeCredential, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -598,9 +655,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_StakeDeRegistrationCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_StakeDeRegistrationCopyWith(Certificate_StakeDeRegistration value, $Res Function(Certificate_StakeDeRegistration) _then) = _$Certificate_StakeDeRegistrationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential, CborInt coin
+ Credential stakeCredential, CborInt coin, CborLengthType lengthType
 });
 
 
@@ -617,11 +674,12 @@ class _$Certificate_StakeDeRegistrationCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? coin = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? coin = null,Object? lengthType = null,}) {
   return _then(Certificate_StakeDeRegistration(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
 as Credential,coin: null == coin ? _self.coin : coin // ignore: cast_nullable_to_non_nullable
-as CborInt,
+as CborInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -641,15 +699,16 @@ $CredentialCopyWith<$Res> get stakeCredential {
 
 
 class Certificate_VoteDelegation extends Certificate {
-   Certificate_VoteDelegation({required this.stakeCredential, required this.dRep}): super._();
+   Certificate_VoteDelegation({required this.stakeCredential, required this.dRep, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  Credential stakeCredential;
  final  Drep dRep;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_VoteDelegationCopyWith<Certificate_VoteDelegation> get copyWith => _$Certificate_VoteDelegationCopyWithImpl<Certificate_VoteDelegation>(this, _$identity);
 
@@ -657,16 +716,16 @@ $Certificate_VoteDelegationCopyWith<Certificate_VoteDelegation> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_VoteDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.dRep, dRep) || other.dRep == dRep));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_VoteDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,dRep);
+int get hashCode => Object.hash(runtimeType,stakeCredential,dRep,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.voteDelegation(stakeCredential: $stakeCredential, dRep: $dRep)';
+  return 'Certificate.voteDelegation(stakeCredential: $stakeCredential, dRep: $dRep, lengthType: $lengthType)';
 }
 
 
@@ -675,9 +734,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_VoteDelegationCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_VoteDelegationCopyWith(Certificate_VoteDelegation value, $Res Function(Certificate_VoteDelegation) _then) = _$Certificate_VoteDelegationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential, Drep dRep
+ Credential stakeCredential, Drep dRep, CborLengthType lengthType
 });
 
 
@@ -694,11 +753,12 @@ class _$Certificate_VoteDelegationCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? dRep = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? dRep = null,Object? lengthType = null,}) {
   return _then(Certificate_VoteDelegation(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
 as Credential,dRep: null == dRep ? _self.dRep : dRep // ignore: cast_nullable_to_non_nullable
-as Drep,
+as Drep,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -727,16 +787,17 @@ $DrepCopyWith<$Res> get dRep {
 
 
 class Certificate_StakeVoteDelegation extends Certificate {
-   Certificate_StakeVoteDelegation({required this.stakeCredential, required this.stakePoolId, required this.dRep}): super._();
+   Certificate_StakeVoteDelegation({required this.stakeCredential, required this.stakePoolId, required this.dRep, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  Credential stakeCredential;
  final  StakePoolId stakePoolId;
  final  Drep dRep;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_StakeVoteDelegationCopyWith<Certificate_StakeVoteDelegation> get copyWith => _$Certificate_StakeVoteDelegationCopyWithImpl<Certificate_StakeVoteDelegation>(this, _$identity);
 
@@ -744,16 +805,16 @@ $Certificate_StakeVoteDelegationCopyWith<Certificate_StakeVoteDelegation> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeVoteDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.dRep, dRep) || other.dRep == dRep));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeVoteDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,dRep);
+int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,dRep,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.stakeVoteDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, dRep: $dRep)';
+  return 'Certificate.stakeVoteDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, dRep: $dRep, lengthType: $lengthType)';
 }
 
 
@@ -762,9 +823,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_StakeVoteDelegationCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_StakeVoteDelegationCopyWith(Certificate_StakeVoteDelegation value, $Res Function(Certificate_StakeVoteDelegation) _then) = _$Certificate_StakeVoteDelegationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential, StakePoolId stakePoolId, Drep dRep
+ Credential stakeCredential, StakePoolId stakePoolId, Drep dRep, CborLengthType lengthType
 });
 
 
@@ -781,12 +842,13 @@ class _$Certificate_StakeVoteDelegationCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? stakePoolId = null,Object? dRep = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? stakePoolId = null,Object? dRep = null,Object? lengthType = null,}) {
   return _then(Certificate_StakeVoteDelegation(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
 as Credential,stakePoolId: null == stakePoolId ? _self.stakePoolId : stakePoolId // ignore: cast_nullable_to_non_nullable
 as StakePoolId,dRep: null == dRep ? _self.dRep : dRep // ignore: cast_nullable_to_non_nullable
-as Drep,
+as Drep,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -824,16 +886,17 @@ $DrepCopyWith<$Res> get dRep {
 
 
 class Certificate_StakeRegistrationDelegation extends Certificate {
-   Certificate_StakeRegistrationDelegation({required this.stakeCredential, required this.stakePoolId, required this.coin}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
+   Certificate_StakeRegistrationDelegation({required this.stakeCredential, required this.stakePoolId, required this.coin, this.lengthType = CborLengthType.definite}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
   
 
  final  Credential stakeCredential;
  final  StakePoolId stakePoolId;
  final  CborInt coin;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_StakeRegistrationDelegationCopyWith<Certificate_StakeRegistrationDelegation> get copyWith => _$Certificate_StakeRegistrationDelegationCopyWithImpl<Certificate_StakeRegistrationDelegation>(this, _$identity);
 
@@ -841,16 +904,16 @@ $Certificate_StakeRegistrationDelegationCopyWith<Certificate_StakeRegistrationDe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.coin, coin) || other.coin == coin));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,coin);
+int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,coin,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.stakeRegistrationDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, coin: $coin)';
+  return 'Certificate.stakeRegistrationDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -859,9 +922,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_StakeRegistrationDelegationCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_StakeRegistrationDelegationCopyWith(Certificate_StakeRegistrationDelegation value, $Res Function(Certificate_StakeRegistrationDelegation) _then) = _$Certificate_StakeRegistrationDelegationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential, StakePoolId stakePoolId, CborInt coin
+ Credential stakeCredential, StakePoolId stakePoolId, CborInt coin, CborLengthType lengthType
 });
 
 
@@ -878,12 +941,13 @@ class _$Certificate_StakeRegistrationDelegationCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? stakePoolId = null,Object? coin = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? stakePoolId = null,Object? coin = null,Object? lengthType = null,}) {
   return _then(Certificate_StakeRegistrationDelegation(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
 as Credential,stakePoolId: null == stakePoolId ? _self.stakePoolId : stakePoolId // ignore: cast_nullable_to_non_nullable
 as StakePoolId,coin: null == coin ? _self.coin : coin // ignore: cast_nullable_to_non_nullable
-as CborInt,
+as CborInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -912,16 +976,17 @@ $StakePoolIdCopyWith<$Res> get stakePoolId {
 
 
 class Certificate_VoteRegistrationDelegation extends Certificate {
-   Certificate_VoteRegistrationDelegation({required this.stakeCredential, required this.dRep, required this.coin}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
+   Certificate_VoteRegistrationDelegation({required this.stakeCredential, required this.dRep, required this.coin, this.lengthType = CborLengthType.definite}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
   
 
  final  Credential stakeCredential;
  final  Drep dRep;
  final  CborInt coin;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_VoteRegistrationDelegationCopyWith<Certificate_VoteRegistrationDelegation> get copyWith => _$Certificate_VoteRegistrationDelegationCopyWithImpl<Certificate_VoteRegistrationDelegation>(this, _$identity);
 
@@ -929,16 +994,16 @@ $Certificate_VoteRegistrationDelegationCopyWith<Certificate_VoteRegistrationDele
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_VoteRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.coin, coin) || other.coin == coin));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_VoteRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,dRep,coin);
+int get hashCode => Object.hash(runtimeType,stakeCredential,dRep,coin,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.voteRegistrationDelegation(stakeCredential: $stakeCredential, dRep: $dRep, coin: $coin)';
+  return 'Certificate.voteRegistrationDelegation(stakeCredential: $stakeCredential, dRep: $dRep, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -947,9 +1012,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_VoteRegistrationDelegationCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_VoteRegistrationDelegationCopyWith(Certificate_VoteRegistrationDelegation value, $Res Function(Certificate_VoteRegistrationDelegation) _then) = _$Certificate_VoteRegistrationDelegationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential, Drep dRep, CborInt coin
+ Credential stakeCredential, Drep dRep, CborInt coin, CborLengthType lengthType
 });
 
 
@@ -966,12 +1031,13 @@ class _$Certificate_VoteRegistrationDelegationCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? dRep = null,Object? coin = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? dRep = null,Object? coin = null,Object? lengthType = null,}) {
   return _then(Certificate_VoteRegistrationDelegation(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
 as Credential,dRep: null == dRep ? _self.dRep : dRep // ignore: cast_nullable_to_non_nullable
 as Drep,coin: null == coin ? _self.coin : coin // ignore: cast_nullable_to_non_nullable
-as CborInt,
+as CborInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -1000,17 +1066,18 @@ $DrepCopyWith<$Res> get dRep {
 
 
 class Certificate_StakeVoteRegistrationDelegation extends Certificate {
-   Certificate_StakeVoteRegistrationDelegation({required this.stakeCredential, required this.stakePoolId, required this.dRep, required this.coin}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
+   Certificate_StakeVoteRegistrationDelegation({required this.stakeCredential, required this.stakePoolId, required this.dRep, required this.coin, this.lengthType = CborLengthType.definite}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
   
 
  final  Credential stakeCredential;
  final  StakePoolId stakePoolId;
  final  Drep dRep;
  final  CborInt coin;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_StakeVoteRegistrationDelegationCopyWith<Certificate_StakeVoteRegistrationDelegation> get copyWith => _$Certificate_StakeVoteRegistrationDelegationCopyWithImpl<Certificate_StakeVoteRegistrationDelegation>(this, _$identity);
 
@@ -1018,16 +1085,16 @@ $Certificate_StakeVoteRegistrationDelegationCopyWith<Certificate_StakeVoteRegist
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeVoteRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.coin, coin) || other.coin == coin));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeVoteRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,dRep,coin);
+int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,dRep,coin,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.stakeVoteRegistrationDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, dRep: $dRep, coin: $coin)';
+  return 'Certificate.stakeVoteRegistrationDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, dRep: $dRep, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -1036,9 +1103,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_StakeVoteRegistrationDelegationCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_StakeVoteRegistrationDelegationCopyWith(Certificate_StakeVoteRegistrationDelegation value, $Res Function(Certificate_StakeVoteRegistrationDelegation) _then) = _$Certificate_StakeVoteRegistrationDelegationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential stakeCredential, StakePoolId stakePoolId, Drep dRep, CborInt coin
+ Credential stakeCredential, StakePoolId stakePoolId, Drep dRep, CborInt coin, CborLengthType lengthType
 });
 
 
@@ -1055,13 +1122,14 @@ class _$Certificate_StakeVoteRegistrationDelegationCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? stakePoolId = null,Object? dRep = null,Object? coin = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stakeCredential = null,Object? stakePoolId = null,Object? dRep = null,Object? coin = null,Object? lengthType = null,}) {
   return _then(Certificate_StakeVoteRegistrationDelegation(
 stakeCredential: null == stakeCredential ? _self.stakeCredential : stakeCredential // ignore: cast_nullable_to_non_nullable
 as Credential,stakePoolId: null == stakePoolId ? _self.stakePoolId : stakePoolId // ignore: cast_nullable_to_non_nullable
 as StakePoolId,dRep: null == dRep ? _self.dRep : dRep // ignore: cast_nullable_to_non_nullable
 as Drep,coin: null == coin ? _self.coin : coin // ignore: cast_nullable_to_non_nullable
-as CborInt,
+as CborInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -1099,15 +1167,16 @@ $DrepCopyWith<$Res> get dRep {
 
 
 class Certificate_AuthorizeCommitteeHot extends Certificate {
-   Certificate_AuthorizeCommitteeHot({required this.committeeColdCredential, required this.committeeHotCredential}): super._();
+   Certificate_AuthorizeCommitteeHot({required this.committeeColdCredential, required this.committeeHotCredential, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  Credential committeeColdCredential;
  final  Credential committeeHotCredential;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_AuthorizeCommitteeHotCopyWith<Certificate_AuthorizeCommitteeHot> get copyWith => _$Certificate_AuthorizeCommitteeHotCopyWithImpl<Certificate_AuthorizeCommitteeHot>(this, _$identity);
 
@@ -1115,16 +1184,16 @@ $Certificate_AuthorizeCommitteeHotCopyWith<Certificate_AuthorizeCommitteeHot> ge
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_AuthorizeCommitteeHot&&(identical(other.committeeColdCredential, committeeColdCredential) || other.committeeColdCredential == committeeColdCredential)&&(identical(other.committeeHotCredential, committeeHotCredential) || other.committeeHotCredential == committeeHotCredential));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_AuthorizeCommitteeHot&&(identical(other.committeeColdCredential, committeeColdCredential) || other.committeeColdCredential == committeeColdCredential)&&(identical(other.committeeHotCredential, committeeHotCredential) || other.committeeHotCredential == committeeHotCredential)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,committeeColdCredential,committeeHotCredential);
+int get hashCode => Object.hash(runtimeType,committeeColdCredential,committeeHotCredential,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.authorizeCommitteeHot(committeeColdCredential: $committeeColdCredential, committeeHotCredential: $committeeHotCredential)';
+  return 'Certificate.authorizeCommitteeHot(committeeColdCredential: $committeeColdCredential, committeeHotCredential: $committeeHotCredential, lengthType: $lengthType)';
 }
 
 
@@ -1133,9 +1202,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_AuthorizeCommitteeHotCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_AuthorizeCommitteeHotCopyWith(Certificate_AuthorizeCommitteeHot value, $Res Function(Certificate_AuthorizeCommitteeHot) _then) = _$Certificate_AuthorizeCommitteeHotCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential committeeColdCredential, Credential committeeHotCredential
+ Credential committeeColdCredential, Credential committeeHotCredential, CborLengthType lengthType
 });
 
 
@@ -1152,11 +1221,12 @@ class _$Certificate_AuthorizeCommitteeHotCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? committeeColdCredential = null,Object? committeeHotCredential = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? committeeColdCredential = null,Object? committeeHotCredential = null,Object? lengthType = null,}) {
   return _then(Certificate_AuthorizeCommitteeHot(
 committeeColdCredential: null == committeeColdCredential ? _self.committeeColdCredential : committeeColdCredential // ignore: cast_nullable_to_non_nullable
 as Credential,committeeHotCredential: null == committeeHotCredential ? _self.committeeHotCredential : committeeHotCredential // ignore: cast_nullable_to_non_nullable
-as Credential,
+as Credential,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -1185,15 +1255,16 @@ $CredentialCopyWith<$Res> get committeeHotCredential {
 
 
 class Certificate_ResignCommitteeCold extends Certificate {
-   Certificate_ResignCommitteeCold({required this.committeeColdCredential, required this.anchor}): super._();
+   Certificate_ResignCommitteeCold({required this.committeeColdCredential, required this.anchor, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  Credential committeeColdCredential;
  final  Anchor? anchor;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_ResignCommitteeColdCopyWith<Certificate_ResignCommitteeCold> get copyWith => _$Certificate_ResignCommitteeColdCopyWithImpl<Certificate_ResignCommitteeCold>(this, _$identity);
 
@@ -1201,16 +1272,16 @@ $Certificate_ResignCommitteeColdCopyWith<Certificate_ResignCommitteeCold> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_ResignCommitteeCold&&(identical(other.committeeColdCredential, committeeColdCredential) || other.committeeColdCredential == committeeColdCredential)&&(identical(other.anchor, anchor) || other.anchor == anchor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_ResignCommitteeCold&&(identical(other.committeeColdCredential, committeeColdCredential) || other.committeeColdCredential == committeeColdCredential)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,committeeColdCredential,anchor);
+int get hashCode => Object.hash(runtimeType,committeeColdCredential,anchor,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.resignCommitteeCold(committeeColdCredential: $committeeColdCredential, anchor: $anchor)';
+  return 'Certificate.resignCommitteeCold(committeeColdCredential: $committeeColdCredential, anchor: $anchor, lengthType: $lengthType)';
 }
 
 
@@ -1219,9 +1290,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_ResignCommitteeColdCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_ResignCommitteeColdCopyWith(Certificate_ResignCommitteeCold value, $Res Function(Certificate_ResignCommitteeCold) _then) = _$Certificate_ResignCommitteeColdCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential committeeColdCredential, Anchor? anchor
+ Credential committeeColdCredential, Anchor? anchor, CborLengthType lengthType
 });
 
 
@@ -1238,11 +1309,12 @@ class _$Certificate_ResignCommitteeColdCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? committeeColdCredential = null,Object? anchor = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? committeeColdCredential = null,Object? anchor = freezed,Object? lengthType = null,}) {
   return _then(Certificate_ResignCommitteeCold(
 committeeColdCredential: null == committeeColdCredential ? _self.committeeColdCredential : committeeColdCredential // ignore: cast_nullable_to_non_nullable
 as Credential,anchor: freezed == anchor ? _self.anchor : anchor // ignore: cast_nullable_to_non_nullable
-as Anchor?,
+as Anchor?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -1274,16 +1346,17 @@ $AnchorCopyWith<$Res>? get anchor {
 
 
 class Certificate_RegisterDRep extends Certificate {
-   Certificate_RegisterDRep({required this.dRepCredential, required this.coin, required this.anchor}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
+   Certificate_RegisterDRep({required this.dRepCredential, required this.coin, required this.anchor, this.lengthType = CborLengthType.definite}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
   
 
  final  Credential dRepCredential;
  final  CborInt coin;
  final  Anchor? anchor;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_RegisterDRepCopyWith<Certificate_RegisterDRep> get copyWith => _$Certificate_RegisterDRepCopyWithImpl<Certificate_RegisterDRep>(this, _$identity);
 
@@ -1291,16 +1364,16 @@ $Certificate_RegisterDRepCopyWith<Certificate_RegisterDRep> get copyWith => _$Ce
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_RegisterDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.anchor, anchor) || other.anchor == anchor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_RegisterDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dRepCredential,coin,anchor);
+int get hashCode => Object.hash(runtimeType,dRepCredential,coin,anchor,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.registerDRep(dRepCredential: $dRepCredential, coin: $coin, anchor: $anchor)';
+  return 'Certificate.registerDRep(dRepCredential: $dRepCredential, coin: $coin, anchor: $anchor, lengthType: $lengthType)';
 }
 
 
@@ -1309,9 +1382,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_RegisterDRepCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_RegisterDRepCopyWith(Certificate_RegisterDRep value, $Res Function(Certificate_RegisterDRep) _then) = _$Certificate_RegisterDRepCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential dRepCredential, CborInt coin, Anchor? anchor
+ Credential dRepCredential, CborInt coin, Anchor? anchor, CborLengthType lengthType
 });
 
 
@@ -1328,12 +1401,13 @@ class _$Certificate_RegisterDRepCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? dRepCredential = null,Object? coin = null,Object? anchor = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dRepCredential = null,Object? coin = null,Object? anchor = freezed,Object? lengthType = null,}) {
   return _then(Certificate_RegisterDRep(
 dRepCredential: null == dRepCredential ? _self.dRepCredential : dRepCredential // ignore: cast_nullable_to_non_nullable
 as Credential,coin: null == coin ? _self.coin : coin // ignore: cast_nullable_to_non_nullable
 as CborInt,anchor: freezed == anchor ? _self.anchor : anchor // ignore: cast_nullable_to_non_nullable
-as Anchor?,
+as Anchor?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -1365,15 +1439,16 @@ $AnchorCopyWith<$Res>? get anchor {
 
 
 class Certificate_UnregisterDRep extends Certificate {
-   Certificate_UnregisterDRep({required this.dRepCredential, required this.coin}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
+   Certificate_UnregisterDRep({required this.dRepCredential, required this.coin, this.lengthType = CborLengthType.definite}): assert(coin.toBigInt() >= BigInt.from(0)),super._();
   
 
  final  Credential dRepCredential;
  final  CborInt coin;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_UnregisterDRepCopyWith<Certificate_UnregisterDRep> get copyWith => _$Certificate_UnregisterDRepCopyWithImpl<Certificate_UnregisterDRep>(this, _$identity);
 
@@ -1381,16 +1456,16 @@ $Certificate_UnregisterDRepCopyWith<Certificate_UnregisterDRep> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_UnregisterDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.coin, coin) || other.coin == coin));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_UnregisterDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dRepCredential,coin);
+int get hashCode => Object.hash(runtimeType,dRepCredential,coin,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.unregisterDRep(dRepCredential: $dRepCredential, coin: $coin)';
+  return 'Certificate.unregisterDRep(dRepCredential: $dRepCredential, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -1399,9 +1474,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_UnregisterDRepCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_UnregisterDRepCopyWith(Certificate_UnregisterDRep value, $Res Function(Certificate_UnregisterDRep) _then) = _$Certificate_UnregisterDRepCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential dRepCredential, CborInt coin
+ Credential dRepCredential, CborInt coin, CborLengthType lengthType
 });
 
 
@@ -1418,11 +1493,12 @@ class _$Certificate_UnregisterDRepCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? dRepCredential = null,Object? coin = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dRepCredential = null,Object? coin = null,Object? lengthType = null,}) {
   return _then(Certificate_UnregisterDRep(
 dRepCredential: null == dRepCredential ? _self.dRepCredential : dRepCredential // ignore: cast_nullable_to_non_nullable
 as Credential,coin: null == coin ? _self.coin : coin // ignore: cast_nullable_to_non_nullable
-as CborInt,
+as CborInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -1442,15 +1518,16 @@ $CredentialCopyWith<$Res> get dRepCredential {
 
 
 class Certificate_UpdateDRep extends Certificate {
-   Certificate_UpdateDRep({required this.dRepCredential, required this.anchor}): super._();
+   Certificate_UpdateDRep({required this.dRepCredential, required this.anchor, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  Credential dRepCredential;
  final  Anchor? anchor;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $Certificate_UpdateDRepCopyWith<Certificate_UpdateDRep> get copyWith => _$Certificate_UpdateDRepCopyWithImpl<Certificate_UpdateDRep>(this, _$identity);
 
@@ -1458,16 +1535,16 @@ $Certificate_UpdateDRepCopyWith<Certificate_UpdateDRep> get copyWith => _$Certif
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_UpdateDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.anchor, anchor) || other.anchor == anchor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_UpdateDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dRepCredential,anchor);
+int get hashCode => Object.hash(runtimeType,dRepCredential,anchor,lengthType);
 
 @override
 String toString() {
-  return 'Certificate.updateDRep(dRepCredential: $dRepCredential, anchor: $anchor)';
+  return 'Certificate.updateDRep(dRepCredential: $dRepCredential, anchor: $anchor, lengthType: $lengthType)';
 }
 
 
@@ -1476,9 +1553,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $Certificate_UpdateDRepCopyWith<$Res> implements $CertificateCopyWith<$Res> {
   factory $Certificate_UpdateDRepCopyWith(Certificate_UpdateDRep value, $Res Function(Certificate_UpdateDRep) _then) = _$Certificate_UpdateDRepCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- Credential dRepCredential, Anchor? anchor
+ Credential dRepCredential, Anchor? anchor, CborLengthType lengthType
 });
 
 
@@ -1495,11 +1572,12 @@ class _$Certificate_UpdateDRepCopyWithImpl<$Res>
 
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? dRepCredential = null,Object? anchor = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dRepCredential = null,Object? anchor = freezed,Object? lengthType = null,}) {
   return _then(Certificate_UpdateDRep(
 dRepCredential: null == dRepCredential ? _self.dRepCredential : dRepCredential // ignore: cast_nullable_to_non_nullable
 as Credential,anchor: freezed == anchor ? _self.anchor : anchor // ignore: cast_nullable_to_non_nullable
-as Anchor?,
+as Anchor?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

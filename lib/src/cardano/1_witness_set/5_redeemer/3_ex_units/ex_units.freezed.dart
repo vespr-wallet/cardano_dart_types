@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ExUnits {
 
- BigInt get mem; BigInt get steps;
+ BigInt get mem; BigInt get steps; CborLengthType get lengthType;
 /// Create a copy of ExUnits
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ExUnitsCopyWith<ExUnits> get copyWith => _$ExUnitsCopyWithImpl<ExUnits>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExUnits&&(identical(other.mem, mem) || other.mem == mem)&&(identical(other.steps, steps) || other.steps == steps));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExUnits&&(identical(other.mem, mem) || other.mem == mem)&&(identical(other.steps, steps) || other.steps == steps)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,mem,steps);
+int get hashCode => Object.hash(runtimeType,mem,steps,lengthType);
 
 @override
 String toString() {
-  return 'ExUnits(mem: $mem, steps: $steps)';
+  return 'ExUnits(mem: $mem, steps: $steps, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ExUnitsCopyWith<$Res>  {
   factory $ExUnitsCopyWith(ExUnits value, $Res Function(ExUnits) _then) = _$ExUnitsCopyWithImpl;
 @useResult
 $Res call({
- BigInt mem, BigInt steps
+ BigInt mem, BigInt steps, CborLengthType lengthType
 });
 
 
@@ -62,11 +62,12 @@ class _$ExUnitsCopyWithImpl<$Res>
 
 /// Create a copy of ExUnits
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? mem = null,Object? steps = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? mem = null,Object? steps = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 mem: null == mem ? _self.mem : mem // ignore: cast_nullable_to_non_nullable
 as BigInt,steps: null == steps ? _self.steps : steps // ignore: cast_nullable_to_non_nullable
-as BigInt,
+as BigInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -78,11 +79,12 @@ as BigInt,
 
 
 class _ExUnits extends ExUnits {
-  const _ExUnits({required this.mem, required this.steps}): super._();
+  const _ExUnits({required this.mem, required this.steps, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  BigInt mem;
 @override final  BigInt steps;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of ExUnits
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +96,16 @@ _$ExUnitsCopyWith<_ExUnits> get copyWith => __$ExUnitsCopyWithImpl<_ExUnits>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExUnits&&(identical(other.mem, mem) || other.mem == mem)&&(identical(other.steps, steps) || other.steps == steps));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExUnits&&(identical(other.mem, mem) || other.mem == mem)&&(identical(other.steps, steps) || other.steps == steps)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,mem,steps);
+int get hashCode => Object.hash(runtimeType,mem,steps,lengthType);
 
 @override
 String toString() {
-  return 'ExUnits(mem: $mem, steps: $steps)';
+  return 'ExUnits(mem: $mem, steps: $steps, lengthType: $lengthType)';
 }
 
 
@@ -114,7 +116,7 @@ abstract mixin class _$ExUnitsCopyWith<$Res> implements $ExUnitsCopyWith<$Res> {
   factory _$ExUnitsCopyWith(_ExUnits value, $Res Function(_ExUnits) _then) = __$ExUnitsCopyWithImpl;
 @override @useResult
 $Res call({
- BigInt mem, BigInt steps
+ BigInt mem, BigInt steps, CborLengthType lengthType
 });
 
 
@@ -131,11 +133,12 @@ class __$ExUnitsCopyWithImpl<$Res>
 
 /// Create a copy of ExUnits
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? mem = null,Object? steps = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? mem = null,Object? steps = null,Object? lengthType = null,}) {
   return _then(_ExUnits(
 mem: null == mem ? _self.mem : mem // ignore: cast_nullable_to_non_nullable
 as BigInt,steps: null == steps ? _self.steps : steps // ignore: cast_nullable_to_non_nullable
-as BigInt,
+as BigInt,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

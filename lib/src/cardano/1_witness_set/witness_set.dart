@@ -44,6 +44,9 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
     ListWithCborType<PlutusScriptV2>? iplutusScriptV2,
     ListWithCborType<PlutusScriptV3>? iplutusScriptV3,
     List<int>? iCborTags,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+    // Original map key order when not ascending (null = ascending)
+    List<int>? nonStandardKeyOrder,
   }) = _WitnessSet;
   const WitnessSet._();
 
@@ -106,6 +109,8 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
         mergeCborTags(iplutusScriptV3?.tags, other.iplutusScriptV3?.tags),
       ).nullIfEmpty(),
       iCborTags: mergeCborTags(iCborTags, other.iCborTags),
+      lengthType: lengthType,
+      nonStandardKeyOrder: nonStandardKeyOrder,
     );
   }
 
@@ -219,6 +224,8 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
       iplutusScriptV2: plutusScriptV2,
       iplutusScriptV3: plutusScriptV3,
       iCborTags: cMap.tags,
+      lengthType: cMap.type,
+      nonStandardKeyOrder: nonAscendingKeyOrder(cMap),
     );
 
     conditionalAssert(
@@ -369,19 +376,21 @@ sealed class WitnessSet with _$WitnessSet implements CborEncodable {
       ),
     );
 
+    final entries = <int, MapEntry<CborValue, CborValue>?>{
+      0: witnessesEntry,
+      1: scriptsEntry,
+      2: bootstrapEntry,
+      3: plutusV1ScriptEntry,
+      4: plutusDataEntry,
+      5: redeemerEntry,
+      6: plutusScriptV2Entry,
+      7: plutusScriptV3Entry,
+    }..removeWhere((_, entry) => entry == null); // remove empty entries for smaller CBOR size
+
     return CborMap.fromEntries(
-      [
-        witnessesEntry,
-        scriptsEntry,
-        bootstrapEntry,
-        plutusV1ScriptEntry,
-        plutusDataEntry,
-        redeemerEntry,
-        plutusScriptV2Entry,
-        plutusScriptV3Entry,
-      ].nonNulls(), // remove empty entries for smaller CBOR size
+      orderEntries(entries.cast<int, MapEntry<CborValue, CborValue>>(), forJson ? null : nonStandardKeyOrder),
       tags: iCborTags ?? [],
-      type: CborLengthType.definite,
+      type: forJson ? CborLengthType.definite : lengthType,
     );
   }
 }

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Constitution {
 
- Anchor get anchor; String? get scriptHash;
+ Anchor get anchor; String? get scriptHash; CborLengthType get lengthType;
 /// Create a copy of Constitution
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ConstitutionCopyWith<Constitution> get copyWith => _$ConstitutionCopyWithImpl<C
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Constitution&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.scriptHash, scriptHash) || other.scriptHash == scriptHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Constitution&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.scriptHash, scriptHash) || other.scriptHash == scriptHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,anchor,scriptHash);
+int get hashCode => Object.hash(runtimeType,anchor,scriptHash,lengthType);
 
 @override
 String toString() {
-  return 'Constitution(anchor: $anchor, scriptHash: $scriptHash)';
+  return 'Constitution(anchor: $anchor, scriptHash: $scriptHash, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ConstitutionCopyWith<$Res>  {
   factory $ConstitutionCopyWith(Constitution value, $Res Function(Constitution) _then) = _$ConstitutionCopyWithImpl;
 @useResult
 $Res call({
- Anchor anchor, String? scriptHash
+ Anchor anchor, String? scriptHash, CborLengthType lengthType
 });
 
 
@@ -62,11 +62,12 @@ class _$ConstitutionCopyWithImpl<$Res>
 
 /// Create a copy of Constitution
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? anchor = null,Object? scriptHash = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? anchor = null,Object? scriptHash = freezed,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 anchor: null == anchor ? _self.anchor : anchor // ignore: cast_nullable_to_non_nullable
 as Anchor,scriptHash: freezed == scriptHash ? _self.scriptHash : scriptHash // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 /// Create a copy of Constitution
@@ -87,11 +88,12 @@ $AnchorCopyWith<$Res> get anchor {
 
 
 class _Constitution extends Constitution {
-  const _Constitution({required this.anchor, required this.scriptHash}): super._();
+  const _Constitution({required this.anchor, required this.scriptHash, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  Anchor anchor;
 @override final  String? scriptHash;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Constitution
 /// with the given fields replaced by the non-null parameter values.
@@ -103,16 +105,16 @@ _$ConstitutionCopyWith<_Constitution> get copyWith => __$ConstitutionCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Constitution&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.scriptHash, scriptHash) || other.scriptHash == scriptHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Constitution&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.scriptHash, scriptHash) || other.scriptHash == scriptHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,anchor,scriptHash);
+int get hashCode => Object.hash(runtimeType,anchor,scriptHash,lengthType);
 
 @override
 String toString() {
-  return 'Constitution(anchor: $anchor, scriptHash: $scriptHash)';
+  return 'Constitution(anchor: $anchor, scriptHash: $scriptHash, lengthType: $lengthType)';
 }
 
 
@@ -123,7 +125,7 @@ abstract mixin class _$ConstitutionCopyWith<$Res> implements $ConstitutionCopyWi
   factory _$ConstitutionCopyWith(_Constitution value, $Res Function(_Constitution) _then) = __$ConstitutionCopyWithImpl;
 @override @useResult
 $Res call({
- Anchor anchor, String? scriptHash
+ Anchor anchor, String? scriptHash, CborLengthType lengthType
 });
 
 
@@ -140,11 +142,12 @@ class __$ConstitutionCopyWithImpl<$Res>
 
 /// Create a copy of Constitution
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? anchor = null,Object? scriptHash = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? anchor = null,Object? scriptHash = freezed,Object? lengthType = null,}) {
   return _then(_Constitution(
 anchor: null == anchor ? _self.anchor : anchor // ignore: cast_nullable_to_non_nullable
 as Anchor,scriptHash: freezed == scriptHash ? _self.scriptHash : scriptHash // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

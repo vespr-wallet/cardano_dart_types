@@ -23,7 +23,12 @@ sealed class Value with _$Value implements CborEncodable {
 
   const factory Value.v0({required CborInt lovelace}) = Value_v0;
 
-  const factory Value.v1({required CborInt lovelace, required List<MultiAsset> mA}) = Value_v1;
+  const factory Value.v1({
+    required CborInt lovelace,
+    required List<MultiAsset> mA,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType multiAssetsLengthType,
+  }) = Value_v1;
 
   List<MultiAsset> get multiAssets => switch (this) {
     Value_v0() => const [],
@@ -47,8 +52,9 @@ sealed class Value with _$Value implements CborEncodable {
       Value_v1() => CborList.of(
         [
           lovelace,
-          CborMap.fromEntries(obj.mA.map((multiAsset) => multiAsset.serialize(forJson: forJson))),
+          obj.mA.serialize(forJson: forJson, lengthType: obj.multiAssetsLengthType),
         ],
+        type: obj.lengthType,
       ),
     };
   }
@@ -73,13 +79,16 @@ sealed class Value with _$Value implements CborEncodable {
       throw CardanoValueParseException("cValue list has length != 2 : ${cValue.length}");
     }
 
-    final List<MultiAsset> multiAssets = (cValue[1] as CborMap).entries
+    final cMultiAssets = cValue[1] as CborMap;
+    final List<MultiAsset> multiAssets = cMultiAssets.entries
         .map((entry) => MultiAsset.deserialize(cMapEntry: entry))
         .toList();
 
     final result = Value.v1(
       lovelace: cValue[0] as CborInt,
       mA: multiAssets,
+      lengthType: cValue.type,
+      multiAssetsLengthType: cMultiAssets.type,
     );
 
     conditionalAssert(() => result.serializeHexString() == cValue.hexEncode());
@@ -120,14 +129,16 @@ sealed class MultiAsset with _$MultiAsset {
   const factory MultiAsset({
     required PolicyId policyId,
     required List<Asset> assets,
+    @Default(CborLengthType.definite) CborLengthType lengthType, // of the assets map
   }) = _MultiAsset;
   const MultiAsset._();
 
   factory MultiAsset.deserialize({required MapEntry<CborValue, CborValue> cMapEntry}) {
     final policyId = PolicyId.deserialize(cMapEntry.key);
 
+    final cAssets = cMapEntry.value as CborMap;
     final List<Asset> assets = [];
-    (cMapEntry.value as CborMap).forEach(
+    cAssets.forEach(
       (key, value) => assets.add(
         Asset(
           assetName: AssetName.deserialize(key),
@@ -136,7 +147,7 @@ sealed class MultiAsset with _$MultiAsset {
       ),
     );
 
-    return MultiAsset(policyId: policyId, assets: assets);
+    return MultiAsset(policyId: policyId, assets: assets, lengthType: cAssets.type);
   }
 
   @override
@@ -166,13 +177,14 @@ sealed class MultiAsset with _$MultiAsset {
 
     return MapEntry(
       policyId.serialize(forJson: forJson),
-      CborMap.fromEntries(assetsMapEntries),
+      CborMap.fromEntries(assetsMapEntries, type: lengthType),
     );
   }
 }
 
 extension MultiAssetIterableX on Iterable<MultiAsset> {
-  CborMap serialize({required bool forJson}) => CborMap.fromEntries(map((e) => e.serialize(forJson: forJson)));
+  CborMap serialize({required bool forJson, CborLengthType lengthType = CborLengthType.definite}) =>
+      CborMap.fromEntries(map((e) => e.serialize(forJson: forJson)), type: lengthType);
 }
 
 /// an single asset name and value under a MultiAsset policyId

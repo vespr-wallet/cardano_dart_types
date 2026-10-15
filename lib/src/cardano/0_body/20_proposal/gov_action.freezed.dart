@@ -14,30 +14,61 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GovAction {
 
-
+ CborLengthType get lengthType;
+/// Create a copy of GovAction
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GovActionCopyWith<GovAction> get copyWith => _$GovActionCopyWithImpl<GovAction>(this as GovAction, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,lengthType);
 
 @override
 String toString() {
-  return 'GovAction()';
+  return 'GovAction(lengthType: $lengthType)';
 }
 
 
 }
 
 /// @nodoc
-class $GovActionCopyWith<$Res>  {
-$GovActionCopyWith(GovAction _, $Res Function(GovAction) __);
+abstract mixin class $GovActionCopyWith<$Res>  {
+  factory $GovActionCopyWith(GovAction value, $Res Function(GovAction) _then) = _$GovActionCopyWithImpl;
+@useResult
+$Res call({
+ CborLengthType lengthType
+});
+
+
+
+
+}
+/// @nodoc
+class _$GovActionCopyWithImpl<$Res>
+    implements $GovActionCopyWith<$Res> {
+  _$GovActionCopyWithImpl(this._self, this._then);
+
+  final GovAction _self;
+  final $Res Function(GovAction) _then;
+
+/// Create a copy of GovAction
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? lengthType = null,}) {
+  return _then(_self.copyWith(
+lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
+  ));
+}
+
 }
 
 
@@ -46,16 +77,17 @@ $GovActionCopyWith(GovAction _, $Res Function(GovAction) __);
 
 
 class GovAction_ParameterChange extends GovAction {
-  const GovAction_ParameterChange({required this.prevGovActionId, required this.protocolParamUpdate, required this.policyHash}): super._();
+  const GovAction_ParameterChange({required this.prevGovActionId, required this.protocolParamUpdate, required this.policyHash, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  GovActionId prevGovActionId;
  final  ProtocolParamUpdate protocolParamUpdate;
  final  Uint8List? policyHash;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $GovAction_ParameterChangeCopyWith<GovAction_ParameterChange> get copyWith => _$GovAction_ParameterChangeCopyWithImpl<GovAction_ParameterChange>(this, _$identity);
 
@@ -63,16 +95,16 @@ $GovAction_ParameterChangeCopyWith<GovAction_ParameterChange> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_ParameterChange&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.protocolParamUpdate, protocolParamUpdate) || other.protocolParamUpdate == protocolParamUpdate)&&const DeepCollectionEquality().equals(other.policyHash, policyHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_ParameterChange&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.protocolParamUpdate, protocolParamUpdate) || other.protocolParamUpdate == protocolParamUpdate)&&const DeepCollectionEquality().equals(other.policyHash, policyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId,protocolParamUpdate,const DeepCollectionEquality().hash(policyHash));
+int get hashCode => Object.hash(runtimeType,prevGovActionId,protocolParamUpdate,const DeepCollectionEquality().hash(policyHash),lengthType);
 
 @override
 String toString() {
-  return 'GovAction.parameterChange(prevGovActionId: $prevGovActionId, protocolParamUpdate: $protocolParamUpdate, policyHash: $policyHash)';
+  return 'GovAction.parameterChange(prevGovActionId: $prevGovActionId, protocolParamUpdate: $protocolParamUpdate, policyHash: $policyHash, lengthType: $lengthType)';
 }
 
 
@@ -81,9 +113,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $GovAction_ParameterChangeCopyWith<$Res> implements $GovActionCopyWith<$Res> {
   factory $GovAction_ParameterChangeCopyWith(GovAction_ParameterChange value, $Res Function(GovAction_ParameterChange) _then) = _$GovAction_ParameterChangeCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- GovActionId prevGovActionId, ProtocolParamUpdate protocolParamUpdate, Uint8List? policyHash
+ GovActionId prevGovActionId, ProtocolParamUpdate protocolParamUpdate, Uint8List? policyHash, CborLengthType lengthType
 });
 
 
@@ -100,12 +132,13 @@ class _$GovAction_ParameterChangeCopyWithImpl<$Res>
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,Object? protocolParamUpdate = null,Object? policyHash = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,Object? protocolParamUpdate = null,Object? policyHash = freezed,Object? lengthType = null,}) {
   return _then(GovAction_ParameterChange(
 prevGovActionId: null == prevGovActionId ? _self.prevGovActionId : prevGovActionId // ignore: cast_nullable_to_non_nullable
 as GovActionId,protocolParamUpdate: null == protocolParamUpdate ? _self.protocolParamUpdate : protocolParamUpdate // ignore: cast_nullable_to_non_nullable
 as ProtocolParamUpdate,policyHash: freezed == policyHash ? _self.policyHash : policyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List?,
+as Uint8List?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -134,15 +167,16 @@ $ProtocolParamUpdateCopyWith<$Res> get protocolParamUpdate {
 
 
 class GovAction_HardForkInitiation extends GovAction {
-  const GovAction_HardForkInitiation({required this.prevGovActionId, required this.protocolVersion}): super._();
+  const GovAction_HardForkInitiation({required this.prevGovActionId, required this.protocolVersion, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  GovActionId prevGovActionId;
  final  ProtocolVersion protocolVersion;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $GovAction_HardForkInitiationCopyWith<GovAction_HardForkInitiation> get copyWith => _$GovAction_HardForkInitiationCopyWithImpl<GovAction_HardForkInitiation>(this, _$identity);
 
@@ -150,16 +184,16 @@ $GovAction_HardForkInitiationCopyWith<GovAction_HardForkInitiation> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_HardForkInitiation&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.protocolVersion, protocolVersion) || other.protocolVersion == protocolVersion));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_HardForkInitiation&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.protocolVersion, protocolVersion) || other.protocolVersion == protocolVersion)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId,protocolVersion);
+int get hashCode => Object.hash(runtimeType,prevGovActionId,protocolVersion,lengthType);
 
 @override
 String toString() {
-  return 'GovAction.hardForkInitiation(prevGovActionId: $prevGovActionId, protocolVersion: $protocolVersion)';
+  return 'GovAction.hardForkInitiation(prevGovActionId: $prevGovActionId, protocolVersion: $protocolVersion, lengthType: $lengthType)';
 }
 
 
@@ -168,9 +202,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $GovAction_HardForkInitiationCopyWith<$Res> implements $GovActionCopyWith<$Res> {
   factory $GovAction_HardForkInitiationCopyWith(GovAction_HardForkInitiation value, $Res Function(GovAction_HardForkInitiation) _then) = _$GovAction_HardForkInitiationCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- GovActionId prevGovActionId, ProtocolVersion protocolVersion
+ GovActionId prevGovActionId, ProtocolVersion protocolVersion, CborLengthType lengthType
 });
 
 
@@ -187,11 +221,12 @@ class _$GovAction_HardForkInitiationCopyWithImpl<$Res>
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,Object? protocolVersion = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,Object? protocolVersion = null,Object? lengthType = null,}) {
   return _then(GovAction_HardForkInitiation(
 prevGovActionId: null == prevGovActionId ? _self.prevGovActionId : prevGovActionId // ignore: cast_nullable_to_non_nullable
 as GovActionId,protocolVersion: null == protocolVersion ? _self.protocolVersion : protocolVersion // ignore: cast_nullable_to_non_nullable
-as ProtocolVersion,
+as ProtocolVersion,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -220,7 +255,7 @@ $ProtocolVersionCopyWith<$Res> get protocolVersion {
 
 
 class GovAction_TreasuryWithdrawals extends GovAction {
-  const GovAction_TreasuryWithdrawals({required final  List<Withdraw> withdrawals, required this.policyHash}): _withdrawals = withdrawals,super._();
+  const GovAction_TreasuryWithdrawals({required final  List<Withdraw> withdrawals, required this.policyHash, this.lengthType = CborLengthType.definite, this.withdrawalsLengthType = CborLengthType.definite}): _withdrawals = withdrawals,super._();
   
 
  final  List<Withdraw> _withdrawals;
@@ -231,10 +266,12 @@ class GovAction_TreasuryWithdrawals extends GovAction {
 }
 
  final  Uint8List? policyHash;
+@override@JsonKey() final  CborLengthType lengthType;
+@JsonKey() final  CborLengthType withdrawalsLengthType;
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $GovAction_TreasuryWithdrawalsCopyWith<GovAction_TreasuryWithdrawals> get copyWith => _$GovAction_TreasuryWithdrawalsCopyWithImpl<GovAction_TreasuryWithdrawals>(this, _$identity);
 
@@ -242,16 +279,16 @@ $GovAction_TreasuryWithdrawalsCopyWith<GovAction_TreasuryWithdrawals> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_TreasuryWithdrawals&&const DeepCollectionEquality().equals(other._withdrawals, _withdrawals)&&const DeepCollectionEquality().equals(other.policyHash, policyHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_TreasuryWithdrawals&&const DeepCollectionEquality().equals(other._withdrawals, _withdrawals)&&const DeepCollectionEquality().equals(other.policyHash, policyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.withdrawalsLengthType, withdrawalsLengthType) || other.withdrawalsLengthType == withdrawalsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_withdrawals),const DeepCollectionEquality().hash(policyHash));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_withdrawals),const DeepCollectionEquality().hash(policyHash),lengthType,withdrawalsLengthType);
 
 @override
 String toString() {
-  return 'GovAction.treasuryWithdrawals(withdrawals: $withdrawals, policyHash: $policyHash)';
+  return 'GovAction.treasuryWithdrawals(withdrawals: $withdrawals, policyHash: $policyHash, lengthType: $lengthType, withdrawalsLengthType: $withdrawalsLengthType)';
 }
 
 
@@ -260,9 +297,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $GovAction_TreasuryWithdrawalsCopyWith<$Res> implements $GovActionCopyWith<$Res> {
   factory $GovAction_TreasuryWithdrawalsCopyWith(GovAction_TreasuryWithdrawals value, $Res Function(GovAction_TreasuryWithdrawals) _then) = _$GovAction_TreasuryWithdrawalsCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- List<Withdraw> withdrawals, Uint8List? policyHash
+ List<Withdraw> withdrawals, Uint8List? policyHash, CborLengthType lengthType, CborLengthType withdrawalsLengthType
 });
 
 
@@ -279,11 +316,13 @@ class _$GovAction_TreasuryWithdrawalsCopyWithImpl<$Res>
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? withdrawals = null,Object? policyHash = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? withdrawals = null,Object? policyHash = freezed,Object? lengthType = null,Object? withdrawalsLengthType = null,}) {
   return _then(GovAction_TreasuryWithdrawals(
 withdrawals: null == withdrawals ? _self._withdrawals : withdrawals // ignore: cast_nullable_to_non_nullable
 as List<Withdraw>,policyHash: freezed == policyHash ? _self.policyHash : policyHash // ignore: cast_nullable_to_non_nullable
-as Uint8List?,
+as Uint8List?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,withdrawalsLengthType: null == withdrawalsLengthType ? _self.withdrawalsLengthType : withdrawalsLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -294,14 +333,15 @@ as Uint8List?,
 
 
 class GovAction_NoConfidence extends GovAction {
-  const GovAction_NoConfidence({required this.prevGovActionId}): super._();
+  const GovAction_NoConfidence({required this.prevGovActionId, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  GovActionId prevGovActionId;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $GovAction_NoConfidenceCopyWith<GovAction_NoConfidence> get copyWith => _$GovAction_NoConfidenceCopyWithImpl<GovAction_NoConfidence>(this, _$identity);
 
@@ -309,16 +349,16 @@ $GovAction_NoConfidenceCopyWith<GovAction_NoConfidence> get copyWith => _$GovAct
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_NoConfidence&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_NoConfidence&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId);
+int get hashCode => Object.hash(runtimeType,prevGovActionId,lengthType);
 
 @override
 String toString() {
-  return 'GovAction.noConfidence(prevGovActionId: $prevGovActionId)';
+  return 'GovAction.noConfidence(prevGovActionId: $prevGovActionId, lengthType: $lengthType)';
 }
 
 
@@ -327,9 +367,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $GovAction_NoConfidenceCopyWith<$Res> implements $GovActionCopyWith<$Res> {
   factory $GovAction_NoConfidenceCopyWith(GovAction_NoConfidence value, $Res Function(GovAction_NoConfidence) _then) = _$GovAction_NoConfidenceCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- GovActionId prevGovActionId
+ GovActionId prevGovActionId, CborLengthType lengthType
 });
 
 
@@ -346,10 +386,11 @@ class _$GovAction_NoConfidenceCopyWithImpl<$Res>
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,Object? lengthType = null,}) {
   return _then(GovAction_NoConfidence(
 prevGovActionId: null == prevGovActionId ? _self.prevGovActionId : prevGovActionId // ignore: cast_nullable_to_non_nullable
-as GovActionId,
+as GovActionId,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -369,7 +410,7 @@ $GovActionIdCopyWith<$Res> get prevGovActionId {
 
 
 class GovAction_UpdateCommittee extends GovAction {
-  const GovAction_UpdateCommittee({required this.prevGovActionId, required final  Set<Credential> membersForRemoval, required final  Map<Credential, int> newMembersAndTerms, required this.quorumThreshold}): _membersForRemoval = membersForRemoval,_newMembersAndTerms = newMembersAndTerms,super._();
+  const GovAction_UpdateCommittee({required this.prevGovActionId, required final  Set<Credential> membersForRemoval, required final  Map<Credential, int> newMembersAndTerms, required this.quorumThreshold, this.lengthType = CborLengthType.definite, this.membersForRemovalLengthType = CborLengthType.definite, final  List<int> membersForRemovalTags = const <int>[], this.newMembersAndTermsLengthType = CborLengthType.definite}): _membersForRemoval = membersForRemoval,_newMembersAndTerms = newMembersAndTerms,_membersForRemovalTags = membersForRemovalTags,super._();
   
 
  final  GovActionId prevGovActionId;
@@ -388,10 +429,20 @@ class GovAction_UpdateCommittee extends GovAction {
 }
 
  final  RationalNumber quorumThreshold;
+@override@JsonKey() final  CborLengthType lengthType;
+@JsonKey() final  CborLengthType membersForRemovalLengthType;
+ final  List<int> _membersForRemovalTags;
+@JsonKey() List<int> get membersForRemovalTags {
+  if (_membersForRemovalTags is EqualUnmodifiableListView) return _membersForRemovalTags;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_membersForRemovalTags);
+}
+
+@JsonKey() final  CborLengthType newMembersAndTermsLengthType;
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $GovAction_UpdateCommitteeCopyWith<GovAction_UpdateCommittee> get copyWith => _$GovAction_UpdateCommitteeCopyWithImpl<GovAction_UpdateCommittee>(this, _$identity);
 
@@ -399,16 +450,16 @@ $GovAction_UpdateCommitteeCopyWith<GovAction_UpdateCommittee> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_UpdateCommittee&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&const DeepCollectionEquality().equals(other._membersForRemoval, _membersForRemoval)&&const DeepCollectionEquality().equals(other._newMembersAndTerms, _newMembersAndTerms)&&(identical(other.quorumThreshold, quorumThreshold) || other.quorumThreshold == quorumThreshold));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_UpdateCommittee&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&const DeepCollectionEquality().equals(other._membersForRemoval, _membersForRemoval)&&const DeepCollectionEquality().equals(other._newMembersAndTerms, _newMembersAndTerms)&&(identical(other.quorumThreshold, quorumThreshold) || other.quorumThreshold == quorumThreshold)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.membersForRemovalLengthType, membersForRemovalLengthType) || other.membersForRemovalLengthType == membersForRemovalLengthType)&&const DeepCollectionEquality().equals(other._membersForRemovalTags, _membersForRemovalTags)&&(identical(other.newMembersAndTermsLengthType, newMembersAndTermsLengthType) || other.newMembersAndTermsLengthType == newMembersAndTermsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId,const DeepCollectionEquality().hash(_membersForRemoval),const DeepCollectionEquality().hash(_newMembersAndTerms),quorumThreshold);
+int get hashCode => Object.hash(runtimeType,prevGovActionId,const DeepCollectionEquality().hash(_membersForRemoval),const DeepCollectionEquality().hash(_newMembersAndTerms),quorumThreshold,lengthType,membersForRemovalLengthType,const DeepCollectionEquality().hash(_membersForRemovalTags),newMembersAndTermsLengthType);
 
 @override
 String toString() {
-  return 'GovAction.updateCommittee(prevGovActionId: $prevGovActionId, membersForRemoval: $membersForRemoval, newMembersAndTerms: $newMembersAndTerms, quorumThreshold: $quorumThreshold)';
+  return 'GovAction.updateCommittee(prevGovActionId: $prevGovActionId, membersForRemoval: $membersForRemoval, newMembersAndTerms: $newMembersAndTerms, quorumThreshold: $quorumThreshold, lengthType: $lengthType, membersForRemovalLengthType: $membersForRemovalLengthType, membersForRemovalTags: $membersForRemovalTags, newMembersAndTermsLengthType: $newMembersAndTermsLengthType)';
 }
 
 
@@ -417,9 +468,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $GovAction_UpdateCommitteeCopyWith<$Res> implements $GovActionCopyWith<$Res> {
   factory $GovAction_UpdateCommitteeCopyWith(GovAction_UpdateCommittee value, $Res Function(GovAction_UpdateCommittee) _then) = _$GovAction_UpdateCommitteeCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- GovActionId prevGovActionId, Set<Credential> membersForRemoval, Map<Credential, int> newMembersAndTerms, RationalNumber quorumThreshold
+ GovActionId prevGovActionId, Set<Credential> membersForRemoval, Map<Credential, int> newMembersAndTerms, RationalNumber quorumThreshold, CborLengthType lengthType, CborLengthType membersForRemovalLengthType, List<int> membersForRemovalTags, CborLengthType newMembersAndTermsLengthType
 });
 
 
@@ -436,13 +487,17 @@ class _$GovAction_UpdateCommitteeCopyWithImpl<$Res>
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,Object? membersForRemoval = null,Object? newMembersAndTerms = null,Object? quorumThreshold = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,Object? membersForRemoval = null,Object? newMembersAndTerms = null,Object? quorumThreshold = null,Object? lengthType = null,Object? membersForRemovalLengthType = null,Object? membersForRemovalTags = null,Object? newMembersAndTermsLengthType = null,}) {
   return _then(GovAction_UpdateCommittee(
 prevGovActionId: null == prevGovActionId ? _self.prevGovActionId : prevGovActionId // ignore: cast_nullable_to_non_nullable
 as GovActionId,membersForRemoval: null == membersForRemoval ? _self._membersForRemoval : membersForRemoval // ignore: cast_nullable_to_non_nullable
 as Set<Credential>,newMembersAndTerms: null == newMembersAndTerms ? _self._newMembersAndTerms : newMembersAndTerms // ignore: cast_nullable_to_non_nullable
 as Map<Credential, int>,quorumThreshold: null == quorumThreshold ? _self.quorumThreshold : quorumThreshold // ignore: cast_nullable_to_non_nullable
-as RationalNumber,
+as RationalNumber,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,membersForRemovalLengthType: null == membersForRemovalLengthType ? _self.membersForRemovalLengthType : membersForRemovalLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,membersForRemovalTags: null == membersForRemovalTags ? _self._membersForRemovalTags : membersForRemovalTags // ignore: cast_nullable_to_non_nullable
+as List<int>,newMembersAndTermsLengthType: null == newMembersAndTermsLengthType ? _self.newMembersAndTermsLengthType : newMembersAndTermsLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -471,15 +526,16 @@ $RationalNumberCopyWith<$Res> get quorumThreshold {
 
 
 class GovAction_NewConstitution extends GovAction {
-  const GovAction_NewConstitution({required this.prevGovActionId, required this.constitution}): super._();
+  const GovAction_NewConstitution({required this.prevGovActionId, required this.constitution, this.lengthType = CborLengthType.definite}): super._();
   
 
  final  GovActionId prevGovActionId;
  final  Constitution constitution;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $GovAction_NewConstitutionCopyWith<GovAction_NewConstitution> get copyWith => _$GovAction_NewConstitutionCopyWithImpl<GovAction_NewConstitution>(this, _$identity);
 
@@ -487,16 +543,16 @@ $GovAction_NewConstitutionCopyWith<GovAction_NewConstitution> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_NewConstitution&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.constitution, constitution) || other.constitution == constitution));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_NewConstitution&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.constitution, constitution) || other.constitution == constitution)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId,constitution);
+int get hashCode => Object.hash(runtimeType,prevGovActionId,constitution,lengthType);
 
 @override
 String toString() {
-  return 'GovAction.newConstitution(prevGovActionId: $prevGovActionId, constitution: $constitution)';
+  return 'GovAction.newConstitution(prevGovActionId: $prevGovActionId, constitution: $constitution, lengthType: $lengthType)';
 }
 
 
@@ -505,9 +561,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $GovAction_NewConstitutionCopyWith<$Res> implements $GovActionCopyWith<$Res> {
   factory $GovAction_NewConstitutionCopyWith(GovAction_NewConstitution value, $Res Function(GovAction_NewConstitution) _then) = _$GovAction_NewConstitutionCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- GovActionId prevGovActionId, Constitution constitution
+ GovActionId prevGovActionId, Constitution constitution, CborLengthType lengthType
 });
 
 
@@ -524,11 +580,12 @@ class _$GovAction_NewConstitutionCopyWithImpl<$Res>
 
 /// Create a copy of GovAction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,Object? constitution = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? prevGovActionId = null,Object? constitution = null,Object? lengthType = null,}) {
   return _then(GovAction_NewConstitution(
 prevGovActionId: null == prevGovActionId ? _self.prevGovActionId : prevGovActionId // ignore: cast_nullable_to_non_nullable
 as GovActionId,constitution: null == constitution ? _self.constitution : constitution // ignore: cast_nullable_to_non_nullable
-as Constitution,
+as Constitution,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -557,32 +614,66 @@ $ConstitutionCopyWith<$Res> get constitution {
 
 
 class GovAction_InfoAction extends GovAction {
-  const GovAction_InfoAction(): super._();
+  const GovAction_InfoAction({this.lengthType = CborLengthType.definite}): super._();
   
 
+@override@JsonKey() final  CborLengthType lengthType;
 
-
+/// Create a copy of GovAction
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GovAction_InfoActionCopyWith<GovAction_InfoAction> get copyWith => _$GovAction_InfoActionCopyWithImpl<GovAction_InfoAction>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_InfoAction);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_InfoAction&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,lengthType);
 
 @override
 String toString() {
-  return 'GovAction.infoAction()';
+  return 'GovAction.infoAction(lengthType: $lengthType)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $GovAction_InfoActionCopyWith<$Res> implements $GovActionCopyWith<$Res> {
+  factory $GovAction_InfoActionCopyWith(GovAction_InfoAction value, $Res Function(GovAction_InfoAction) _then) = _$GovAction_InfoActionCopyWithImpl;
+@override @useResult
+$Res call({
+ CborLengthType lengthType
+});
 
 
+
+
+}
+/// @nodoc
+class _$GovAction_InfoActionCopyWithImpl<$Res>
+    implements $GovAction_InfoActionCopyWith<$Res> {
+  _$GovAction_InfoActionCopyWithImpl(this._self, this._then);
+
+  final GovAction_InfoAction _self;
+  final $Res Function(GovAction_InfoAction) _then;
+
+/// Create a copy of GovAction
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? lengthType = null,}) {
+  return _then(GovAction_InfoAction(
+lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
+  ));
+}
+
+
+}
 
 // dart format on

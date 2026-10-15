@@ -30,22 +30,26 @@ enum CredType {
 sealed class Credential with _$Credential implements CborEncodable {
   const factory Credential(
     CredType type,
-    Uint8List vKeyHash,
-  ) = _Credential;
+    Uint8List vKeyHash, {
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+  }) = _Credential;
 
   const Credential._();
 
   @override
-  CborValue serialize({required bool forJson}) => CborList([
-    forJson ? CborString(type.name) : CborSmallInt(type.intValue),
-    ...forJson
-        ? [
-            CborString(vKeyHash.hexEncode()),
-            CborString("as stake: ${"e1${vKeyHash.hexEncode()}".hexAddressToBech32()}"),
-            CborString("as base: ${"01${vKeyHash.hexEncode()}".hexAddressToBech32()}"),
-          ]
-        : [CborBytes(vKeyHash)],
-  ]);
+  CborValue serialize({required bool forJson}) => CborList(
+    [
+      forJson ? CborString(type.name) : CborSmallInt(type.intValue),
+      ...forJson
+          ? [
+              CborString(vKeyHash.hexEncode()),
+              CborString("as stake: ${"e1${vKeyHash.hexEncode()}".hexAddressToBech32()}"),
+              CborString("as base: ${"01${vKeyHash.hexEncode()}".hexAddressToBech32()}"),
+            ]
+          : [CborBytes(vKeyHash)],
+    ],
+    type: lengthType,
+  );
 
   factory Credential.deserialize(CborValue cList) {
     if (cList is! CborList) {
@@ -65,6 +69,7 @@ sealed class Credential with _$Credential implements CborEncodable {
     final Credential credential = Credential(
       CredType.fromSmallInt(cTypeDi.value),
       cHashDi.bytes.toUint8List(),
+      lengthType: cList.type,
     );
 
     return credential;

@@ -15,6 +15,7 @@ sealed class RequiredSigners with _$RequiredSigners implements CborEncodable {
   const factory RequiredSigners({
     required List<Uint8List> signersBytes,
     required List<int> cborTags, // [258] tag may be sent in Conway era | passed for ledger serialization
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _RequiredSigner;
   const RequiredSigners._();
 
@@ -25,7 +26,7 @@ sealed class RequiredSigners with _$RequiredSigners implements CborEncodable {
       if (forJson) CborString("tags: [${cborTags.join(", ")}]"),
     ],
     tags: cborTags,
-    type: CborLengthType.definite,
+    type: lengthType,
   );
 
   static RequiredSigners deserialize(CborValue cList) {
@@ -45,6 +46,7 @@ sealed class RequiredSigners with _$RequiredSigners implements CborEncodable {
         return signer.bytes.toUint8List();
       }).toList(),
       cborTags: cList.tags,
+      lengthType: cList.type,
     );
   }
 }

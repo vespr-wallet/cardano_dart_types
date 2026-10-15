@@ -14,6 +14,7 @@ sealed class Constitution with _$Constitution implements CborEncodable {
   const factory Constitution({
     required Anchor anchor,
     required String? scriptHash,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _Constitution;
   const Constitution._();
 
@@ -40,6 +41,7 @@ sealed class Constitution with _$Constitution implements CborEncodable {
           "Constitution deserialization failed. Invalid script hash type ${scriptHash.runtimeType}",
         ),
       },
+      lengthType: cValue.type,
     );
   }
 
@@ -47,13 +49,16 @@ sealed class Constitution with _$Constitution implements CborEncodable {
   CborValue serialize({required bool forJson}) {
     final scriptHash = this.scriptHash;
 
-    return CborList([
-      anchor.serialize(forJson: forJson),
-      scriptHash == null
-          ? const CborNull()
-          : forJson
-          ? CborString(scriptHash)
-          : CborBytes(scriptHash.hexDecode()),
-    ]);
+    return CborList(
+      [
+        anchor.serialize(forJson: forJson),
+        scriptHash == null
+            ? const CborNull()
+            : forJson
+            ? CborString(scriptHash)
+            : CborBytes(scriptHash.hexDecode()),
+      ],
+      type: lengthType,
+    );
   }
 }

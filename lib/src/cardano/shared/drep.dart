@@ -14,20 +14,20 @@ sealed class Drep with _$Drep implements CborEncodable {
 
   factory Drep.addrKeyHash({
     required String hash,
-    required CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Drep_AddrKeyHash;
 
   factory Drep.scriptHash({
     required String hash,
-    required CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Drep_ScriptHash;
 
   factory Drep.abstain({
-    required CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Drep_Abstain;
 
   factory Drep.noConfidence({
-    required CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Drep_NoConfidence;
 
   factory Drep.deserialize(CborValue value) {

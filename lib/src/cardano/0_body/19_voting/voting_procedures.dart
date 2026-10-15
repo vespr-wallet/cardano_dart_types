@@ -14,7 +14,9 @@ part "voting_procedures.freezed.dart";
 @freezed
 sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
   const factory VotingProcedures({
-    required Map<Voter, Map<GovActionId, VotingProcedure>> voting,
+    // each voter's votes with the cbor length type of that inner map
+    required Map<Voter, (Map<GovActionId, VotingProcedure>, CborLengthType)> voting,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _VotingProcedures;
   const VotingProcedures._();
 
@@ -25,18 +27,13 @@ sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
       );
     }
 
-    final voting = Map.fromEntries(
-      cValue.entries.map(
-        (e) {
-          final voter = Voter.deserialize(e.key);
-          final votingProcedure = _deserializeVotingProcedureMap(e.value);
-
-          return MapEntry(voter, votingProcedure);
-        },
-      ),
+    return VotingProcedures(
+      voting: {
+        for (final e in cValue.entries)
+          Voter.deserialize(e.key): (_deserializeVotingProcedureMap(e.value), (e.value as CborMap).type),
+      },
+      lengthType: cValue.type,
     );
-
-    return VotingProcedures(voting: voting);
   }
 
   @override
@@ -44,14 +41,15 @@ sealed class VotingProcedures with _$VotingProcedures implements CborEncodable {
     voting.entries.map(
       (e) {
         final voter = e.key;
-        final votingProcedureMap = e.value;
+        final (votingProcedureMap, votesLengthType) = e.value;
 
         return MapEntry(
           voter.serialize(forJson: forJson),
-          votingProcedureMap.serialize(forJson: forJson),
+          votingProcedureMap.serialize(forJson: forJson, lengthType: votesLengthType),
         );
       },
     ),
+    type: lengthType,
   );
 }
 
@@ -75,7 +73,7 @@ Map<GovActionId, VotingProcedure> _deserializeVotingProcedureMap(CborValue cMap)
 }
 
 extension VotingProcedureMapX on Map<GovActionId, VotingProcedure> {
-  CborMap serialize({required bool forJson}) {
+  CborMap serialize({required bool forJson, CborLengthType lengthType = CborLengthType.definite}) {
     return CborMap.fromEntries(
       entries.map(
         (e) {
@@ -88,6 +86,7 @@ extension VotingProcedureMapX on Map<GovActionId, VotingProcedure> {
           );
         },
       ),
+      type: lengthType,
     );
   }
 }

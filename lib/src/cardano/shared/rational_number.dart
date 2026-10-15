@@ -11,6 +11,9 @@ sealed class RationalNumber with _$RationalNumber implements CborEncodable {
   factory RationalNumber({
     required BigInt numerator,
     required BigInt denominator,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+    // tag 30 (rational number) by default; empty when parsed from an untagged [numerator, denominator] list
+    @Default([CborTag.rationalNumber]) List<int> cborTags,
   }) = _RationalNumber;
   RationalNumber._();
 
@@ -24,6 +27,8 @@ sealed class RationalNumber with _$RationalNumber implements CborEncodable {
       return RationalNumber(
         numerator: (cValue[0] as CborInt).toBigInt(),
         denominator: (cValue[1] as CborInt).toBigInt(),
+        lengthType: cValue.type,
+        cborTags: cValue.tags,
       );
     }
 
@@ -41,6 +46,12 @@ sealed class RationalNumber with _$RationalNumber implements CborEncodable {
   @override
   CborValue serialize({required bool forJson}) =>
       forJson //
-      ? CborString(toString())
-      : CborRationalNumber(numerator: CborInt(numerator), denominator: CborInt(denominator));
+      // explicit string (not toString()) so the JSON shape doesn't change with the encoding detail fields
+      ? CborString("RationalNumber(numerator: $numerator, denominator: $denominator)")
+      : CborRationalNumber(
+          numerator: CborInt(numerator),
+          denominator: CborInt(denominator),
+          tags: cborTags,
+          type: lengthType,
+        );
 }

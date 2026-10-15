@@ -14,7 +14,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CardanoTransactionInputs {
 
- List<CardanoTransactionInput> get data; List<int> get cborTags;
+ List<CardanoTransactionInput> get data; List<int> get cborTags;// [258] tag may be sent in Conway era | passed for ledger serialization
+ CborLengthType get lengthType;
 /// Create a copy of CardanoTransactionInputs
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +26,16 @@ $CardanoTransactionInputsCopyWith<CardanoTransactionInputs> get copyWith => _$Ca
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionInputs&&const DeepCollectionEquality().equals(other.data, data)&&const DeepCollectionEquality().equals(other.cborTags, cborTags));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionInputs&&const DeepCollectionEquality().equals(other.data, data)&&const DeepCollectionEquality().equals(other.cborTags, cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data),const DeepCollectionEquality().hash(cborTags));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data),const DeepCollectionEquality().hash(cborTags),lengthType);
 
 @override
 String toString() {
-  return 'CardanoTransactionInputs(data: $data, cborTags: $cborTags)';
+  return 'CardanoTransactionInputs(data: $data, cborTags: $cborTags, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +46,7 @@ abstract mixin class $CardanoTransactionInputsCopyWith<$Res>  {
   factory $CardanoTransactionInputsCopyWith(CardanoTransactionInputs value, $Res Function(CardanoTransactionInputs) _then) = _$CardanoTransactionInputsCopyWithImpl;
 @useResult
 $Res call({
- List<CardanoTransactionInput> data, List<int> cborTags
+ List<CardanoTransactionInput> data, List<int> cborTags, CborLengthType lengthType
 });
 
 
@@ -62,11 +63,12 @@ class _$CardanoTransactionInputsCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionInputs
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? data = null,Object? cborTags = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? data = null,Object? cborTags = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as List<CardanoTransactionInput>,cborTags: null == cborTags ? _self.cborTags : cborTags // ignore: cast_nullable_to_non_nullable
-as List<int>,
+as List<int>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -78,7 +80,7 @@ as List<int>,
 
 
 class _CardanoTransactionInputs extends CardanoTransactionInputs {
-  const _CardanoTransactionInputs({required final  List<CardanoTransactionInput> data, required final  List<int> cborTags}): _data = data,_cborTags = cborTags,super._();
+  const _CardanoTransactionInputs({required final  List<CardanoTransactionInput> data, required final  List<int> cborTags, this.lengthType = CborLengthType.definite}): _data = data,_cborTags = cborTags,super._();
   
 
  final  List<CardanoTransactionInput> _data;
@@ -95,6 +97,8 @@ class _CardanoTransactionInputs extends CardanoTransactionInputs {
   return EqualUnmodifiableListView(_cborTags);
 }
 
+// [258] tag may be sent in Conway era | passed for ledger serialization
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of CardanoTransactionInputs
 /// with the given fields replaced by the non-null parameter values.
@@ -106,16 +110,16 @@ _$CardanoTransactionInputsCopyWith<_CardanoTransactionInputs> get copyWith => __
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransactionInputs&&const DeepCollectionEquality().equals(other._data, _data)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransactionInputs&&const DeepCollectionEquality().equals(other._data, _data)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_cborTags));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_cborTags),lengthType);
 
 @override
 String toString() {
-  return 'CardanoTransactionInputs(data: $data, cborTags: $cborTags)';
+  return 'CardanoTransactionInputs(data: $data, cborTags: $cborTags, lengthType: $lengthType)';
 }
 
 
@@ -126,7 +130,7 @@ abstract mixin class _$CardanoTransactionInputsCopyWith<$Res> implements $Cardan
   factory _$CardanoTransactionInputsCopyWith(_CardanoTransactionInputs value, $Res Function(_CardanoTransactionInputs) _then) = __$CardanoTransactionInputsCopyWithImpl;
 @override @useResult
 $Res call({
- List<CardanoTransactionInput> data, List<int> cborTags
+ List<CardanoTransactionInput> data, List<int> cborTags, CborLengthType lengthType
 });
 
 
@@ -143,11 +147,12 @@ class __$CardanoTransactionInputsCopyWithImpl<$Res>
 
 /// Create a copy of CardanoTransactionInputs
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? data = null,Object? cborTags = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? data = null,Object? cborTags = null,Object? lengthType = null,}) {
   return _then(_CardanoTransactionInputs(
 data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
 as List<CardanoTransactionInput>,cborTags: null == cborTags ? _self._cborTags : cborTags // ignore: cast_nullable_to_non_nullable
-as List<int>,
+as List<int>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

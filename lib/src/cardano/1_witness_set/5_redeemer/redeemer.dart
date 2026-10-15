@@ -16,6 +16,7 @@ sealed class Redeemer with _$Redeemer {
     required int index,
     required PlutusData plutusData,
     required ExUnits exUnits,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = Redeemer_PreConway;
 
   const factory Redeemer.conway({
@@ -23,6 +24,8 @@ sealed class Redeemer with _$Redeemer {
     required int index,
     required PlutusData plutusData,
     required ExUnits exUnits,
+    @Default(CborLengthType.definite) CborLengthType keyLengthType,
+    @Default(CborLengthType.definite) CborLengthType valueLengthType,
   }) = Redeemer_Conway;
 
   factory Redeemer.deserializePreConway(CborValue cborValue) {
@@ -38,6 +41,7 @@ sealed class Redeemer with _$Redeemer {
       index: (cborValue[1] as CborSmallInt).toInt(),
       plutusData: PlutusData.deserialize(cborValue[2]),
       exUnits: ExUnits.deserialize(cborValue[3]),
+      lengthType: cborValue.type,
     );
   }
 
@@ -60,26 +64,46 @@ sealed class Redeemer with _$Redeemer {
       index: (redeemerKey[1] as CborSmallInt).toInt(),
       plutusData: PlutusData.deserialize(redeemerValue[0]),
       exUnits: ExUnits.deserialize(redeemerValue[1]),
+      keyLengthType: redeemerKey.type,
+      valueLengthType: redeemerValue.type,
     );
   }
 
-  CborValue serializePreConway({required bool forJson}) => CborList.of([
-    forJson ? CborString(redeemerTag.name) : CborSmallInt(redeemerTag.intValue),
-    CborSmallInt(index),
-    plutusData.serialize(forJson: forJson),
-    exUnits.serialize(forJson: forJson),
-  ]);
-
-  MapEntry<CborValue, CborValue> serializeConway({required bool forJson}) => MapEntry(
-    CborList.of([
+  CborValue serializePreConway({required bool forJson}) => CborList.of(
+    [
       forJson ? CborString(redeemerTag.name) : CborSmallInt(redeemerTag.intValue),
       CborSmallInt(index),
-    ]),
-    CborList.of([
       plutusData.serialize(forJson: forJson),
       exUnits.serialize(forJson: forJson),
-    ]),
+    ],
+    type: switch (this) {
+      Redeemer_PreConway(:final lengthType) => lengthType,
+      Redeemer_Conway() => CborLengthType.definite,
+    },
   );
+
+  MapEntry<CborValue, CborValue> serializeConway({required bool forJson}) {
+    final (keyLengthType, valueLengthType) = switch (this) {
+      Redeemer_Conway(:final keyLengthType, :final valueLengthType) => (keyLengthType, valueLengthType),
+      Redeemer_PreConway() => (CborLengthType.definite, CborLengthType.definite),
+    };
+    return MapEntry(
+      CborList.of(
+        [
+          forJson ? CborString(redeemerTag.name) : CborSmallInt(redeemerTag.intValue),
+          CborSmallInt(index),
+        ],
+        type: keyLengthType,
+      ),
+      CborList.of(
+        [
+          plutusData.serialize(forJson: forJson),
+          exUnits.serialize(forJson: forJson),
+        ],
+        type: valueLengthType,
+      ),
+    );
+  }
 }
 
 enum RedeemerTag {

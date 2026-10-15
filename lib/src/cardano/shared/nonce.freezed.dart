@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Nonce {
 
- Uint8List? get nonceHash;
+ Uint8List? get nonceHash; CborLengthType get lengthType;
 /// Create a copy of Nonce
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $NonceCopyWith<Nonce> get copyWith => _$NonceCopyWithImpl<Nonce>(this as Nonce, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Nonce&&const DeepCollectionEquality().equals(other.nonceHash, nonceHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Nonce&&const DeepCollectionEquality().equals(other.nonceHash, nonceHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(nonceHash));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(nonceHash),lengthType);
 
 @override
 String toString() {
-  return 'Nonce(nonceHash: $nonceHash)';
+  return 'Nonce(nonceHash: $nonceHash, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $NonceCopyWith<$Res>  {
   factory $NonceCopyWith(Nonce value, $Res Function(Nonce) _then) = _$NonceCopyWithImpl;
 @useResult
 $Res call({
- Uint8List? nonceHash
+ Uint8List? nonceHash, CborLengthType lengthType
 });
 
 
@@ -62,10 +62,11 @@ class _$NonceCopyWithImpl<$Res>
 
 /// Create a copy of Nonce
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? nonceHash = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? nonceHash = freezed,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 nonceHash: freezed == nonceHash ? _self.nonceHash : nonceHash // ignore: cast_nullable_to_non_nullable
-as Uint8List?,
+as Uint8List?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -77,10 +78,11 @@ as Uint8List?,
 
 
 class _Nonce extends Nonce {
-  const _Nonce({required this.nonceHash}): super._();
+  const _Nonce({required this.nonceHash, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  Uint8List? nonceHash;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of Nonce
 /// with the given fields replaced by the non-null parameter values.
@@ -92,16 +94,16 @@ _$NonceCopyWith<_Nonce> get copyWith => __$NonceCopyWithImpl<_Nonce>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Nonce&&const DeepCollectionEquality().equals(other.nonceHash, nonceHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Nonce&&const DeepCollectionEquality().equals(other.nonceHash, nonceHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(nonceHash));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(nonceHash),lengthType);
 
 @override
 String toString() {
-  return 'Nonce(nonceHash: $nonceHash)';
+  return 'Nonce(nonceHash: $nonceHash, lengthType: $lengthType)';
 }
 
 
@@ -112,7 +114,7 @@ abstract mixin class _$NonceCopyWith<$Res> implements $NonceCopyWith<$Res> {
   factory _$NonceCopyWith(_Nonce value, $Res Function(_Nonce) _then) = __$NonceCopyWithImpl;
 @override @useResult
 $Res call({
- Uint8List? nonceHash
+ Uint8List? nonceHash, CborLengthType lengthType
 });
 
 
@@ -129,10 +131,11 @@ class __$NonceCopyWithImpl<$Res>
 
 /// Create a copy of Nonce
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? nonceHash = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? nonceHash = freezed,Object? lengthType = null,}) {
   return _then(_Nonce(
 nonceHash: freezed == nonceHash ? _self.nonceHash : nonceHash // ignore: cast_nullable_to_non_nullable
-as Uint8List?,
+as Uint8List?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

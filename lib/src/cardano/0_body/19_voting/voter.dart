@@ -18,14 +18,18 @@ sealed class Voter with _$Voter implements CborEncodable {
   const factory Voter({
     required VoterType voterType,
     required Uint8List vKeyHash,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _Voter;
   const Voter._();
 
   @override
-  CborValue serialize({required bool forJson}) => CborList([
-    voterType.serialize(forJson: forJson),
-    forJson ? CborString(vKeyHash.hexEncode()) : CborBytes(vKeyHash),
-  ]);
+  CborValue serialize({required bool forJson}) => CborList(
+    [
+      voterType.serialize(forJson: forJson),
+      forJson ? CborString(vKeyHash.hexEncode()) : CborBytes(vKeyHash),
+    ],
+    type: lengthType,
+  );
 
   factory Voter.deserialize(CborValue cList) {
     if (cList is! CborList) {
@@ -48,6 +52,7 @@ sealed class Voter with _$Voter implements CborEncodable {
     return Voter(
       voterType: VoterType.deserialize(cList[0]),
       vKeyHash: vKeyHash.bytes.toUint8List(),
+      lengthType: cList.type,
     );
   }
 }

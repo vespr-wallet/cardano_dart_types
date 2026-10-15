@@ -12,18 +12,39 @@ part "native_script.freezed.dart";
 sealed class NativeScript extends Script with _$NativeScript {
   const NativeScript._() : super();
 
-  const factory NativeScript.pubKey({required Uint8List blob}) = NativeScript_PubKey;
+  const factory NativeScript.pubKey({
+    required Uint8List blob,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+  }) = NativeScript_PubKey;
 
-  const factory NativeScript.all({required List<NativeScript> scripts}) = NativeScript_All;
+  const factory NativeScript.all({
+    required List<NativeScript> scripts,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType scriptsLengthType,
+  }) = NativeScript_All;
 
-  const factory NativeScript.any({required List<NativeScript> scripts}) = NativeScript_Any;
+  const factory NativeScript.any({
+    required List<NativeScript> scripts,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType scriptsLengthType,
+  }) = NativeScript_Any;
 
-  const factory NativeScript.atLeast({required int required, required List<NativeScript> scripts}) =
-      NativeScript_AtLeast;
+  const factory NativeScript.atLeast({
+    required int required,
+    required List<NativeScript> scripts,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType scriptsLengthType,
+  }) = NativeScript_AtLeast;
 
-  const factory NativeScript.requireTimeAfter({required BigInt slot}) = NativeScript_RequireTimeAfter;
+  const factory NativeScript.requireTimeAfter({
+    required BigInt slot,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+  }) = NativeScript_RequireTimeAfter;
 
-  const factory NativeScript.requireTimeBefore({required BigInt slot}) = NativeScript_RequireTimeBefore;
+  const factory NativeScript.requireTimeBefore({
+    required BigInt slot,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+  }) = NativeScript_RequireTimeBefore;
 
   int get selector => switch (this) {
     NativeScript_PubKey() => 0,
@@ -45,45 +66,44 @@ sealed class NativeScript extends Script with _$NativeScript {
         forJson ? CborString(runtimeType.toString()) : CborSmallInt(selector),
         ...switch (obj) {
           NativeScript_PubKey(blob: final blob) => [encoder(blob)],
-          NativeScript_All(scripts: final scripts) => [CborList.of(scripts.map((e) => e.serialize(forJson: forJson)))],
-          NativeScript_Any(scripts: final scripts) => [CborList.of(scripts.map((e) => e.serialize(forJson: forJson)))],
-          NativeScript_AtLeast(scripts: final scripts, required: final required) => [
+          NativeScript_All(:final scripts, :final scriptsLengthType) ||
+          NativeScript_Any(:final scripts, :final scriptsLengthType) => [
+            CborList.of(scripts.map((e) => e.serialize(forJson: forJson)), type: scriptsLengthType),
+          ],
+          NativeScript_AtLeast(:final scripts, :final required, :final scriptsLengthType) => [
             CborSmallInt(required),
-            CborList.of(scripts.map((e) => e.serialize(forJson: forJson))),
+            CborList.of(scripts.map((e) => e.serialize(forJson: forJson)), type: scriptsLengthType),
           ],
           NativeScript_RequireTimeAfter(slot: final slot) => [CborInt(slot)],
           NativeScript_RequireTimeBefore(slot: final slot) => [CborInt(slot)],
         },
       ],
+      type: lengthType,
     );
   }
 
   factory NativeScript.deserialize({required CborList cList}) {
     final selector = (cList[0] as CborSmallInt).value;
 
+    final lengthType = cList.type;
+    List<NativeScript> scripts(int index) =>
+        (cList[index] as CborList) //
+            .map((e) => NativeScript.deserialize(cList: e as CborList))
+            .toList(growable: false);
+    CborLengthType scriptsLengthType(int index) => (cList[index] as CborList).type;
+
     return switch (selector) {
-      0 => NativeScript.pubKey(blob: (cList[1] as CborBytes).bytes.toUint8List()),
-      1 => NativeScript.all(
-        scripts:
-            (cList[1] as CborList) //
-                .map((e) => NativeScript.deserialize(cList: e as CborList))
-                .toList(growable: false),
-      ),
-      2 => NativeScript.any(
-        scripts:
-            (cList[1] as CborList) //
-                .map((e) => NativeScript.deserialize(cList: e as CborList))
-                .toList(growable: false),
-      ),
+      0 => NativeScript.pubKey(blob: (cList[1] as CborBytes).bytes.toUint8List(), lengthType: lengthType),
+      1 => NativeScript.all(scripts: scripts(1), lengthType: lengthType, scriptsLengthType: scriptsLengthType(1)),
+      2 => NativeScript.any(scripts: scripts(1), lengthType: lengthType, scriptsLengthType: scriptsLengthType(1)),
       3 => NativeScript.atLeast(
         required: (cList[1] as CborSmallInt).value,
-        scripts:
-            (cList[2] as CborList) //
-                .map((e) => NativeScript.deserialize(cList: e as CborList))
-                .toList(growable: false),
+        scripts: scripts(2),
+        lengthType: lengthType,
+        scriptsLengthType: scriptsLengthType(2),
       ),
-      4 => NativeScript.requireTimeAfter(slot: (cList[1] as CborInt).toBigInt()),
-      5 => NativeScript.requireTimeBefore(slot: (cList[1] as CborInt).toBigInt()),
+      4 => NativeScript.requireTimeAfter(slot: (cList[1] as CborInt).toBigInt(), lengthType: lengthType),
+      5 => NativeScript.requireTimeBefore(slot: (cList[1] as CborInt).toBigInt(), lengthType: lengthType),
       _ => throw NativeScriptParseException("Unknown NativeScript selector: $selector"),
     };
   }

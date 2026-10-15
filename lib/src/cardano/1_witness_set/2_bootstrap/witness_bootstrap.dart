@@ -16,6 +16,7 @@ sealed class WitnessBootstrap with _$WitnessBootstrap implements CborEncodable {
     required Uint8List signature,
     required Uint8List chainCode,
     required Uint8List attributes,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _WitnessBootstrap;
   const WitnessBootstrap._();
 
@@ -32,14 +33,18 @@ sealed class WitnessBootstrap with _$WitnessBootstrap implements CborEncodable {
       signature: (cborValue[1] as CborBytes).bytes.toUint8List(),
       chainCode: (cborValue[2] as CborBytes).bytes.toUint8List(),
       attributes: (cborValue[3] as CborBytes).bytes.toUint8List(),
+      lengthType: cborValue.type,
     );
   }
 
   @override
-  CborValue serialize({required bool forJson}) => CborList.of([
-    publicKey.serializeCbor(forJson: forJson),
-    signature.serializeCbor(forJson: forJson),
-    chainCode.serializeCbor(forJson: forJson),
-    attributes.serializeCbor(forJson: forJson),
-  ]);
+  CborValue serialize({required bool forJson}) => CborList.of(
+    [
+      publicKey.serializeCbor(forJson: forJson),
+      signature.serializeCbor(forJson: forJson),
+      chainCode.serializeCbor(forJson: forJson),
+      attributes.serializeCbor(forJson: forJson),
+    ],
+    type: lengthType,
+  );
 }

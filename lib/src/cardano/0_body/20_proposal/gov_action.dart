@@ -25,23 +25,28 @@ sealed class GovAction with _$GovAction implements CborEncodable {
     required GovActionId prevGovActionId,
     required ProtocolParamUpdate protocolParamUpdate,
     required Uint8List? policyHash,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = GovAction_ParameterChange;
 
   // 1
   const factory GovAction.hardForkInitiation({
     required GovActionId prevGovActionId,
     required ProtocolVersion protocolVersion,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = GovAction_HardForkInitiation;
 
   // 2
   const factory GovAction.treasuryWithdrawals({
     required List<Withdraw> withdrawals,
     required Uint8List? policyHash,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType withdrawalsLengthType,
   }) = GovAction_TreasuryWithdrawals;
 
   // 3
   const factory GovAction.noConfidence({
     required GovActionId prevGovActionId,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = GovAction_NoConfidence;
 
   // 4
@@ -50,16 +55,23 @@ sealed class GovAction with _$GovAction implements CborEncodable {
     required Set<Credential> membersForRemoval,
     required Map<Credential, int> newMembersAndTerms,
     required RationalNumber quorumThreshold,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+    @Default(CborLengthType.definite) CborLengthType membersForRemovalLengthType,
+    @Default(<int>[]) List<int> membersForRemovalTags,
+    @Default(CborLengthType.definite) CborLengthType newMembersAndTermsLengthType,
   }) = GovAction_UpdateCommittee;
 
   // 5
   const factory GovAction.newConstitution({
     required GovActionId prevGovActionId,
     required Constitution constitution,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = GovAction_NewConstitution;
 
   // 6
-  const factory GovAction.infoAction() = GovAction_InfoAction;
+  const factory GovAction.infoAction({
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+  }) = GovAction_InfoAction;
 
   factory GovAction.deserialize(CborValue cValue) {
     if (cValue is! CborList) {
@@ -85,6 +97,7 @@ sealed class GovAction with _$GovAction implements CborEncodable {
           prevGovActionId: GovActionId.deserialize(cValue[1]),
           protocolParamUpdate: ProtocolParamUpdate.deserialize(cValue[2]),
           policyHash: _parsePolicyHash(cValue[3]),
+          lengthType: cValue.type,
         );
       case 1:
         if (cValue.length > 3) {
@@ -95,6 +108,7 @@ sealed class GovAction with _$GovAction implements CborEncodable {
         return GovAction.hardForkInitiation(
           prevGovActionId: GovActionId.deserialize(cValue[1]),
           protocolVersion: ProtocolVersion.deserialize(cValue[2]),
+          lengthType: cValue.type,
         );
       case 2:
         if (cValue.length > 3) {
@@ -114,6 +128,8 @@ sealed class GovAction with _$GovAction implements CborEncodable {
               .map((e) => Withdraw.deserialize(stakeAddress: e.key as CborBytes, coin: e.value as CborInt))
               .toList(),
           policyHash: _parsePolicyHash(cValue[2]),
+          lengthType: cValue.type,
+          withdrawalsLengthType: withdrawals.type,
         );
       case 3:
         if (cValue.length > 2) {
@@ -123,6 +139,7 @@ sealed class GovAction with _$GovAction implements CborEncodable {
         }
         return GovAction.noConfidence(
           prevGovActionId: GovActionId.deserialize(cValue[1]),
+          lengthType: cValue.type,
         );
       case 4:
         if (cValue.length > 5) {
@@ -154,6 +171,10 @@ sealed class GovAction with _$GovAction implements CborEncodable {
             ),
           ),
           quorumThreshold: RationalNumber.deserialize(cValue[4]),
+          lengthType: cValue.type,
+          membersForRemovalLengthType: membersForRemoval.type,
+          membersForRemovalTags: membersForRemoval.tags,
+          newMembersAndTermsLengthType: newMembersAndTerms.type,
         );
       case 5:
         if (cValue.length > 3) {
@@ -164,9 +185,10 @@ sealed class GovAction with _$GovAction implements CborEncodable {
         return GovAction.newConstitution(
           prevGovActionId: GovActionId.deserialize(cValue[1]),
           constitution: Constitution.deserialize(cValue[2]),
+          lengthType: cValue.type,
         );
       case 6:
-        return const GovAction.infoAction();
+        return GovAction.infoAction(lengthType: cValue.type);
       default:
         throw Exception(
           "GovAction deserialization failed. Invalid GovAction type ${actionType.toInt()}",
@@ -204,81 +226,107 @@ Uint8List? _parsePolicyHash(CborValue cValue) {
 extension _ParameterChangeX on GovAction_ParameterChange {
   CborValue serializeAction({required bool forJson}) {
     final policyHash = this.policyHash;
-    return CborList([
-      forJson ? CborString("ParameterChange") : const CborSmallInt(0),
-      prevGovActionId.serialize(forJson: forJson),
-      protocolParamUpdate.serialize(forJson: forJson),
-      policyHash == null
-          ? const CborNull()
-          : forJson
-          ? CborString(policyHash.hexEncode())
-          : CborBytes(policyHash),
-    ]);
+    return CborList(
+      [
+        forJson ? CborString("ParameterChange") : const CborSmallInt(0),
+        prevGovActionId.serialize(forJson: forJson),
+        protocolParamUpdate.serialize(forJson: forJson),
+        policyHash == null
+            ? const CborNull()
+            : forJson
+            ? CborString(policyHash.hexEncode())
+            : CborBytes(policyHash),
+      ],
+      type: lengthType,
+    );
   }
 }
 
 extension _HardForkInitiationX on GovAction_HardForkInitiation {
   CborValue serializeAction({required bool forJson}) {
-    return CborList([
-      forJson ? CborString("HardForkInitiation") : const CborSmallInt(1),
-      prevGovActionId.serialize(forJson: forJson),
-      protocolVersion.serialize(forJson: forJson),
-    ]);
+    return CborList(
+      [
+        forJson ? CborString("HardForkInitiation") : const CborSmallInt(1),
+        prevGovActionId.serialize(forJson: forJson),
+        protocolVersion.serialize(forJson: forJson),
+      ],
+      type: lengthType,
+    );
   }
 }
 
 extension _TreasuryWithdrawalsX on GovAction_TreasuryWithdrawals {
   CborValue serializeAction({required bool forJson}) {
     final policyHash = this.policyHash;
-    return CborList([
-      forJson ? CborString("TreasuryWithdrawals") : const CborSmallInt(2),
-      CborMap.fromEntries(withdrawals.map((withdraw) => withdraw.serializeEntry(forJson: forJson))),
-      policyHash == null
-          ? const CborNull()
-          : forJson
-          ? CborString(policyHash.hexEncode())
-          : CborBytes(policyHash),
-    ]);
+    return CborList(
+      [
+        forJson ? CborString("TreasuryWithdrawals") : const CborSmallInt(2),
+        withdrawals.serialize(forJson: forJson, lengthType: withdrawalsLengthType),
+        policyHash == null
+            ? const CborNull()
+            : forJson
+            ? CborString(policyHash.hexEncode())
+            : CborBytes(policyHash),
+      ],
+      type: lengthType,
+    );
   }
 }
 
 extension _NoConfidenceX on GovAction_NoConfidence {
   CborValue serializeAction({required bool forJson}) {
-    return CborList([
-      forJson ? CborString("NoConfidence") : const CborSmallInt(3),
-      prevGovActionId.serialize(forJson: forJson),
-    ]);
+    return CborList(
+      [
+        forJson ? CborString("NoConfidence") : const CborSmallInt(3),
+        prevGovActionId.serialize(forJson: forJson),
+      ],
+      type: lengthType,
+    );
   }
 }
 
 extension _UpdateCommitteeX on GovAction_UpdateCommittee {
   CborValue serializeAction({required bool forJson}) {
-    return CborList([
-      forJson ? CborString("UpdateCommittee") : const CborSmallInt(4),
-      prevGovActionId.serialize(forJson: forJson),
-      CborList(membersForRemoval.map((member) => member.serialize(forJson: forJson)).toList()),
-      CborMap.fromEntries(
-        newMembersAndTerms.entries.map((e) => MapEntry(e.key.serialize(forJson: forJson), CborSmallInt(e.value))),
-      ),
-      quorumThreshold.serialize(forJson: forJson),
-    ]);
+    return CborList(
+      [
+        forJson ? CborString("UpdateCommittee") : const CborSmallInt(4),
+        prevGovActionId.serialize(forJson: forJson),
+        CborList(
+          membersForRemoval.map((member) => member.serialize(forJson: forJson)).toList(),
+          type: membersForRemovalLengthType,
+          tags: forJson ? const [] : membersForRemovalTags,
+        ),
+        CborMap.fromEntries(
+          newMembersAndTerms.entries.map((e) => MapEntry(e.key.serialize(forJson: forJson), CborSmallInt(e.value))),
+          type: newMembersAndTermsLengthType,
+        ),
+        quorumThreshold.serialize(forJson: forJson),
+      ],
+      type: lengthType,
+    );
   }
 }
 
 extension _NewConstitutionX on GovAction_NewConstitution {
   CborValue serializeAction({required bool forJson}) {
-    return CborList([
-      forJson ? CborString("NewConstitution") : const CborSmallInt(5),
-      prevGovActionId.serialize(forJson: forJson),
-      constitution.serialize(forJson: forJson),
-    ]);
+    return CborList(
+      [
+        forJson ? CborString("NewConstitution") : const CborSmallInt(5),
+        prevGovActionId.serialize(forJson: forJson),
+        constitution.serialize(forJson: forJson),
+      ],
+      type: lengthType,
+    );
   }
 }
 
 extension _InfoActionX on GovAction_InfoAction {
   CborValue serializeAction({required bool forJson}) {
-    return CborList([
-      forJson ? CborString("InfoAction") : const CborSmallInt(6),
-    ]);
+    return CborList(
+      [
+        forJson ? CborString("InfoAction") : const CborSmallInt(6),
+      ],
+      type: lengthType,
+    );
   }
 }

@@ -14,7 +14,7 @@ sealed class PoolMetadata with _$PoolMetadata implements CborEncodable {
   factory PoolMetadata({
     required String metadataUrl,
     required Uint8List metadataHash,
-    required CborLengthType cborLengthType,
+    @Default(CborLengthType.definite) CborLengthType cborLengthType,
   }) = _PoolMetadata;
   PoolMetadata._();
 

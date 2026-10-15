@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GovActionId {
 
- Lazy<String> get bech32; String get transactionId; int get govActionIndex;
+ Lazy<String> get bech32; String get transactionId; int get govActionIndex; CborLengthType get lengthType;
 /// Create a copy of GovActionId
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $GovActionIdCopyWith<GovActionId> get copyWith => _$GovActionIdCopyWithImpl<GovA
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovActionId&&(identical(other.bech32, bech32) || other.bech32 == bech32)&&(identical(other.transactionId, transactionId) || other.transactionId == transactionId)&&(identical(other.govActionIndex, govActionIndex) || other.govActionIndex == govActionIndex));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovActionId&&(identical(other.bech32, bech32) || other.bech32 == bech32)&&(identical(other.transactionId, transactionId) || other.transactionId == transactionId)&&(identical(other.govActionIndex, govActionIndex) || other.govActionIndex == govActionIndex)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,bech32,transactionId,govActionIndex);
+int get hashCode => Object.hash(runtimeType,bech32,transactionId,govActionIndex,lengthType);
 
 @override
 String toString() {
-  return 'GovActionId(bech32: $bech32, transactionId: $transactionId, govActionIndex: $govActionIndex)';
+  return 'GovActionId(bech32: $bech32, transactionId: $transactionId, govActionIndex: $govActionIndex, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $GovActionIdCopyWith<$Res>  {
   factory $GovActionIdCopyWith(GovActionId value, $Res Function(GovActionId) _then) = _$GovActionIdCopyWithImpl;
 @useResult
 $Res call({
- String transactionId, int govActionIndex
+ String transactionId, int govActionIndex, CborLengthType lengthType
 });
 
 
@@ -62,11 +62,12 @@ class _$GovActionIdCopyWithImpl<$Res>
 
 /// Create a copy of GovActionId
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? transactionId = null,Object? govActionIndex = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? transactionId = null,Object? govActionIndex = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 transactionId: null == transactionId ? _self.transactionId : transactionId // ignore: cast_nullable_to_non_nullable
 as String,govActionIndex: null == govActionIndex ? _self.govActionIndex : govActionIndex // ignore: cast_nullable_to_non_nullable
-as int,
+as int,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -78,11 +79,12 @@ as int,
 
 
 class _GovActionId extends GovActionId {
-   _GovActionId({required this.transactionId, required this.govActionIndex}): super._();
+   _GovActionId({required this.transactionId, required this.govActionIndex, this.lengthType = CborLengthType.definite}): super._();
   
 
 @override final  String transactionId;
 @override final  int govActionIndex;
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of GovActionId
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +96,16 @@ _$GovActionIdCopyWith<_GovActionId> get copyWith => __$GovActionIdCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GovActionId&&(identical(other.transactionId, transactionId) || other.transactionId == transactionId)&&(identical(other.govActionIndex, govActionIndex) || other.govActionIndex == govActionIndex));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GovActionId&&(identical(other.transactionId, transactionId) || other.transactionId == transactionId)&&(identical(other.govActionIndex, govActionIndex) || other.govActionIndex == govActionIndex)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,transactionId,govActionIndex);
+int get hashCode => Object.hash(runtimeType,transactionId,govActionIndex,lengthType);
 
 @override
 String toString() {
-  return 'GovActionId(transactionId: $transactionId, govActionIndex: $govActionIndex)';
+  return 'GovActionId(transactionId: $transactionId, govActionIndex: $govActionIndex, lengthType: $lengthType)';
 }
 
 
@@ -114,7 +116,7 @@ abstract mixin class _$GovActionIdCopyWith<$Res> implements $GovActionIdCopyWith
   factory _$GovActionIdCopyWith(_GovActionId value, $Res Function(_GovActionId) _then) = __$GovActionIdCopyWithImpl;
 @override @useResult
 $Res call({
- String transactionId, int govActionIndex
+ String transactionId, int govActionIndex, CborLengthType lengthType
 });
 
 
@@ -131,11 +133,12 @@ class __$GovActionIdCopyWithImpl<$Res>
 
 /// Create a copy of GovActionId
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? transactionId = null,Object? govActionIndex = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? transactionId = null,Object? govActionIndex = null,Object? lengthType = null,}) {
   return _then(_GovActionId(
 transactionId: null == transactionId ? _self.transactionId : transactionId // ignore: cast_nullable_to_non_nullable
 as String,govActionIndex: null == govActionIndex ? _self.govActionIndex : govActionIndex // ignore: cast_nullable_to_non_nullable
-as int,
+as int,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 

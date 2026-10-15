@@ -3,6 +3,7 @@
 import "package:cbor/cbor.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
+import "../../../utils/cbor.dart";
 import "../../../utils/sugar.dart";
 import "../../cbor_encodable.dart";
 import "../../shared/nonce.dart";
@@ -40,6 +41,23 @@ sealed class ProtocolParamUpdate with _$ProtocolParamUpdate implements CborEncod
     required BigInt? maxValSize, // 22
     required int? collateralPercentage, // 23
     required int? maxCollateralInputs, // 24
+    // Conway changes
+    List<RationalNumber>? poolVotingThresholds, // 25
+    List<RationalNumber>? drepVotingThresholds, // 26
+    int? minCommitteeSize, // 27
+    int? committeeTermLimit, // 28
+    int? govActionValidityPeriod, // 29
+    BigInt? govActionDeposit, // 30
+    BigInt? drepDeposit, // 31
+    int? drepInactivityPeriod, // 32
+    RationalNumber? minFeeRefScriptCostPerByte, // 33
+    // encoding details (not part of the protocol params)
+    @Default(CborLengthType.definite) CborLengthType lengthType,
+
+    /// Map key order as parsed, or null when ascending (the standard order).
+    List<int>? nonStandardKeyOrder,
+    @Default(CborLengthType.definite) CborLengthType poolVotingThresholdsLengthType,
+    @Default(CborLengthType.definite) CborLengthType drepVotingThresholdsLengthType,
   }) = _ProtocolParamUpdate;
   const ProtocolParamUpdate._();
 
@@ -187,12 +205,25 @@ sealed class ProtocolParamUpdate with _$ProtocolParamUpdate implements CborEncod
         }
         return cValue.toInt();
       }),
+      poolVotingThresholds: mapOfCbor[25]?.let((cValue) => _parseRationalList(cValue, "poolVotingThresholds")),
+      drepVotingThresholds: mapOfCbor[26]?.let((cValue) => _parseRationalList(cValue, "drepVotingThresholds")),
+      minCommitteeSize: mapOfCbor[27]?.let((cValue) => _parseSmallInt(cValue, "minCommitteeSize")),
+      committeeTermLimit: mapOfCbor[28]?.let((cValue) => _parseSmallInt(cValue, "committeeTermLimit")),
+      govActionValidityPeriod: mapOfCbor[29]?.let((cValue) => _parseSmallInt(cValue, "govActionValidityPeriod")),
+      govActionDeposit: mapOfCbor[30]?.let((cValue) => _parseBigInt(cValue, "govActionDeposit")),
+      drepDeposit: mapOfCbor[31]?.let((cValue) => _parseBigInt(cValue, "drepDeposit")),
+      drepInactivityPeriod: mapOfCbor[32]?.let((cValue) => _parseSmallInt(cValue, "drepInactivityPeriod")),
+      minFeeRefScriptCostPerByte: mapOfCbor[33]?.let(RationalNumber.deserialize),
+      lengthType: cMap.type,
+      nonStandardKeyOrder: nonAscendingKeyOrder(cMap),
+      poolVotingThresholdsLengthType: (mapOfCbor[25] as CborList?)?.type ?? CborLengthType.definite,
+      drepVotingThresholdsLengthType: (mapOfCbor[26] as CborList?)?.type ?? CborLengthType.definite,
     );
   }
 
   @override
-  CborValue serialize({required bool forJson}) => CborMap.fromEntries(
-    [
+  CborValue serialize({required bool forJson}) {
+    final entries = <MapEntry<CborValue, CborValue>?>[
       minFeeA?.let((value) => MapEntry(const CborSmallInt(0), CborInt(value))),
       minFeeB?.let((value) => MapEntry(const CborSmallInt(1), CborInt(value))),
       maxBlockSize?.let((value) => MapEntry(const CborSmallInt(2), CborSmallInt(value))),
@@ -218,6 +249,68 @@ sealed class ProtocolParamUpdate with _$ProtocolParamUpdate implements CborEncod
       maxValSize?.let((value) => MapEntry(const CborSmallInt(22), CborInt(value))),
       collateralPercentage?.let((value) => MapEntry(const CborSmallInt(23), CborSmallInt(value))),
       maxCollateralInputs?.let((value) => MapEntry(const CborSmallInt(24), CborSmallInt(value))),
-    ].nonNulls,
-  );
+      poolVotingThresholds?.let(
+        (value) => MapEntry(
+          const CborSmallInt(25),
+          CborList(
+            value.map((e) => e.serialize(forJson: forJson)).toList(growable: false),
+            type: poolVotingThresholdsLengthType,
+          ),
+        ),
+      ),
+      drepVotingThresholds?.let(
+        (value) => MapEntry(
+          const CborSmallInt(26),
+          CborList(
+            value.map((e) => e.serialize(forJson: forJson)).toList(growable: false),
+            type: drepVotingThresholdsLengthType,
+          ),
+        ),
+      ),
+      minCommitteeSize?.let((value) => MapEntry(const CborSmallInt(27), CborSmallInt(value))),
+      committeeTermLimit?.let((value) => MapEntry(const CborSmallInt(28), CborSmallInt(value))),
+      govActionValidityPeriod?.let((value) => MapEntry(const CborSmallInt(29), CborSmallInt(value))),
+      govActionDeposit?.let((value) => MapEntry(const CborSmallInt(30), CborInt(value))),
+      drepDeposit?.let((value) => MapEntry(const CborSmallInt(31), CborInt(value))),
+      drepInactivityPeriod?.let((value) => MapEntry(const CborSmallInt(32), CborSmallInt(value))),
+      minFeeRefScriptCostPerByte?.let(
+        (value) => MapEntry(const CborSmallInt(33), value.serialize(forJson: forJson)),
+      ),
+    ].nonNulls;
+
+    return CborMap.fromEntries(
+      orderEntries(
+        {for (final entry in entries) (entry.key as CborSmallInt).toInt(): entry},
+        nonStandardKeyOrder,
+      ),
+      type: lengthType,
+    );
+  }
+}
+
+int _parseSmallInt(CborValue cValue, String name) {
+  if (cValue is! CborInt || !cValue.toBigInt().isValidInt) {
+    throw Exception(
+      "ProtocolParamUpdate deserialization failed. Expected $name to be cbor small int but got ${cValue.runtimeType}",
+    );
+  }
+  return cValue.toInt();
+}
+
+BigInt _parseBigInt(CborValue cValue, String name) {
+  if (cValue is! CborInt) {
+    throw Exception(
+      "ProtocolParamUpdate deserialization failed. Expected $name to be cbor int but got ${cValue.runtimeType}",
+    );
+  }
+  return cValue.toBigInt();
+}
+
+List<RationalNumber> _parseRationalList(CborValue cValue, String name) {
+  if (cValue is! CborList) {
+    throw Exception(
+      "ProtocolParamUpdate deserialization failed. Expected $name to be cbor list but got ${cValue.runtimeType}",
+    );
+  }
+  return cValue.map(RationalNumber.deserialize).toList(growable: false);
 }

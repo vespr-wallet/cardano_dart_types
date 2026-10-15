@@ -15,6 +15,7 @@ sealed class GovActionId with _$GovActionId implements CborEncodable {
   factory GovActionId({
     required String transactionId,
     required int govActionIndex,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _GovActionId;
   GovActionId._();
 
@@ -24,10 +25,13 @@ sealed class GovActionId with _$GovActionId implements CborEncodable {
   );
 
   @override
-  CborValue serialize({required bool forJson}) => CborList([
-    forJson ? CborString(transactionId) : CborBytes(transactionId.hexDecode()),
-    CborSmallInt(govActionIndex),
-  ]);
+  CborValue serialize({required bool forJson}) => CborList(
+    [
+      forJson ? CborString(transactionId) : CborBytes(transactionId.hexDecode()),
+      CborSmallInt(govActionIndex),
+    ],
+    type: lengthType,
+  );
 
   static GovActionId deserialize(CborValue cList) {
     if (cList is! CborList) {
@@ -65,6 +69,7 @@ sealed class GovActionId with _$GovActionId implements CborEncodable {
     return GovActionId(
       transactionId: txId,
       govActionIndex: govActionIndex.toInt(),
+      lengthType: cList.type,
     );
   }
 }

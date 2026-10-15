@@ -16,14 +16,18 @@ sealed class Utxo with _$Utxo implements CborEncodable {
   const factory Utxo({
     required CardanoTransactionInput identifier,
     required CardanoTransactionOutput content,
+    @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _Utxo;
   const Utxo._();
 
   @override
-  CborValue serialize({required bool forJson}) => CborList([
-    identifier.serialize(forJson: forJson),
-    content.serialize(forJson: forJson),
-  ]);
+  CborValue serialize({required bool forJson}) => CborList(
+    [
+      identifier.serialize(forJson: forJson),
+      content.serialize(forJson: forJson),
+    ],
+    type: lengthType,
+  );
 
   factory Utxo.deserializeBytes(Uint8List bytes) {
     return Utxo.deserialize(cbor.decode(bytes));
@@ -44,6 +48,7 @@ sealed class Utxo with _$Utxo implements CborEncodable {
       return Utxo(
         identifier: CardanoTransactionInput.deserialize(cList: utxoInfo),
         content: CardanoTransactionOutput.deserialize(utxoContent),
+        lengthType: cborValue.type,
       );
     } else {
       throw CborDeserializationException("Utxo deserialization failed. Invalid cbor type ${cborValue.runtimeType}");

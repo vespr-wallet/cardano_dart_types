@@ -20,7 +20,9 @@ sealed class Withdraw with _$Withdraw {
 }
 
 extension WithdrawIterableExtension on Iterable<Withdraw> {
-  CborValue serialize({required bool forJson}) => CborMap.fromEntries(
-    map((withdrawEntry) => withdrawEntry.serializeEntry(forJson: forJson)),
-  );
+  CborValue serialize({required bool forJson, CborLengthType lengthType = CborLengthType.definite}) =>
+      CborMap.fromEntries(
+        map((withdrawEntry) => withdrawEntry.serializeEntry(forJson: forJson)),
+        type: lengthType,
+      );
 }

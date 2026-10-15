@@ -1,6 +1,9 @@
+import "dart:typed_data";
+
 import "package:cardano_dart_types/cardano_dart_types.dart";
 import "package:test/test.dart";
 
+import "test_utils/cbor_mutations.dart";
 import "test_utils/fixtures.dart";
 
 void main() async {
@@ -21,6 +24,87 @@ void main() async {
           expect(reEncoded, testData.cborHex);
         });
       }
+    });
+
+    group("round-trips non-canonical encodings byte-exact", () {
+      for (final testData in _TestCaseTx.values) {
+        test(testData.name, () {
+          for (final variant in encodingVariants(testData.cborHex.cborDecode())) {
+            final hex = variant.hexEncode();
+            final tx = CardanoTransaction.deserializeFromHex(hex);
+            expect(tx.serializeHexString(), hex);
+            expect(tx.body.computeBlake2bHash256().hexEncode(), tx.body.blake2bHash256Hex());
+          }
+        });
+      }
+
+      test("signed body hash matches the re-serialized body (indefinite-length inputs)", () {
+        const txHex = "84a3009fff01800200a0f5f6";
+        final tx = CardanoTransaction.deserializeFromHex(txHex);
+
+        final submittedBody = CardanoTransactionBody.deserializeHex(tx.body.serializeHexString());
+        expect(submittedBody.blake2bHash256Hex(), tx.body.blake2bHash256Hex());
+        expect(tx.serializeHexString(), txHex);
+      });
+
+      test("modified fields fall back to typed encoding, untouched fields keep theirs", () {
+        final tx = CardanoTransaction.deserializeFromHex("84a3009fff01800200a0f5f6");
+
+        final modified = tx.copyWith.body(fee: 1.toCborInt());
+
+        // inputs still indefinite (9f ff), fee re-encoded from the typed value
+        expect(modified.body.serializeHexString(), "a3009fff01800201");
+      });
+
+      test("witness set merge keeps original encoding of untouched fields", () {
+        final original = _TestCaseTx.values
+            .map((t) => t.cborHex.cborDecode() as CborList)
+            .firstWhere((tx) => (tx[1] as CborMap).containsKey(const CborSmallInt(5)));
+        final withIndefiniteRedeemers = rebuildCbor(original, (path) => path == "[1]{05}", indefinite: true);
+        final redeemersHex = ((withIndefiniteRedeemers as CborList)[1] as CborMap)[const CborSmallInt(5)]!.hexEncode();
+
+        final tx = CardanoTransaction.deserializeFromHex(withIndefiniteRedeemers.hexEncode());
+        final signed = tx.copyWithAdditionalSignatures(
+          WitnessSet(
+            ivkeyWitnesses: ListWithCborType(
+              [WitnessVKey(vkey: Uint8List(32), signature: Uint8List(64))],
+              CborLengthType.definite,
+              null,
+            ),
+          ),
+        );
+
+        final signedWitnesses = signed.witnessSet.serialize(forJson: false);
+        expect(signedWitnesses[const CborSmallInt(5)]!.hexEncode(), redeemersHex);
+        expect(signed.witnessSet.vkeyWitnesses.length, tx.witnessSet.vkeyWitnesses.length + 1);
+      });
+    });
+
+    group("hasAscendingKeyOrder", () {
+      test("true for ascending and manually created bodies", () {
+        final tx = CardanoTransaction.deserializeFromHex(_TestCaseTx.sentryF8.cborHex);
+        expect(tx.hasAscendingBodyKeyOrder, isTrue);
+        expect(
+          CardanoTransactionBody.create(
+            inputs: const CardanoTransactionInputs(data: [], cborTags: []),
+            outputs: [],
+            fee: 1.toCborInt(),
+          ).hasAscendingKeyOrder,
+          isTrue,
+        );
+      });
+
+      test("true for ascending bodies with non-canonical nested encoding", () {
+        final tx = CardanoTransaction.deserializeFromHex("84a3009fff01800200a0f5f6");
+        expect(tx.hasAscendingBodyKeyOrder, isTrue);
+      });
+
+      test("false for non-ascending bodies, also after modifications", () {
+        final tx = CardanoTransaction.deserializeFromHex(_TestCaseTx.midnight.cborHex);
+        expect(tx.hasAscendingBodyKeyOrder, isFalse);
+        expect(tx.body.hasAscendingKeyOrder, isFalse);
+        expect(tx.copyWith.body(fee: 1.toCborInt()).hasAscendingBodyKeyOrder, isFalse);
+      });
     });
 
     group("preserves original CBOR key order", () {

@@ -14,7 +14,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RequiredSigners {
 
- List<Uint8List> get signersBytes; List<int> get cborTags;
+ List<Uint8List> get signersBytes; List<int> get cborTags;// [258] tag may be sent in Conway era | passed for ledger serialization
+ CborLengthType get lengthType;
 /// Create a copy of RequiredSigners
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +26,16 @@ $RequiredSignersCopyWith<RequiredSigners> get copyWith => _$RequiredSignersCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequiredSigners&&const DeepCollectionEquality().equals(other.signersBytes, signersBytes)&&const DeepCollectionEquality().equals(other.cborTags, cborTags));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequiredSigners&&const DeepCollectionEquality().equals(other.signersBytes, signersBytes)&&const DeepCollectionEquality().equals(other.cborTags, cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(signersBytes),const DeepCollectionEquality().hash(cborTags));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(signersBytes),const DeepCollectionEquality().hash(cborTags),lengthType);
 
 @override
 String toString() {
-  return 'RequiredSigners(signersBytes: $signersBytes, cborTags: $cborTags)';
+  return 'RequiredSigners(signersBytes: $signersBytes, cborTags: $cborTags, lengthType: $lengthType)';
 }
 
 
@@ -45,7 +46,7 @@ abstract mixin class $RequiredSignersCopyWith<$Res>  {
   factory $RequiredSignersCopyWith(RequiredSigners value, $Res Function(RequiredSigners) _then) = _$RequiredSignersCopyWithImpl;
 @useResult
 $Res call({
- List<Uint8List> signersBytes, List<int> cborTags
+ List<Uint8List> signersBytes, List<int> cborTags, CborLengthType lengthType
 });
 
 
@@ -62,11 +63,12 @@ class _$RequiredSignersCopyWithImpl<$Res>
 
 /// Create a copy of RequiredSigners
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? signersBytes = null,Object? cborTags = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? signersBytes = null,Object? cborTags = null,Object? lengthType = null,}) {
   return _then(_self.copyWith(
 signersBytes: null == signersBytes ? _self.signersBytes : signersBytes // ignore: cast_nullable_to_non_nullable
 as List<Uint8List>,cborTags: null == cborTags ? _self.cborTags : cborTags // ignore: cast_nullable_to_non_nullable
-as List<int>,
+as List<int>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
@@ -78,7 +80,7 @@ as List<int>,
 
 
 class _RequiredSigner extends RequiredSigners {
-  const _RequiredSigner({required final  List<Uint8List> signersBytes, required final  List<int> cborTags}): _signersBytes = signersBytes,_cborTags = cborTags,super._();
+  const _RequiredSigner({required final  List<Uint8List> signersBytes, required final  List<int> cborTags, this.lengthType = CborLengthType.definite}): _signersBytes = signersBytes,_cborTags = cborTags,super._();
   
 
  final  List<Uint8List> _signersBytes;
@@ -95,6 +97,8 @@ class _RequiredSigner extends RequiredSigners {
   return EqualUnmodifiableListView(_cborTags);
 }
 
+// [258] tag may be sent in Conway era | passed for ledger serialization
+@override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of RequiredSigners
 /// with the given fields replaced by the non-null parameter values.
@@ -106,16 +110,16 @@ _$RequiredSignerCopyWith<_RequiredSigner> get copyWith => __$RequiredSignerCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RequiredSigner&&const DeepCollectionEquality().equals(other._signersBytes, _signersBytes)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RequiredSigner&&const DeepCollectionEquality().equals(other._signersBytes, _signersBytes)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_signersBytes),const DeepCollectionEquality().hash(_cborTags));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_signersBytes),const DeepCollectionEquality().hash(_cborTags),lengthType);
 
 @override
 String toString() {
-  return 'RequiredSigners(signersBytes: $signersBytes, cborTags: $cborTags)';
+  return 'RequiredSigners(signersBytes: $signersBytes, cborTags: $cborTags, lengthType: $lengthType)';
 }
 
 
@@ -126,7 +130,7 @@ abstract mixin class _$RequiredSignerCopyWith<$Res> implements $RequiredSignersC
   factory _$RequiredSignerCopyWith(_RequiredSigner value, $Res Function(_RequiredSigner) _then) = __$RequiredSignerCopyWithImpl;
 @override @useResult
 $Res call({
- List<Uint8List> signersBytes, List<int> cborTags
+ List<Uint8List> signersBytes, List<int> cborTags, CborLengthType lengthType
 });
 
 
@@ -143,11 +147,12 @@ class __$RequiredSignerCopyWithImpl<$Res>
 
 /// Create a copy of RequiredSigners
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? signersBytes = null,Object? cborTags = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? signersBytes = null,Object? cborTags = null,Object? lengthType = null,}) {
   return _then(_RequiredSigner(
 signersBytes: null == signersBytes ? _self._signersBytes : signersBytes // ignore: cast_nullable_to_non_nullable
 as List<Uint8List>,cborTags: null == cborTags ? _self._cborTags : cborTags // ignore: cast_nullable_to_non_nullable
-as List<int>,
+as List<int>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,
   ));
 }
 
