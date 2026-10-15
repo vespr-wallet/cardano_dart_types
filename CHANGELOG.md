@@ -3,6 +3,7 @@
 Bug Fix:
 
 - `CardanoTransaction.diff` computed `stakeDeregistration` and `dRepDeregistration` from the last certificate of the transaction, whatever it was, so a deregistration followed by a certificate of another credential reported `false`. The flags now follow the last certificate that registers or deregisters the wallet's own credential
+- `CardanoTransaction.diff` honours `isValidDi == false`. A transaction marked as failing phase-2 script validation only consumes its collateral inputs and creates the collateral return output, so `diff` and `usedUtxos` now reflect that. Its regular inputs, outputs, withdrawals, certificates, votes and proposals are reported as having no effect; previously the transaction was summarised as if it had succeeded
 
 ## 3.1.0
 

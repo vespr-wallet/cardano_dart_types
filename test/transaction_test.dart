@@ -408,6 +408,103 @@ void main() async {
           expect(diffWithCerts([registration, deregistration, unrelatedCert]).dRepDeregistration, isTrue);
         });
       });
+
+      group("isValidDi false (phase-2 validation failure)", () {
+        const walletAddressBech32 =
+            "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk";
+        const otherAddressBech32 =
+            "addr1qxprs4zhu84ejtxgvf8ux34z8v973ghzv0m82hjcvf329eegh2vkhtv4pcy82r78swe77ynkwdqx0pprf5uyy6espyws8u5nph";
+        // stake key hash of walletAddressBech32
+        const walletStakeKeyHashHex = "9086fc9117b2dadb43da1f922c46039a47d51bff09433dcdd18f1cce";
+
+        CardanoTransactionOutput output({required String addressBech32, required int lovelace}) =>
+            CardanoTransactionOutput.postAlonzo(
+              address: Address.fromBase58OrBech32(addressBech32),
+              value: Value.v0(lovelace: BigInt.from(lovelace).toCborInt()),
+              outDatum: null,
+              scriptRef: null,
+              lengthType: CborLengthType.definite,
+            );
+        Utxo walletUtxo({required int index, required int lovelace}) => Utxo(
+          identifier: CardanoTransactionInput(transactionHash: TransactionHash.fromHex("11" * 32), index: index),
+          content: output(addressBech32: walletAddressBech32, lovelace: lovelace),
+        );
+        final spendUtxo = walletUtxo(index: 0, lovelace: 10000000);
+        final collateralUtxo = walletUtxo(index: 1, lovelace: 5000000);
+
+        TxDiff diffOf(CardanoTransaction tx) => tx.diff(
+          receiveAddressBech32: walletAddressBech32,
+          drepCredential: "0" * 56,
+          constitutionalCommitteeColdCredential: "0" * 56,
+          constitutionalCommitteeHotCredential: "0" * 56,
+          walletUtxos: [spendUtxo, collateralUtxo],
+        );
+
+        test("only the collateral is consumed and only the collateral return is received", () {
+          final body = txBody(
+            inputs: CardanoTransactionInputs(data: [spendUtxo.identifier], cborTags: const []),
+            outputs: [output(addressBech32: walletAddressBech32, lovelace: 9000000)],
+            certs: Certificates(
+              certificates: [
+                Certificate.stakeDeRegistrationLegacy(
+                  stakeCredential: Credential(CredType.ADDR_KEY_HASH, walletStakeKeyHashHex.hexDecode()),
+                ),
+              ],
+              cborTags: const [],
+              lengthType: CborLengthType.definite,
+            ),
+            collateral: CardanoTransactionInputs(data: [collateralUtxo.identifier], cborTags: const []),
+            collateralReturn: output(addressBech32: walletAddressBech32, lovelace: 3000000),
+            totalCollateral: BigInt.from(2000000),
+          );
+
+          final valid = diffOf(cardanoTx(body: body));
+          expect(valid.usedUtxos, [spendUtxo]);
+          expect(valid.diff.lovelace.toBigInt(), BigInt.from(9000000 - 10000000));
+          expect(valid.stakeDeregistration, isTrue);
+
+          final invalid = diffOf(cardanoTx(body: body, isValidDi: false));
+          expect(invalid.usedUtxos, [collateralUtxo]);
+          expect(invalid.diff.lovelace.toBigInt(), BigInt.from(3000000 - 5000000));
+          expect(invalid.diff.multiAssets, isEmpty);
+          expect(invalid.stakeDeregistration, isFalse);
+        });
+
+        test("collateral return to another address is not received", () {
+          final txDiff = diffOf(
+            cardanoTx(
+              isValidDi: false,
+              body: txBody(
+                inputs: CardanoTransactionInputs(data: [spendUtxo.identifier], cborTags: const []),
+                collateral: CardanoTransactionInputs(data: [collateralUtxo.identifier], cborTags: const []),
+                collateralReturn: output(addressBech32: otherAddressBech32, lovelace: 3000000),
+                totalCollateral: BigInt.from(2000000),
+              ),
+            ),
+          );
+          expect(txDiff.usedUtxos, [collateralUtxo]);
+          expect(txDiff.diff.lovelace.toBigInt(), BigInt.from(-5000000));
+        });
+
+        test("nothing changes for the wallet when the collateral belongs to someone else", () {
+          final otherCollateral = CardanoTransactionInput(
+            transactionHash: TransactionHash.fromHex("22" * 32),
+            index: 0,
+          );
+          final txDiff = diffOf(
+            cardanoTx(
+              isValidDi: false,
+              body: txBody(
+                inputs: CardanoTransactionInputs(data: [spendUtxo.identifier], cborTags: const []),
+                outputs: [output(addressBech32: walletAddressBech32, lovelace: 9000000)],
+                collateral: CardanoTransactionInputs(data: [otherCollateral], cborTags: const []),
+              ),
+            ),
+          );
+          expect(txDiff.usedUtxos, isEmpty);
+          expect(txDiff.diff.lovelace.toBigInt(), BigInt.zero);
+        });
+      });
     });
   });
 }

@@ -170,6 +170,44 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     if (stakeBech32Address == null) {
       throw Exception("receiveAddressBech32 is not a base or stake address: $receiveAddressBech32");
     }
+
+    const deepEq = DeepCollectionEquality();
+    final utxoByHashAndId = walletUtxos.groupFoldBy(
+      (e) => "${e.identifier.transactionHash.hexValue}#${e.identifier.index}",
+      (previous, element) => element,
+    );
+
+    if (!isValidDi) {
+      // Phase-2 script validation failed: the ledger consumes the collateral inputs and creates only the collateral
+      // return output. Regular inputs, outputs, withdrawals, certificates, votes and proposals have no effect.
+      final consumedCollateralFromThisWallet = (body.collateral?.data ?? [])
+          .map((e) => utxoByHashAndId["${e.transactionHash.hexValue}#${e.index}"])
+          .nonNulls
+          .toList();
+      final collateralReturn = body.collateralReturn;
+      final incoming = collateralReturn != null && deepEq.equals(collateralReturn.address.value, receiveAddress.bytes)
+          ? collateralReturn.value
+          : Value.v0(lovelace: CborInt(BigInt.zero));
+      final outgoing = consumedCollateralFromThisWallet.fold(
+        Value.v0(lovelace: CborInt(BigInt.zero)),
+        (previousValue, element) => previousValue + element.content.value,
+      );
+      return TxDiff(
+        diff: incoming - outgoing,
+        usedUtxos: consumedCollateralFromThisWallet,
+        stakeDelegationPoolId: null,
+        dRepDelegation: null,
+        dRepRegistration: null,
+        dRepUpdate: null,
+        authorizeConstitutionalCommitteeHot: null,
+        resignConstitutionalCommitteeCold: null,
+        votes: const [],
+        proposals: const [],
+        dRepDeregistration: false,
+        stakeDeregistration: false,
+      );
+    }
+
     final outputs = body.outputs;
 
     final withdrawals = body.withdrawals
@@ -177,7 +215,6 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
         .fold(BigInt.zero, (previousValue, element) => previousValue + element.coin)
         .toCborInt();
 
-    const deepEq = DeepCollectionEquality();
     final incoming =
         outputs //
             .where((item) => deepEq.equals(item.address.value, receiveAddress.bytes))
@@ -186,10 +223,6 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
               (previousValue, element) => previousValue + element.value,
             );
 
-    final utxoByHashAndId = walletUtxos.groupFoldBy(
-      (e) => "${e.identifier.transactionHash.hexValue}#${e.identifier.index}",
-      (previous, element) => element,
-    );
     final consumedUtxosFromThisWallet = body
         .inputs
         .data //
