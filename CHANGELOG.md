@@ -1,3 +1,9 @@
+## 3.1.1
+
+Bug Fix:
+
+- `CardanoTransaction.diff` read `stakeDeregistration` and `dRepDeregistration` from the last certificate only, so a deregistration followed by any other certificate reported `false`. The flags are now set when any certificate deregisters the wallet's credential
+
 ## 3.1.0
 
 Breaking Changes:

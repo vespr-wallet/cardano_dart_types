@@ -323,6 +323,73 @@ void main() async {
 
         expect(txDiff.usedUtxos, isEmpty);
       });
+
+      group("deregistration flags", () {
+        const addressBech32 =
+            "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk";
+        // stake key hash of addressBech32
+        const walletStakeKeyHashHex = "9086fc9117b2dadb43da1f922c46039a47d51bff09433dcdd18f1cce";
+        final walletDRepKeyHashHex = "ab" * 28;
+        final walletStakeCredential = Credential(CredType.ADDR_KEY_HASH, walletStakeKeyHashHex.hexDecode());
+        final walletDRepCredential = Credential(CredType.ADDR_KEY_HASH, walletDRepKeyHashHex.hexDecode());
+        final otherCredential = Credential(CredType.ADDR_KEY_HASH, Uint8List.fromList(List.filled(28, 0xff)));
+        final deposit = BigInt.from(2000000).toCborInt();
+        final unrelatedCert = Certificate.stakeRegistration(stakeCredential: otherCredential, coin: deposit);
+
+        TxDiff diffWithCerts(List<Certificate> certs) =>
+            cardanoTx(
+              body: txBody(
+                certs: Certificates(certificates: certs, cborTags: const [], lengthType: CborLengthType.definite),
+              ),
+            ).diff(
+              receiveAddressBech32: addressBech32,
+              drepCredential: walletDRepKeyHashHex,
+              constitutionalCommitteeColdCredential: "0" * 56,
+              constitutionalCommitteeHotCredential: "0" * 56,
+              walletUtxos: const [],
+            );
+
+        test("stake deregistration followed by another certificate", () {
+          final txDiff = diffWithCerts([
+            Certificate.stakeDeRegistration(stakeCredential: walletStakeCredential, coin: deposit),
+            unrelatedCert,
+          ]);
+          expect(txDiff.stakeDeregistration, isTrue);
+          expect(txDiff.dRepDeregistration, isFalse);
+        });
+
+        test("legacy stake deregistration followed by another certificate", () {
+          final txDiff = diffWithCerts([
+            Certificate.stakeDeRegistrationLegacy(stakeCredential: walletStakeCredential),
+            unrelatedCert,
+          ]);
+          expect(txDiff.stakeDeregistration, isTrue);
+        });
+
+        test("DRep deregistration followed by another certificate", () {
+          final txDiff = diffWithCerts([
+            Certificate.unregisterDRep(dRepCredential: walletDRepCredential, coin: deposit),
+            unrelatedCert,
+          ]);
+          expect(txDiff.dRepDeregistration, isTrue);
+          expect(txDiff.stakeDeregistration, isFalse);
+        });
+
+        test("no deregistration certificate", () {
+          final txDiff = diffWithCerts([unrelatedCert]);
+          expect(txDiff.stakeDeregistration, isFalse);
+          expect(txDiff.dRepDeregistration, isFalse);
+        });
+
+        test("deregistration of another wallet's credentials", () {
+          final txDiff = diffWithCerts([
+            Certificate.stakeDeRegistration(stakeCredential: otherCredential, coin: deposit),
+            Certificate.unregisterDRep(dRepCredential: otherCredential, coin: deposit),
+          ]);
+          expect(txDiff.stakeDeregistration, isFalse);
+          expect(txDiff.dRepDeregistration, isFalse);
+        });
+      });
     });
   });
 }

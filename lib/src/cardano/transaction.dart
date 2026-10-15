@@ -334,29 +334,21 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           .nonNulls
           .lastOrNull,
       dRepDeregistration:
-          body.certs?.certificates
-              .map(
-                (e) => switch (e) {
-                  Certificate_UnregisterDRep() => e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes),
-                  _ => false,
-                },
-              )
-              .nonNulls
-              .lastOrNull ??
+          body.certs?.certificates.any(
+            (e) => switch (e) {
+              Certificate_UnregisterDRep() => e.dRepCredential.vKeyHash.deepEquals(drepCredentialBytes),
+              _ => false,
+            },
+          ) ??
           false,
       stakeDeregistration:
-          body.certs?.certificates
-              .map(
-                (e) => switch (e) {
-                  Certificate_StakeDeRegistrationLegacy() => e.stakeCredential.vKeyHash.deepEquals(
-                    stakeCredentialsBytes,
-                  ),
-                  Certificate_StakeDeRegistration() => e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes),
-                  _ => false,
-                },
-              )
-              .nonNulls
-              .lastOrNull ??
+          body.certs?.certificates.any(
+            (e) => switch (e) {
+              Certificate_StakeDeRegistrationLegacy() => e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes),
+              Certificate_StakeDeRegistration() => e.stakeCredential.vKeyHash.deepEquals(stakeCredentialsBytes),
+              _ => false,
+            },
+          ) ??
           false,
       proposals:
           body.proposalProcedures
