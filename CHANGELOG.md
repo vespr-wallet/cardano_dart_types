@@ -1,4 +1,11 @@
-## 3.1.1
+## 3.1.2
+
+Security:
+
+- `CardanoTransaction.diff` refuses a transaction with `isValidDi == false` by default and throws `TransactionMarkedInvalidException`. The `isValid` flag is not part of the transaction body, so it is not covered by the signatures and can be switched after signing: a requester could present a transaction as failing phase-2 validation, obtain the signatures on a collateral-only summary, and submit it as valid. New `txDiManagement` parameter (`TxDiManagement`): `safeAlwaysReject` (default), `dangerouslyAssumeTrue` (summarise the body as if the flag were true, the behaviour up to 3.1.0) and `dangerouslyAssumeOnlyCollateralBurnOnInvalidDi` (collateral-only summary, the behaviour of 3.1.1). The `dangerously*` options are only appropriate for transactions already on chain, where the flag is authoritative
+- 3.1.1 is retracted from pub.dev: its collateral-only summary of transactions marked invalid under-reports, before signing, what a flipped flag would make the body do. Its deregistration flag fix is included in this release
+
+## 3.1.1 (retracted)
 
 Bug Fix:
 

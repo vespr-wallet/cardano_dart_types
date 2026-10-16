@@ -21,6 +21,35 @@ import "vote_info.dart";
 
 part "signing_types.freezed.dart";
 
+/// How [CardanoTransaction.diff] treats a transaction whose `isValid` flag ([CardanoTransaction.isValidDi]) is false.
+///
+/// THE FLAG CANNOT BE TRUSTED BEFORE THE TRANSACTION IS ON CHAIN. It is the third element of the transaction
+/// envelope, not part of the transaction body, and vkey witnesses sign the blake2b-256 hash of the body only. Whoever
+/// holds a signed transaction can therefore switch the flag without breaking any signature. A requester can show a
+/// wallet a transaction marked as failing phase-2 validation (only the collateral would be consumed), obtain the
+/// signatures, flip the flag to true and submit it: the whole body then takes effect, including anything a
+/// collateral-only summary did not show.
+///
+/// Once a transaction is in a block the flag is authoritative, because block producers reject transactions whose flag
+/// does not match the actual script evaluation result. That is the only context where the `dangerously*` options are
+/// appropriate.
+enum TxDiManagement {
+  /// Throw `TransactionMarkedInvalidException` for a transaction with `isValidDi == false`. The default, and the only
+  /// safe choice before signing: no summary of such a transaction can be trusted, and a wallet has no legitimate
+  /// reason to sign a transaction that its requester marks as failing (on chain it would only forfeit the collateral).
+  safeAlwaysReject,
+
+  /// Summarise the body as if the flag were true: regular inputs spent, outputs created, withdrawals, certificates,
+  /// votes and proposals applied. This is what happens if the flag is flipped after signing; it hides the collateral
+  /// loss that an honest flag would cause. Behaviour of cardano_dart_types 3.1.0 and older.
+  dangerouslyAssumeTrue,
+
+  /// Summarise only the collateral effect: collateral inputs consumed, the collateral return received, nothing else.
+  /// What the ledger does to a transaction that is on chain with `isValid = false`. Before signing, it is the summary
+  /// a malicious requester wants the user to see. Behaviour of cardano_dart_types 3.1.1 (retracted).
+  dangerouslyAssumeOnlyCollateralBurnOnInvalidDi,
+}
+
 @Freezed(copyWith: false)
 sealed class TxDiff with _$TxDiff {
   const factory TxDiff({

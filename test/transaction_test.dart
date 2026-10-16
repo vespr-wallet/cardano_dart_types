@@ -432,13 +432,55 @@ void main() async {
         final spendUtxo = walletUtxo(index: 0, lovelace: 10000000);
         final collateralUtxo = walletUtxo(index: 1, lovelace: 5000000);
 
-        TxDiff diffOf(CardanoTransaction tx) => tx.diff(
-          receiveAddressBech32: walletAddressBech32,
-          drepCredential: "0" * 56,
-          constitutionalCommitteeColdCredential: "0" * 56,
-          constitutionalCommitteeHotCredential: "0" * 56,
-          walletUtxos: [spendUtxo, collateralUtxo],
-        );
+        TxDiff diffOf(CardanoTransaction tx, [TxDiManagement txDiManagement = TxDiManagement.safeAlwaysReject]) =>
+            tx.diff(
+              receiveAddressBech32: walletAddressBech32,
+              drepCredential: "0" * 56,
+              constitutionalCommitteeColdCredential: "0" * 56,
+              constitutionalCommitteeHotCredential: "0" * 56,
+              walletUtxos: [spendUtxo, collateralUtxo],
+              txDiManagement: txDiManagement,
+            );
+        TxDiff collateralOnlyDiffOf(CardanoTransaction tx) =>
+            diffOf(tx, TxDiManagement.dangerouslyAssumeOnlyCollateralBurnOnInvalidDi);
+
+        test("is refused by default: the flag is not signed and can be switched after signing", () {
+          final body = txBody(
+            inputs: CardanoTransactionInputs(data: [spendUtxo.identifier], cborTags: const []),
+            outputs: [output(addressBech32: otherAddressBech32, lovelace: 9000000)],
+            collateral: CardanoTransactionInputs(data: [collateralUtxo.identifier], cborTags: const []),
+          );
+          final tx = cardanoTx(body: body, isValidDi: false);
+          expect(
+            () => diffOf(tx),
+            throwsA(
+              isA<TransactionMarkedInvalidException>().having((e) => e.txHash, "txHash", body.blake2bHash256Hex()),
+            ),
+          );
+          expect(() => diffOf(tx, TxDiManagement.safeAlwaysReject), throwsA(isA<TransactionMarkedInvalidException>()));
+          // a valid transaction is summarised the same way whatever the option
+          for (final option in TxDiManagement.values) {
+            expect(
+              diffOf(cardanoTx(body: body), option),
+              diffOf(cardanoTx(body: body)),
+              reason: "$option",
+            );
+          }
+        });
+
+        test("dangerouslyAssumeTrue summarises the body as if the flag were true", () {
+          final body = txBody(
+            inputs: CardanoTransactionInputs(data: [spendUtxo.identifier], cborTags: const []),
+            outputs: [output(addressBech32: otherAddressBech32, lovelace: 9000000)],
+            collateral: CardanoTransactionInputs(data: [collateralUtxo.identifier], cborTags: const []),
+            collateralReturn: output(addressBech32: walletAddressBech32, lovelace: 3000000),
+            totalCollateral: BigInt.from(2000000),
+          );
+          final assumedTrue = diffOf(cardanoTx(body: body, isValidDi: false), TxDiManagement.dangerouslyAssumeTrue);
+          expect(assumedTrue, diffOf(cardanoTx(body: body)));
+          expect(assumedTrue.usedUtxos, [spendUtxo]);
+          expect(assumedTrue.diff.lovelace.toBigInt(), BigInt.from(-10000000));
+        });
 
         test("only the collateral is consumed and only the collateral return is received", () {
           final body = txBody(
@@ -463,7 +505,7 @@ void main() async {
           expect(valid.diff.lovelace.toBigInt(), BigInt.from(9000000 - 10000000));
           expect(valid.stakeDeregistration, isTrue);
 
-          final invalid = diffOf(cardanoTx(body: body, isValidDi: false));
+          final invalid = collateralOnlyDiffOf(cardanoTx(body: body, isValidDi: false));
           expect(invalid.usedUtxos, [collateralUtxo]);
           expect(invalid.diff.lovelace.toBigInt(), BigInt.from(3000000 - 5000000));
           expect(invalid.diff.multiAssets, isEmpty);
@@ -471,7 +513,7 @@ void main() async {
         });
 
         test("collateral return to another address is not received", () {
-          final txDiff = diffOf(
+          final txDiff = collateralOnlyDiffOf(
             cardanoTx(
               isValidDi: false,
               body: txBody(
@@ -491,7 +533,7 @@ void main() async {
             transactionHash: TransactionHash.fromHex("22" * 32),
             index: 0,
           );
-          final txDiff = diffOf(
+          final txDiff = collateralOnlyDiffOf(
             cardanoTx(
               isValidDi: false,
               body: txBody(

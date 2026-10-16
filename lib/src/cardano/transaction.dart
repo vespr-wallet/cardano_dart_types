@@ -6,6 +6,7 @@ import "package:cbor/cbor.dart";
 import "package:collection/collection.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
+import "../exceptions/signing_exceptions.dart";
 import "../hd/address/cardano_address.dart";
 import "../hd/signing/drep_diff_info.dart";
 import "../hd/signing/proposal_diff_info.dart";
@@ -153,12 +154,19 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     );
   }
 
+  /// Summarises what this transaction does to the wallet identified by [receiveAddressBech32] and [walletUtxos].
+  ///
+  /// [txDiManagement] decides what happens when [isValidDi] is false. The flag is not part of the signed body and can
+  /// be switched after signing without breaking any signature, so the default refuses such transactions by throwing
+  /// [TransactionMarkedInvalidException]. Only pass a `dangerously*` option for transactions already on chain; see
+  /// [TxDiManagement].
   TxDiff diff({
     required String receiveAddressBech32,
     required String drepCredential,
     required String constitutionalCommitteeColdCredential,
     required String constitutionalCommitteeHotCredential,
     required Iterable<Utxo> walletUtxos,
+    TxDiManagement txDiManagement = TxDiManagement.safeAlwaysReject,
   }) {
     final drepCredentialBytes = drepCredential.hexDecode();
     final constitutionalCommitteeColdCredentialBytes = constitutionalCommitteeColdCredential.hexDecode();
@@ -177,35 +185,46 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
       (previous, element) => element,
     );
 
+    // The isValid flag is not covered by the signature (witnesses sign the body hash only) and can be switched after
+    // signing, so it is only trustworthy for transactions already on chain. See TxDiManagement.
     if (!isValidDi) {
-      // Phase-2 script validation failed: the ledger consumes the collateral inputs and creates only the collateral
-      // return output. Regular inputs, outputs, withdrawals, certificates, votes and proposals have no effect.
-      final consumedCollateralFromThisWallet = (body.collateral?.data ?? [])
-          .map((e) => utxoByHashAndId["${e.transactionHash.hexValue}#${e.index}"])
-          .nonNulls
-          .toList();
-      final collateralReturn = body.collateralReturn;
-      final incoming = collateralReturn != null && deepEq.equals(collateralReturn.address.value, receiveAddress.bytes)
-          ? collateralReturn.value
-          : Value.v0(lovelace: CborInt(BigInt.zero));
-      final outgoing = consumedCollateralFromThisWallet.fold(
-        Value.v0(lovelace: CborInt(BigInt.zero)),
-        (previousValue, element) => previousValue + element.content.value,
-      );
-      return TxDiff(
-        diff: incoming - outgoing,
-        usedUtxos: consumedCollateralFromThisWallet,
-        stakeDelegationPoolId: null,
-        dRepDelegation: null,
-        dRepRegistration: null,
-        dRepUpdate: null,
-        authorizeConstitutionalCommitteeHot: null,
-        resignConstitutionalCommitteeCold: null,
-        votes: const [],
-        proposals: const [],
-        dRepDeregistration: false,
-        stakeDeregistration: false,
-      );
+      switch (txDiManagement) {
+        case TxDiManagement.safeAlwaysReject:
+          throw TransactionMarkedInvalidException(txHash: body.blake2bHash256Hex());
+        case TxDiManagement.dangerouslyAssumeOnlyCollateralBurnOnInvalidDi:
+          // Phase-2 script validation failed: the ledger consumes the collateral inputs and creates only the
+          // collateral return output. Regular inputs, outputs, withdrawals, certificates, votes and proposals have no
+          // effect.
+          final consumedCollateralFromThisWallet = (body.collateral?.data ?? [])
+              .map((e) => utxoByHashAndId["${e.transactionHash.hexValue}#${e.index}"])
+              .nonNulls
+              .toList();
+          final collateralReturn = body.collateralReturn;
+          final incoming =
+              collateralReturn != null && deepEq.equals(collateralReturn.address.value, receiveAddress.bytes)
+              ? collateralReturn.value
+              : Value.v0(lovelace: CborInt(BigInt.zero));
+          final outgoing = consumedCollateralFromThisWallet.fold(
+            Value.v0(lovelace: CborInt(BigInt.zero)),
+            (previousValue, element) => previousValue + element.content.value,
+          );
+          return TxDiff(
+            diff: incoming - outgoing,
+            usedUtxos: consumedCollateralFromThisWallet,
+            stakeDelegationPoolId: null,
+            dRepDelegation: null,
+            dRepRegistration: null,
+            dRepUpdate: null,
+            authorizeConstitutionalCommitteeHot: null,
+            resignConstitutionalCommitteeCold: null,
+            votes: const [],
+            proposals: const [],
+            dRepDeregistration: false,
+            stakeDeregistration: false,
+          );
+        case TxDiManagement.dangerouslyAssumeTrue:
+        // Summarised below as if the flag were true: this is what a flipped flag makes the body do.
+      }
     }
 
     final outputs = body.outputs;

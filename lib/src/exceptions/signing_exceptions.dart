@@ -77,3 +77,23 @@ class SigningAddressNotValidException extends Error {
     return "Signing address (hex) [$hexInvalidAddressOrCredential] is not matching a valid hex address or credential. $signingContext";
   }
 }
+
+/// Thrown by `CardanoTransaction.diff` under `TxDiManagement.safeAlwaysReject` (the default) for a transaction whose
+/// `isValid` flag (`isValidDi`) is false.
+///
+/// The flag is not part of the signed transaction body, so it can be switched after signing without breaking any
+/// signature. A summary that honours it can be defeated by a requester who presents the transaction as failing
+/// phase-2 validation and submits it as valid once signed. See `TxDiManagement`.
+class TransactionMarkedInvalidException extends Error {
+  /// Hex of the blake2b-256 hash of the transaction body.
+  final String txHash;
+
+  TransactionMarkedInvalidException({required this.txHash});
+
+  @override
+  String toString() {
+    return "Transaction [$txHash] is marked as failing script validation (isValid = false) and is not summarised: the "
+        "flag is not covered by the signature, so it can be switched to true after signing, and signing it as marked "
+        "would only forfeit the collateral. See TxDiManagement";
+  }
+}
