@@ -33,6 +33,14 @@ part "signing_types.freezed.dart";
 /// Once a transaction is in a block the flag is authoritative, because block producers reject transactions whose flag
 /// does not match the actual script evaluation result. That is the only context where the `dangerously*` options are
 /// appropriate.
+///
+/// Refusing transactions marked invalid does not cover the opposite flip. The phase-2 outcome is fixed by the body
+/// (script evaluation is deterministic), so a requester who builds a transaction whose scripts fail can present it as
+/// valid, obtain the signatures and submit it with the flag switched to false: the ledger then consumes the collateral
+/// inputs and creates only the collateral return, whose address the requester chose. No option here can detect that
+/// without evaluating the scripts, and the regular summary does not include the collateral. Any wallet showing a
+/// transaction with collateral must present the collateral exposure (wallet collateral inputs minus the collateral
+/// return to the wallet) separately, whatever the flag says.
 enum TxDiManagement {
   /// Throw `TransactionMarkedInvalidException` for a transaction with `isValidDi == false`. The default, and the only
   /// safe choice before signing: no summary of such a transaction can be trusted, and a wallet has no legitimate
