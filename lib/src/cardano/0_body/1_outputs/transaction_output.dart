@@ -40,7 +40,6 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
     List<int>? nonStandardKeyOrder,
   }) = CardanoTransactionOutput_PostAlonzo;
 
-  @override
   late final OutputDatum? datum = switch (this) {
     CardanoTransactionOutput_PostAlonzo(outDatum: final outDatum) => outDatum,
     CardanoTransactionOutput_Legacy(outDatumHash: final datumHash) => datumHash,

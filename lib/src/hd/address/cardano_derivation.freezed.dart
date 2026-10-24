@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cardano_derivation.dart';
@@ -9,6 +9,7 @@ part of 'cardano_derivation.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 CardanoDerivation _$CardanoDerivationFromJson(
@@ -42,9 +43,7 @@ CardanoDerivation _$CardanoDerivationFromJson(
 /// @nodoc
 mixin _$CardanoDerivation {
 
- ByteList get pubKey;// bytes
- Lazy<Uint8List> get _credentialsBytes;// hex
- Lazy<String> get _credentialsHex; Lazy<String> get _keyHex;
+
 
   /// Serializes this CardanoDerivation to a JSON map.
   Map<String, dynamic> toJson();
@@ -52,16 +51,21 @@ mixin _$CardanoDerivation {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoDerivation&&const DeepCollectionEquality().equals(other.pubKey, pubKey)&&(identical(other._credentialsBytes, _credentialsBytes) || other._credentialsBytes == _credentialsBytes)&&(identical(other._credentialsHex, _credentialsHex) || other._credentialsHex == _credentialsHex)&&(identical(other._keyHex, _keyHex) || other._keyHex == _keyHex));
+  final _this = this as CardanoDerivation;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoDerivation&&const DeepCollectionEquality().equals(other.pubKey, _this.pubKey)&&(identical(other._credentialsBytes, _this._credentialsBytes) || other._credentialsBytes == _this._credentialsBytes)&&(identical(other._credentialsHex, _this._credentialsHex) || other._credentialsHex == _this._credentialsHex)&&(identical(other._keyHex, _this._keyHex) || other._keyHex == _this._keyHex));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(pubKey),_credentialsBytes,_credentialsHex,_keyHex);
+int get hashCode {
+  final _this = this as CardanoDerivation;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.pubKey),_this._credentialsBytes,_this._credentialsHex,_this._keyHex);
+}
 
 @override
 String toString() {
-  return 'CardanoDerivation(pubKey: $pubKey, _credentialsBytes: $_credentialsBytes, _credentialsHex: $_credentialsHex, _keyHex: $_keyHex)';
+  final _this = this as CardanoDerivation;
+  return 'CardanoDerivation(pubKey: ${_this.pubKey}, _credentialsBytes: ${_this._credentialsBytes}, _credentialsHex: ${_this._credentialsHex}, _keyHex: ${_this._keyHex})';
 }
 
 
@@ -78,7 +82,7 @@ $CardanoDerivationCopyWith(CardanoDerivation _, $Res Function(CardanoDerivation)
 @JsonSerializable()
 
 class CardanoDerivedAddress extends CardanoDerivation {
-   CardanoDerivedAddress({required this.type, @byteListConverter required this.bytes, final  String? $type}): $type = $type ?? 'address',super._();
+   CardanoDerivedAddress({required this.type, @byteListConverter required this.bytes,  String? $type}): $type = $type ?? 'address',super._();
   factory CardanoDerivedAddress.fromJson(Map<String, dynamic> json) => _$CardanoDerivedAddressFromJson(json);
 
  final  AddressType type;
@@ -101,16 +105,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoDerivedAddress&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoDerivedAddress&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,type,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'CardanoDerivation.address(type: $type, bytes: $bytes)';
+    return 'CardanoDerivation.address(type: $type, bytes: $bytes)';
 }
 
 
@@ -153,7 +159,7 @@ as ByteList,
 @JsonSerializable()
 
 class CardanoDerivedDRep extends CardanoDerivation {
-   CardanoDerivedDRep({required this.value, final  String? $type}): $type = $type ?? 'dRep',super._();
+   CardanoDerivedDRep({required this.value,  String? $type}): $type = $type ?? 'dRep',super._();
   factory CardanoDerivedDRep.fromJson(Map<String, dynamic> json) => _$CardanoDerivedDRepFromJson(json);
 
  final  DRepDerivation value;
@@ -175,16 +181,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoDerivedDRep&&(identical(other.value, value) || other.value == value));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoDerivedDRep&&(identical(other.value, value) || other.value == value));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode {
+    return Object.hash(runtimeType,value);
+}
 
 @override
 String toString() {
-  return 'CardanoDerivation.dRep(value: $value)';
+    return 'CardanoDerivation.dRep(value: $value)';
 }
 
 
@@ -235,7 +243,7 @@ $DRepDerivationCopyWith<$Res> get value {
 @JsonSerializable()
 
 class CardanoDerivedConstitutionalCommittee extends CardanoDerivation {
-   CardanoDerivedConstitutionalCommittee({required this.value, final  String? $type}): $type = $type ?? 'constitutionalCommittee',super._();
+   CardanoDerivedConstitutionalCommittee({required this.value,  String? $type}): $type = $type ?? 'constitutionalCommittee',super._();
   factory CardanoDerivedConstitutionalCommittee.fromJson(Map<String, dynamic> json) => _$CardanoDerivedConstitutionalCommitteeFromJson(json);
 
  final  ConstitutionalCommitee value;
@@ -257,16 +265,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoDerivedConstitutionalCommittee&&(identical(other.value, value) || other.value == value));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoDerivedConstitutionalCommittee&&(identical(other.value, value) || other.value == value));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode {
+    return Object.hash(runtimeType,value);
+}
 
 @override
 String toString() {
-  return 'CardanoDerivation.constitutionalCommittee(value: $value)';
+    return 'CardanoDerivation.constitutionalCommittee(value: $value)';
 }
 
 
@@ -317,12 +327,7 @@ $ConstitutionalCommiteeCopyWith<$Res> get value {
 /// @nodoc
 mixin _$DRepDerivation {
 
-// raw key
- Lazy<String> get _dRepKeyHex;// hex encoded - raw key
-// credentials (hashed raw key)
- Lazy<Uint8List> get _credentialsBytes; Lazy<String> get _credentialsHex;// dRep ID - CIP 105 (Legacy)
- Lazy<String> get _dRepIdLegacyBech32;// dRep ID - CIP 129
- Lazy<Uint8List> get _dRepIdNewBytes; Lazy<String> get _dRepIdNewHex; Lazy<String> get _dRepIdNewBech32;@byteListConverter ByteList get bytes;
+@byteListConverter ByteList get bytes;
 /// Create a copy of DRepDerivation
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -335,16 +340,21 @@ $DRepDerivationCopyWith<DRepDerivation> get copyWith => _$DRepDerivationCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DRepDerivation&&(identical(other._dRepKeyHex, _dRepKeyHex) || other._dRepKeyHex == _dRepKeyHex)&&(identical(other._credentialsBytes, _credentialsBytes) || other._credentialsBytes == _credentialsBytes)&&(identical(other._credentialsHex, _credentialsHex) || other._credentialsHex == _credentialsHex)&&(identical(other._dRepIdLegacyBech32, _dRepIdLegacyBech32) || other._dRepIdLegacyBech32 == _dRepIdLegacyBech32)&&(identical(other._dRepIdNewBytes, _dRepIdNewBytes) || other._dRepIdNewBytes == _dRepIdNewBytes)&&(identical(other._dRepIdNewHex, _dRepIdNewHex) || other._dRepIdNewHex == _dRepIdNewHex)&&(identical(other._dRepIdNewBech32, _dRepIdNewBech32) || other._dRepIdNewBech32 == _dRepIdNewBech32)&&const DeepCollectionEquality().equals(other.bytes, bytes));
+  final _this = this as DRepDerivation;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DRepDerivation&&(identical(other._dRepKeyHex, _this._dRepKeyHex) || other._dRepKeyHex == _this._dRepKeyHex)&&(identical(other._credentialsBytes, _this._credentialsBytes) || other._credentialsBytes == _this._credentialsBytes)&&(identical(other._credentialsHex, _this._credentialsHex) || other._credentialsHex == _this._credentialsHex)&&(identical(other._dRepIdLegacyBech32, _this._dRepIdLegacyBech32) || other._dRepIdLegacyBech32 == _this._dRepIdLegacyBech32)&&(identical(other._dRepIdNewBytes, _this._dRepIdNewBytes) || other._dRepIdNewBytes == _this._dRepIdNewBytes)&&(identical(other._dRepIdNewHex, _this._dRepIdNewHex) || other._dRepIdNewHex == _this._dRepIdNewHex)&&(identical(other._dRepIdNewBech32, _this._dRepIdNewBech32) || other._dRepIdNewBech32 == _this._dRepIdNewBech32)&&const DeepCollectionEquality().equals(other.bytes, _this.bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,_dRepKeyHex,_credentialsBytes,_credentialsHex,_dRepIdLegacyBech32,_dRepIdNewBytes,_dRepIdNewHex,_dRepIdNewBech32,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+  final _this = this as DRepDerivation;
+  return Object.hash(runtimeType,_this._dRepKeyHex,_this._credentialsBytes,_this._credentialsHex,_this._dRepIdLegacyBech32,_this._dRepIdNewBytes,_this._dRepIdNewHex,_this._dRepIdNewBech32,const DeepCollectionEquality().hash(_this.bytes));
+}
 
 @override
 String toString() {
-  return 'DRepDerivation(_dRepKeyHex: $_dRepKeyHex, _credentialsBytes: $_credentialsBytes, _credentialsHex: $_credentialsHex, _dRepIdLegacyBech32: $_dRepIdLegacyBech32, _dRepIdNewBytes: $_dRepIdNewBytes, _dRepIdNewHex: $_dRepIdNewHex, _dRepIdNewBech32: $_dRepIdNewBech32, bytes: $bytes)';
+  final _this = this as DRepDerivation;
+  return 'DRepDerivation(_dRepKeyHex: ${_this._dRepKeyHex}, _credentialsBytes: ${_this._credentialsBytes}, _credentialsHex: ${_this._credentialsHex}, _dRepIdLegacyBech32: ${_this._dRepIdLegacyBech32}, _dRepIdNewBytes: ${_this._dRepIdNewBytes}, _dRepIdNewHex: ${_this._dRepIdNewHex}, _dRepIdNewBech32: ${_this._dRepIdNewBech32}, bytes: ${_this.bytes})';
 }
 
 
@@ -373,7 +383,7 @@ class _$DRepDerivationCopyWithImpl<$Res>
 /// Create a copy of DRepDerivation
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? bytes = null,}) {
-  return _then(_self.copyWith(
+  return _then(DRepDerivation(
 bytes: null == bytes ? _self.bytes : bytes // ignore: cast_nullable_to_non_nullable
 as ByteList,
   ));
@@ -405,16 +415,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DRepDerivation&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DRepDerivation&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'DRepDerivation(bytes: $bytes)';
+    return 'DRepDerivation(bytes: $bytes)';
 }
 
 
@@ -479,11 +491,7 @@ ConstitutionalCommitee _$ConstitutionalCommiteeFromJson(
 /// @nodoc
 mixin _$ConstitutionalCommitee {
 
- String get hexCCKey;// credentials (hashed raw key) = _pubCCKeyHash
- Uint8List get credentialsBytes; String get hexCredential;// this is the CIP 105 (Legacy)
-// late final String bech32Credential = credentialsBytes.bech32Encode(_hrp);
-// CIP 129 (New)
- Uint8List get ccIdBytes; String get ccIdHex; String get ccIdBech32; String get _hrp;@byteListConverter ByteList get bytes;
+@byteListConverter ByteList get bytes;
 /// Create a copy of ConstitutionalCommitee
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -496,16 +504,21 @@ $ConstitutionalCommiteeCopyWith<ConstitutionalCommitee> get copyWith => _$Consti
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConstitutionalCommitee&&(identical(other.hexCCKey, hexCCKey) || other.hexCCKey == hexCCKey)&&const DeepCollectionEquality().equals(other.credentialsBytes, credentialsBytes)&&(identical(other.hexCredential, hexCredential) || other.hexCredential == hexCredential)&&const DeepCollectionEquality().equals(other.ccIdBytes, ccIdBytes)&&(identical(other.ccIdHex, ccIdHex) || other.ccIdHex == ccIdHex)&&(identical(other.ccIdBech32, ccIdBech32) || other.ccIdBech32 == ccIdBech32)&&(identical(other._hrp, _hrp) || other._hrp == _hrp)&&const DeepCollectionEquality().equals(other.bytes, bytes));
+  final _this = this as ConstitutionalCommitee;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConstitutionalCommitee&&(identical(other.hexCCKey, _this.hexCCKey) || other.hexCCKey == _this.hexCCKey)&&const DeepCollectionEquality().equals(other.credentialsBytes, _this.credentialsBytes)&&(identical(other.hexCredential, _this.hexCredential) || other.hexCredential == _this.hexCredential)&&const DeepCollectionEquality().equals(other.ccIdBytes, _this.ccIdBytes)&&(identical(other.ccIdHex, _this.ccIdHex) || other.ccIdHex == _this.ccIdHex)&&(identical(other.ccIdBech32, _this.ccIdBech32) || other.ccIdBech32 == _this.ccIdBech32)&&(identical(other._hrp, _this._hrp) || other._hrp == _this._hrp)&&const DeepCollectionEquality().equals(other.bytes, _this.bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,hexCCKey,const DeepCollectionEquality().hash(credentialsBytes),hexCredential,const DeepCollectionEquality().hash(ccIdBytes),ccIdHex,ccIdBech32,_hrp,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+  final _this = this as ConstitutionalCommitee;
+  return Object.hash(runtimeType,_this.hexCCKey,const DeepCollectionEquality().hash(_this.credentialsBytes),_this.hexCredential,const DeepCollectionEquality().hash(_this.ccIdBytes),_this.ccIdHex,_this.ccIdBech32,_this._hrp,const DeepCollectionEquality().hash(_this.bytes));
+}
 
 @override
 String toString() {
-  return 'ConstitutionalCommitee(hexCCKey: $hexCCKey, credentialsBytes: $credentialsBytes, hexCredential: $hexCredential, ccIdBytes: $ccIdBytes, ccIdHex: $ccIdHex, ccIdBech32: $ccIdBech32, _hrp: $_hrp, bytes: $bytes)';
+  final _this = this as ConstitutionalCommitee;
+  return 'ConstitutionalCommitee(hexCCKey: ${_this.hexCCKey}, credentialsBytes: ${_this.credentialsBytes}, hexCredential: ${_this.hexCredential}, ccIdBytes: ${_this.ccIdBytes}, ccIdHex: ${_this.ccIdHex}, ccIdBech32: ${_this.ccIdBech32}, _hrp: ${_this._hrp}, bytes: ${_this.bytes})';
 }
 
 
@@ -548,7 +561,7 @@ as ByteList,
 @JsonSerializable()
 
 class ConstitutionalCommiteeCold extends ConstitutionalCommitee {
-   ConstitutionalCommiteeCold({@byteListConverter required this.bytes, final  String? $type}): $type = $type ?? 'cold',super._();
+   ConstitutionalCommiteeCold({@byteListConverter required this.bytes,  String? $type}): $type = $type ?? 'cold',super._();
   factory ConstitutionalCommiteeCold.fromJson(Map<String, dynamic> json) => _$ConstitutionalCommiteeColdFromJson(json);
 
 @override@byteListConverter final  ByteList bytes;
@@ -570,16 +583,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConstitutionalCommiteeCold&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ConstitutionalCommiteeCold&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'ConstitutionalCommitee.cold(bytes: $bytes)';
+    return 'ConstitutionalCommitee.cold(bytes: $bytes)';
 }
 
 
@@ -621,7 +636,7 @@ as ByteList,
 @JsonSerializable()
 
 class ConstitutionalCommiteeHot extends ConstitutionalCommitee {
-   ConstitutionalCommiteeHot({@byteListConverter required this.bytes, final  String? $type}): $type = $type ?? 'hot',super._();
+   ConstitutionalCommiteeHot({@byteListConverter required this.bytes,  String? $type}): $type = $type ?? 'hot',super._();
   factory ConstitutionalCommiteeHot.fromJson(Map<String, dynamic> json) => _$ConstitutionalCommiteeHotFromJson(json);
 
 @override@byteListConverter final  ByteList bytes;
@@ -643,16 +658,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConstitutionalCommiteeHot&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ConstitutionalCommiteeHot&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'ConstitutionalCommitee.hot(bytes: $bytes)';
+    return 'ConstitutionalCommitee.hot(bytes: $bytes)';
 }
 
 

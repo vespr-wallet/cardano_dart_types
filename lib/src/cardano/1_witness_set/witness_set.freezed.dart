@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'witness_set.dart';
@@ -9,6 +9,7 @@ part of 'witness_set.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ListWithCborTypeCopyWith<T, ListWithCborType<T>> get copyWith => _$ListWithCbor
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ListWithCborType<T>&&const DeepCollectionEquality().equals(other.items, items)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType)&&const DeepCollectionEquality().equals(other.tags, tags));
+  final _this = this as ListWithCborType<T>;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ListWithCborType<T>&&const DeepCollectionEquality().equals(other.items, _this.items)&&(identical(other.cborLengthType, _this.cborLengthType) || other.cborLengthType == _this.cborLengthType)&&const DeepCollectionEquality().equals(other.tags, _this.tags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(items),cborLengthType,const DeepCollectionEquality().hash(tags));
+int get hashCode {
+  final _this = this as ListWithCborType<T>;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.items),_this.cborLengthType,const DeepCollectionEquality().hash(_this.tags));
+}
 
 @override
 String toString() {
-  return 'ListWithCborType<$T>(items: $items, cborLengthType: $cborLengthType, tags: $tags)';
+  final _this = this as ListWithCborType<T>;
+  return 'ListWithCborType<$T>(items: ${_this.items}, cborLengthType: ${_this.cborLengthType}, tags: ${_this.tags})';
 }
 
 
@@ -63,10 +69,10 @@ class _$ListWithCborTypeCopyWithImpl<T,$Res>
 /// Create a copy of ListWithCborType
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? items = null,Object? cborLengthType = null,Object? tags = freezed,}) {
-  return _then(_self.copyWith(
-items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
-as List<T>,cborLengthType: null == cborLengthType ? _self.cborLengthType : cborLengthType // ignore: cast_nullable_to_non_nullable
-as CborLengthType,tags: freezed == tags ? _self.tags : tags // ignore: cast_nullable_to_non_nullable
+  return _then(ListWithCborType(
+null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
+as List<T>,null == cborLengthType ? _self.cborLengthType : cborLengthType // ignore: cast_nullable_to_non_nullable
+as CborLengthType,freezed == tags ? _self.tags : tags // ignore: cast_nullable_to_non_nullable
 as List<int>?,
   ));
 }
@@ -79,7 +85,7 @@ as List<int>?,
 
 
 class _ListWithCborType<T> extends ListWithCborType<T> {
-  const _ListWithCborType(final  List<T> items, this.cborLengthType, final  List<int>? tags): _items = items,_tags = tags,super._();
+  const _ListWithCborType( List<T> items, this.cborLengthType,  List<int>? tags): _items = items,_tags = tags,super._();
   
 
  final  List<T> _items;
@@ -110,16 +116,18 @@ _$ListWithCborTypeCopyWith<T, _ListWithCborType<T>> get copyWith => __$ListWithC
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ListWithCborType<T>&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType)&&const DeepCollectionEquality().equals(other._tags, _tags));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ListWithCborType<T>&&const DeepCollectionEquality().equals(other.items, _items)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType)&&const DeepCollectionEquality().equals(other.tags, _tags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_items),cborLengthType,const DeepCollectionEquality().hash(_tags));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_items),cborLengthType,const DeepCollectionEquality().hash(_tags));
+}
 
 @override
 String toString() {
-  return 'ListWithCborType<$T>(items: $items, cborLengthType: $cborLengthType, tags: $tags)';
+    return 'ListWithCborType<$T>(items: $items, cborLengthType: $cborLengthType, tags: $tags)';
 }
 
 
@@ -162,8 +170,7 @@ as List<int>?,
 /// @nodoc
 mixin _$WitnessSet {
 
- ListWithCborType<WitnessVKey>? get ivkeyWitnesses; ListWithCborType<NativeScript>? get inativeScripts; ListWithCborType<WitnessBootstrap>? get ibootstrap; ListWithCborType<PlutusScriptV1>? get iplutusScriptV1; ListWithCborType<PlutusData>? get iplutusData; ListWithCborType<Redeemer>? get iredeemer; ListWithCborType<PlutusScriptV2>? get iplutusScriptV2; ListWithCborType<PlutusScriptV3>? get iplutusScriptV3; List<int>? get iCborTags; CborLengthType get lengthType;// Original map key order when not ascending (null = ascending)
- List<int>? get nonStandardKeyOrder;
+ ListWithCborType<WitnessVKey>? get ivkeyWitnesses; ListWithCborType<NativeScript>? get inativeScripts; ListWithCborType<WitnessBootstrap>? get ibootstrap; ListWithCborType<PlutusScriptV1>? get iplutusScriptV1; ListWithCborType<PlutusData>? get iplutusData; ListWithCborType<Redeemer>? get iredeemer; ListWithCborType<PlutusScriptV2>? get iplutusScriptV2; ListWithCborType<PlutusScriptV3>? get iplutusScriptV3; List<int>? get iCborTags; CborLengthType get lengthType; List<int>? get nonStandardKeyOrder;
 /// Create a copy of WitnessSet
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -174,16 +181,21 @@ $WitnessSetCopyWith<WitnessSet> get copyWith => _$WitnessSetCopyWithImpl<Witness
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WitnessSet&&(identical(other.ivkeyWitnesses, ivkeyWitnesses) || other.ivkeyWitnesses == ivkeyWitnesses)&&(identical(other.inativeScripts, inativeScripts) || other.inativeScripts == inativeScripts)&&(identical(other.ibootstrap, ibootstrap) || other.ibootstrap == ibootstrap)&&(identical(other.iplutusScriptV1, iplutusScriptV1) || other.iplutusScriptV1 == iplutusScriptV1)&&(identical(other.iplutusData, iplutusData) || other.iplutusData == iplutusData)&&(identical(other.iredeemer, iredeemer) || other.iredeemer == iredeemer)&&(identical(other.iplutusScriptV2, iplutusScriptV2) || other.iplutusScriptV2 == iplutusScriptV2)&&(identical(other.iplutusScriptV3, iplutusScriptV3) || other.iplutusScriptV3 == iplutusScriptV3)&&const DeepCollectionEquality().equals(other.iCborTags, iCborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.nonStandardKeyOrder, nonStandardKeyOrder));
+  final _this = this as WitnessSet;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WitnessSet&&(identical(other.ivkeyWitnesses, _this.ivkeyWitnesses) || other.ivkeyWitnesses == _this.ivkeyWitnesses)&&(identical(other.inativeScripts, _this.inativeScripts) || other.inativeScripts == _this.inativeScripts)&&(identical(other.ibootstrap, _this.ibootstrap) || other.ibootstrap == _this.ibootstrap)&&(identical(other.iplutusScriptV1, _this.iplutusScriptV1) || other.iplutusScriptV1 == _this.iplutusScriptV1)&&(identical(other.iplutusData, _this.iplutusData) || other.iplutusData == _this.iplutusData)&&(identical(other.iredeemer, _this.iredeemer) || other.iredeemer == _this.iredeemer)&&(identical(other.iplutusScriptV2, _this.iplutusScriptV2) || other.iplutusScriptV2 == _this.iplutusScriptV2)&&(identical(other.iplutusScriptV3, _this.iplutusScriptV3) || other.iplutusScriptV3 == _this.iplutusScriptV3)&&const DeepCollectionEquality().equals(other.iCborTags, _this.iCborTags)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType)&&const DeepCollectionEquality().equals(other.nonStandardKeyOrder, _this.nonStandardKeyOrder));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,ivkeyWitnesses,inativeScripts,ibootstrap,iplutusScriptV1,iplutusData,iredeemer,iplutusScriptV2,iplutusScriptV3,const DeepCollectionEquality().hash(iCborTags),lengthType,const DeepCollectionEquality().hash(nonStandardKeyOrder));
+int get hashCode {
+  final _this = this as WitnessSet;
+  return Object.hash(runtimeType,_this.ivkeyWitnesses,_this.inativeScripts,_this.ibootstrap,_this.iplutusScriptV1,_this.iplutusData,_this.iredeemer,_this.iplutusScriptV2,_this.iplutusScriptV3,const DeepCollectionEquality().hash(_this.iCborTags),_this.lengthType,const DeepCollectionEquality().hash(_this.nonStandardKeyOrder));
+}
 
 @override
 String toString() {
-  return 'WitnessSet(ivkeyWitnesses: $ivkeyWitnesses, inativeScripts: $inativeScripts, ibootstrap: $ibootstrap, iplutusScriptV1: $iplutusScriptV1, iplutusData: $iplutusData, iredeemer: $iredeemer, iplutusScriptV2: $iplutusScriptV2, iplutusScriptV3: $iplutusScriptV3, iCborTags: $iCborTags, lengthType: $lengthType, nonStandardKeyOrder: $nonStandardKeyOrder)';
+  final _this = this as WitnessSet;
+  return 'WitnessSet(ivkeyWitnesses: ${_this.ivkeyWitnesses}, inativeScripts: ${_this.inativeScripts}, ibootstrap: ${_this.ibootstrap}, iplutusScriptV1: ${_this.iplutusScriptV1}, iplutusData: ${_this.iplutusData}, iredeemer: ${_this.iredeemer}, iplutusScriptV2: ${_this.iplutusScriptV2}, iplutusScriptV3: ${_this.iplutusScriptV3}, iCborTags: ${_this.iCborTags}, lengthType: ${_this.lengthType}, nonStandardKeyOrder: ${_this.nonStandardKeyOrder})';
 }
 
 
@@ -212,7 +224,7 @@ class _$WitnessSetCopyWithImpl<$Res>
 /// Create a copy of WitnessSet
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? ivkeyWitnesses = freezed,Object? inativeScripts = freezed,Object? ibootstrap = freezed,Object? iplutusScriptV1 = freezed,Object? iplutusData = freezed,Object? iredeemer = freezed,Object? iplutusScriptV2 = freezed,Object? iplutusScriptV3 = freezed,Object? iCborTags = freezed,Object? lengthType = null,Object? nonStandardKeyOrder = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(WitnessSet(
 ivkeyWitnesses: freezed == ivkeyWitnesses ? _self.ivkeyWitnesses : ivkeyWitnesses // ignore: cast_nullable_to_non_nullable
 as ListWithCborType<WitnessVKey>?,inativeScripts: freezed == inativeScripts ? _self.inativeScripts : inativeScripts // ignore: cast_nullable_to_non_nullable
 as ListWithCborType<NativeScript>?,ibootstrap: freezed == ibootstrap ? _self.ibootstrap : ibootstrap // ignore: cast_nullable_to_non_nullable
@@ -332,7 +344,7 @@ $ListWithCborTypeCopyWith<PlutusScriptV3, $Res>? get iplutusScriptV3 {
 
 
 class _WitnessSet extends WitnessSet {
-  const _WitnessSet({this.ivkeyWitnesses, this.inativeScripts, this.ibootstrap, this.iplutusScriptV1, this.iplutusData, this.iredeemer, this.iplutusScriptV2, this.iplutusScriptV3, final  List<int>? iCborTags, this.lengthType = CborLengthType.definite, final  List<int>? nonStandardKeyOrder}): _iCborTags = iCborTags,_nonStandardKeyOrder = nonStandardKeyOrder,super._();
+  const _WitnessSet({this.ivkeyWitnesses, this.inativeScripts, this.ibootstrap, this.iplutusScriptV1, this.iplutusData, this.iredeemer, this.iplutusScriptV2, this.iplutusScriptV3,  List<int>? iCborTags, this.lengthType = CborLengthType.definite,  List<int>? nonStandardKeyOrder}): _iCborTags = iCborTags,_nonStandardKeyOrder = nonStandardKeyOrder,super._();
   
 
 @override final  ListWithCborType<WitnessVKey>? ivkeyWitnesses;
@@ -353,9 +365,7 @@ class _WitnessSet extends WitnessSet {
 }
 
 @override@JsonKey() final  CborLengthType lengthType;
-// Original map key order when not ascending (null = ascending)
  final  List<int>? _nonStandardKeyOrder;
-// Original map key order when not ascending (null = ascending)
 @override List<int>? get nonStandardKeyOrder {
   final value = _nonStandardKeyOrder;
   if (value == null) return null;
@@ -375,16 +385,18 @@ _$WitnessSetCopyWith<_WitnessSet> get copyWith => __$WitnessSetCopyWithImpl<_Wit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WitnessSet&&(identical(other.ivkeyWitnesses, ivkeyWitnesses) || other.ivkeyWitnesses == ivkeyWitnesses)&&(identical(other.inativeScripts, inativeScripts) || other.inativeScripts == inativeScripts)&&(identical(other.ibootstrap, ibootstrap) || other.ibootstrap == ibootstrap)&&(identical(other.iplutusScriptV1, iplutusScriptV1) || other.iplutusScriptV1 == iplutusScriptV1)&&(identical(other.iplutusData, iplutusData) || other.iplutusData == iplutusData)&&(identical(other.iredeemer, iredeemer) || other.iredeemer == iredeemer)&&(identical(other.iplutusScriptV2, iplutusScriptV2) || other.iplutusScriptV2 == iplutusScriptV2)&&(identical(other.iplutusScriptV3, iplutusScriptV3) || other.iplutusScriptV3 == iplutusScriptV3)&&const DeepCollectionEquality().equals(other._iCborTags, _iCborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other._nonStandardKeyOrder, _nonStandardKeyOrder));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _WitnessSet&&(identical(other.ivkeyWitnesses, ivkeyWitnesses) || other.ivkeyWitnesses == ivkeyWitnesses)&&(identical(other.inativeScripts, inativeScripts) || other.inativeScripts == inativeScripts)&&(identical(other.ibootstrap, ibootstrap) || other.ibootstrap == ibootstrap)&&(identical(other.iplutusScriptV1, iplutusScriptV1) || other.iplutusScriptV1 == iplutusScriptV1)&&(identical(other.iplutusData, iplutusData) || other.iplutusData == iplutusData)&&(identical(other.iredeemer, iredeemer) || other.iredeemer == iredeemer)&&(identical(other.iplutusScriptV2, iplutusScriptV2) || other.iplutusScriptV2 == iplutusScriptV2)&&(identical(other.iplutusScriptV3, iplutusScriptV3) || other.iplutusScriptV3 == iplutusScriptV3)&&const DeepCollectionEquality().equals(other.iCborTags, _iCborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.nonStandardKeyOrder, _nonStandardKeyOrder));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,ivkeyWitnesses,inativeScripts,ibootstrap,iplutusScriptV1,iplutusData,iredeemer,iplutusScriptV2,iplutusScriptV3,const DeepCollectionEquality().hash(_iCborTags),lengthType,const DeepCollectionEquality().hash(_nonStandardKeyOrder));
+int get hashCode {
+    return Object.hash(runtimeType,ivkeyWitnesses,inativeScripts,ibootstrap,iplutusScriptV1,iplutusData,iredeemer,iplutusScriptV2,iplutusScriptV3,const DeepCollectionEquality().hash(_iCborTags),lengthType,const DeepCollectionEquality().hash(_nonStandardKeyOrder));
+}
 
 @override
 String toString() {
-  return 'WitnessSet(ivkeyWitnesses: $ivkeyWitnesses, inativeScripts: $inativeScripts, ibootstrap: $ibootstrap, iplutusScriptV1: $iplutusScriptV1, iplutusData: $iplutusData, iredeemer: $iredeemer, iplutusScriptV2: $iplutusScriptV2, iplutusScriptV3: $iplutusScriptV3, iCborTags: $iCborTags, lengthType: $lengthType, nonStandardKeyOrder: $nonStandardKeyOrder)';
+    return 'WitnessSet(ivkeyWitnesses: $ivkeyWitnesses, inativeScripts: $inativeScripts, ibootstrap: $ibootstrap, iplutusScriptV1: $iplutusScriptV1, iplutusData: $iplutusData, iredeemer: $iredeemer, iplutusScriptV2: $iplutusScriptV2, iplutusScriptV3: $iplutusScriptV3, iCborTags: $iCborTags, lengthType: $lengthType, nonStandardKeyOrder: $nonStandardKeyOrder)';
 }
 
 

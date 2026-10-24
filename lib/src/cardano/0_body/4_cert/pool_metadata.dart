@@ -37,7 +37,6 @@ sealed class PoolMetadata with _$PoolMetadata implements CborEncodable {
     );
   }
 
-  @override
   late final Lazy<String> metadataHashHex = Lazy(() => metadataHash.hexEncode());
 
   @override

@@ -35,7 +35,7 @@ void conditionalAssert(bool Function() fct, [String? message]) {
 }
 
 /// outer wrapper of a Cardano blockchain transaction.
-@freezed
+@Freezed(copyWith: false) // hand-written below, see [$CardanoTransactionCopyWith]
 sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodable {
   factory CardanoTransaction({
     required CardanoTransactionBody body,
@@ -83,6 +83,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     required CBORMetadata? auxiliaryData, // 3
     @Default(CborLengthType.definite) CborLengthType lengthType,
   }) = _CardanoTransaction;
+
+  $CardanoTransactionCopyWith<CardanoTransaction> get copyWith => $CardanoTransactionCopyWith(this, (value) => value);
 
   CardanoTransaction copyWithAdditionalSignatures(WitnessSet additionalWitnessSet) =>
       copyWith(witnessSet: witnessSet + additionalWitnessSet);
@@ -452,6 +454,64 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           [],
       votes: thisWalletVotes,
     );
+  }
+}
+
+// ponytail: hand-written copy of the copyWith freezed 3 generated. freezed 4 builds it on the
+// public `CardanoTransaction(...)` factory instead of `_hidden` (https://github.com/rrousselGit/freezed/issues/1376).
+// Back to `@freezed` once that is fixed.
+abstract mixin class $CardanoTransactionCopyWith<$Res> {
+  factory $CardanoTransactionCopyWith(CardanoTransaction value, $Res Function(CardanoTransaction) then) =
+      _CardanoTransactionCopyWithImpl;
+
+  @useResult
+  $Res call({
+    CardanoTransactionBody body,
+    WitnessSet witnessSet,
+    bool isValidDi,
+    CBORMetadata? auxiliaryData,
+    CborLengthType lengthType,
+  });
+
+  $CardanoTransactionBodyCopyWith<$Res> get body;
+  $WitnessSetCopyWith<$Res> get witnessSet;
+  $CBORMetadataCopyWith<$Res>? get auxiliaryData;
+}
+
+class _CardanoTransactionCopyWithImpl<$Res> implements $CardanoTransactionCopyWith<$Res> {
+  _CardanoTransactionCopyWithImpl(this._self, this._then);
+
+  final CardanoTransaction _self;
+  final $Res Function(CardanoTransaction) _then;
+
+  @override
+  $Res call({
+    CardanoTransactionBody? body,
+    WitnessSet? witnessSet,
+    bool? isValidDi,
+    Object? auxiliaryData = freezed,
+    CborLengthType? lengthType,
+  }) => _then(
+    CardanoTransaction._hidden(
+      body: body ?? _self.body,
+      witnessSet: witnessSet ?? _self.witnessSet,
+      isValidDi: isValidDi ?? _self.isValidDi,
+      auxiliaryData: freezed == auxiliaryData ? _self.auxiliaryData : auxiliaryData as CBORMetadata?,
+      lengthType: lengthType ?? _self.lengthType,
+    ),
+  );
+
+  @override
+  $CardanoTransactionBodyCopyWith<$Res> get body =>
+      $CardanoTransactionBodyCopyWith(_self.body, (value) => call(body: value));
+
+  @override
+  $WitnessSetCopyWith<$Res> get witnessSet => $WitnessSetCopyWith(_self.witnessSet, (value) => call(witnessSet: value));
+
+  @override
+  $CBORMetadataCopyWith<$Res>? get auxiliaryData {
+    final auxiliaryData = _self.auxiliaryData;
+    return auxiliaryData == null ? null : $CBORMetadataCopyWith(auxiliaryData, (value) => call(auxiliaryData: value));
   }
 }
 

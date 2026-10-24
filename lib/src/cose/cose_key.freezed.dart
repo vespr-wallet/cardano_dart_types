@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cose_key.dart';
@@ -9,13 +9,13 @@ part of 'cose_key.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CoseKey {
 
- Uint8List get keyId;// verification key bytes
- CborValue get algorithmId; CborValue get crvKey; CborValue get keyType;
+ Uint8List get keyId; CborValue get algorithmId; CborValue get crvKey; CborValue get keyType;
 /// Create a copy of CoseKey
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,21 @@ $CoseKeyCopyWith<CoseKey> get copyWith => _$CoseKeyCopyWithImpl<CoseKey>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseKey&&const DeepCollectionEquality().equals(other.keyId, keyId)&&(identical(other.algorithmId, algorithmId) || other.algorithmId == algorithmId)&&(identical(other.crvKey, crvKey) || other.crvKey == crvKey)&&(identical(other.keyType, keyType) || other.keyType == keyType));
+  final _this = this as CoseKey;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseKey&&const DeepCollectionEquality().equals(other.keyId, _this.keyId)&&(identical(other.algorithmId, _this.algorithmId) || other.algorithmId == _this.algorithmId)&&(identical(other.crvKey, _this.crvKey) || other.crvKey == _this.crvKey)&&(identical(other.keyType, _this.keyType) || other.keyType == _this.keyType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(keyId),algorithmId,crvKey,keyType);
+int get hashCode {
+  final _this = this as CoseKey;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.keyId),_this.algorithmId,_this.crvKey,_this.keyType);
+}
 
 @override
 String toString() {
-  return 'CoseKey(keyId: $keyId, algorithmId: $algorithmId, crvKey: $crvKey, keyType: $keyType)';
+  final _this = this as CoseKey;
+  return 'CoseKey(keyId: ${_this.keyId}, algorithmId: ${_this.algorithmId}, crvKey: ${_this.crvKey}, keyType: ${_this.keyType})';
 }
 
 
@@ -64,7 +69,7 @@ class _$CoseKeyCopyWithImpl<$Res>
 /// Create a copy of CoseKey
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? keyId = null,Object? algorithmId = null,Object? crvKey = null,Object? keyType = null,}) {
-  return _then(_self.copyWith(
+  return _then(CoseKey(
 keyId: null == keyId ? _self.keyId : keyId // ignore: cast_nullable_to_non_nullable
 as Uint8List,algorithmId: null == algorithmId ? _self.algorithmId : algorithmId // ignore: cast_nullable_to_non_nullable
 as CborValue,crvKey: null == crvKey ? _self.crvKey : crvKey // ignore: cast_nullable_to_non_nullable
@@ -85,7 +90,6 @@ class _CoseKey extends CoseKey {
   
 
 @override final  Uint8List keyId;
-// verification key bytes
 @override@JsonKey() final  CborValue algorithmId;
 @override@JsonKey() final  CborValue crvKey;
 @override@JsonKey() final  CborValue keyType;
@@ -100,16 +104,18 @@ _$CoseKeyCopyWith<_CoseKey> get copyWith => __$CoseKeyCopyWithImpl<_CoseKey>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseKey&&const DeepCollectionEquality().equals(other.keyId, keyId)&&(identical(other.algorithmId, algorithmId) || other.algorithmId == algorithmId)&&(identical(other.crvKey, crvKey) || other.crvKey == crvKey)&&(identical(other.keyType, keyType) || other.keyType == keyType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseKey&&const DeepCollectionEquality().equals(other.keyId, keyId)&&(identical(other.algorithmId, algorithmId) || other.algorithmId == algorithmId)&&(identical(other.crvKey, crvKey) || other.crvKey == crvKey)&&(identical(other.keyType, keyType) || other.keyType == keyType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(keyId),algorithmId,crvKey,keyType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(keyId),algorithmId,crvKey,keyType);
+}
 
 @override
 String toString() {
-  return 'CoseKey(keyId: $keyId, algorithmId: $algorithmId, crvKey: $crvKey, keyType: $keyType)';
+    return 'CoseKey(keyId: $keyId, algorithmId: $algorithmId, crvKey: $crvKey, keyType: $keyType)';
 }
 
 

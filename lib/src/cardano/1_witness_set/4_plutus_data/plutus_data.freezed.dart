@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'plutus_data.dart';
@@ -9,6 +9,7 @@ part of 'plutus_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$PlutusData {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'PlutusData()';
+    return 'PlutusData()';
 }
 
 
@@ -61,16 +62,18 @@ $PlutusData_BigIntCopyWith<PlutusData_BigInt> get copyWith => _$PlutusData_BigIn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_BigInt&&(identical(other.value, value) || other.value == value));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_BigInt&&(identical(other.value, value) || other.value == value));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode {
+    return Object.hash(runtimeType,value);
+}
 
 @override
 String toString() {
-  return 'PlutusData.bigInt(value: $value)';
+    return 'PlutusData.bigInt(value: $value)';
 }
 
 
@@ -112,7 +115,7 @@ as BigInt,
 
 
 class PlutusData_DefiniteBytes extends PlutusData {
-   PlutusData_DefiniteBytes(final  List<int> bytes, final  List<int> tags): _bytes = bytes,_tags = tags,super._();
+   PlutusData_DefiniteBytes( List<int> bytes,  List<int> tags): _bytes = bytes,_tags = tags,super._();
   
 
  final  List<int> _bytes;
@@ -140,16 +143,18 @@ $PlutusData_DefiniteBytesCopyWith<PlutusData_DefiniteBytes> get copyWith => _$Pl
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_DefiniteBytes&&const DeepCollectionEquality().equals(other._bytes, _bytes)&&const DeepCollectionEquality().equals(other._tags, _tags));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_DefiniteBytes&&const DeepCollectionEquality().equals(other.bytes, _bytes)&&const DeepCollectionEquality().equals(other.tags, _tags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_bytes),const DeepCollectionEquality().hash(_tags));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_bytes),const DeepCollectionEquality().hash(_tags));
+}
 
 @override
 String toString() {
-  return 'PlutusData.definiteBytes(bytes: $bytes, tags: $tags)';
+    return 'PlutusData.definiteBytes(bytes: $bytes, tags: $tags)';
 }
 
 
@@ -192,7 +197,7 @@ as List<int>,
 
 
 class PlutusData_IndefiniteBytes extends PlutusData {
-   PlutusData_IndefiniteBytes(final  List<List<int>> bytesList, final  List<int> tags): _bytesList = bytesList,_tags = tags,super._();
+   PlutusData_IndefiniteBytes( List<List<int>> bytesList,  List<int> tags): _bytesList = bytesList,_tags = tags,super._();
   
 
  final  List<List<int>> _bytesList;
@@ -220,16 +225,18 @@ $PlutusData_IndefiniteBytesCopyWith<PlutusData_IndefiniteBytes> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_IndefiniteBytes&&const DeepCollectionEquality().equals(other._bytesList, _bytesList)&&const DeepCollectionEquality().equals(other._tags, _tags));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_IndefiniteBytes&&const DeepCollectionEquality().equals(other.bytesList, _bytesList)&&const DeepCollectionEquality().equals(other.tags, _tags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_bytesList),const DeepCollectionEquality().hash(_tags));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_bytesList),const DeepCollectionEquality().hash(_tags));
+}
 
 @override
 String toString() {
-  return 'PlutusData.indefiniteBytes(bytesList: $bytesList, tags: $tags)';
+    return 'PlutusData.indefiniteBytes(bytesList: $bytesList, tags: $tags)';
 }
 
 
@@ -272,7 +279,7 @@ as List<int>,
 
 
 class PlutusData_Constr extends PlutusData {
-   PlutusData_Constr(this.alternative, this.data, final  List<int> tags, this.cborLengthType): _tags = tags,super._();
+   PlutusData_Constr(this.alternative, this.data,  List<int> tags, this.cborLengthType): _tags = tags,super._();
   
 
  final  int alternative;
@@ -296,16 +303,18 @@ $PlutusData_ConstrCopyWith<PlutusData_Constr> get copyWith => _$PlutusData_Const
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_Constr&&(identical(other.alternative, alternative) || other.alternative == alternative)&&const DeepCollectionEquality().equals(other.data, data)&&const DeepCollectionEquality().equals(other._tags, _tags)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_Constr&&(identical(other.alternative, alternative) || other.alternative == alternative)&&const DeepCollectionEquality().equals(other.data, data)&&const DeepCollectionEquality().equals(other.tags, _tags)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,alternative,const DeepCollectionEquality().hash(data),const DeepCollectionEquality().hash(_tags),cborLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,alternative,const DeepCollectionEquality().hash(data),const DeepCollectionEquality().hash(_tags),cborLengthType);
+}
 
 @override
 String toString() {
-  return 'PlutusData.constr(alternative: $alternative, data: $data, tags: $tags, cborLengthType: $cborLengthType)';
+    return 'PlutusData.constr(alternative: $alternative, data: $data, tags: $tags, cborLengthType: $cborLengthType)';
 }
 
 
@@ -350,7 +359,7 @@ as CborLengthType,
 
 
 class PlutusData_List extends PlutusData {
-   PlutusData_List(final  List<PlutusData> data, final  List<int> tags, this.cborLengthType): _data = data,_tags = tags,super._();
+   PlutusData_List( List<PlutusData> data,  List<int> tags, this.cborLengthType): _data = data,_tags = tags,super._();
   
 
  final  List<PlutusData> _data;
@@ -379,16 +388,18 @@ $PlutusData_ListCopyWith<PlutusData_List> get copyWith => _$PlutusData_ListCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_List&&const DeepCollectionEquality().equals(other._data, _data)&&const DeepCollectionEquality().equals(other._tags, _tags)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_List&&const DeepCollectionEquality().equals(other.data, _data)&&const DeepCollectionEquality().equals(other.tags, _tags)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_tags),cborLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_tags),cborLengthType);
+}
 
 @override
 String toString() {
-  return 'PlutusData.list(data: $data, tags: $tags, cborLengthType: $cborLengthType)';
+    return 'PlutusData.list(data: $data, tags: $tags, cborLengthType: $cborLengthType)';
 }
 
 
@@ -432,7 +443,7 @@ as CborLengthType,
 
 
 class PlutusData_Map extends PlutusData {
-   PlutusData_Map(final  Map<PlutusData, PlutusData> data, final  List<int> tags, this.cborLengthType): _data = data,_tags = tags,super._();
+   PlutusData_Map( Map<PlutusData, PlutusData> data,  List<int> tags, this.cborLengthType): _data = data,_tags = tags,super._();
   
 
  final  Map<PlutusData, PlutusData> _data;
@@ -461,16 +472,18 @@ $PlutusData_MapCopyWith<PlutusData_Map> get copyWith => _$PlutusData_MapCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_Map&&const DeepCollectionEquality().equals(other._data, _data)&&const DeepCollectionEquality().equals(other._tags, _tags)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusData_Map&&const DeepCollectionEquality().equals(other.data, _data)&&const DeepCollectionEquality().equals(other.tags, _tags)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_tags),cborLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_tags),cborLengthType);
+}
 
 @override
 String toString() {
-  return 'PlutusData.map(data: $data, tags: $tags, cborLengthType: $cborLengthType)';
+    return 'PlutusData.map(data: $data, tags: $tags, cborLengthType: $cborLengthType)';
 }
 
 

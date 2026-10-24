@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cardano_address.dart';
@@ -9,6 +9,7 @@ part of 'cardano_address.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 CardanoAddress _$CardanoAddressFromJson(
@@ -50,7 +51,7 @@ CardanoAddress _$CardanoAddressFromJson(
 /// @nodoc
 mixin _$CardanoAddress {
 
- String get hrp; String get bech32Encoded; String get hexEncoded; Uint8List get credentialsBytes; Uint8List? get stakeCredentialsBytes; String get credentials; String get credentialsBech32; String? get stakeCredentials; String? get stakeBech32Encoded; NetworkId get networkId; Lazy<CredentialType> get credentialsType; AddressType get addressType;@byteListConverter ByteList get bytes;
+@byteListConverter ByteList get bytes;
 /// Create a copy of CardanoAddress
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -63,16 +64,21 @@ $CardanoAddressCopyWith<CardanoAddress> get copyWith => _$CardanoAddressCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddress&&(identical(other.hrp, hrp) || other.hrp == hrp)&&(identical(other.bech32Encoded, bech32Encoded) || other.bech32Encoded == bech32Encoded)&&(identical(other.hexEncoded, hexEncoded) || other.hexEncoded == hexEncoded)&&const DeepCollectionEquality().equals(other.credentialsBytes, credentialsBytes)&&const DeepCollectionEquality().equals(other.stakeCredentialsBytes, stakeCredentialsBytes)&&(identical(other.credentials, credentials) || other.credentials == credentials)&&(identical(other.credentialsBech32, credentialsBech32) || other.credentialsBech32 == credentialsBech32)&&(identical(other.stakeCredentials, stakeCredentials) || other.stakeCredentials == stakeCredentials)&&(identical(other.stakeBech32Encoded, stakeBech32Encoded) || other.stakeBech32Encoded == stakeBech32Encoded)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&(identical(other.credentialsType, credentialsType) || other.credentialsType == credentialsType)&&(identical(other.addressType, addressType) || other.addressType == addressType)&&const DeepCollectionEquality().equals(other.bytes, bytes));
+  final _this = this as CardanoAddress;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddress&&(identical(other.hrp, _this.hrp) || other.hrp == _this.hrp)&&(identical(other.bech32Encoded, _this.bech32Encoded) || other.bech32Encoded == _this.bech32Encoded)&&(identical(other.hexEncoded, _this.hexEncoded) || other.hexEncoded == _this.hexEncoded)&&const DeepCollectionEquality().equals(other.credentialsBytes, _this.credentialsBytes)&&const DeepCollectionEquality().equals(other.stakeCredentialsBytes, _this.stakeCredentialsBytes)&&(identical(other.credentials, _this.credentials) || other.credentials == _this.credentials)&&(identical(other.credentialsBech32, _this.credentialsBech32) || other.credentialsBech32 == _this.credentialsBech32)&&(identical(other.stakeCredentials, _this.stakeCredentials) || other.stakeCredentials == _this.stakeCredentials)&&(identical(other.stakeBech32Encoded, _this.stakeBech32Encoded) || other.stakeBech32Encoded == _this.stakeBech32Encoded)&&(identical(other.networkId, _this.networkId) || other.networkId == _this.networkId)&&(identical(other.credentialsType, _this.credentialsType) || other.credentialsType == _this.credentialsType)&&(identical(other.addressType, _this.addressType) || other.addressType == _this.addressType)&&const DeepCollectionEquality().equals(other.bytes, _this.bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,hrp,bech32Encoded,hexEncoded,const DeepCollectionEquality().hash(credentialsBytes),const DeepCollectionEquality().hash(stakeCredentialsBytes),credentials,credentialsBech32,stakeCredentials,stakeBech32Encoded,networkId,credentialsType,addressType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+  final _this = this as CardanoAddress;
+  return Object.hash(runtimeType,_this.hrp,_this.bech32Encoded,_this.hexEncoded,const DeepCollectionEquality().hash(_this.credentialsBytes),const DeepCollectionEquality().hash(_this.stakeCredentialsBytes),_this.credentials,_this.credentialsBech32,_this.stakeCredentials,_this.stakeBech32Encoded,_this.networkId,_this.credentialsType,_this.addressType,const DeepCollectionEquality().hash(_this.bytes));
+}
 
 @override
 String toString() {
-  return 'CardanoAddress(hrp: $hrp, bech32Encoded: $bech32Encoded, hexEncoded: $hexEncoded, credentialsBytes: $credentialsBytes, stakeCredentialsBytes: $stakeCredentialsBytes, credentials: $credentials, credentialsBech32: $credentialsBech32, stakeCredentials: $stakeCredentials, stakeBech32Encoded: $stakeBech32Encoded, networkId: $networkId, credentialsType: $credentialsType, addressType: $addressType, bytes: $bytes)';
+  final _this = this as CardanoAddress;
+  return 'CardanoAddress(hrp: ${_this.hrp}, bech32Encoded: ${_this.bech32Encoded}, hexEncoded: ${_this.hexEncoded}, credentialsBytes: ${_this.credentialsBytes}, stakeCredentialsBytes: ${_this.stakeCredentialsBytes}, credentials: ${_this.credentials}, credentialsBech32: ${_this.credentialsBech32}, stakeCredentials: ${_this.stakeCredentials}, stakeBech32Encoded: ${_this.stakeBech32Encoded}, networkId: ${_this.networkId}, credentialsType: ${_this.credentialsType}, addressType: ${_this.addressType}, bytes: ${_this.bytes})';
 }
 
 
@@ -115,7 +121,7 @@ as ByteList,
 @JsonSerializable()
 
 class CardanoAddressByron extends CardanoAddress {
-   CardanoAddressByron({@byteListConverter required this.bytes, final  String? $type}): $type = $type ?? 'byronRaw',super._();
+   CardanoAddressByron({@byteListConverter required this.bytes,  String? $type}): $type = $type ?? 'byronRaw',super._();
   factory CardanoAddressByron.fromJson(Map<String, dynamic> json) => _$CardanoAddressByronFromJson(json);
 
 @override@byteListConverter final  ByteList bytes;
@@ -137,16 +143,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressByron&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressByron&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'CardanoAddress.byronRaw(bytes: $bytes)';
+    return 'CardanoAddress.byronRaw(bytes: $bytes)';
 }
 
 
@@ -188,7 +196,7 @@ as ByteList,
 @JsonSerializable()
 
 class CardanoAddressPointer extends CardanoAddress {
-   CardanoAddressPointer({@byteListConverter required this.bytes, final  String? $type}): $type = $type ?? 'pointerRaw',super._();
+   CardanoAddressPointer({@byteListConverter required this.bytes,  String? $type}): $type = $type ?? 'pointerRaw',super._();
   factory CardanoAddressPointer.fromJson(Map<String, dynamic> json) => _$CardanoAddressPointerFromJson(json);
 
 @override@byteListConverter final  ByteList bytes;
@@ -210,16 +218,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressPointer&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressPointer&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'CardanoAddress.pointerRaw(bytes: $bytes)';
+    return 'CardanoAddress.pointerRaw(bytes: $bytes)';
 }
 
 
@@ -261,7 +271,7 @@ as ByteList,
 @JsonSerializable()
 
 class CardanoAddressBase extends CardanoAddress {
-   CardanoAddressBase({@byteListConverter required this.bytes, final  String? $type}): $type = $type ?? 'baseRaw',super._();
+   CardanoAddressBase({@byteListConverter required this.bytes,  String? $type}): $type = $type ?? 'baseRaw',super._();
   factory CardanoAddressBase.fromJson(Map<String, dynamic> json) => _$CardanoAddressBaseFromJson(json);
 
 @override@byteListConverter final  ByteList bytes;
@@ -283,16 +293,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressBase&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressBase&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'CardanoAddress.baseRaw(bytes: $bytes)';
+    return 'CardanoAddress.baseRaw(bytes: $bytes)';
 }
 
 
@@ -334,7 +346,7 @@ as ByteList,
 @JsonSerializable()
 
 class CardanoAddressEnterprise extends CardanoAddress {
-   CardanoAddressEnterprise({@byteListConverter required this.bytes, final  String? $type}): $type = $type ?? 'enterpriseRaw',super._();
+   CardanoAddressEnterprise({@byteListConverter required this.bytes,  String? $type}): $type = $type ?? 'enterpriseRaw',super._();
   factory CardanoAddressEnterprise.fromJson(Map<String, dynamic> json) => _$CardanoAddressEnterpriseFromJson(json);
 
 @override@byteListConverter final  ByteList bytes;
@@ -356,16 +368,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressEnterprise&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressEnterprise&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'CardanoAddress.enterpriseRaw(bytes: $bytes)';
+    return 'CardanoAddress.enterpriseRaw(bytes: $bytes)';
 }
 
 
@@ -407,7 +421,7 @@ as ByteList,
 @JsonSerializable()
 
 class CardanoAddressReward extends CardanoAddress {
-   CardanoAddressReward({@byteListConverter required this.bytes, final  String? $type}): $type = $type ?? 'rewardRaw',super._();
+   CardanoAddressReward({@byteListConverter required this.bytes,  String? $type}): $type = $type ?? 'rewardRaw',super._();
   factory CardanoAddressReward.fromJson(Map<String, dynamic> json) => _$CardanoAddressRewardFromJson(json);
 
 @override@byteListConverter final  ByteList bytes;
@@ -429,16 +443,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressReward&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoAddressReward&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'CardanoAddress.rewardRaw(bytes: $bytes)';
+    return 'CardanoAddress.rewardRaw(bytes: $bytes)';
 }
 
 

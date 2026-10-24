@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'asset.dart';
@@ -9,6 +9,7 @@ part of 'asset.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -27,7 +28,8 @@ $ValueCopyWith<Value> get copyWith => _$ValueCopyWithImpl<Value>(this as Value, 
 
 @override
 String toString() {
-  return 'Value(lovelace: $lovelace)';
+  final _this = this as Value;
+  return 'Value(lovelace: ${_this.lovelace})';
 }
 
 
@@ -87,7 +89,7 @@ $Value_v0CopyWith<Value_v0> get copyWith => _$Value_v0CopyWithImpl<Value_v0>(thi
 
 @override
 String toString() {
-  return 'Value.v0(lovelace: $lovelace)';
+    return 'Value.v0(lovelace: $lovelace)';
 }
 
 
@@ -129,7 +131,7 @@ as CborInt,
 
 
 class Value_v1 extends Value {
-  const Value_v1({required this.lovelace, required final  List<MultiAsset> mA, this.lengthType = CborLengthType.definite, this.multiAssetsLengthType = CborLengthType.definite}): _mA = mA,super._();
+  const Value_v1({required this.lovelace, required  List<MultiAsset> mA, this.lengthType = CborLengthType.definite, this.multiAssetsLengthType = CborLengthType.definite}): _mA = mA,super._();
   
 
 @override final  CborInt lovelace;
@@ -155,7 +157,7 @@ $Value_v1CopyWith<Value_v1> get copyWith => _$Value_v1CopyWithImpl<Value_v1>(thi
 
 @override
 String toString() {
-  return 'Value.v1(lovelace: $lovelace, mA: $mA, lengthType: $lengthType, multiAssetsLengthType: $multiAssetsLengthType)';
+    return 'Value.v1(lovelace: $lovelace, mA: $mA, lengthType: $lengthType, multiAssetsLengthType: $multiAssetsLengthType)';
 }
 
 
@@ -212,7 +214,8 @@ $MultiAssetCopyWith<MultiAsset> get copyWith => _$MultiAssetCopyWithImpl<MultiAs
 
 @override
 String toString() {
-  return 'MultiAsset(policyId: $policyId, assets: $assets, lengthType: $lengthType)';
+  final _this = this as MultiAsset;
+  return 'MultiAsset(policyId: ${_this.policyId}, assets: ${_this.assets}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -241,7 +244,7 @@ class _$MultiAssetCopyWithImpl<$Res>
 /// Create a copy of MultiAsset
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? policyId = null,Object? assets = null,Object? lengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(MultiAsset(
 policyId: null == policyId ? _self.policyId : policyId // ignore: cast_nullable_to_non_nullable
 as PolicyId,assets: null == assets ? _self.assets : assets // ignore: cast_nullable_to_non_nullable
 as List<Asset>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
@@ -266,7 +269,7 @@ $PolicyIdCopyWith<$Res> get policyId {
 
 
 class _MultiAsset extends MultiAsset {
-  const _MultiAsset({required this.policyId, required final  List<Asset> assets, this.lengthType = CborLengthType.definite}): _assets = assets,super._();
+  const _MultiAsset({required this.policyId, required  List<Asset> assets, this.lengthType = CborLengthType.definite}): _assets = assets,super._();
   
 
 @override final  PolicyId policyId;
@@ -291,7 +294,7 @@ _$MultiAssetCopyWith<_MultiAsset> get copyWith => __$MultiAssetCopyWithImpl<_Mul
 
 @override
 String toString() {
-  return 'MultiAsset(policyId: $policyId, assets: $assets, lengthType: $lengthType)';
+    return 'MultiAsset(policyId: $policyId, assets: $assets, lengthType: $lengthType)';
 }
 
 
@@ -354,16 +357,21 @@ $AssetCopyWith<Asset> get copyWith => _$AssetCopyWithImpl<Asset>(this as Asset, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Asset&&(identical(other.assetName, assetName) || other.assetName == assetName)&&(identical(other.value, value) || other.value == value));
+  final _this = this as Asset;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Asset&&(identical(other.assetName, _this.assetName) || other.assetName == _this.assetName)&&(identical(other.value, _this.value) || other.value == _this.value));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,assetName,value);
+int get hashCode {
+  final _this = this as Asset;
+  return Object.hash(runtimeType,_this.assetName,_this.value);
+}
 
 @override
 String toString() {
-  return 'Asset(assetName: $assetName, value: $value)';
+  final _this = this as Asset;
+  return 'Asset(assetName: ${_this.assetName}, value: ${_this.value})';
 }
 
 
@@ -392,7 +400,7 @@ class _$AssetCopyWithImpl<$Res>
 /// Create a copy of Asset
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? assetName = null,Object? value = null,}) {
-  return _then(_self.copyWith(
+  return _then(Asset(
 assetName: null == assetName ? _self.assetName : assetName // ignore: cast_nullable_to_non_nullable
 as AssetName,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as CborInt,
@@ -432,16 +440,18 @@ _$AssetCopyWith<_Asset> get copyWith => __$AssetCopyWithImpl<_Asset>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Asset&&(identical(other.assetName, assetName) || other.assetName == assetName)&&(identical(other.value, value) || other.value == value));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Asset&&(identical(other.assetName, assetName) || other.assetName == assetName)&&(identical(other.value, value) || other.value == value));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,assetName,value);
+int get hashCode {
+    return Object.hash(runtimeType,assetName,value);
+}
 
 @override
 String toString() {
-  return 'Asset(assetName: $assetName, value: $value)';
+    return 'Asset(assetName: $assetName, value: $value)';
 }
 
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cose_sign.dart';
@@ -9,6 +9,7 @@ part of 'cose_sign.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $CoseSignCopyWith<CoseSign> get copyWith => _$CoseSignCopyWithImpl<CoseSign>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseSign&&(identical(other.headers, headers) || other.headers == headers)&&const DeepCollectionEquality().equals(other.payload, payload)&&const DeepCollectionEquality().equals(other.signatures, signatures));
+  final _this = this as CoseSign;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseSign&&(identical(other.headers, _this.headers) || other.headers == _this.headers)&&const DeepCollectionEquality().equals(other.payload, _this.payload)&&const DeepCollectionEquality().equals(other.signatures, _this.signatures));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,headers,const DeepCollectionEquality().hash(payload),const DeepCollectionEquality().hash(signatures));
+int get hashCode {
+  final _this = this as CoseSign;
+  return Object.hash(runtimeType,_this.headers,const DeepCollectionEquality().hash(_this.payload),const DeepCollectionEquality().hash(_this.signatures));
+}
 
 @override
 String toString() {
-  return 'CoseSign(headers: $headers, payload: $payload, signatures: $signatures)';
+  final _this = this as CoseSign;
+  return 'CoseSign(headers: ${_this.headers}, payload: ${_this.payload}, signatures: ${_this.signatures})';
 }
 
 
@@ -63,7 +69,7 @@ class _$CoseSignCopyWithImpl<$Res>
 /// Create a copy of CoseSign
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? headers = null,Object? payload = null,Object? signatures = null,}) {
-  return _then(_self.copyWith(
+  return _then(CoseSign(
 headers: null == headers ? _self.headers : headers // ignore: cast_nullable_to_non_nullable
 as CoseHeaders,payload: null == payload ? _self.payload : payload // ignore: cast_nullable_to_non_nullable
 as Uint8List,signatures: null == signatures ? _self.signatures : signatures // ignore: cast_nullable_to_non_nullable
@@ -88,7 +94,7 @@ $CoseHeadersCopyWith<$Res> get headers {
 
 
 class _CoseSign extends CoseSign {
-  const _CoseSign({required this.headers, required this.payload, required final  List<CoseSignature> signatures}): _signatures = signatures,super._();
+  const _CoseSign({required this.headers, required this.payload, required  List<CoseSignature> signatures}): _signatures = signatures,super._();
   
 
 @override final  CoseHeaders headers;
@@ -111,16 +117,18 @@ _$CoseSignCopyWith<_CoseSign> get copyWith => __$CoseSignCopyWithImpl<_CoseSign>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseSign&&(identical(other.headers, headers) || other.headers == headers)&&const DeepCollectionEquality().equals(other.payload, payload)&&const DeepCollectionEquality().equals(other._signatures, _signatures));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseSign&&(identical(other.headers, headers) || other.headers == headers)&&const DeepCollectionEquality().equals(other.payload, payload)&&const DeepCollectionEquality().equals(other.signatures, _signatures));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,headers,const DeepCollectionEquality().hash(payload),const DeepCollectionEquality().hash(_signatures));
+int get hashCode {
+    return Object.hash(runtimeType,headers,const DeepCollectionEquality().hash(payload),const DeepCollectionEquality().hash(_signatures));
+}
 
 @override
 String toString() {
-  return 'CoseSign(headers: $headers, payload: $payload, signatures: $signatures)';
+    return 'CoseSign(headers: $headers, payload: $payload, signatures: $signatures)';
 }
 
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cose_sig_structure.dart';
@@ -9,6 +9,7 @@ part of 'cose_sig_structure.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $CoseSigStructureCopyWith<CoseSigStructure> get copyWith => _$CoseSigStructureCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseSigStructure&&(identical(other.bodyProtected, bodyProtected) || other.bodyProtected == bodyProtected)&&(identical(other.signProtected, signProtected) || other.signProtected == signProtected)&&(identical(other.sigContext, sigContext) || other.sigContext == sigContext)&&const DeepCollectionEquality().equals(other.payload, payload)&&const DeepCollectionEquality().equals(other.externalAad, externalAad));
+  final _this = this as CoseSigStructure;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseSigStructure&&(identical(other.bodyProtected, _this.bodyProtected) || other.bodyProtected == _this.bodyProtected)&&(identical(other.signProtected, _this.signProtected) || other.signProtected == _this.signProtected)&&(identical(other.sigContext, _this.sigContext) || other.sigContext == _this.sigContext)&&const DeepCollectionEquality().equals(other.payload, _this.payload)&&const DeepCollectionEquality().equals(other.externalAad, _this.externalAad));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,bodyProtected,signProtected,sigContext,const DeepCollectionEquality().hash(payload),const DeepCollectionEquality().hash(externalAad));
+int get hashCode {
+  final _this = this as CoseSigStructure;
+  return Object.hash(runtimeType,_this.bodyProtected,_this.signProtected,_this.sigContext,const DeepCollectionEquality().hash(_this.payload),const DeepCollectionEquality().hash(_this.externalAad));
+}
 
 @override
 String toString() {
-  return 'CoseSigStructure(bodyProtected: $bodyProtected, signProtected: $signProtected, sigContext: $sigContext, payload: $payload, externalAad: $externalAad)';
+  final _this = this as CoseSigStructure;
+  return 'CoseSigStructure(bodyProtected: ${_this.bodyProtected}, signProtected: ${_this.signProtected}, sigContext: ${_this.sigContext}, payload: ${_this.payload}, externalAad: ${_this.externalAad})';
 }
 
 
@@ -63,7 +69,7 @@ class _$CoseSigStructureCopyWithImpl<$Res>
 /// Create a copy of CoseSigStructure
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? bodyProtected = null,Object? signProtected = freezed,Object? sigContext = null,Object? payload = null,Object? externalAad = null,}) {
-  return _then(_self.copyWith(
+  return _then(CoseSigStructure(
 bodyProtected: null == bodyProtected ? _self.bodyProtected : bodyProtected // ignore: cast_nullable_to_non_nullable
 as CoseProtectedHeaderMap,signProtected: freezed == signProtected ? _self.signProtected : signProtected // ignore: cast_nullable_to_non_nullable
 as CoseProtectedHeaderMap?,sigContext: null == sigContext ? _self.sigContext : sigContext // ignore: cast_nullable_to_non_nullable
@@ -121,16 +127,18 @@ _$CoseSigStructureCopyWith<_CoseSigStructure> get copyWith => __$CoseSigStructur
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseSigStructure&&(identical(other.bodyProtected, bodyProtected) || other.bodyProtected == bodyProtected)&&(identical(other.signProtected, signProtected) || other.signProtected == signProtected)&&(identical(other.sigContext, sigContext) || other.sigContext == sigContext)&&const DeepCollectionEquality().equals(other.payload, payload)&&const DeepCollectionEquality().equals(other.externalAad, externalAad));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseSigStructure&&(identical(other.bodyProtected, bodyProtected) || other.bodyProtected == bodyProtected)&&(identical(other.signProtected, signProtected) || other.signProtected == signProtected)&&(identical(other.sigContext, sigContext) || other.sigContext == sigContext)&&const DeepCollectionEquality().equals(other.payload, payload)&&const DeepCollectionEquality().equals(other.externalAad, externalAad));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,bodyProtected,signProtected,sigContext,const DeepCollectionEquality().hash(payload),const DeepCollectionEquality().hash(externalAad));
+int get hashCode {
+    return Object.hash(runtimeType,bodyProtected,signProtected,sigContext,const DeepCollectionEquality().hash(payload),const DeepCollectionEquality().hash(externalAad));
+}
 
 @override
 String toString() {
-  return 'CoseSigStructure(bodyProtected: $bodyProtected, signProtected: $signProtected, sigContext: $sigContext, payload: $payload, externalAad: $externalAad)';
+    return 'CoseSigStructure(bodyProtected: $bodyProtected, signProtected: $signProtected, sigContext: $sigContext, payload: $payload, externalAad: $externalAad)';
 }
 
 

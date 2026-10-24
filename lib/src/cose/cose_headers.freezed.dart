@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cose_headers.dart';
@@ -9,6 +9,7 @@ part of 'cose_headers.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $CoseHeadersCopyWith<CoseHeaders> get copyWith => _$CoseHeadersCopyWithImpl<Cose
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseHeaders&&(identical(other.protectedHeader, protectedHeader) || other.protectedHeader == protectedHeader)&&(identical(other.unprotectedHeader, unprotectedHeader) || other.unprotectedHeader == unprotectedHeader));
+  final _this = this as CoseHeaders;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseHeaders&&(identical(other.protectedHeader, _this.protectedHeader) || other.protectedHeader == _this.protectedHeader)&&(identical(other.unprotectedHeader, _this.unprotectedHeader) || other.unprotectedHeader == _this.unprotectedHeader));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,protectedHeader,unprotectedHeader);
+int get hashCode {
+  final _this = this as CoseHeaders;
+  return Object.hash(runtimeType,_this.protectedHeader,_this.unprotectedHeader);
+}
 
 @override
 String toString() {
-  return 'CoseHeaders(protectedHeader: $protectedHeader, unprotectedHeader: $unprotectedHeader)';
+  final _this = this as CoseHeaders;
+  return 'CoseHeaders(protectedHeader: ${_this.protectedHeader}, unprotectedHeader: ${_this.unprotectedHeader})';
 }
 
 
@@ -63,7 +69,7 @@ class _$CoseHeadersCopyWithImpl<$Res>
 /// Create a copy of CoseHeaders
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? protectedHeader = null,Object? unprotectedHeader = null,}) {
-  return _then(_self.copyWith(
+  return _then(CoseHeaders(
 protectedHeader: null == protectedHeader ? _self.protectedHeader : protectedHeader // ignore: cast_nullable_to_non_nullable
 as CoseProtectedHeaderMap,unprotectedHeader: null == unprotectedHeader ? _self.unprotectedHeader : unprotectedHeader // ignore: cast_nullable_to_non_nullable
 as CoseHeaderMap,
@@ -112,16 +118,18 @@ _$CoseHeadersCopyWith<_CoseHeaders> get copyWith => __$CoseHeadersCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseHeaders&&(identical(other.protectedHeader, protectedHeader) || other.protectedHeader == protectedHeader)&&(identical(other.unprotectedHeader, unprotectedHeader) || other.unprotectedHeader == unprotectedHeader));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseHeaders&&(identical(other.protectedHeader, protectedHeader) || other.protectedHeader == protectedHeader)&&(identical(other.unprotectedHeader, unprotectedHeader) || other.unprotectedHeader == unprotectedHeader));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,protectedHeader,unprotectedHeader);
+int get hashCode {
+    return Object.hash(runtimeType,protectedHeader,unprotectedHeader);
+}
 
 @override
 String toString() {
-  return 'CoseHeaders(protectedHeader: $protectedHeader, unprotectedHeader: $unprotectedHeader)';
+    return 'CoseHeaders(protectedHeader: $protectedHeader, unprotectedHeader: $unprotectedHeader)';
 }
 
 

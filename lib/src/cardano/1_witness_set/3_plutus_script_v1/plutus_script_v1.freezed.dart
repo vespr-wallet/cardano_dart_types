@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'plutus_script_v1.dart';
@@ -9,6 +9,7 @@ part of 'plutus_script_v1.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $PlutusScriptV1CopyWith<PlutusScriptV1> get copyWith => _$PlutusScriptV1CopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusScriptV1&&const DeepCollectionEquality().equals(other.bytes, bytes));
+  final _this = this as PlutusScriptV1;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlutusScriptV1&&const DeepCollectionEquality().equals(other.bytes, _this.bytes));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+  final _this = this as PlutusScriptV1;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.bytes));
+}
 
 @override
 String toString() {
-  return 'PlutusScriptV1(bytes: $bytes)';
+  final _this = this as PlutusScriptV1;
+  return 'PlutusScriptV1(bytes: ${_this.bytes})';
 }
 
 
@@ -63,7 +69,7 @@ class _$PlutusScriptV1CopyWithImpl<$Res>
 /// Create a copy of PlutusScriptV1
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? bytes = null,}) {
-  return _then(_self.copyWith(
+  return _then(PlutusScriptV1(
 bytes: null == bytes ? _self.bytes : bytes // ignore: cast_nullable_to_non_nullable
 as Uint8List,
   ));
@@ -92,16 +98,18 @@ _$PlutusScriptV1CopyWith<_PlutusScriptV1> get copyWith => __$PlutusScriptV1CopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlutusScriptV1&&const DeepCollectionEquality().equals(other.bytes, bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlutusScriptV1&&const DeepCollectionEquality().equals(other.bytes, bytes));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(bytes));
+}
 
 @override
 String toString() {
-  return 'PlutusScriptV1(bytes: $bytes)';
+    return 'PlutusScriptV1(bytes: $bytes)';
 }
 
 
