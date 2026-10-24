@@ -1,3 +1,4 @@
+import "../cardano/shared/asset.dart";
 import "../hd/ada_types.dart";
 import "../hd/address/cardano_address.dart";
 
@@ -95,5 +96,39 @@ class TransactionMarkedInvalidException extends Error {
     return "Transaction [$txHash] is marked as failing script validation (isValid = false) and is not summarised: the "
         "flag is not covered by the signature, so it can be switched to true after signing, and signing it as marked "
         "would only forfeit the collateral. See TxDiManagement";
+  }
+}
+
+/// Thrown by `CardanoTransaction.diff` for a transaction whose collateral puts more ADA of the wallet at risk than
+/// `maxCollateralAdaExposure` allows, or any of its native tokens.
+///
+/// The ledger takes the collateral inputs and creates only the collateral return if a script fails, and the requester
+/// can arrange that: script evaluation is fixed by the body, and the `isValid` flag can be switched after signing. A
+/// legitimate transaction gets the excess back through the collateral return, including every token, since the ledger
+/// requires the collateral balance to be ADA only.
+class CollateralExposureTooHighException extends Error {
+  /// Hex of the blake2b-256 hash of the transaction body.
+  final String txHash;
+
+  /// The wallet's collateral inputs minus the collateral return to [walletAddressBech32].
+  final Value exposure;
+  final double maxAdaExposure;
+  final String walletAddressBech32;
+
+  CollateralExposureTooHighException({
+    required this.txHash,
+    required this.exposure,
+    required this.maxAdaExposure,
+    required this.walletAddressBech32,
+  });
+
+  @override
+  String toString() {
+    final ada = exposure.lovelace.toBigInt() / BigInt.from(1000000);
+    final tokens = exposure.multiAssets.any((e) => e.assets.any((a) => a.value.toBigInt() > BigInt.zero));
+    return "Transaction [$txHash] puts $ada ADA${tokens ? " and native tokens" : ""} of the wallet at risk as "
+        "collateral, which is lost if a script fails. At most $maxAdaExposure ADA and no tokens are allowed: return "
+        "the rest to the wallet address [$walletAddressBech32] with the collateral return output, or use smaller "
+        "collateral inputs";
   }
 }

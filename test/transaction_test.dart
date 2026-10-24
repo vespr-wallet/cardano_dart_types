@@ -547,6 +547,108 @@ void main() async {
           expect(txDiff.diff.lovelace.toBigInt(), BigInt.zero);
         });
       });
+
+      group("collateral exposure", () {
+        const walletAddressBech32 =
+            "addr1q8l7hny7x96fadvq8cukyqkcfca5xmkrvfrrkt7hp76v3qvssm7fz9ajmtd58ksljgkyvqu6gl23hlcfgv7um5v0rn8qtnzlfk";
+        const otherAddressBech32 =
+            "addr1qxprs4zhu84ejtxgvf8ux34z8v973ghzv0m82hjcvf329eegh2vkhtv4pcy82r78swe77ynkwdqx0pprf5uyy6espyws8u5nph";
+        final token = MultiAsset(
+          policyId: PolicyId.fromHex("33" * 28),
+          assets: [Asset(assetName: AssetName.fromHex("74"), value: CborInt(BigInt.one))],
+        );
+
+        CardanoTransactionOutput output({
+          required String addressBech32,
+          required int lovelace,
+          required bool withToken,
+        }) => CardanoTransactionOutput.postAlonzo(
+          address: Address.fromBase58OrBech32(addressBech32),
+          value: withToken
+              ? Value.v1(lovelace: BigInt.from(lovelace).toCborInt(), mA: [token])
+              : Value.v0(lovelace: BigInt.from(lovelace).toCborInt()),
+          outDatum: null,
+          scriptRef: null,
+          lengthType: CborLengthType.definite,
+        );
+        // 100 ADA and a token
+        final collateralUtxo = Utxo(
+          identifier: CardanoTransactionInput(transactionHash: TransactionHash.fromHex("11" * 32), index: 0),
+          content: output(addressBech32: walletAddressBech32, lovelace: 100000000, withToken: true),
+        );
+
+        TxDiff diffOf({
+          required List<CardanoTransactionInput> collateral,
+          required CardanoTransactionOutput? collateralReturn,
+        }) =>
+            cardanoTx(
+              body: txBody(
+                collateral: CardanoTransactionInputs(data: collateral, cborTags: const []),
+                collateralReturn: collateralReturn,
+              ),
+            ).diff(
+              receiveAddressBech32: walletAddressBech32,
+              drepCredential: "0" * 56,
+              constitutionalCommitteeColdCredential: "0" * 56,
+              constitutionalCommitteeHotCredential: "0" * 56,
+              walletUtxos: [collateralUtxo],
+            );
+        TxDiff diffReturning({required String addressBech32, required int lovelace, required bool withToken}) => diffOf(
+          collateral: [collateralUtxo.identifier],
+          collateralReturn: output(addressBech32: addressBech32, lovelace: lovelace, withToken: withToken),
+        );
+        final throwsExposure = throwsA(isA<CollateralExposureTooHighException>());
+
+        test("up to 15 ADA is allowed", () {
+          expect(
+            diffReturning(addressBech32: walletAddressBech32, lovelace: 85000000, withToken: true).usedUtxos,
+            isEmpty,
+          );
+        });
+
+        test("above 15 ADA is refused", () {
+          expect(
+            () => diffReturning(addressBech32: walletAddressBech32, lovelace: 84999999, withToken: true),
+            throwsA(
+              isA<CollateralExposureTooHighException>()
+                  .having((e) => e.exposure.lovelace.toBigInt(), "exposure", BigInt.from(15000001))
+                  .having((e) => e.toString(), "message", contains("puts 15.000001 ADA of the wallet at risk")),
+            ),
+          );
+        });
+
+        test("a token not returned is refused", () {
+          expect(
+            () => diffReturning(addressBech32: walletAddressBech32, lovelace: 99000000, withToken: false),
+            throwsA(
+              isA<CollateralExposureTooHighException>().having(
+                (e) => e.toString(),
+                "message",
+                contains("puts 1.0 ADA and native tokens of the wallet at risk"),
+              ),
+            ),
+          );
+        });
+
+        test("a collateral return to another address is not returned to the wallet", () {
+          expect(
+            () => diffReturning(addressBech32: otherAddressBech32, lovelace: 99000000, withToken: true),
+            throwsExposure,
+          );
+        });
+
+        test("no collateral return", () {
+          expect(() => diffOf(collateral: [collateralUtxo.identifier], collateralReturn: null), throwsExposure);
+        });
+
+        test("collateral of someone else exposes nothing", () {
+          final otherCollateral = CardanoTransactionInput(
+            transactionHash: TransactionHash.fromHex("22" * 32),
+            index: 0,
+          );
+          expect(diffOf(collateral: [otherCollateral], collateralReturn: null).usedUtxos, isEmpty);
+        });
+      });
     });
   });
 }
