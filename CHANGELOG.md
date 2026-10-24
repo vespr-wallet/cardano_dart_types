@@ -1,3 +1,11 @@
+## 3.2.0
+
+Security:
+
+- `CardanoTransaction.diff` refuses a transaction whose collateral exposure, the wallet's collateral inputs minus the collateral return to `receiveAddressBech32`, is above `maxCollateralAdaExposure` (new parameter, default 15 ADA) or includes native tokens. It throws `CollateralExposureTooHighException`, whose message tells the requester what to change.
+  - Why: the summary does not include the collateral. The ledger takes the collateral and creates only the collateral return when a script fails, and the requester can arrange that failure. Script evaluation is fixed by the body, and `isValid` can be switched after signing.
+  - Allowed: a legitimate transaction returns everything above its required collateral (about 150% of the fee) through the collateral return, including every token. Collateral supplied by someone else exposes nothing.
+
 ## 3.1.2
 
 Security:

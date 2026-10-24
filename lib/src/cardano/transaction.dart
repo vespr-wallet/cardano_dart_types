@@ -160,6 +160,10 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
   /// be switched after signing without breaking any signature, so the default refuses such transactions by throwing
   /// [TransactionMarkedInvalidException]. Only pass a `dangerously*` option for transactions already on chain; see
   /// [TxDiManagement].
+  ///
+  /// The collateral is not part of the summary, so a transaction whose collateral exposure (the wallet's collateral
+  /// inputs minus the collateral return to [receiveAddressBech32]) is above [maxCollateralAdaExposure] ADA or includes
+  /// native tokens is refused with [CollateralExposureTooHighException].
   TxDiff diff({
     required String receiveAddressBech32,
     required String drepCredential,
@@ -167,6 +171,7 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     required String constitutionalCommitteeHotCredential,
     required Iterable<Utxo> walletUtxos,
     TxDiManagement txDiManagement = TxDiManagement.safeAlwaysReject,
+    double maxCollateralAdaExposure = 15.0,
   }) {
     final drepCredentialBytes = drepCredential.hexDecode();
     final constitutionalCommitteeColdCredentialBytes = constitutionalCommitteeColdCredential.hexDecode();
@@ -185,6 +190,35 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
       (previous, element) => element,
     );
 
+    // The ledger takes the collateral inputs and creates only the collateral return if a script fails. The requester
+    // can arrange that (script evaluation is fixed by the body, and isValid can be switched after signing), so the
+    // wallet's collateral is at risk whatever the transaction is meant to do.
+    final collateralFromThisWallet = (body.collateral?.data ?? [])
+        .map((e) => utxoByHashAndId["${e.transactionHash.hexValue}#${e.index}"])
+        .nonNulls
+        .toList();
+    final collateralSpent = collateralFromThisWallet.fold(
+      Value.v0(lovelace: CborInt(BigInt.zero)),
+      (previousValue, element) => previousValue + element.content.value,
+    );
+    final collateralReturn = body.collateralReturn;
+    final collateralReturned =
+        collateralReturn != null && deepEq.equals(collateralReturn.address.value, receiveAddress.bytes)
+        ? collateralReturn.value
+        : Value.v0(lovelace: CborInt(BigInt.zero));
+    final collateralExposure = collateralSpent - collateralReturned;
+    final exposesTokens = collateralExposure.multiAssets.any(
+      (e) => e.assets.any((a) => a.value.toBigInt() > BigInt.zero),
+    );
+    if (collateralExposure.lovelace.toBigInt() / BigInt.from(1000000) > maxCollateralAdaExposure || exposesTokens) {
+      throw CollateralExposureTooHighException(
+        txHash: body.blake2bHash256Hex(),
+        exposure: collateralExposure,
+        maxAdaExposure: maxCollateralAdaExposure,
+        walletAddressBech32: receiveAddressBech32,
+      );
+    }
+
     // The isValid flag is not covered by the signature (witnesses sign the body hash only) and can be switched after
     // signing, so it is only trustworthy for transactions already on chain. See TxDiManagement.
     if (!isValidDi) {
@@ -195,22 +229,9 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
           // Phase-2 script validation failed: the ledger consumes the collateral inputs and creates only the
           // collateral return output. Regular inputs, outputs, withdrawals, certificates, votes and proposals have no
           // effect.
-          final consumedCollateralFromThisWallet = (body.collateral?.data ?? [])
-              .map((e) => utxoByHashAndId["${e.transactionHash.hexValue}#${e.index}"])
-              .nonNulls
-              .toList();
-          final collateralReturn = body.collateralReturn;
-          final incoming =
-              collateralReturn != null && deepEq.equals(collateralReturn.address.value, receiveAddress.bytes)
-              ? collateralReturn.value
-              : Value.v0(lovelace: CborInt(BigInt.zero));
-          final outgoing = consumedCollateralFromThisWallet.fold(
-            Value.v0(lovelace: CborInt(BigInt.zero)),
-            (previousValue, element) => previousValue + element.content.value,
-          );
           return TxDiff(
-            diff: incoming - outgoing,
-            usedUtxos: consumedCollateralFromThisWallet,
+            diff: collateralReturned - collateralSpent,
+            usedUtxos: collateralFromThisWallet,
             stakeDelegationPoolId: null,
             dRepDelegation: null,
             dRepRegistration: null,
