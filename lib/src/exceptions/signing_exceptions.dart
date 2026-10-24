@@ -124,11 +124,13 @@ class CollateralExposureTooHighException extends Error {
 
   @override
   String toString() {
-    final ada = exposure.lovelace.toBigInt() / BigInt.from(1000000);
+    // Fixed format: double.toString differs between the VM (1.0) and the web (1)
+    String format(double ada) => ada.toStringAsFixed(6).replaceFirst(RegExp(r"\.?0+$"), "");
+    final ada = format(exposure.lovelace.toBigInt() / BigInt.from(1000000));
     final tokens = exposure.multiAssets.any((e) => e.assets.any((a) => a.value.toBigInt() > BigInt.zero));
     return "Transaction [$txHash] puts $ada ADA${tokens ? " and native tokens" : ""} of the wallet at risk as "
-        "collateral, which is lost if a script fails. At most $maxAdaExposure ADA and no tokens are allowed: return "
-        "the rest to the wallet address [$walletAddressBech32] with the collateral return output, or use smaller "
-        "collateral inputs";
+        "collateral, which is lost if a script fails. At most ${format(maxAdaExposure)} ADA and no tokens are allowed: "
+        "return the rest to the wallet address [$walletAddressBech32] with the collateral return output, or use "
+        "smaller collateral inputs";
   }
 }

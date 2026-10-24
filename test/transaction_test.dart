@@ -612,7 +612,8 @@ void main() async {
             throwsA(
               isA<CollateralExposureTooHighException>()
                   .having((e) => e.exposure.lovelace.toBigInt(), "exposure", BigInt.from(15000001))
-                  .having((e) => e.toString(), "message", contains("puts 15.000001 ADA of the wallet at risk")),
+                  .having((e) => e.toString(), "message", contains("puts 15.000001 ADA of the wallet at risk"))
+                  .having((e) => e.toString(), "limit", contains("At most 15 ADA and no tokens are allowed")),
             ),
           );
         });
@@ -624,7 +625,7 @@ void main() async {
               isA<CollateralExposureTooHighException>().having(
                 (e) => e.toString(),
                 "message",
-                contains("puts 1.0 ADA and native tokens of the wallet at risk"),
+                contains("puts 1 ADA and native tokens of the wallet at risk"),
               ),
             ),
           );
