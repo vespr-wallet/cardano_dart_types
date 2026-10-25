@@ -2,10 +2,10 @@
 
 Security:
 
-- `CardanoTransaction.deserializeBytes` / `deserializeFromHex` and `CardanoTransactionBody.deserializeHex` refuse a transaction body that does not re-serialize to the bytes it was parsed from, and throw `NonCanonicalTransactionBodyException` (a `TransactionBodyParseException`). Before, the parse normalized such a body silently.
-  - Why: the normalized encodings are non-minimal integer or length heads, chunked strings and duplicate map keys (only the last value was kept). For such a body, the parsed body could differ from what the ledger reads from the bytes. Its hash was not the transaction id, so witnesses signed over it did not fit the submitted transaction.
-  - Only the body is checked: it is what witnesses sign and what the transaction id is the hash of. Non-canonical encodings in the transaction array, witness set or auxiliary data still parse.
-  - `CardanoTransaction.deserialize` and `CardanoTransactionBody.deserialize`, which take already decoded CBOR values, have no original bytes to check against.
+- `CardanoTransaction.deserializeBytes` / `deserializeFromHex` and `CardanoTransactionBody.deserializeHex` keep the hash of the body bytes as they are in the input, which is the transaction id. Before, the hash was of the body as package:cbor re-encodes it, which normalizes non-minimal integer or length heads, so witnesses of such a body did not fit the submitted transaction.
+  - A body that does not re-serialize to its bytes (non-minimal heads, chunked strings) still parses, so `blake2bHash256` and `computeBlake2bHash256()` differ for it.
+  - A duplicate map key anywhere in the body throws `TransactionBodyDuplicateKeyException` (a `TransactionBodyParseException`). Decoding keeps only the last value, which need not be the one the ledger reads, so a summary of the parsed body could differ from the signed one.
+  - New `CardanoTransactionBody.deserializeBytes`. `CardanoTransaction.deserialize` and `CardanoTransactionBody.deserialize`, which take already decoded CBOR values, have no bytes to hash or to find duplicate keys in.
 
 Other Changes:
 

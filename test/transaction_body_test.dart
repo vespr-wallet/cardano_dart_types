@@ -1,4 +1,5 @@
 import "package:cardano_dart_types/cardano_dart_types.dart";
+import "package:cardano_dart_types/src/hd/util/blake2bhash.dart";
 import "package:test/test.dart";
 
 void main() async {
@@ -124,52 +125,68 @@ void main() async {
       });
     });
 
-    test("deserializeHex refuses a body that does not re-serialize to its bytes", () {
-      // fee 42 with a non-minimal head (19002a instead of 182a)
-      expect(
-        () => CardanoTransactionBody.deserializeHex("a300d901028001800219002a"),
-        throwsA(isA<NonCanonicalTransactionBodyException>()),
-      );
+    // Not in transaction_test.dart: its debugAssertEnabled asserts the whole transaction re-serializes byte-exact
+    group("the body hash is of its bytes when they do not re-serialize to them", () {
+      // body a3 00 80 01 80 02 0a (no inputs or outputs, fee 10), with an encoding that parsing normalizes
+      final bodies = {
+        "non-minimal integer head":
+            "a3008001800218"
+            "0a",
+        "non-minimal length head":
+            "a300"
+            "9800"
+            "0180020a",
+        "non-minimal map head":
+            "b90003"
+            "00800180020a",
+        "chunked byte string":
+            "a400800180020a07"
+            "5f41004101ff",
+      };
+      for (final MapEntry(key: name, value: bodyHex) in bodies.entries) {
+        test(name, () {
+          final bodyHash = blake2bHash256(bodyHex.hexDecode()).hexEncode();
+          final body = CardanoTransactionBody.deserializeHex(bodyHex);
+
+          expect(body.blake2bHash256Hex(), bodyHash);
+          expect(body.computeBlake2bHash256().hexEncode(), isNot(bodyHash));
+          expect(CardanoTransaction.deserializeFromHex("84${bodyHex}a0f5f6").body.blake2bHash256Hex(), bodyHash);
+        });
+      }
     });
 
-    // Not in transaction_test.dart: its debugAssertEnabled asserts the whole transaction re-serializes byte-exact
-    group("CardanoTransaction.deserializeBytes refuses a body that does not re-serialize to its bytes", () {
-      // body a3 00 80 01 80 02 0a (no inputs or outputs, fee 10), empty witness set, valid, no auxiliary data
-      final cases = {
-        "non-minimal integer head":
-            "84a3008001800218"
-            "0a"
-            "a0f5f6",
-        "non-minimal length head":
-            "84a3009800018002"
-            "0a"
-            "a0f5f6",
-        "non-minimal map head":
-            "84b90003008001800200"
-            "a0f5f6",
-        "duplicate key (only the last fee is kept)":
-            "84a4008001800201"
+    group("refuses a duplicate map key in the body", () {
+      final bodies = {
+        "body key (only the last fee would be kept)":
+            "a4008001800201"
+            "0202",
+        "key of a nested map":
+            "a4008001800200"
+            "09a1581c${"00" * 28}a2"
+            "4001"
+            "4002",
+        "key of an indefinite map":
+            "bf008001800201"
             "0202"
-            "a0f5f6",
-        "chunked byte string":
-            "84a4008001800200"
-            "07"
-            "5f41004101ff"
-            "a0f5f6",
+            "ff",
       };
-      for (final MapEntry(key: name, value: txHex) in cases.entries) {
+      for (final MapEntry(key: name, value: bodyHex) in bodies.entries) {
         test(name, () {
           expect(
-            () => CardanoTransaction.deserializeFromHex(txHex),
-            throwsA(isA<NonCanonicalTransactionBodyException>()),
+            () => CardanoTransactionBody.deserializeHex(bodyHex),
+            throwsA(isA<TransactionBodyDuplicateKeyException>()),
+          );
+          expect(
+            () => CardanoTransaction.deserializeFromHex("84${bodyHex}a0f5f6"),
+            throwsA(isA<TransactionBodyDuplicateKeyException>()),
           );
         });
       }
     });
 
-    group("CardanoTransaction.deserializeBytes only checks the body", () {
+    group("CardanoTransaction.deserializeBytes finds the body bytes in any transaction encoding", () {
       const bodyHex = "a300800180020a";
-      final bodyHash = CardanoTransactionBody.deserializeHex(bodyHex).blake2bHash256Hex();
+      final bodyHash = blake2bHash256(bodyHex.hexDecode()).hexEncode();
       final cases = {
         "canonical": "84${bodyHex}a0f5f6",
         "non-minimal transaction array head": "9804${bodyHex}a0f5f6",

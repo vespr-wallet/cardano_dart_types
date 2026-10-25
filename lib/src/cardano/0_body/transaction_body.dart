@@ -1,7 +1,6 @@
 import "dart:typed_data";
 
 import "package:cbor/cbor.dart";
-import "package:collection/collection.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:hex/hex.dart";
 
@@ -11,6 +10,7 @@ import "../../exceptions/parse_exceptions.dart";
 import "../../hd/ada_types.dart";
 import "../../hd/util/blake2bhash.dart";
 import "../../utils/cbor.dart";
+import "../../utils/cbor_scan.dart";
 import "../../utils/sugar.dart";
 import "../../utils/transformations.dart";
 import "../cbor_encodable.dart";
@@ -246,23 +246,27 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     donation: donation,
   );
 
-  /// Throws [NonCanonicalTransactionBodyException] unless the body re-serializes to [hexData].
-  factory CardanoTransactionBody.deserializeHex(String hexData) {
-    final bytes = hexData.hexDecode();
+  /// See [CardanoTransactionBody.deserializeBytes].
+  factory CardanoTransactionBody.deserializeHex(String hexData) => CardanoTransactionBody.deserializeBytes(
+    hexData.hexDecode(),
+  );
 
-    final body = CardanoTransactionBody.deserialize(
-      cMap: bytes.cborDecode() as CborMap,
+  /// The hash is of [bytes], the transaction id, even where the body does not re-serialize to them (non-minimal
+  /// integer or length heads, chunked strings): their values are the ones the ledger reads, but witnesses have to sign
+  /// the hash of the bytes. Throws [TransactionBodyDuplicateKeyException] for a duplicate map key anywhere in the body.
+  factory CardanoTransactionBody.deserializeBytes(Uint8List bytes) {
+    final cMap = bytes.cborDecode() as CborMap;
+    if (countCborMapEntries(cMap) != scanCborItem(bytes, 0).mapEntries) {
+      throw TransactionBodyDuplicateKeyException();
+    }
+    return CardanoTransactionBody.deserialize(
+      cMap: cMap,
       originalBodyBlake2bHash256: blake2bHash256(bytes).hexEncode(),
     );
-    if (!const ListEquality<int>().equals(body.serializeAsBytes(), bytes)) {
-      throw NonCanonicalTransactionBodyException();
-    }
-    return body;
   }
 
-  /// No byte-exactness check: an [originalBodyBlake2bHash256] is trusted to be the hash of the bytes [cMap]
-  /// re-serializes to. Use [CardanoTransactionBody.deserializeHex] or [CardanoTransaction.deserializeBytes] for
-  /// untrusted bytes.
+  /// [originalBodyBlake2bHash256] is trusted to be the hash of the bytes [cMap] was decoded from. Without it, the hash
+  /// is of [cMap] as package:cbor re-encodes it. Use [CardanoTransactionBody.deserializeBytes] for untrusted bytes.
   factory CardanoTransactionBody.deserialize({
     required CborMap cMap,
     String? originalBodyBlake2bHash256, // used for signing the tx
