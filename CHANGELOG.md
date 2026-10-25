@@ -1,3 +1,9 @@
+## 3.2.1
+
+Bug Fix:
+
+- `CardanoTransactionBody.copyWith` kept the body hash cached at parse time, so a copy with changed fields still reported the original body's hash from `blake2bHash256Hex()`. A copy that changes any field now hashes its own serialization. A copy with no changes keeps the hash of the original bytes, and an explicit `blake2bHash256` argument is still used as given
+
 ## 3.2.0
 
 Security:

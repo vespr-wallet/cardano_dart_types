@@ -1,4 +1,5 @@
 import "package:cardano_dart_types/cardano_dart_types.dart";
+import "package:cardano_dart_types/src/hd/util/blake2bhash.dart";
 import "package:test/test.dart";
 
 void main() async {
@@ -90,6 +91,42 @@ void main() async {
           equals([0, 1, 2, 3, 8]),
           reason: "Adding a new field via copyWith on ascending-order body must preserve ascending order",
         );
+      });
+    });
+
+    group("copyWith hash", () {
+      // Fee 42 non-minimally encoded (19002a), so the hash of these bytes differs from the hash of the re-serialization
+      const nonMinimalBody = "a300d901028001800219002a";
+      final originalHash = blake2bHash256(nonMinimalBody.hexDecode()).hexEncode();
+      final body = CardanoTransactionBody.deserializeHex(nonMinimalBody);
+
+      test("parsed body reports the hash of its original bytes", () {
+        expect(body.blake2bHash256Hex(), originalHash);
+        expect(body.computeBlake2bHash256().hexEncode(), isNot(originalHash));
+      });
+
+      test("no-op copyWith keeps the original hash", () {
+        expect(body.copyWith().blake2bHash256Hex(), originalHash);
+      });
+
+      test("copyWith changing a field hashes the new serialization", () {
+        final modified = body.copyWith(fee: BigInt.from(43).toCborInt());
+
+        expect(modified.blake2bHash256Hex(), modified.computeBlake2bHash256().hexEncode());
+        expect(modified.blake2bHash256Hex(), isNot(originalHash));
+      });
+
+      test("transaction copyWith.body changing a field hashes the new serialization", () {
+        final tx = CardanoTransaction.deserializeFromHex("84${nonMinimalBody}a0f5f6");
+        final modified = tx.copyWith.body(fee: BigInt.from(43).toCborInt()).body;
+
+        expect(modified.blake2bHash256Hex(), modified.computeBlake2bHash256().hexEncode());
+      });
+
+      test("explicit hash is kept", () {
+        const hash = Blake2bHash256.passed(blake2bHash256: "00");
+
+        expect(body.copyWith(fee: BigInt.from(43).toCborInt(), blake2bHash256: hash).blake2bHash256, hash);
       });
     });
   });

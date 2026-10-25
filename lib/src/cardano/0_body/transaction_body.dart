@@ -714,8 +714,8 @@ class _CardanoTransactionBodyCopyWithImpl<$Res> implements $CardanoTransactionBo
     Object? proposalProcedures = freezed,
     Object? currentTreasuryValue = freezed,
     Object? donation = freezed,
-  }) => _then(
-    CardanoTransactionBody._hidden(
+  }) {
+    final copy = CardanoTransactionBody._hidden(
       blake2bHash256: blake2bHash256 ?? _self.blake2bHash256,
       nonStandardKeyOrder: _orKeep(nonStandardKeyOrder, _self.nonStandardKeyOrder),
       lengthType: lengthType ?? _self.lengthType,
@@ -744,8 +744,12 @@ class _CardanoTransactionBodyCopyWithImpl<$Res> implements $CardanoTransactionBo
       proposalProcedures: _orKeep(proposalProcedures, _self.proposalProcedures),
       currentTreasuryValue: _orKeep(currentTreasuryValue, _self.currentTreasuryValue),
       donation: _orKeep(donation, _self.donation),
-    ),
-  );
+    );
+    // The kept hash is of the bytes [_self] was parsed from, so a copy with other fields has to hash its own serialization
+    return _then(
+      blake2bHash256 == null && copy != _self ? copy.copyWith(blake2bHash256: const Blake2bHash256.none()) : copy,
+    );
+  }
 
   @override
   $CardanoTransactionInputsCopyWith<$Res> get inputs =>
