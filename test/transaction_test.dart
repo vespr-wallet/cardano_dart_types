@@ -148,7 +148,10 @@ void main() async {
         final modified = tx.copyWith(lengthType: CborLengthType.indefinite).copyWith.body(totalCollateral: null);
         expect(modified.lengthType, CborLengthType.indefinite);
         expect(modified.body.totalCollateral, isNull);
-        expect(modified.body.copyWith(totalCollateral: tx.body.totalCollateral), tx.body);
+        final restored = modified.body.copyWith(totalCollateral: tx.body.totalCollateral);
+        // The edits dropped the cached hash, the recomputed one matches
+        expect(restored.copyWith(blake2bHash256: tx.body.blake2bHash256), tx.body);
+        expect(restored.blake2bHash256Hex(), tx.body.blake2bHash256Hex());
         expect(modified.copyWith(auxiliaryData: null).auxiliaryData, isNull);
       });
 
