@@ -89,13 +89,17 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
 
   $CardanoTransactionCopyWith<CardanoTransaction> get copyWith => $CardanoTransactionCopyWith(this, (value) => value);
 
+  /// Serializing the result re-encodes the body: for a parsed body that does not re-serialize to its bytes, the
+  /// signatures are of [CardanoTransactionBody.blake2bHash256Hex], not of that encoding. Such a transaction has to be
+  /// submitted as its original bytes with the new witnesses, as CIP-30 dApps do with the witness set.
   CardanoTransaction copyWithAdditionalSignatures(WitnessSet additionalWitnessSet) =>
       copyWith(witnessSet: witnessSet + additionalWitnessSet);
 
   /// See [CardanoTransactionBody.hasAscendingKeyOrder].
   bool get hasAscendingBodyKeyOrder => body.hasAscendingKeyOrder;
 
-  /// The body is parsed from its bytes in [transactionBytes], see [CardanoTransactionBody.deserializeBytes].
+  /// The body is parsed from its bytes in [transactionBytes], see [CardanoTransactionBody.deserializeBytes]. Its hash
+  /// is theirs, which [serializeAsBytes] need not reproduce, see [copyWithAdditionalSignatures].
   factory CardanoTransaction.deserializeBytes(Uint8List transactionBytes) {
     final list = cbor.decode(transactionBytes) as CborList;
     // if (list.length != 1) throw CborDeserializationException();
