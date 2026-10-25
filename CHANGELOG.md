@@ -9,6 +9,7 @@ Security:
 
 Other Changes:
 
+- New `CardanoTransaction.marshal` / `unmarshal` for passing a transaction to a worker. Unlike `serializeAsBytes`, they keep the body hash. `TxPreparedForSigning` already kept the hash and now uses them. `TxAndSignature` uses them too: it used to drop the hash, so a signed transaction coming back from a worker reported the hash of its re-serialization
 - `RationalNumber` is exported. `Certificate.poolRegistration` requires one
 
 ## 3.2.1

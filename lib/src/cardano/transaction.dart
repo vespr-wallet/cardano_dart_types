@@ -6,6 +6,8 @@ import "package:cbor/cbor.dart";
 import "package:collection/collection.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
+import "../../binary/binary_reader.dart";
+import "../../binary/binary_writer.dart";
 import "../exceptions/signing_exceptions.dart";
 import "../hd/address/cardano_address.dart";
 import "../hd/signing/drep_diff_info.dart";
@@ -124,6 +126,19 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
 
     return result;
   }
+
+  /// For passing to a worker. Unlike [serializeAsBytes], keeps the body hash: it is of the body bytes as parsed, which
+  /// its serialization need not reproduce.
+  Uint8List marshal() => useBinaryWriter((writer) {
+    writer.writeByteList(body.blake2bHash256.marshal());
+    writer.writeByteList(serializeAsBytes());
+  });
+
+  /// See [marshal].
+  factory CardanoTransaction.unmarshal(Uint8List bytes) => useBinaryReader(bytes, (reader) {
+    final blake2bHash256 = Blake2bHash256.unmarshal(reader.readByteList());
+    return CardanoTransaction.deserializeBytes(reader.readByteList()).copyWith.body(blake2bHash256: blake2bHash256);
+  });
 
   /// See [CardanoTransaction.deserializeBytes].
   factory CardanoTransaction.deserializeFromHex(String transactionHex) {
