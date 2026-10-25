@@ -41,6 +41,7 @@ export "src/cardano/shared/asset.dart";
 export "src/cardano/shared/asset_name.dart";
 export "src/cardano/shared/drep.dart";
 export "src/cardano/shared/policy.dart";
+export "src/cardano/shared/rational_number.dart";
 export "src/cardano/shared/transaction_hash.dart";
 export "src/cardano/shared/utxo.dart";
 export "src/cardano/transaction.dart";
