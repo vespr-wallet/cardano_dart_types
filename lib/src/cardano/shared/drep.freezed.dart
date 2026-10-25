@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'drep.dart';
@@ -9,12 +9,13 @@ part of 'drep.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Drep {
 
- int get type; CborLengthType get lengthType;
+ CborLengthType get lengthType;
 /// Create a copy of Drep
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +26,21 @@ $DrepCopyWith<Drep> get copyWith => _$DrepCopyWithImpl<Drep>(this as Drep, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep&&(identical(other.type, type) || other.type == type)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as Drep;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,type,lengthType);
+int get hashCode {
+  final _this = this as Drep;
+  return Object.hash(runtimeType,_this.type,_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'Drep(type: $type, lengthType: $lengthType)';
+  final _this = this as Drep;
+  return 'Drep(type: ${_this.type}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -93,16 +99,18 @@ $Drep_AddrKeyHashCopyWith<Drep_AddrKeyHash> get copyWith => _$Drep_AddrKeyHashCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep_AddrKeyHash&&(identical(other.hash, hash) || other.hash == hash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep_AddrKeyHash&&(identical(other.hash, hash) || other.hash == hash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,hash,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,hash,lengthType);
+}
 
 @override
 String toString() {
-  return 'Drep.addrKeyHash(hash: $hash, lengthType: $lengthType)';
+    return 'Drep.addrKeyHash(hash: $hash, lengthType: $lengthType)';
 }
 
 
@@ -161,16 +169,18 @@ $Drep_ScriptHashCopyWith<Drep_ScriptHash> get copyWith => _$Drep_ScriptHashCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep_ScriptHash&&(identical(other.hash, hash) || other.hash == hash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep_ScriptHash&&(identical(other.hash, hash) || other.hash == hash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,hash,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,hash,lengthType);
+}
 
 @override
 String toString() {
-  return 'Drep.scriptHash(hash: $hash, lengthType: $lengthType)';
+    return 'Drep.scriptHash(hash: $hash, lengthType: $lengthType)';
 }
 
 
@@ -228,16 +238,18 @@ $Drep_AbstainCopyWith<Drep_Abstain> get copyWith => _$Drep_AbstainCopyWithImpl<D
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep_Abstain&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep_Abstain&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,lengthType);
+}
 
 @override
 String toString() {
-  return 'Drep.abstain(lengthType: $lengthType)';
+    return 'Drep.abstain(lengthType: $lengthType)';
 }
 
 
@@ -294,16 +306,18 @@ $Drep_NoConfidenceCopyWith<Drep_NoConfidence> get copyWith => _$Drep_NoConfidenc
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep_NoConfidence&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Drep_NoConfidence&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,lengthType);
+}
 
 @override
 String toString() {
-  return 'Drep.noConfidence(lengthType: $lengthType)';
+    return 'Drep.noConfidence(lengthType: $lengthType)';
 }
 
 

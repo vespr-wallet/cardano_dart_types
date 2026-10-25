@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'constitution.dart';
@@ -9,6 +9,7 @@ part of 'constitution.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ConstitutionCopyWith<Constitution> get copyWith => _$ConstitutionCopyWithImpl<C
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Constitution&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.scriptHash, scriptHash) || other.scriptHash == scriptHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as Constitution;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Constitution&&(identical(other.anchor, _this.anchor) || other.anchor == _this.anchor)&&(identical(other.scriptHash, _this.scriptHash) || other.scriptHash == _this.scriptHash)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,anchor,scriptHash,lengthType);
+int get hashCode {
+  final _this = this as Constitution;
+  return Object.hash(runtimeType,_this.anchor,_this.scriptHash,_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'Constitution(anchor: $anchor, scriptHash: $scriptHash, lengthType: $lengthType)';
+  final _this = this as Constitution;
+  return 'Constitution(anchor: ${_this.anchor}, scriptHash: ${_this.scriptHash}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ConstitutionCopyWithImpl<$Res>
 /// Create a copy of Constitution
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? anchor = null,Object? scriptHash = freezed,Object? lengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(Constitution(
 anchor: null == anchor ? _self.anchor : anchor // ignore: cast_nullable_to_non_nullable
 as Anchor,scriptHash: freezed == scriptHash ? _self.scriptHash : scriptHash // ignore: cast_nullable_to_non_nullable
 as String?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
@@ -105,16 +111,18 @@ _$ConstitutionCopyWith<_Constitution> get copyWith => __$ConstitutionCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Constitution&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.scriptHash, scriptHash) || other.scriptHash == scriptHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Constitution&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.scriptHash, scriptHash) || other.scriptHash == scriptHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,anchor,scriptHash,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,anchor,scriptHash,lengthType);
+}
 
 @override
 String toString() {
-  return 'Constitution(anchor: $anchor, scriptHash: $scriptHash, lengthType: $lengthType)';
+    return 'Constitution(anchor: $anchor, scriptHash: $scriptHash, lengthType: $lengthType)';
 }
 
 

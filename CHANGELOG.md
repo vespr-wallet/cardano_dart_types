@@ -6,6 +6,12 @@ Security:
   - Why: the summary does not include the collateral. The ledger takes the collateral and creates only the collateral return when a script fails, and the requester can arrange that failure. Script evaluation is fixed by the body, and `isValid` can be switched after signing.
   - Allowed: a legitimate transaction returns everything above its required collateral (about 150% of the fee) through the collateral return, including every token. Collateral supplied by someone else exposes nothing.
 
+Other Changes:
+
+- Re-generated code with freezed 4 (from 3.2.5), json_serializable 6.15 and build_runner 2.17
+- `json_annotation` minimum raised to 4.12.0, required by the generated JSON code
+- `copyWith` of `CardanoTransaction`, `CardanoTransactionBody` and `CardanoPubAccount` is now hand-written, because freezed 4 builds it on the wrong constructor ([freezed#1376](https://github.com/rrousselGit/freezed/issues/1376)). The API is unchanged, except that `CardanoTransactionBody.copyWith.blake2bHash256` is gone (it returned an object with no methods)
+
 ## 3.1.2
 
 Security:

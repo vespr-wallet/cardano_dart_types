@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'gov_action.dart';
@@ -9,6 +9,7 @@ part of 'gov_action.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $GovActionCopyWith<GovAction> get copyWith => _$GovActionCopyWithImpl<GovAction>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as GovAction;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,lengthType);
+int get hashCode {
+  final _this = this as GovAction;
+  return Object.hash(runtimeType,_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'GovAction(lengthType: $lengthType)';
+  final _this = this as GovAction;
+  return 'GovAction(lengthType: ${_this.lengthType})';
 }
 
 
@@ -95,16 +101,18 @@ $GovAction_ParameterChangeCopyWith<GovAction_ParameterChange> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_ParameterChange&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.protocolParamUpdate, protocolParamUpdate) || other.protocolParamUpdate == protocolParamUpdate)&&const DeepCollectionEquality().equals(other.policyHash, policyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_ParameterChange&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.protocolParamUpdate, protocolParamUpdate) || other.protocolParamUpdate == protocolParamUpdate)&&const DeepCollectionEquality().equals(other.policyHash, policyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId,protocolParamUpdate,const DeepCollectionEquality().hash(policyHash),lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,prevGovActionId,protocolParamUpdate,const DeepCollectionEquality().hash(policyHash),lengthType);
+}
 
 @override
 String toString() {
-  return 'GovAction.parameterChange(prevGovActionId: $prevGovActionId, protocolParamUpdate: $protocolParamUpdate, policyHash: $policyHash, lengthType: $lengthType)';
+    return 'GovAction.parameterChange(prevGovActionId: $prevGovActionId, protocolParamUpdate: $protocolParamUpdate, policyHash: $policyHash, lengthType: $lengthType)';
 }
 
 
@@ -184,16 +192,18 @@ $GovAction_HardForkInitiationCopyWith<GovAction_HardForkInitiation> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_HardForkInitiation&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.protocolVersion, protocolVersion) || other.protocolVersion == protocolVersion)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_HardForkInitiation&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.protocolVersion, protocolVersion) || other.protocolVersion == protocolVersion)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId,protocolVersion,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,prevGovActionId,protocolVersion,lengthType);
+}
 
 @override
 String toString() {
-  return 'GovAction.hardForkInitiation(prevGovActionId: $prevGovActionId, protocolVersion: $protocolVersion, lengthType: $lengthType)';
+    return 'GovAction.hardForkInitiation(prevGovActionId: $prevGovActionId, protocolVersion: $protocolVersion, lengthType: $lengthType)';
 }
 
 
@@ -255,7 +265,7 @@ $ProtocolVersionCopyWith<$Res> get protocolVersion {
 
 
 class GovAction_TreasuryWithdrawals extends GovAction {
-  const GovAction_TreasuryWithdrawals({required final  List<Withdraw> withdrawals, required this.policyHash, this.lengthType = CborLengthType.definite, this.withdrawalsLengthType = CborLengthType.definite}): _withdrawals = withdrawals,super._();
+  const GovAction_TreasuryWithdrawals({required  List<Withdraw> withdrawals, required this.policyHash, this.lengthType = CborLengthType.definite, this.withdrawalsLengthType = CborLengthType.definite}): _withdrawals = withdrawals,super._();
   
 
  final  List<Withdraw> _withdrawals;
@@ -279,16 +289,18 @@ $GovAction_TreasuryWithdrawalsCopyWith<GovAction_TreasuryWithdrawals> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_TreasuryWithdrawals&&const DeepCollectionEquality().equals(other._withdrawals, _withdrawals)&&const DeepCollectionEquality().equals(other.policyHash, policyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.withdrawalsLengthType, withdrawalsLengthType) || other.withdrawalsLengthType == withdrawalsLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_TreasuryWithdrawals&&const DeepCollectionEquality().equals(other.withdrawals, _withdrawals)&&const DeepCollectionEquality().equals(other.policyHash, policyHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.withdrawalsLengthType, withdrawalsLengthType) || other.withdrawalsLengthType == withdrawalsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_withdrawals),const DeepCollectionEquality().hash(policyHash),lengthType,withdrawalsLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_withdrawals),const DeepCollectionEquality().hash(policyHash),lengthType,withdrawalsLengthType);
+}
 
 @override
 String toString() {
-  return 'GovAction.treasuryWithdrawals(withdrawals: $withdrawals, policyHash: $policyHash, lengthType: $lengthType, withdrawalsLengthType: $withdrawalsLengthType)';
+    return 'GovAction.treasuryWithdrawals(withdrawals: $withdrawals, policyHash: $policyHash, lengthType: $lengthType, withdrawalsLengthType: $withdrawalsLengthType)';
 }
 
 
@@ -349,16 +361,18 @@ $GovAction_NoConfidenceCopyWith<GovAction_NoConfidence> get copyWith => _$GovAct
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_NoConfidence&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_NoConfidence&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,prevGovActionId,lengthType);
+}
 
 @override
 String toString() {
-  return 'GovAction.noConfidence(prevGovActionId: $prevGovActionId, lengthType: $lengthType)';
+    return 'GovAction.noConfidence(prevGovActionId: $prevGovActionId, lengthType: $lengthType)';
 }
 
 
@@ -410,7 +424,7 @@ $GovActionIdCopyWith<$Res> get prevGovActionId {
 
 
 class GovAction_UpdateCommittee extends GovAction {
-  const GovAction_UpdateCommittee({required this.prevGovActionId, required final  Set<Credential> membersForRemoval, required final  Map<Credential, int> newMembersAndTerms, required this.quorumThreshold, this.lengthType = CborLengthType.definite, this.membersForRemovalLengthType = CborLengthType.definite, final  List<int> membersForRemovalTags = const <int>[], this.newMembersAndTermsLengthType = CborLengthType.definite}): _membersForRemoval = membersForRemoval,_newMembersAndTerms = newMembersAndTerms,_membersForRemovalTags = membersForRemovalTags,super._();
+  const GovAction_UpdateCommittee({required this.prevGovActionId, required  Set<Credential> membersForRemoval, required  Map<Credential, int> newMembersAndTerms, required this.quorumThreshold, this.lengthType = CborLengthType.definite, this.membersForRemovalLengthType = CborLengthType.definite,  List<int> membersForRemovalTags = const <int>[], this.newMembersAndTermsLengthType = CborLengthType.definite}): _membersForRemoval = membersForRemoval,_newMembersAndTerms = newMembersAndTerms,_membersForRemovalTags = membersForRemovalTags,super._();
   
 
  final  GovActionId prevGovActionId;
@@ -450,16 +464,18 @@ $GovAction_UpdateCommitteeCopyWith<GovAction_UpdateCommittee> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_UpdateCommittee&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&const DeepCollectionEquality().equals(other._membersForRemoval, _membersForRemoval)&&const DeepCollectionEquality().equals(other._newMembersAndTerms, _newMembersAndTerms)&&(identical(other.quorumThreshold, quorumThreshold) || other.quorumThreshold == quorumThreshold)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.membersForRemovalLengthType, membersForRemovalLengthType) || other.membersForRemovalLengthType == membersForRemovalLengthType)&&const DeepCollectionEquality().equals(other._membersForRemovalTags, _membersForRemovalTags)&&(identical(other.newMembersAndTermsLengthType, newMembersAndTermsLengthType) || other.newMembersAndTermsLengthType == newMembersAndTermsLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_UpdateCommittee&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&const DeepCollectionEquality().equals(other.membersForRemoval, _membersForRemoval)&&const DeepCollectionEquality().equals(other.newMembersAndTerms, _newMembersAndTerms)&&(identical(other.quorumThreshold, quorumThreshold) || other.quorumThreshold == quorumThreshold)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.membersForRemovalLengthType, membersForRemovalLengthType) || other.membersForRemovalLengthType == membersForRemovalLengthType)&&const DeepCollectionEquality().equals(other.membersForRemovalTags, _membersForRemovalTags)&&(identical(other.newMembersAndTermsLengthType, newMembersAndTermsLengthType) || other.newMembersAndTermsLengthType == newMembersAndTermsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId,const DeepCollectionEquality().hash(_membersForRemoval),const DeepCollectionEquality().hash(_newMembersAndTerms),quorumThreshold,lengthType,membersForRemovalLengthType,const DeepCollectionEquality().hash(_membersForRemovalTags),newMembersAndTermsLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,prevGovActionId,const DeepCollectionEquality().hash(_membersForRemoval),const DeepCollectionEquality().hash(_newMembersAndTerms),quorumThreshold,lengthType,membersForRemovalLengthType,const DeepCollectionEquality().hash(_membersForRemovalTags),newMembersAndTermsLengthType);
+}
 
 @override
 String toString() {
-  return 'GovAction.updateCommittee(prevGovActionId: $prevGovActionId, membersForRemoval: $membersForRemoval, newMembersAndTerms: $newMembersAndTerms, quorumThreshold: $quorumThreshold, lengthType: $lengthType, membersForRemovalLengthType: $membersForRemovalLengthType, membersForRemovalTags: $membersForRemovalTags, newMembersAndTermsLengthType: $newMembersAndTermsLengthType)';
+    return 'GovAction.updateCommittee(prevGovActionId: $prevGovActionId, membersForRemoval: $membersForRemoval, newMembersAndTerms: $newMembersAndTerms, quorumThreshold: $quorumThreshold, lengthType: $lengthType, membersForRemovalLengthType: $membersForRemovalLengthType, membersForRemovalTags: $membersForRemovalTags, newMembersAndTermsLengthType: $newMembersAndTermsLengthType)';
 }
 
 
@@ -543,16 +559,18 @@ $GovAction_NewConstitutionCopyWith<GovAction_NewConstitution> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_NewConstitution&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.constitution, constitution) || other.constitution == constitution)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_NewConstitution&&(identical(other.prevGovActionId, prevGovActionId) || other.prevGovActionId == prevGovActionId)&&(identical(other.constitution, constitution) || other.constitution == constitution)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,prevGovActionId,constitution,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,prevGovActionId,constitution,lengthType);
+}
 
 @override
 String toString() {
-  return 'GovAction.newConstitution(prevGovActionId: $prevGovActionId, constitution: $constitution, lengthType: $lengthType)';
+    return 'GovAction.newConstitution(prevGovActionId: $prevGovActionId, constitution: $constitution, lengthType: $lengthType)';
 }
 
 
@@ -629,16 +647,18 @@ $GovAction_InfoActionCopyWith<GovAction_InfoAction> get copyWith => _$GovAction_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_InfoAction&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is GovAction_InfoAction&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,lengthType);
+}
 
 @override
 String toString() {
-  return 'GovAction.infoAction(lengthType: $lengthType)';
+    return 'GovAction.infoAction(lengthType: $lengthType)';
 }
 
 

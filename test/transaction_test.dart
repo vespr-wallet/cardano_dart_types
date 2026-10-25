@@ -140,6 +140,18 @@ void main() async {
         expect(modifiedTx.body.nonStandardKeyOrder, equals(nonStandardKeyOrder));
       });
 
+      test("copyWith keeps omitted fields and clears nullable fields passed as null", () {
+        final tx = CardanoTransaction.deserializeFromHex(_TestCaseTx.midnight.cborHex);
+        expect(tx.copyWith(), tx);
+        expect(tx.body.totalCollateral, isNotNull);
+
+        final modified = tx.copyWith(lengthType: CborLengthType.indefinite).copyWith.body(totalCollateral: null);
+        expect(modified.lengthType, CborLengthType.indefinite);
+        expect(modified.body.totalCollateral, isNull);
+        expect(modified.body.copyWith(totalCollateral: tx.body.totalCollateral), tx.body);
+        expect(modified.copyWith(auxiliaryData: null).auxiliaryData, isNull);
+      });
+
       test("manually created body has null nonStandardKeyOrder and uses ascending order", () {
         final body = CardanoTransactionBody.create(
           inputs: const CardanoTransactionInputs(data: [], cborTags: []),

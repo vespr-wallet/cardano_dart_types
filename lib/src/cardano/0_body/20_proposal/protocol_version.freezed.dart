@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'protocol_version.dart';
@@ -9,6 +9,7 @@ part of 'protocol_version.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ProtocolVersionCopyWith<ProtocolVersion> get copyWith => _$ProtocolVersionCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProtocolVersion&&(identical(other.major, major) || other.major == major)&&(identical(other.minor, minor) || other.minor == minor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as ProtocolVersion;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProtocolVersion&&(identical(other.major, _this.major) || other.major == _this.major)&&(identical(other.minor, _this.minor) || other.minor == _this.minor)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,major,minor,lengthType);
+int get hashCode {
+  final _this = this as ProtocolVersion;
+  return Object.hash(runtimeType,_this.major,_this.minor,_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'ProtocolVersion(major: $major, minor: $minor, lengthType: $lengthType)';
+  final _this = this as ProtocolVersion;
+  return 'ProtocolVersion(major: ${_this.major}, minor: ${_this.minor}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ProtocolVersionCopyWithImpl<$Res>
 /// Create a copy of ProtocolVersion
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? major = null,Object? minor = null,Object? lengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(ProtocolVersion(
 major: null == major ? _self.major : major // ignore: cast_nullable_to_non_nullable
 as int,minor: null == minor ? _self.minor : minor // ignore: cast_nullable_to_non_nullable
 as int,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
@@ -96,16 +102,18 @@ _$ProtocolVersionCopyWith<_ProtocolVersion> get copyWith => __$ProtocolVersionCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProtocolVersion&&(identical(other.major, major) || other.major == major)&&(identical(other.minor, minor) || other.minor == minor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProtocolVersion&&(identical(other.major, major) || other.major == major)&&(identical(other.minor, minor) || other.minor == minor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,major,minor,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,major,minor,lengthType);
+}
 
 @override
 String toString() {
-  return 'ProtocolVersion(major: $major, minor: $minor, lengthType: $lengthType)';
+    return 'ProtocolVersion(major: $major, minor: $minor, lengthType: $lengthType)';
 }
 
 

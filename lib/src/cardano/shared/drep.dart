@@ -56,7 +56,6 @@ sealed class Drep with _$Drep implements CborEncodable {
     };
   }
 
-  @override
   late final int type = switch (this) {
     Drep_AddrKeyHash() => 0,
     Drep_ScriptHash() => 1,

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'certificate.dart';
@@ -9,12 +9,13 @@ part of 'certificate.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Certificate {
 
- int get certType; CborLengthType get lengthType;
+ CborLengthType get lengthType;
 /// Create a copy of Certificate
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +26,21 @@ $CertificateCopyWith<Certificate> get copyWith => _$CertificateCopyWithImpl<Cert
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate&&(identical(other.certType, certType) || other.certType == certType)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as Certificate;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate&&(identical(other.certType, _this.certType) || other.certType == _this.certType)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,certType,lengthType);
+int get hashCode {
+  final _this = this as Certificate;
+  return Object.hash(runtimeType,_this.certType,_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate(certType: $certType, lengthType: $lengthType)';
+  final _this = this as Certificate;
+  return 'Certificate(certType: ${_this.certType}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -93,16 +99,18 @@ $Certificate_StakeRegistrationLegacyCopyWith<Certificate_StakeRegistrationLegacy
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistrationLegacy&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistrationLegacy&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.stakeRegistrationLegacy(stakeCredential: $stakeCredential, lengthType: $lengthType)';
+    return 'Certificate.stakeRegistrationLegacy(stakeCredential: $stakeCredential, lengthType: $lengthType)';
 }
 
 
@@ -170,16 +178,18 @@ $Certificate_StakeDeRegistrationLegacyCopyWith<Certificate_StakeDeRegistrationLe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDeRegistrationLegacy&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDeRegistrationLegacy&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.stakeDeRegistrationLegacy(stakeCredential: $stakeCredential, lengthType: $lengthType)';
+    return 'Certificate.stakeDeRegistrationLegacy(stakeCredential: $stakeCredential, lengthType: $lengthType)';
 }
 
 
@@ -248,16 +258,18 @@ $Certificate_StakeDelegationCopyWith<Certificate_StakeDelegation> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,stakePoolId,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.stakeDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, lengthType: $lengthType)';
+    return 'Certificate.stakeDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, lengthType: $lengthType)';
 }
 
 
@@ -319,43 +331,31 @@ $StakePoolIdCopyWith<$Res> get stakePoolId {
 
 
 class Certificate_PoolRegistration extends Certificate {
-   Certificate_PoolRegistration({required this.operator, required this.vrfKeyHash, required this.pledge, required this.cost, required this.margin, required this.rewardAccount, required final  List<Uint8List> poolOwners, this.poolOwnersLengthType = CborLengthType.definite, final  List<int> poolOwnersCborTags = const [], required this.relays, required this.poolMetadata, this.lengthType = CborLengthType.definite}): assert(pledge.toBigInt() >= BigInt.from(0)),assert(cost.toBigInt() >= BigInt.from(0)),_poolOwners = poolOwners,_poolOwnersCborTags = poolOwnersCborTags,super._();
+   Certificate_PoolRegistration({required this.operator, required this.vrfKeyHash, required this.pledge, required this.cost, required this.margin, required this.rewardAccount, required  List<Uint8List> poolOwners, this.poolOwnersLengthType = CborLengthType.definite,  List<int> poolOwnersCborTags = const [], required this.relays, required this.poolMetadata, this.lengthType = CborLengthType.definite}): assert(pledge.toBigInt() >= BigInt.from(0)),assert(cost.toBigInt() >= BigInt.from(0)),_poolOwners = poolOwners,_poolOwnersCborTags = poolOwnersCborTags,super._();
   
 
  final  StakePoolId operator;
-// pool key hash 28 bytes
  final  Uint8List vrfKeyHash;
-// vrf key hash 32 bytes
  final  CborInt pledge;
-// pledge in lovelace
  final  CborInt cost;
-// cost in lovelace
  final  RationalNumber margin;
-// margin
  final  Uint8List rewardAccount;
-// decoded address bytes (can be encoded to bech32 directly)
  final  List<Uint8List> _poolOwners;
-// decoded address bytes (can be encoded to bech32 directly)
  List<Uint8List> get poolOwners {
   if (_poolOwners is EqualUnmodifiableListView) return _poolOwners;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_poolOwners);
 }
 
-// decoded pool owner address key hash 28
 @JsonKey() final  CborLengthType poolOwnersLengthType;
-// encoding of the pool owners list/set
  final  List<int> _poolOwnersCborTags;
-// encoding of the pool owners list/set
 @JsonKey() List<int> get poolOwnersCborTags {
   if (_poolOwnersCborTags is EqualUnmodifiableListView) return _poolOwnersCborTags;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_poolOwnersCborTags);
 }
 
-// e.g. 258 when the pool owners are encoded as a tagged set
  final  CborValue relays;
-// relays ; we don't bother to decode this for now
  final  PoolMetadata? poolMetadata;
 @override@JsonKey() final  CborLengthType lengthType;
 
@@ -369,16 +369,18 @@ $Certificate_PoolRegistrationCopyWith<Certificate_PoolRegistration> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_PoolRegistration&&(identical(other.operator, operator) || other.operator == operator)&&const DeepCollectionEquality().equals(other.vrfKeyHash, vrfKeyHash)&&(identical(other.pledge, pledge) || other.pledge == pledge)&&(identical(other.cost, cost) || other.cost == cost)&&(identical(other.margin, margin) || other.margin == margin)&&const DeepCollectionEquality().equals(other.rewardAccount, rewardAccount)&&const DeepCollectionEquality().equals(other._poolOwners, _poolOwners)&&(identical(other.poolOwnersLengthType, poolOwnersLengthType) || other.poolOwnersLengthType == poolOwnersLengthType)&&const DeepCollectionEquality().equals(other._poolOwnersCborTags, _poolOwnersCborTags)&&(identical(other.relays, relays) || other.relays == relays)&&(identical(other.poolMetadata, poolMetadata) || other.poolMetadata == poolMetadata)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_PoolRegistration&&(identical(other.operator, operator) || other.operator == operator)&&const DeepCollectionEquality().equals(other.vrfKeyHash, vrfKeyHash)&&(identical(other.pledge, pledge) || other.pledge == pledge)&&(identical(other.cost, cost) || other.cost == cost)&&(identical(other.margin, margin) || other.margin == margin)&&const DeepCollectionEquality().equals(other.rewardAccount, rewardAccount)&&const DeepCollectionEquality().equals(other.poolOwners, _poolOwners)&&(identical(other.poolOwnersLengthType, poolOwnersLengthType) || other.poolOwnersLengthType == poolOwnersLengthType)&&const DeepCollectionEquality().equals(other.poolOwnersCborTags, _poolOwnersCborTags)&&(identical(other.relays, relays) || other.relays == relays)&&(identical(other.poolMetadata, poolMetadata) || other.poolMetadata == poolMetadata)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,operator,const DeepCollectionEquality().hash(vrfKeyHash),pledge,cost,margin,const DeepCollectionEquality().hash(rewardAccount),const DeepCollectionEquality().hash(_poolOwners),poolOwnersLengthType,const DeepCollectionEquality().hash(_poolOwnersCborTags),relays,poolMetadata,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,operator,const DeepCollectionEquality().hash(vrfKeyHash),pledge,cost,margin,const DeepCollectionEquality().hash(rewardAccount),const DeepCollectionEquality().hash(_poolOwners),poolOwnersLengthType,const DeepCollectionEquality().hash(_poolOwnersCborTags),relays,poolMetadata,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.poolRegistration(operator: $operator, vrfKeyHash: $vrfKeyHash, pledge: $pledge, cost: $cost, margin: $margin, rewardAccount: $rewardAccount, poolOwners: $poolOwners, poolOwnersLengthType: $poolOwnersLengthType, poolOwnersCborTags: $poolOwnersCborTags, relays: $relays, poolMetadata: $poolMetadata, lengthType: $lengthType)';
+    return 'Certificate.poolRegistration(operator: $operator, vrfKeyHash: $vrfKeyHash, pledge: $pledge, cost: $cost, margin: $margin, rewardAccount: $rewardAccount, poolOwners: $poolOwners, poolOwnersLengthType: $poolOwnersLengthType, poolOwnersCborTags: $poolOwnersCborTags, relays: $relays, poolMetadata: $poolMetadata, lengthType: $lengthType)';
 }
 
 
@@ -465,7 +467,6 @@ class Certificate_PoolRetirement extends Certificate {
   
 
  final  StakePoolId operator;
-// pool key hash 28 bytes
  final  CborInt epoch;
 @override@JsonKey() final  CborLengthType lengthType;
 
@@ -479,16 +480,18 @@ $Certificate_PoolRetirementCopyWith<Certificate_PoolRetirement> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_PoolRetirement&&(identical(other.operator, operator) || other.operator == operator)&&(identical(other.epoch, epoch) || other.epoch == epoch)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_PoolRetirement&&(identical(other.operator, operator) || other.operator == operator)&&(identical(other.epoch, epoch) || other.epoch == epoch)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,operator,epoch,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,operator,epoch,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.poolRetirement(operator: $operator, epoch: $epoch, lengthType: $lengthType)';
+    return 'Certificate.poolRetirement(operator: $operator, epoch: $epoch, lengthType: $lengthType)';
 }
 
 
@@ -558,16 +561,18 @@ $Certificate_StakeRegistrationCopyWith<Certificate_StakeRegistration> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistration&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistration&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,coin,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,coin,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.stakeRegistration(stakeCredential: $stakeCredential, coin: $coin, lengthType: $lengthType)';
+    return 'Certificate.stakeRegistration(stakeCredential: $stakeCredential, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -637,16 +642,18 @@ $Certificate_StakeDeRegistrationCopyWith<Certificate_StakeDeRegistration> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDeRegistration&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeDeRegistration&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,coin,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,coin,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.stakeDeRegistration(stakeCredential: $stakeCredential, coin: $coin, lengthType: $lengthType)';
+    return 'Certificate.stakeDeRegistration(stakeCredential: $stakeCredential, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -716,16 +723,18 @@ $Certificate_VoteDelegationCopyWith<Certificate_VoteDelegation> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_VoteDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_VoteDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,dRep,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,dRep,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.voteDelegation(stakeCredential: $stakeCredential, dRep: $dRep, lengthType: $lengthType)';
+    return 'Certificate.voteDelegation(stakeCredential: $stakeCredential, dRep: $dRep, lengthType: $lengthType)';
 }
 
 
@@ -805,16 +814,18 @@ $Certificate_StakeVoteDelegationCopyWith<Certificate_StakeVoteDelegation> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeVoteDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeVoteDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,dRep,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,stakePoolId,dRep,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.stakeVoteDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, dRep: $dRep, lengthType: $lengthType)';
+    return 'Certificate.stakeVoteDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, dRep: $dRep, lengthType: $lengthType)';
 }
 
 
@@ -904,16 +915,18 @@ $Certificate_StakeRegistrationDelegationCopyWith<Certificate_StakeRegistrationDe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,coin,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,stakePoolId,coin,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.stakeRegistrationDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, coin: $coin, lengthType: $lengthType)';
+    return 'Certificate.stakeRegistrationDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -994,16 +1007,18 @@ $Certificate_VoteRegistrationDelegationCopyWith<Certificate_VoteRegistrationDele
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_VoteRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_VoteRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,dRep,coin,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,dRep,coin,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.voteRegistrationDelegation(stakeCredential: $stakeCredential, dRep: $dRep, coin: $coin, lengthType: $lengthType)';
+    return 'Certificate.voteRegistrationDelegation(stakeCredential: $stakeCredential, dRep: $dRep, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -1085,16 +1100,18 @@ $Certificate_StakeVoteRegistrationDelegationCopyWith<Certificate_StakeVoteRegist
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeVoteRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_StakeVoteRegistrationDelegation&&(identical(other.stakeCredential, stakeCredential) || other.stakeCredential == stakeCredential)&&(identical(other.stakePoolId, stakePoolId) || other.stakePoolId == stakePoolId)&&(identical(other.dRep, dRep) || other.dRep == dRep)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stakeCredential,stakePoolId,dRep,coin,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,stakeCredential,stakePoolId,dRep,coin,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.stakeVoteRegistrationDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, dRep: $dRep, coin: $coin, lengthType: $lengthType)';
+    return 'Certificate.stakeVoteRegistrationDelegation(stakeCredential: $stakeCredential, stakePoolId: $stakePoolId, dRep: $dRep, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -1184,16 +1201,18 @@ $Certificate_AuthorizeCommitteeHotCopyWith<Certificate_AuthorizeCommitteeHot> ge
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_AuthorizeCommitteeHot&&(identical(other.committeeColdCredential, committeeColdCredential) || other.committeeColdCredential == committeeColdCredential)&&(identical(other.committeeHotCredential, committeeHotCredential) || other.committeeHotCredential == committeeHotCredential)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_AuthorizeCommitteeHot&&(identical(other.committeeColdCredential, committeeColdCredential) || other.committeeColdCredential == committeeColdCredential)&&(identical(other.committeeHotCredential, committeeHotCredential) || other.committeeHotCredential == committeeHotCredential)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,committeeColdCredential,committeeHotCredential,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,committeeColdCredential,committeeHotCredential,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.authorizeCommitteeHot(committeeColdCredential: $committeeColdCredential, committeeHotCredential: $committeeHotCredential, lengthType: $lengthType)';
+    return 'Certificate.authorizeCommitteeHot(committeeColdCredential: $committeeColdCredential, committeeHotCredential: $committeeHotCredential, lengthType: $lengthType)';
 }
 
 
@@ -1272,16 +1291,18 @@ $Certificate_ResignCommitteeColdCopyWith<Certificate_ResignCommitteeCold> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_ResignCommitteeCold&&(identical(other.committeeColdCredential, committeeColdCredential) || other.committeeColdCredential == committeeColdCredential)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_ResignCommitteeCold&&(identical(other.committeeColdCredential, committeeColdCredential) || other.committeeColdCredential == committeeColdCredential)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,committeeColdCredential,anchor,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,committeeColdCredential,anchor,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.resignCommitteeCold(committeeColdCredential: $committeeColdCredential, anchor: $anchor, lengthType: $lengthType)';
+    return 'Certificate.resignCommitteeCold(committeeColdCredential: $committeeColdCredential, anchor: $anchor, lengthType: $lengthType)';
 }
 
 
@@ -1364,16 +1385,18 @@ $Certificate_RegisterDRepCopyWith<Certificate_RegisterDRep> get copyWith => _$Ce
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_RegisterDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_RegisterDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dRepCredential,coin,anchor,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,dRepCredential,coin,anchor,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.registerDRep(dRepCredential: $dRepCredential, coin: $coin, anchor: $anchor, lengthType: $lengthType)';
+    return 'Certificate.registerDRep(dRepCredential: $dRepCredential, coin: $coin, anchor: $anchor, lengthType: $lengthType)';
 }
 
 
@@ -1456,16 +1479,18 @@ $Certificate_UnregisterDRepCopyWith<Certificate_UnregisterDRep> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_UnregisterDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_UnregisterDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.coin, coin) || other.coin == coin)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dRepCredential,coin,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,dRepCredential,coin,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.unregisterDRep(dRepCredential: $dRepCredential, coin: $coin, lengthType: $lengthType)';
+    return 'Certificate.unregisterDRep(dRepCredential: $dRepCredential, coin: $coin, lengthType: $lengthType)';
 }
 
 
@@ -1535,16 +1560,18 @@ $Certificate_UpdateDRepCopyWith<Certificate_UpdateDRep> get copyWith => _$Certif
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_UpdateDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificate_UpdateDRep&&(identical(other.dRepCredential, dRepCredential) || other.dRepCredential == dRepCredential)&&(identical(other.anchor, anchor) || other.anchor == anchor)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dRepCredential,anchor,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,dRepCredential,anchor,lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificate.updateDRep(dRepCredential: $dRepCredential, anchor: $anchor, lengthType: $lengthType)';
+    return 'Certificate.updateDRep(dRepCredential: $dRepCredential, anchor: $anchor, lengthType: $lengthType)';
 }
 
 

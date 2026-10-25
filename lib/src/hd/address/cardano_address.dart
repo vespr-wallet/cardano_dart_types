@@ -153,19 +153,14 @@ sealed class CardanoAddress with _$CardanoAddress {
 
   factory CardanoAddress.fromJson(Map<String, dynamic> json) => _$CardanoAddressFromJson(json);
 
-  @override
   late final String hrp = getAddressHrp(bytes);
 
-  @override
   late final String bech32Encoded = bytes.encode(Bech32Encoder(hrp: hrp));
 
-  @override
   late final String hexEncoded = bytes.hexEncode();
 
-  @override
   late final Uint8List credentialsBytes = bytes.skip(1).take(28).toUint8List();
 
-  @override
   late final Uint8List? stakeCredentialsBytes = getAddressType(bytes).let(
     (p0) => p0 == AddressType.reward
         ? credentialsBytes
@@ -174,16 +169,12 @@ sealed class CardanoAddress with _$CardanoAddress {
         : null,
   );
 
-  @override
   late final String credentials = credentialsBytes.hexEncode();
 
-  @override
   late final String credentialsBech32 = credentialsBytes.bech32Encode(getCredHrp(bytes));
 
-  @override
   late final String? stakeCredentials = stakeCredentialsBytes?.hexEncode();
 
-  @override
   late final String? stakeBech32Encoded = getAddressType(bytes).let(
     (p0) => p0 == AddressType.reward
         ? bech32Encoded
@@ -192,16 +183,13 @@ sealed class CardanoAddress with _$CardanoAddress {
         : null,
   );
 
-  @override
   late final NetworkId networkId = getNetworkId(bytes);
 
   @Deprecated("Use credentialsType instead")
   CredentialType get paymentCredentialType => credentialsType.value;
 
-  @override
   late final Lazy<CredentialType> credentialsType = Lazy(() => getCredentialType(bytes));
 
-  @override
   late final AddressType addressType = getAddressType(bytes);
 
   static NetworkId getNetworkId(Iterable<int> address) =>

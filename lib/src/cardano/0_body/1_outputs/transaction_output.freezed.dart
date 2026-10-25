@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'transaction_output.dart';
@@ -9,12 +9,13 @@ part of 'transaction_output.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CardanoTransactionOutput {
 
- OutputDatum? get datum; Address get address; Value get value; CborLengthType get lengthType;
+ Address get address; Value get value; CborLengthType get lengthType;
 /// Create a copy of CardanoTransactionOutput
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,12 +26,16 @@ $CardanoTransactionOutputCopyWith<CardanoTransactionOutput> get copyWith => _$Ca
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput&&(identical(other.datum, datum) || other.datum == datum)&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as CardanoTransactionOutput;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput&&(identical(other.datum, _this.datum) || other.datum == _this.datum)&&(identical(other.address, _this.address) || other.address == _this.address)&&(identical(other.value, _this.value) || other.value == _this.value)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,datum,address,value,lengthType);
+int get hashCode {
+  final _this = this as CardanoTransactionOutput;
+  return Object.hash(runtimeType,_this.datum,_this.address,_this.value,_this.lengthType);
+}
 
 
 
@@ -111,12 +116,14 @@ $CardanoTransactionOutput_LegacyCopyWith<CardanoTransactionOutput_Legacy> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_Legacy&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&const DeepCollectionEquality().equals(other.outDatumHash, outDatumHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_Legacy&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&const DeepCollectionEquality().equals(other.outDatumHash, outDatumHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,address,value,const DeepCollectionEquality().hash(outDatumHash),lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,address,value,const DeepCollectionEquality().hash(outDatumHash),lengthType);
+}
 
 
 
@@ -179,7 +186,7 @@ $ValueCopyWith<$Res> get value {
 
 
 class CardanoTransactionOutput_PostAlonzo extends CardanoTransactionOutput {
-   CardanoTransactionOutput_PostAlonzo({required this.address, required this.value, required this.outDatum, required this.scriptRef, required this.lengthType, this.datumOptionLengthType = CborLengthType.definite, final  List<int>? nonStandardKeyOrder}): _nonStandardKeyOrder = nonStandardKeyOrder,super._();
+   CardanoTransactionOutput_PostAlonzo({required this.address, required this.value, required this.outDatum, required this.scriptRef, required this.lengthType, this.datumOptionLengthType = CborLengthType.definite,  List<int>? nonStandardKeyOrder}): _nonStandardKeyOrder = nonStandardKeyOrder,super._();
   
 
 @override final  Address address;
@@ -188,9 +195,7 @@ class CardanoTransactionOutput_PostAlonzo extends CardanoTransactionOutput {
  final  Uint8List? scriptRef;
 @override final  CborLengthType lengthType;
 @JsonKey() final  CborLengthType datumOptionLengthType;
-// Original map key order when not ascending (null = ascending)
  final  List<int>? _nonStandardKeyOrder;
-// Original map key order when not ascending (null = ascending)
  List<int>? get nonStandardKeyOrder {
   final value = _nonStandardKeyOrder;
   if (value == null) return null;
@@ -210,12 +215,14 @@ $CardanoTransactionOutput_PostAlonzoCopyWith<CardanoTransactionOutput_PostAlonzo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_PostAlonzo&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&(identical(other.outDatum, outDatum) || other.outDatum == outDatum)&&const DeepCollectionEquality().equals(other.scriptRef, scriptRef)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.datumOptionLengthType, datumOptionLengthType) || other.datumOptionLengthType == datumOptionLengthType)&&const DeepCollectionEquality().equals(other._nonStandardKeyOrder, _nonStandardKeyOrder));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionOutput_PostAlonzo&&(identical(other.address, address) || other.address == address)&&(identical(other.value, value) || other.value == value)&&(identical(other.outDatum, outDatum) || other.outDatum == outDatum)&&const DeepCollectionEquality().equals(other.scriptRef, scriptRef)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.datumOptionLengthType, datumOptionLengthType) || other.datumOptionLengthType == datumOptionLengthType)&&const DeepCollectionEquality().equals(other.nonStandardKeyOrder, _nonStandardKeyOrder));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,address,value,outDatum,const DeepCollectionEquality().hash(scriptRef),lengthType,datumOptionLengthType,const DeepCollectionEquality().hash(_nonStandardKeyOrder));
+int get hashCode {
+    return Object.hash(runtimeType,address,value,outDatum,const DeepCollectionEquality().hash(scriptRef),lengthType,datumOptionLengthType,const DeepCollectionEquality().hash(_nonStandardKeyOrder));
+}
 
 
 

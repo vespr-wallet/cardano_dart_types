@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'vote_info.dart';
@@ -9,6 +9,7 @@ part of 'vote_info.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $VoteInfoCopyWith<VoteInfo> get copyWith => _$VoteInfoCopyWithImpl<VoteInfo>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VoteInfo&&(identical(other.action, action) || other.action == action)&&(identical(other.vote, vote) || other.vote == vote));
+  final _this = this as VoteInfo;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VoteInfo&&(identical(other.action, _this.action) || other.action == _this.action)&&(identical(other.vote, _this.vote) || other.vote == _this.vote));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,action,vote);
+int get hashCode {
+  final _this = this as VoteInfo;
+  return Object.hash(runtimeType,_this.action,_this.vote);
+}
 
 @override
 String toString() {
-  return 'VoteInfo(action: $action, vote: $vote)';
+  final _this = this as VoteInfo;
+  return 'VoteInfo(action: ${_this.action}, vote: ${_this.vote})';
 }
 
 
@@ -63,7 +69,7 @@ class _$VoteInfoCopyWithImpl<$Res>
 /// Create a copy of VoteInfo
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? action = null,Object? vote = null,}) {
-  return _then(_self.copyWith(
+  return _then(VoteInfo(
 action: null == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
 as GovActionId,vote: null == vote ? _self.vote : vote // ignore: cast_nullable_to_non_nullable
 as Vote,
@@ -103,16 +109,18 @@ _$VoteInfoCopyWith<_VoteInfo> get copyWith => __$VoteInfoCopyWithImpl<_VoteInfo>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VoteInfo&&(identical(other.action, action) || other.action == action)&&(identical(other.vote, vote) || other.vote == vote));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _VoteInfo&&(identical(other.action, action) || other.action == action)&&(identical(other.vote, vote) || other.vote == vote));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,action,vote);
+int get hashCode {
+    return Object.hash(runtimeType,action,vote);
+}
 
 @override
 String toString() {
-  return 'VoteInfo(action: $action, vote: $vote)';
+    return 'VoteInfo(action: $action, vote: $vote)';
 }
 
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'native_script.dart';
@@ -9,6 +9,7 @@ part of 'native_script.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $NativeScriptCopyWith<NativeScript> get copyWith => _$NativeScriptCopyWithImpl<N
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as NativeScript;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,lengthType);
+int get hashCode {
+  final _this = this as NativeScript;
+  return Object.hash(runtimeType,_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'NativeScript(lengthType: $lengthType)';
+  final _this = this as NativeScript;
+  return 'NativeScript(lengthType: ${_this.lengthType})';
 }
 
 
@@ -93,16 +99,18 @@ $NativeScript_PubKeyCopyWith<NativeScript_PubKey> get copyWith => _$NativeScript
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_PubKey&&const DeepCollectionEquality().equals(other.blob, blob)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_PubKey&&const DeepCollectionEquality().equals(other.blob, blob)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(blob),lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(blob),lengthType);
+}
 
 @override
 String toString() {
-  return 'NativeScript.pubKey(blob: $blob, lengthType: $lengthType)';
+    return 'NativeScript.pubKey(blob: $blob, lengthType: $lengthType)';
 }
 
 
@@ -145,7 +153,7 @@ as CborLengthType,
 
 
 class NativeScript_All extends NativeScript {
-  const NativeScript_All({required final  List<NativeScript> scripts, this.lengthType = CborLengthType.definite, this.scriptsLengthType = CborLengthType.definite}): _scripts = scripts,super._();
+  const NativeScript_All({required  List<NativeScript> scripts, this.lengthType = CborLengthType.definite, this.scriptsLengthType = CborLengthType.definite}): _scripts = scripts,super._();
   
 
  final  List<NativeScript> _scripts;
@@ -168,16 +176,18 @@ $NativeScript_AllCopyWith<NativeScript_All> get copyWith => _$NativeScript_AllCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_All&&const DeepCollectionEquality().equals(other._scripts, _scripts)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.scriptsLengthType, scriptsLengthType) || other.scriptsLengthType == scriptsLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_All&&const DeepCollectionEquality().equals(other.scripts, _scripts)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.scriptsLengthType, scriptsLengthType) || other.scriptsLengthType == scriptsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts),lengthType,scriptsLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts),lengthType,scriptsLengthType);
+}
 
 @override
 String toString() {
-  return 'NativeScript.all(scripts: $scripts, lengthType: $lengthType, scriptsLengthType: $scriptsLengthType)';
+    return 'NativeScript.all(scripts: $scripts, lengthType: $lengthType, scriptsLengthType: $scriptsLengthType)';
 }
 
 
@@ -221,7 +231,7 @@ as CborLengthType,
 
 
 class NativeScript_Any extends NativeScript {
-  const NativeScript_Any({required final  List<NativeScript> scripts, this.lengthType = CborLengthType.definite, this.scriptsLengthType = CborLengthType.definite}): _scripts = scripts,super._();
+  const NativeScript_Any({required  List<NativeScript> scripts, this.lengthType = CborLengthType.definite, this.scriptsLengthType = CborLengthType.definite}): _scripts = scripts,super._();
   
 
  final  List<NativeScript> _scripts;
@@ -244,16 +254,18 @@ $NativeScript_AnyCopyWith<NativeScript_Any> get copyWith => _$NativeScript_AnyCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_Any&&const DeepCollectionEquality().equals(other._scripts, _scripts)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.scriptsLengthType, scriptsLengthType) || other.scriptsLengthType == scriptsLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_Any&&const DeepCollectionEquality().equals(other.scripts, _scripts)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.scriptsLengthType, scriptsLengthType) || other.scriptsLengthType == scriptsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts),lengthType,scriptsLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_scripts),lengthType,scriptsLengthType);
+}
 
 @override
 String toString() {
-  return 'NativeScript.any(scripts: $scripts, lengthType: $lengthType, scriptsLengthType: $scriptsLengthType)';
+    return 'NativeScript.any(scripts: $scripts, lengthType: $lengthType, scriptsLengthType: $scriptsLengthType)';
 }
 
 
@@ -297,7 +309,7 @@ as CborLengthType,
 
 
 class NativeScript_AtLeast extends NativeScript {
-  const NativeScript_AtLeast({required this.required, required final  List<NativeScript> scripts, this.lengthType = CborLengthType.definite, this.scriptsLengthType = CborLengthType.definite}): _scripts = scripts,super._();
+  const NativeScript_AtLeast({required this.required, required  List<NativeScript> scripts, this.lengthType = CborLengthType.definite, this.scriptsLengthType = CborLengthType.definite}): _scripts = scripts,super._();
   
 
  final  int required;
@@ -321,16 +333,18 @@ $NativeScript_AtLeastCopyWith<NativeScript_AtLeast> get copyWith => _$NativeScri
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_AtLeast&&(identical(other.required, required) || other.required == required)&&const DeepCollectionEquality().equals(other._scripts, _scripts)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.scriptsLengthType, scriptsLengthType) || other.scriptsLengthType == scriptsLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_AtLeast&&(identical(other.required, required) || other.required == required)&&const DeepCollectionEquality().equals(other.scripts, _scripts)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.scriptsLengthType, scriptsLengthType) || other.scriptsLengthType == scriptsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,required,const DeepCollectionEquality().hash(_scripts),lengthType,scriptsLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,required,const DeepCollectionEquality().hash(_scripts),lengthType,scriptsLengthType);
+}
 
 @override
 String toString() {
-  return 'NativeScript.atLeast(required: $required, scripts: $scripts, lengthType: $lengthType, scriptsLengthType: $scriptsLengthType)';
+    return 'NativeScript.atLeast(required: $required, scripts: $scripts, lengthType: $lengthType, scriptsLengthType: $scriptsLengthType)';
 }
 
 
@@ -391,16 +405,18 @@ $NativeScript_RequireTimeAfterCopyWith<NativeScript_RequireTimeAfter> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_RequireTimeAfter&&(identical(other.slot, slot) || other.slot == slot)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_RequireTimeAfter&&(identical(other.slot, slot) || other.slot == slot)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,slot,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,slot,lengthType);
+}
 
 @override
 String toString() {
-  return 'NativeScript.requireTimeAfter(slot: $slot, lengthType: $lengthType)';
+    return 'NativeScript.requireTimeAfter(slot: $slot, lengthType: $lengthType)';
 }
 
 
@@ -459,16 +475,18 @@ $NativeScript_RequireTimeBeforeCopyWith<NativeScript_RequireTimeBefore> get copy
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_RequireTimeBefore&&(identical(other.slot, slot) || other.slot == slot)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NativeScript_RequireTimeBefore&&(identical(other.slot, slot) || other.slot == slot)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,slot,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,slot,lengthType);
+}
 
 @override
 String toString() {
-  return 'NativeScript.requireTimeBefore(slot: $slot, lengthType: $lengthType)';
+    return 'NativeScript.requireTimeBefore(slot: $slot, lengthType: $lengthType)';
 }
 
 

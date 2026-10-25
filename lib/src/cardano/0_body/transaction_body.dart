@@ -72,9 +72,12 @@ sealed class Blake2bHash256 with _$Blake2bHash256 {
 }
 
 /// Core of the cardano transaction that is signed.
-@freezed
+@Freezed(copyWith: false) // hand-written below, see [$CardanoTransactionBodyCopyWith]
 sealed class CardanoTransactionBody with _$CardanoTransactionBody implements CborEncodable {
   CardanoTransactionBody._();
+
+  $CardanoTransactionBodyCopyWith<CardanoTransactionBody> get copyWith =>
+      $CardanoTransactionBodyCopyWith(this, (value) => value);
 
   factory CardanoTransactionBody.create({
     // TX Body Fields
@@ -622,4 +625,158 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
   /// Whether the body map keys serialize in ascending order. Hardware wallets (Ledger, Trezor)
   /// rebuild the body canonically before signing, so they can't sign a body where this is false.
   bool get hasAscendingKeyOrder => nonAscendingKeyOrder(serialize(forJson: false)) == null;
+}
+
+// ponytail: hand-written copy of the copyWith freezed 3 generated. freezed 4 builds it on the
+// `CardanoTransactionBody._()` constructor instead of `_hidden` (https://github.com/rrousselGit/freezed/issues/1376).
+// Back to `@freezed` once that is fixed. Dropped the no-op `copyWith.blake2bHash256`.
+abstract mixin class $CardanoTransactionBodyCopyWith<$Res> {
+  factory $CardanoTransactionBodyCopyWith(CardanoTransactionBody value, $Res Function(CardanoTransactionBody) then) =
+      _CardanoTransactionBodyCopyWithImpl;
+
+  @useResult
+  $Res call({
+    Blake2bHash256 blake2bHash256,
+    List<int>? nonStandardKeyOrder,
+    CborLengthType lengthType,
+    CborLengthType outputsLengthType,
+    CborLengthType withdrawalsLengthType,
+    CborLengthType mintLengthType,
+    CborLengthType proposalProceduresLengthType,
+    List<int> proposalProceduresCborTags,
+    CardanoTransactionInputs inputs,
+    List<CardanoTransactionOutput> outputs,
+    CborInt fee,
+    CborInt? ttl,
+    Certificates? certs,
+    List<Withdraw>? withdrawals,
+    Uint8List? metadataHash,
+    CborInt? validityStartInterval,
+    List<MultiAsset>? mint,
+    Uint8List? scriptDataHash,
+    CardanoTransactionInputs? collateral,
+    RequiredSigners? requiredSigners,
+    NetworkId? networkId,
+    CardanoTransactionOutput? collateralReturn,
+    CborInt? totalCollateral,
+    CardanoTransactionInputs? referenceInputs,
+    VotingProcedures? votingProcedures,
+    List<ProposalProcedure>? proposalProcedures,
+    CborInt? currentTreasuryValue,
+    CborInt? donation,
+  });
+
+  $CardanoTransactionInputsCopyWith<$Res> get inputs;
+  $CertificatesCopyWith<$Res>? get certs;
+  $CardanoTransactionInputsCopyWith<$Res>? get collateral;
+  $RequiredSignersCopyWith<$Res>? get requiredSigners;
+  $CardanoTransactionOutputCopyWith<$Res>? get collateralReturn;
+  $CardanoTransactionInputsCopyWith<$Res>? get referenceInputs;
+  $VotingProceduresCopyWith<$Res>? get votingProcedures;
+}
+
+/// [freezed] (omitted argument) keeps [current], anything else (null included) replaces it.
+T? _orKeep<T>(Object? value, T? current) => freezed == value ? current : value as T?;
+
+class _CardanoTransactionBodyCopyWithImpl<$Res> implements $CardanoTransactionBodyCopyWith<$Res> {
+  _CardanoTransactionBodyCopyWithImpl(this._self, this._then);
+
+  final CardanoTransactionBody _self;
+  final $Res Function(CardanoTransactionBody) _then;
+
+  @override
+  $Res call({
+    Blake2bHash256? blake2bHash256,
+    Object? nonStandardKeyOrder = freezed,
+    CborLengthType? lengthType,
+    CborLengthType? outputsLengthType,
+    CborLengthType? withdrawalsLengthType,
+    CborLengthType? mintLengthType,
+    CborLengthType? proposalProceduresLengthType,
+    List<int>? proposalProceduresCborTags,
+    CardanoTransactionInputs? inputs,
+    List<CardanoTransactionOutput>? outputs,
+    CborInt? fee,
+    Object? ttl = freezed,
+    Object? certs = freezed,
+    Object? withdrawals = freezed,
+    Object? metadataHash = freezed,
+    Object? validityStartInterval = freezed,
+    Object? mint = freezed,
+    Object? scriptDataHash = freezed,
+    Object? collateral = freezed,
+    Object? requiredSigners = freezed,
+    Object? networkId = freezed,
+    Object? collateralReturn = freezed,
+    Object? totalCollateral = freezed,
+    Object? referenceInputs = freezed,
+    Object? votingProcedures = freezed,
+    Object? proposalProcedures = freezed,
+    Object? currentTreasuryValue = freezed,
+    Object? donation = freezed,
+  }) => _then(
+    CardanoTransactionBody._hidden(
+      blake2bHash256: blake2bHash256 ?? _self.blake2bHash256,
+      nonStandardKeyOrder: _orKeep(nonStandardKeyOrder, _self.nonStandardKeyOrder),
+      lengthType: lengthType ?? _self.lengthType,
+      outputsLengthType: outputsLengthType ?? _self.outputsLengthType,
+      withdrawalsLengthType: withdrawalsLengthType ?? _self.withdrawalsLengthType,
+      mintLengthType: mintLengthType ?? _self.mintLengthType,
+      proposalProceduresLengthType: proposalProceduresLengthType ?? _self.proposalProceduresLengthType,
+      proposalProceduresCborTags: proposalProceduresCborTags ?? _self.proposalProceduresCborTags,
+      inputs: inputs ?? _self.inputs,
+      outputs: outputs ?? _self.outputs,
+      fee: fee ?? _self.fee,
+      ttl: _orKeep(ttl, _self.ttl),
+      certs: _orKeep(certs, _self.certs),
+      withdrawals: _orKeep(withdrawals, _self.withdrawals),
+      metadataHash: _orKeep(metadataHash, _self.metadataHash),
+      validityStartInterval: _orKeep(validityStartInterval, _self.validityStartInterval),
+      mint: _orKeep(mint, _self.mint),
+      scriptDataHash: _orKeep(scriptDataHash, _self.scriptDataHash),
+      collateral: _orKeep(collateral, _self.collateral),
+      requiredSigners: _orKeep(requiredSigners, _self.requiredSigners),
+      networkId: _orKeep(networkId, _self.networkId),
+      collateralReturn: _orKeep(collateralReturn, _self.collateralReturn),
+      totalCollateral: _orKeep(totalCollateral, _self.totalCollateral),
+      referenceInputs: _orKeep(referenceInputs, _self.referenceInputs),
+      votingProcedures: _orKeep(votingProcedures, _self.votingProcedures),
+      proposalProcedures: _orKeep(proposalProcedures, _self.proposalProcedures),
+      currentTreasuryValue: _orKeep(currentTreasuryValue, _self.currentTreasuryValue),
+      donation: _orKeep(donation, _self.donation),
+    ),
+  );
+
+  @override
+  $CardanoTransactionInputsCopyWith<$Res> get inputs =>
+      $CardanoTransactionInputsCopyWith(_self.inputs, (value) => call(inputs: value));
+
+  @override
+  $CertificatesCopyWith<$Res>? get certs =>
+      _self.certs?.let((certs) => $CertificatesCopyWith(certs, (value) => call(certs: value)));
+
+  @override
+  $CardanoTransactionInputsCopyWith<$Res>? get collateral => _self.collateral?.let(
+    (collateral) => $CardanoTransactionInputsCopyWith(collateral, (value) => call(collateral: value)),
+  );
+
+  @override
+  $RequiredSignersCopyWith<$Res>? get requiredSigners => _self.requiredSigners?.let(
+    (requiredSigners) => $RequiredSignersCopyWith(requiredSigners, (value) => call(requiredSigners: value)),
+  );
+
+  @override
+  $CardanoTransactionOutputCopyWith<$Res>? get collateralReturn => _self.collateralReturn?.let(
+    (collateralReturn) => $CardanoTransactionOutputCopyWith(collateralReturn, (value) => call(collateralReturn: value)),
+  );
+
+  @override
+  $CardanoTransactionInputsCopyWith<$Res>? get referenceInputs => _self.referenceInputs?.let(
+    (referenceInputs) => $CardanoTransactionInputsCopyWith(referenceInputs, (value) => call(referenceInputs: value)),
+  );
+
+  @override
+  $VotingProceduresCopyWith<$Res>? get votingProcedures => _self.votingProcedures?.let(
+    (votingProcedures) => $VotingProceduresCopyWith(votingProcedures, (value) => call(votingProcedures: value)),
+  );
 }

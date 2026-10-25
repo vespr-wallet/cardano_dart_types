@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'transaction_input.dart';
@@ -9,6 +9,7 @@ part of 'transaction_input.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $CardanoTransactionInputCopyWith<CardanoTransactionInput> get copyWith => _$Card
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionInput&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.cborTags, cborTags));
+  final _this = this as CardanoTransactionInput;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransactionInput&&(identical(other.transactionHash, _this.transactionHash) || other.transactionHash == _this.transactionHash)&&(identical(other.index, _this.index) || other.index == _this.index)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType)&&const DeepCollectionEquality().equals(other.cborTags, _this.cborTags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,transactionHash,index,lengthType,const DeepCollectionEquality().hash(cborTags));
+int get hashCode {
+  final _this = this as CardanoTransactionInput;
+  return Object.hash(runtimeType,_this.transactionHash,_this.index,_this.lengthType,const DeepCollectionEquality().hash(_this.cborTags));
+}
 
 @override
 String toString() {
-  return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index, lengthType: $lengthType, cborTags: $cborTags)';
+  final _this = this as CardanoTransactionInput;
+  return 'CardanoTransactionInput(transactionHash: ${_this.transactionHash}, index: ${_this.index}, lengthType: ${_this.lengthType}, cborTags: ${_this.cborTags})';
 }
 
 
@@ -63,7 +69,7 @@ class _$CardanoTransactionInputCopyWithImpl<$Res>
 /// Create a copy of CardanoTransactionInput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? transactionHash = null,Object? index = null,Object? lengthType = null,Object? cborTags = null,}) {
-  return _then(_self.copyWith(
+  return _then(CardanoTransactionInput(
 transactionHash: null == transactionHash ? _self.transactionHash : transactionHash // ignore: cast_nullable_to_non_nullable
 as TransactionHash,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
 as int,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
@@ -89,7 +95,7 @@ $TransactionHashCopyWith<$Res> get transactionHash {
 
 
 class _CardanoTransactionInput extends CardanoTransactionInput {
-  const _CardanoTransactionInput({required this.transactionHash, required this.index, this.lengthType = CborLengthType.definite, final  List<int> cborTags = const []}): _cborTags = cborTags,super._();
+  const _CardanoTransactionInput({required this.transactionHash, required this.index, this.lengthType = CborLengthType.definite,  List<int> cborTags = const []}): _cborTags = cborTags,super._();
   
 
 @override final  TransactionHash transactionHash;
@@ -113,16 +119,18 @@ _$CardanoTransactionInputCopyWith<_CardanoTransactionInput> get copyWith => __$C
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransactionInput&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransactionInput&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash)&&(identical(other.index, index) || other.index == index)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.cborTags, _cborTags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,transactionHash,index,lengthType,const DeepCollectionEquality().hash(_cborTags));
+int get hashCode {
+    return Object.hash(runtimeType,transactionHash,index,lengthType,const DeepCollectionEquality().hash(_cborTags));
+}
 
 @override
 String toString() {
-  return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index, lengthType: $lengthType, cborTags: $cborTags)';
+    return 'CardanoTransactionInput(transactionHash: $transactionHash, index: $index, lengthType: $lengthType, cborTags: $cborTags)';
 }
 
 

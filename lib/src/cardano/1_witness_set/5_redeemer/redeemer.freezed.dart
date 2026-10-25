@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'redeemer.dart';
@@ -9,6 +9,7 @@ part of 'redeemer.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $RedeemerCopyWith<Redeemer> get copyWith => _$RedeemerCopyWithImpl<Redeemer>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer&&(identical(other.redeemerTag, redeemerTag) || other.redeemerTag == redeemerTag)&&(identical(other.index, index) || other.index == index)&&(identical(other.plutusData, plutusData) || other.plutusData == plutusData)&&(identical(other.exUnits, exUnits) || other.exUnits == exUnits));
+  final _this = this as Redeemer;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer&&(identical(other.redeemerTag, _this.redeemerTag) || other.redeemerTag == _this.redeemerTag)&&(identical(other.index, _this.index) || other.index == _this.index)&&(identical(other.plutusData, _this.plutusData) || other.plutusData == _this.plutusData)&&(identical(other.exUnits, _this.exUnits) || other.exUnits == _this.exUnits));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,redeemerTag,index,plutusData,exUnits);
+int get hashCode {
+  final _this = this as Redeemer;
+  return Object.hash(runtimeType,_this.redeemerTag,_this.index,_this.plutusData,_this.exUnits);
+}
 
 @override
 String toString() {
-  return 'Redeemer(redeemerTag: $redeemerTag, index: $index, plutusData: $plutusData, exUnits: $exUnits)';
+  final _this = this as Redeemer;
+  return 'Redeemer(redeemerTag: ${_this.redeemerTag}, index: ${_this.index}, plutusData: ${_this.plutusData}, exUnits: ${_this.exUnits})';
 }
 
 
@@ -117,16 +123,18 @@ $Redeemer_PreConwayCopyWith<Redeemer_PreConway> get copyWith => _$Redeemer_PreCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer_PreConway&&(identical(other.redeemerTag, redeemerTag) || other.redeemerTag == redeemerTag)&&(identical(other.index, index) || other.index == index)&&(identical(other.plutusData, plutusData) || other.plutusData == plutusData)&&(identical(other.exUnits, exUnits) || other.exUnits == exUnits)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer_PreConway&&(identical(other.redeemerTag, redeemerTag) || other.redeemerTag == redeemerTag)&&(identical(other.index, index) || other.index == index)&&(identical(other.plutusData, plutusData) || other.plutusData == plutusData)&&(identical(other.exUnits, exUnits) || other.exUnits == exUnits)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,redeemerTag,index,plutusData,exUnits,lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,redeemerTag,index,plutusData,exUnits,lengthType);
+}
 
 @override
 String toString() {
-  return 'Redeemer.preConway(redeemerTag: $redeemerTag, index: $index, plutusData: $plutusData, exUnits: $exUnits, lengthType: $lengthType)';
+    return 'Redeemer.preConway(redeemerTag: $redeemerTag, index: $index, plutusData: $plutusData, exUnits: $exUnits, lengthType: $lengthType)';
 }
 
 
@@ -210,16 +218,18 @@ $Redeemer_ConwayCopyWith<Redeemer_Conway> get copyWith => _$Redeemer_ConwayCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer_Conway&&(identical(other.redeemerTag, redeemerTag) || other.redeemerTag == redeemerTag)&&(identical(other.index, index) || other.index == index)&&(identical(other.plutusData, plutusData) || other.plutusData == plutusData)&&(identical(other.exUnits, exUnits) || other.exUnits == exUnits)&&(identical(other.keyLengthType, keyLengthType) || other.keyLengthType == keyLengthType)&&(identical(other.valueLengthType, valueLengthType) || other.valueLengthType == valueLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Redeemer_Conway&&(identical(other.redeemerTag, redeemerTag) || other.redeemerTag == redeemerTag)&&(identical(other.index, index) || other.index == index)&&(identical(other.plutusData, plutusData) || other.plutusData == plutusData)&&(identical(other.exUnits, exUnits) || other.exUnits == exUnits)&&(identical(other.keyLengthType, keyLengthType) || other.keyLengthType == keyLengthType)&&(identical(other.valueLengthType, valueLengthType) || other.valueLengthType == valueLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,redeemerTag,index,plutusData,exUnits,keyLengthType,valueLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,redeemerTag,index,plutusData,exUnits,keyLengthType,valueLengthType);
+}
 
 @override
 String toString() {
-  return 'Redeemer.conway(redeemerTag: $redeemerTag, index: $index, plutusData: $plutusData, exUnits: $exUnits, keyLengthType: $keyLengthType, valueLengthType: $valueLengthType)';
+    return 'Redeemer.conway(redeemerTag: $redeemerTag, index: $index, plutusData: $plutusData, exUnits: $exUnits, keyLengthType: $keyLengthType, valueLengthType: $valueLengthType)';
 }
 
 

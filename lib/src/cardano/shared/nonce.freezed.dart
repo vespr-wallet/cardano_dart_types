@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'nonce.dart';
@@ -9,6 +9,7 @@ part of 'nonce.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $NonceCopyWith<Nonce> get copyWith => _$NonceCopyWithImpl<Nonce>(this as Nonce, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Nonce&&const DeepCollectionEquality().equals(other.nonceHash, nonceHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as Nonce;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Nonce&&const DeepCollectionEquality().equals(other.nonceHash, _this.nonceHash)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(nonceHash),lengthType);
+int get hashCode {
+  final _this = this as Nonce;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.nonceHash),_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'Nonce(nonceHash: $nonceHash, lengthType: $lengthType)';
+  final _this = this as Nonce;
+  return 'Nonce(nonceHash: ${_this.nonceHash}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -63,7 +69,7 @@ class _$NonceCopyWithImpl<$Res>
 /// Create a copy of Nonce
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? nonceHash = freezed,Object? lengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(Nonce(
 nonceHash: freezed == nonceHash ? _self.nonceHash : nonceHash // ignore: cast_nullable_to_non_nullable
 as Uint8List?,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
 as CborLengthType,
@@ -94,16 +100,18 @@ _$NonceCopyWith<_Nonce> get copyWith => __$NonceCopyWithImpl<_Nonce>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Nonce&&const DeepCollectionEquality().equals(other.nonceHash, nonceHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Nonce&&const DeepCollectionEquality().equals(other.nonceHash, nonceHash)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(nonceHash),lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(nonceHash),lengthType);
+}
 
 @override
 String toString() {
-  return 'Nonce(nonceHash: $nonceHash, lengthType: $lengthType)';
+    return 'Nonce(nonceHash: $nonceHash, lengthType: $lengthType)';
 }
 
 

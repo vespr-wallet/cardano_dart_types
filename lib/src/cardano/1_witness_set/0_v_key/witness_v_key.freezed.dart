@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'witness_v_key.dart';
@@ -9,6 +9,7 @@ part of 'witness_v_key.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $WitnessVKeyCopyWith<WitnessVKey> get copyWith => _$WitnessVKeyCopyWithImpl<Witn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WitnessVKey&&const DeepCollectionEquality().equals(other.vkey, vkey)&&const DeepCollectionEquality().equals(other.signature, signature)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as WitnessVKey;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WitnessVKey&&const DeepCollectionEquality().equals(other.vkey, _this.vkey)&&const DeepCollectionEquality().equals(other.signature, _this.signature)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(vkey),const DeepCollectionEquality().hash(signature),lengthType);
+int get hashCode {
+  final _this = this as WitnessVKey;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.vkey),const DeepCollectionEquality().hash(_this.signature),_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'WitnessVKey(vkey: $vkey, signature: $signature, lengthType: $lengthType)';
+  final _this = this as WitnessVKey;
+  return 'WitnessVKey(vkey: ${_this.vkey}, signature: ${_this.signature}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -63,7 +69,7 @@ class _$WitnessVKeyCopyWithImpl<$Res>
 /// Create a copy of WitnessVKey
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? vkey = null,Object? signature = null,Object? lengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(WitnessVKey(
 vkey: null == vkey ? _self.vkey : vkey // ignore: cast_nullable_to_non_nullable
 as Uint8List,signature: null == signature ? _self.signature : signature // ignore: cast_nullable_to_non_nullable
 as Uint8List,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
@@ -96,16 +102,18 @@ _$WitnessVKeyCopyWith<_WitnessVKey> get copyWith => __$WitnessVKeyCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WitnessVKey&&const DeepCollectionEquality().equals(other.vkey, vkey)&&const DeepCollectionEquality().equals(other.signature, signature)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _WitnessVKey&&const DeepCollectionEquality().equals(other.vkey, vkey)&&const DeepCollectionEquality().equals(other.signature, signature)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(vkey),const DeepCollectionEquality().hash(signature),lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(vkey),const DeepCollectionEquality().hash(signature),lengthType);
+}
 
 @override
 String toString() {
-  return 'WitnessVKey(vkey: $vkey, signature: $signature, lengthType: $lengthType)';
+    return 'WitnessVKey(vkey: $vkey, signature: $signature, lengthType: $lengthType)';
 }
 
 

@@ -217,7 +217,6 @@ sealed class Certificate with _$Certificate implements CborEncodable {
     return parsedCert;
   }
 
-  @override
   late final int certType = switch (this) {
     Certificate_StakeRegistrationLegacy() => 0,
     Certificate_StakeDeRegistrationLegacy() => 1,

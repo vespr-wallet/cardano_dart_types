@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cardano_signing_path.dart';
@@ -9,6 +9,7 @@ part of 'cardano_signing_path.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $CardanoSigningPathCopyWith<CardanoSigningPath> get copyWith => _$CardanoSigning
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath&&(identical(other.address, address) || other.address == address));
+  final _this = this as CardanoSigningPath;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath&&(identical(other.address, _this.address) || other.address == _this.address));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,address);
+int get hashCode {
+  final _this = this as CardanoSigningPath;
+  return Object.hash(runtimeType,_this.address);
+}
 
 @override
 String toString() {
-  return 'CardanoSigningPath(address: $address)';
+  final _this = this as CardanoSigningPath;
+  return 'CardanoSigningPath(address: ${_this.address})';
 }
 
 
@@ -92,16 +98,18 @@ $CardanoSigningPath_ByronCopyWith<CardanoSigningPath_Byron> get copyWith => _$Ca
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_Byron&&(identical(other.address, address) || other.address == address));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_Byron&&(identical(other.address, address) || other.address == address));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,address);
+int get hashCode {
+    return Object.hash(runtimeType,address);
+}
 
 @override
 String toString() {
-  return 'CardanoSigningPath.byron(address: $address)';
+    return 'CardanoSigningPath.byron(address: $address)';
 }
 
 
@@ -159,16 +167,18 @@ $CardanoSigningPath_ShelleyCopyWith<CardanoSigningPath_Shelley> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_Shelley&&(identical(other.address, address) || other.address == address)&&(identical(other.role, role) || other.role == role));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_Shelley&&(identical(other.address, address) || other.address == address)&&(identical(other.role, role) || other.role == role));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,address,role);
+int get hashCode {
+    return Object.hash(runtimeType,address,role);
+}
 
 @override
 String toString() {
-  return 'CardanoSigningPath.shelley(address: $address, role: $role)';
+    return 'CardanoSigningPath.shelley(address: $address, role: $role)';
 }
 
 
@@ -226,16 +236,18 @@ $CardanoSigningPath_CIP36CopyWith<CardanoSigningPath_CIP36> get copyWith => _$Ca
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_CIP36&&(identical(other.address, address) || other.address == address));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoSigningPath_CIP36&&(identical(other.address, address) || other.address == address));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,address);
+int get hashCode {
+    return Object.hash(runtimeType,address);
+}
 
 @override
 String toString() {
-  return 'CardanoSigningPath.cip36(address: $address)';
+    return 'CardanoSigningPath.cip36(address: $address)';
 }
 
 

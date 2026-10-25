@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'certificates.dart';
@@ -9,6 +9,7 @@ part of 'certificates.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $CertificatesCopyWith<Certificates> get copyWith => _$CertificatesCopyWithImpl<C
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificates&&const DeepCollectionEquality().equals(other.certificates, certificates)&&const DeepCollectionEquality().equals(other.cborTags, cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as Certificates;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certificates&&const DeepCollectionEquality().equals(other.certificates, _this.certificates)&&const DeepCollectionEquality().equals(other.cborTags, _this.cborTags)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(certificates),const DeepCollectionEquality().hash(cborTags),lengthType);
+int get hashCode {
+  final _this = this as Certificates;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.certificates),const DeepCollectionEquality().hash(_this.cborTags),_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificates(certificates: $certificates, cborTags: $cborTags, lengthType: $lengthType)';
+  final _this = this as Certificates;
+  return 'Certificates(certificates: ${_this.certificates}, cborTags: ${_this.cborTags}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -63,7 +69,7 @@ class _$CertificatesCopyWithImpl<$Res>
 /// Create a copy of Certificates
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? certificates = null,Object? cborTags = null,Object? lengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(Certificates(
 certificates: null == certificates ? _self.certificates : certificates // ignore: cast_nullable_to_non_nullable
 as List<Certificate>,cborTags: null == cborTags ? _self.cborTags : cborTags // ignore: cast_nullable_to_non_nullable
 as List<int>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
@@ -79,7 +85,7 @@ as CborLengthType,
 
 
 class _Certificates extends Certificates {
-  const _Certificates({required final  List<Certificate> certificates, required final  List<int> cborTags, required this.lengthType}): _certificates = certificates,_cborTags = cborTags,super._();
+  const _Certificates({required  List<Certificate> certificates, required  List<int> cborTags, required this.lengthType}): _certificates = certificates,_cborTags = cborTags,super._();
   
 
  final  List<Certificate> _certificates;
@@ -108,16 +114,18 @@ _$CertificatesCopyWith<_Certificates> get copyWith => __$CertificatesCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Certificates&&const DeepCollectionEquality().equals(other._certificates, _certificates)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Certificates&&const DeepCollectionEquality().equals(other.certificates, _certificates)&&const DeepCollectionEquality().equals(other.cborTags, _cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_certificates),const DeepCollectionEquality().hash(_cborTags),lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_certificates),const DeepCollectionEquality().hash(_cborTags),lengthType);
+}
 
 @override
 String toString() {
-  return 'Certificates(certificates: $certificates, cborTags: $cborTags, lengthType: $lengthType)';
+    return 'Certificates(certificates: $certificates, cborTags: $cborTags, lengthType: $lengthType)';
 }
 
 

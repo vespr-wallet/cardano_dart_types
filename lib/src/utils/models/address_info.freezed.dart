@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'address_info.dart';
@@ -9,6 +9,7 @@ part of 'address_info.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 AddressInfo _$AddressInfoFromJson(
@@ -54,7 +55,7 @@ mixin _$AddressInfo {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo);
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -63,7 +64,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AddressInfo()';
+    return 'AddressInfo()';
 }
 
 
@@ -80,7 +81,7 @@ $AddressInfoCopyWith(AddressInfo _, $Res Function(AddressInfo) __);
 @JsonSerializable()
 
 class AddressInfo_Byron extends AddressInfo {
-  const AddressInfo_Byron({final  String? $type}): $type = $type ?? 'byron',super._();
+  const AddressInfo_Byron({ String? $type}): $type = $type ?? 'byron',super._();
   factory AddressInfo_Byron.fromJson(Map<String, dynamic> json) => _$AddressInfo_ByronFromJson(json);
 
 
@@ -97,7 +98,7 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo_Byron);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo_Byron);
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -106,7 +107,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AddressInfo.byron()';
+    return 'AddressInfo.byron()';
 }
 
 
@@ -119,7 +120,7 @@ String toString() {
 @JsonSerializable()
 
 class AddressInfo_Shelley extends AddressInfo {
-  const AddressInfo_Shelley({required this.isEnterprise, required this.isScript, required this.network, final  String? $type}): $type = $type ?? 'shelley',super._();
+  const AddressInfo_Shelley({required this.isEnterprise, required this.isScript, required this.network,  String? $type}): $type = $type ?? 'shelley',super._();
   factory AddressInfo_Shelley.fromJson(Map<String, dynamic> json) => _$AddressInfo_ShelleyFromJson(json);
 
  final  bool isEnterprise;
@@ -143,16 +144,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo_Shelley&&(identical(other.isEnterprise, isEnterprise) || other.isEnterprise == isEnterprise)&&(identical(other.isScript, isScript) || other.isScript == isScript)&&(identical(other.network, network) || other.network == network));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo_Shelley&&(identical(other.isEnterprise, isEnterprise) || other.isEnterprise == isEnterprise)&&(identical(other.isScript, isScript) || other.isScript == isScript)&&(identical(other.network, network) || other.network == network));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isEnterprise,isScript,network);
+int get hashCode {
+    return Object.hash(runtimeType,isEnterprise,isScript,network);
+}
 
 @override
 String toString() {
-  return 'AddressInfo.shelley(isEnterprise: $isEnterprise, isScript: $isScript, network: $network)';
+    return 'AddressInfo.shelley(isEnterprise: $isEnterprise, isScript: $isScript, network: $network)';
 }
 
 
@@ -196,7 +199,7 @@ as NetworkId,
 @JsonSerializable()
 
 class AddressInfo_Invalid extends AddressInfo {
-  const AddressInfo_Invalid({final  String? $type}): $type = $type ?? 'invalid',super._();
+  const AddressInfo_Invalid({ String? $type}): $type = $type ?? 'invalid',super._();
   factory AddressInfo_Invalid.fromJson(Map<String, dynamic> json) => _$AddressInfo_InvalidFromJson(json);
 
 
@@ -213,7 +216,7 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo_Invalid);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo_Invalid);
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -222,7 +225,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AddressInfo.invalid()';
+    return 'AddressInfo.invalid()';
 }
 
 
@@ -235,7 +238,7 @@ String toString() {
 @JsonSerializable()
 
 class AddressInfo_NotAnAddress extends AddressInfo {
-  const AddressInfo_NotAnAddress({final  String? $type}): $type = $type ?? 'notAnAddress',super._();
+  const AddressInfo_NotAnAddress({ String? $type}): $type = $type ?? 'notAnAddress',super._();
   factory AddressInfo_NotAnAddress.fromJson(Map<String, dynamic> json) => _$AddressInfo_NotAnAddressFromJson(json);
 
 
@@ -252,7 +255,7 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo_NotAnAddress);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressInfo_NotAnAddress);
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -261,7 +264,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AddressInfo.notAnAddress()';
+    return 'AddressInfo.notAnAddress()';
 }
 
 
@@ -305,7 +308,7 @@ mixin _$StakeAddressInfo {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StakeAddressInfo);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StakeAddressInfo);
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -314,7 +317,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'StakeAddressInfo()';
+    return 'StakeAddressInfo()';
 }
 
 
@@ -331,7 +334,7 @@ $StakeAddressInfoCopyWith(StakeAddressInfo _, $Res Function(StakeAddressInfo) __
 @JsonSerializable()
 
 class StakeAddressInfo_Valid extends StakeAddressInfo {
-  const StakeAddressInfo_Valid({required this.isScript, required this.network, final  String? $type}): $type = $type ?? 'valid',super._();
+  const StakeAddressInfo_Valid({required this.isScript, required this.network,  String? $type}): $type = $type ?? 'valid',super._();
   factory StakeAddressInfo_Valid.fromJson(Map<String, dynamic> json) => _$StakeAddressInfo_ValidFromJson(json);
 
  final  bool isScript;
@@ -354,16 +357,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StakeAddressInfo_Valid&&(identical(other.isScript, isScript) || other.isScript == isScript)&&(identical(other.network, network) || other.network == network));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StakeAddressInfo_Valid&&(identical(other.isScript, isScript) || other.isScript == isScript)&&(identical(other.network, network) || other.network == network));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isScript,network);
+int get hashCode {
+    return Object.hash(runtimeType,isScript,network);
+}
 
 @override
 String toString() {
-  return 'StakeAddressInfo.valid(isScript: $isScript, network: $network)';
+    return 'StakeAddressInfo.valid(isScript: $isScript, network: $network)';
 }
 
 
@@ -406,7 +411,7 @@ as NetworkId,
 @JsonSerializable()
 
 class StakeAddressInfo_NotAnAddress extends StakeAddressInfo {
-  const StakeAddressInfo_NotAnAddress({final  String? $type}): $type = $type ?? 'notAnAddress',super._();
+  const StakeAddressInfo_NotAnAddress({ String? $type}): $type = $type ?? 'notAnAddress',super._();
   factory StakeAddressInfo_NotAnAddress.fromJson(Map<String, dynamic> json) => _$StakeAddressInfo_NotAnAddressFromJson(json);
 
 
@@ -423,7 +428,7 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StakeAddressInfo_NotAnAddress);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StakeAddressInfo_NotAnAddress);
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -432,7 +437,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'StakeAddressInfo.notAnAddress()';
+    return 'StakeAddressInfo.notAnAddress()';
 }
 
 

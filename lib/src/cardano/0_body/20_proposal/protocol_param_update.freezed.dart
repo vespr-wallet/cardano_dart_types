@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'protocol_param_update.dart';
@@ -9,49 +9,13 @@ part of 'protocol_param_update.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProtocolParamUpdate {
 
- BigInt? get minFeeA;// 0
- BigInt? get minFeeB;// 1
- int? get maxBlockSize;// 2
- int? get maxTxSize;// 3
- int? get maxBlockHeaderSize;// 4
- BigInt? get keyDeposit;// 5
- BigInt? get poolDeposit;// 6
- int? get maxEpoch;// 7
- int? get nOpt;// 8
- RationalNumber? get poolPledgeInfluence;// 9
- RationalNumber? get expansionRate;// 10
- RationalNumber? get treasuryGrowth;// 11
-@Deprecated("") RationalNumber? get decentralisationConstant;// 12
-@Deprecated("Removed in Babbage era") Nonce? get extraEntropy;// 13
- ProtocolVersion? get protocolVersion;// 14
-@Deprecated("") BigInt? get minUtxo;// 15
- BigInt? get minPoolCost;// 16
- BigInt? get adaPerUtxoByte;// 17
-// Alonzo changes
- CborValue? get costmdls;// 18
- CborValue? get executionCosts;// 19
- CborValue? get maxTxExUnits;// 20
- CborValue? get maxBlockExUnits;// 21
- BigInt? get maxValSize;// 22
- int? get collateralPercentage;// 23
- int? get maxCollateralInputs;// 24
-// Conway changes
- List<RationalNumber>? get poolVotingThresholds;// 25
- List<RationalNumber>? get drepVotingThresholds;// 26
- int? get minCommitteeSize;// 27
- int? get committeeTermLimit;// 28
- int? get govActionValidityPeriod;// 29
- BigInt? get govActionDeposit;// 30
- BigInt? get drepDeposit;// 31
- int? get drepInactivityPeriod;// 32
- RationalNumber? get minFeeRefScriptCostPerByte;// 33
-// encoding details (not part of the protocol params)
- CborLengthType get lengthType;/// Map key order as parsed, or null when ascending (the standard order).
+ BigInt? get minFeeA; BigInt? get minFeeB; int? get maxBlockSize; int? get maxTxSize; int? get maxBlockHeaderSize; BigInt? get keyDeposit; BigInt? get poolDeposit; int? get maxEpoch; int? get nOpt; RationalNumber? get poolPledgeInfluence; RationalNumber? get expansionRate; RationalNumber? get treasuryGrowth;@Deprecated("") RationalNumber? get decentralisationConstant;@Deprecated("Removed in Babbage era") Nonce? get extraEntropy; ProtocolVersion? get protocolVersion;@Deprecated("") BigInt? get minUtxo; BigInt? get minPoolCost; BigInt? get adaPerUtxoByte; CborValue? get costmdls; CborValue? get executionCosts; CborValue? get maxTxExUnits; CborValue? get maxBlockExUnits; BigInt? get maxValSize; int? get collateralPercentage; int? get maxCollateralInputs; List<RationalNumber>? get poolVotingThresholds; List<RationalNumber>? get drepVotingThresholds; int? get minCommitteeSize; int? get committeeTermLimit; int? get govActionValidityPeriod; BigInt? get govActionDeposit; BigInt? get drepDeposit; int? get drepInactivityPeriod; RationalNumber? get minFeeRefScriptCostPerByte; CborLengthType get lengthType;/// Map key order as parsed, or null when ascending (the standard order).
  List<int>? get nonStandardKeyOrder; CborLengthType get poolVotingThresholdsLengthType; CborLengthType get drepVotingThresholdsLengthType;
 /// Create a copy of ProtocolParamUpdate
 /// with the given fields replaced by the non-null parameter values.
@@ -63,16 +27,21 @@ $ProtocolParamUpdateCopyWith<ProtocolParamUpdate> get copyWith => _$ProtocolPara
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProtocolParamUpdate&&(identical(other.minFeeA, minFeeA) || other.minFeeA == minFeeA)&&(identical(other.minFeeB, minFeeB) || other.minFeeB == minFeeB)&&(identical(other.maxBlockSize, maxBlockSize) || other.maxBlockSize == maxBlockSize)&&(identical(other.maxTxSize, maxTxSize) || other.maxTxSize == maxTxSize)&&(identical(other.maxBlockHeaderSize, maxBlockHeaderSize) || other.maxBlockHeaderSize == maxBlockHeaderSize)&&(identical(other.keyDeposit, keyDeposit) || other.keyDeposit == keyDeposit)&&(identical(other.poolDeposit, poolDeposit) || other.poolDeposit == poolDeposit)&&(identical(other.maxEpoch, maxEpoch) || other.maxEpoch == maxEpoch)&&(identical(other.nOpt, nOpt) || other.nOpt == nOpt)&&(identical(other.poolPledgeInfluence, poolPledgeInfluence) || other.poolPledgeInfluence == poolPledgeInfluence)&&(identical(other.expansionRate, expansionRate) || other.expansionRate == expansionRate)&&(identical(other.treasuryGrowth, treasuryGrowth) || other.treasuryGrowth == treasuryGrowth)&&(identical(other.decentralisationConstant, decentralisationConstant) || other.decentralisationConstant == decentralisationConstant)&&(identical(other.extraEntropy, extraEntropy) || other.extraEntropy == extraEntropy)&&(identical(other.protocolVersion, protocolVersion) || other.protocolVersion == protocolVersion)&&(identical(other.minUtxo, minUtxo) || other.minUtxo == minUtxo)&&(identical(other.minPoolCost, minPoolCost) || other.minPoolCost == minPoolCost)&&(identical(other.adaPerUtxoByte, adaPerUtxoByte) || other.adaPerUtxoByte == adaPerUtxoByte)&&(identical(other.costmdls, costmdls) || other.costmdls == costmdls)&&(identical(other.executionCosts, executionCosts) || other.executionCosts == executionCosts)&&(identical(other.maxTxExUnits, maxTxExUnits) || other.maxTxExUnits == maxTxExUnits)&&(identical(other.maxBlockExUnits, maxBlockExUnits) || other.maxBlockExUnits == maxBlockExUnits)&&(identical(other.maxValSize, maxValSize) || other.maxValSize == maxValSize)&&(identical(other.collateralPercentage, collateralPercentage) || other.collateralPercentage == collateralPercentage)&&(identical(other.maxCollateralInputs, maxCollateralInputs) || other.maxCollateralInputs == maxCollateralInputs)&&const DeepCollectionEquality().equals(other.poolVotingThresholds, poolVotingThresholds)&&const DeepCollectionEquality().equals(other.drepVotingThresholds, drepVotingThresholds)&&(identical(other.minCommitteeSize, minCommitteeSize) || other.minCommitteeSize == minCommitteeSize)&&(identical(other.committeeTermLimit, committeeTermLimit) || other.committeeTermLimit == committeeTermLimit)&&(identical(other.govActionValidityPeriod, govActionValidityPeriod) || other.govActionValidityPeriod == govActionValidityPeriod)&&(identical(other.govActionDeposit, govActionDeposit) || other.govActionDeposit == govActionDeposit)&&(identical(other.drepDeposit, drepDeposit) || other.drepDeposit == drepDeposit)&&(identical(other.drepInactivityPeriod, drepInactivityPeriod) || other.drepInactivityPeriod == drepInactivityPeriod)&&(identical(other.minFeeRefScriptCostPerByte, minFeeRefScriptCostPerByte) || other.minFeeRefScriptCostPerByte == minFeeRefScriptCostPerByte)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.nonStandardKeyOrder, nonStandardKeyOrder)&&(identical(other.poolVotingThresholdsLengthType, poolVotingThresholdsLengthType) || other.poolVotingThresholdsLengthType == poolVotingThresholdsLengthType)&&(identical(other.drepVotingThresholdsLengthType, drepVotingThresholdsLengthType) || other.drepVotingThresholdsLengthType == drepVotingThresholdsLengthType));
+  final _this = this as ProtocolParamUpdate;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProtocolParamUpdate&&(identical(other.minFeeA, _this.minFeeA) || other.minFeeA == _this.minFeeA)&&(identical(other.minFeeB, _this.minFeeB) || other.minFeeB == _this.minFeeB)&&(identical(other.maxBlockSize, _this.maxBlockSize) || other.maxBlockSize == _this.maxBlockSize)&&(identical(other.maxTxSize, _this.maxTxSize) || other.maxTxSize == _this.maxTxSize)&&(identical(other.maxBlockHeaderSize, _this.maxBlockHeaderSize) || other.maxBlockHeaderSize == _this.maxBlockHeaderSize)&&(identical(other.keyDeposit, _this.keyDeposit) || other.keyDeposit == _this.keyDeposit)&&(identical(other.poolDeposit, _this.poolDeposit) || other.poolDeposit == _this.poolDeposit)&&(identical(other.maxEpoch, _this.maxEpoch) || other.maxEpoch == _this.maxEpoch)&&(identical(other.nOpt, _this.nOpt) || other.nOpt == _this.nOpt)&&(identical(other.poolPledgeInfluence, _this.poolPledgeInfluence) || other.poolPledgeInfluence == _this.poolPledgeInfluence)&&(identical(other.expansionRate, _this.expansionRate) || other.expansionRate == _this.expansionRate)&&(identical(other.treasuryGrowth, _this.treasuryGrowth) || other.treasuryGrowth == _this.treasuryGrowth)&&(identical(other.decentralisationConstant, _this.decentralisationConstant) || other.decentralisationConstant == _this.decentralisationConstant)&&(identical(other.extraEntropy, _this.extraEntropy) || other.extraEntropy == _this.extraEntropy)&&(identical(other.protocolVersion, _this.protocolVersion) || other.protocolVersion == _this.protocolVersion)&&(identical(other.minUtxo, _this.minUtxo) || other.minUtxo == _this.minUtxo)&&(identical(other.minPoolCost, _this.minPoolCost) || other.minPoolCost == _this.minPoolCost)&&(identical(other.adaPerUtxoByte, _this.adaPerUtxoByte) || other.adaPerUtxoByte == _this.adaPerUtxoByte)&&(identical(other.costmdls, _this.costmdls) || other.costmdls == _this.costmdls)&&(identical(other.executionCosts, _this.executionCosts) || other.executionCosts == _this.executionCosts)&&(identical(other.maxTxExUnits, _this.maxTxExUnits) || other.maxTxExUnits == _this.maxTxExUnits)&&(identical(other.maxBlockExUnits, _this.maxBlockExUnits) || other.maxBlockExUnits == _this.maxBlockExUnits)&&(identical(other.maxValSize, _this.maxValSize) || other.maxValSize == _this.maxValSize)&&(identical(other.collateralPercentage, _this.collateralPercentage) || other.collateralPercentage == _this.collateralPercentage)&&(identical(other.maxCollateralInputs, _this.maxCollateralInputs) || other.maxCollateralInputs == _this.maxCollateralInputs)&&const DeepCollectionEquality().equals(other.poolVotingThresholds, _this.poolVotingThresholds)&&const DeepCollectionEquality().equals(other.drepVotingThresholds, _this.drepVotingThresholds)&&(identical(other.minCommitteeSize, _this.minCommitteeSize) || other.minCommitteeSize == _this.minCommitteeSize)&&(identical(other.committeeTermLimit, _this.committeeTermLimit) || other.committeeTermLimit == _this.committeeTermLimit)&&(identical(other.govActionValidityPeriod, _this.govActionValidityPeriod) || other.govActionValidityPeriod == _this.govActionValidityPeriod)&&(identical(other.govActionDeposit, _this.govActionDeposit) || other.govActionDeposit == _this.govActionDeposit)&&(identical(other.drepDeposit, _this.drepDeposit) || other.drepDeposit == _this.drepDeposit)&&(identical(other.drepInactivityPeriod, _this.drepInactivityPeriod) || other.drepInactivityPeriod == _this.drepInactivityPeriod)&&(identical(other.minFeeRefScriptCostPerByte, _this.minFeeRefScriptCostPerByte) || other.minFeeRefScriptCostPerByte == _this.minFeeRefScriptCostPerByte)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType)&&const DeepCollectionEquality().equals(other.nonStandardKeyOrder, _this.nonStandardKeyOrder)&&(identical(other.poolVotingThresholdsLengthType, _this.poolVotingThresholdsLengthType) || other.poolVotingThresholdsLengthType == _this.poolVotingThresholdsLengthType)&&(identical(other.drepVotingThresholdsLengthType, _this.drepVotingThresholdsLengthType) || other.drepVotingThresholdsLengthType == _this.drepVotingThresholdsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,minFeeA,minFeeB,maxBlockSize,maxTxSize,maxBlockHeaderSize,keyDeposit,poolDeposit,maxEpoch,nOpt,poolPledgeInfluence,expansionRate,treasuryGrowth,decentralisationConstant,extraEntropy,protocolVersion,minUtxo,minPoolCost,adaPerUtxoByte,costmdls,executionCosts,maxTxExUnits,maxBlockExUnits,maxValSize,collateralPercentage,maxCollateralInputs,const DeepCollectionEquality().hash(poolVotingThresholds),const DeepCollectionEquality().hash(drepVotingThresholds),minCommitteeSize,committeeTermLimit,govActionValidityPeriod,govActionDeposit,drepDeposit,drepInactivityPeriod,minFeeRefScriptCostPerByte,lengthType,const DeepCollectionEquality().hash(nonStandardKeyOrder),poolVotingThresholdsLengthType,drepVotingThresholdsLengthType]);
+int get hashCode {
+  final _this = this as ProtocolParamUpdate;
+  return Object.hashAll([runtimeType,_this.minFeeA,_this.minFeeB,_this.maxBlockSize,_this.maxTxSize,_this.maxBlockHeaderSize,_this.keyDeposit,_this.poolDeposit,_this.maxEpoch,_this.nOpt,_this.poolPledgeInfluence,_this.expansionRate,_this.treasuryGrowth,_this.decentralisationConstant,_this.extraEntropy,_this.protocolVersion,_this.minUtxo,_this.minPoolCost,_this.adaPerUtxoByte,_this.costmdls,_this.executionCosts,_this.maxTxExUnits,_this.maxBlockExUnits,_this.maxValSize,_this.collateralPercentage,_this.maxCollateralInputs,const DeepCollectionEquality().hash(_this.poolVotingThresholds),const DeepCollectionEquality().hash(_this.drepVotingThresholds),_this.minCommitteeSize,_this.committeeTermLimit,_this.govActionValidityPeriod,_this.govActionDeposit,_this.drepDeposit,_this.drepInactivityPeriod,_this.minFeeRefScriptCostPerByte,_this.lengthType,const DeepCollectionEquality().hash(_this.nonStandardKeyOrder),_this.poolVotingThresholdsLengthType,_this.drepVotingThresholdsLengthType]);
+}
 
 @override
 String toString() {
-  return 'ProtocolParamUpdate(minFeeA: $minFeeA, minFeeB: $minFeeB, maxBlockSize: $maxBlockSize, maxTxSize: $maxTxSize, maxBlockHeaderSize: $maxBlockHeaderSize, keyDeposit: $keyDeposit, poolDeposit: $poolDeposit, maxEpoch: $maxEpoch, nOpt: $nOpt, poolPledgeInfluence: $poolPledgeInfluence, expansionRate: $expansionRate, treasuryGrowth: $treasuryGrowth, decentralisationConstant: $decentralisationConstant, extraEntropy: $extraEntropy, protocolVersion: $protocolVersion, minUtxo: $minUtxo, minPoolCost: $minPoolCost, adaPerUtxoByte: $adaPerUtxoByte, costmdls: $costmdls, executionCosts: $executionCosts, maxTxExUnits: $maxTxExUnits, maxBlockExUnits: $maxBlockExUnits, maxValSize: $maxValSize, collateralPercentage: $collateralPercentage, maxCollateralInputs: $maxCollateralInputs, poolVotingThresholds: $poolVotingThresholds, drepVotingThresholds: $drepVotingThresholds, minCommitteeSize: $minCommitteeSize, committeeTermLimit: $committeeTermLimit, govActionValidityPeriod: $govActionValidityPeriod, govActionDeposit: $govActionDeposit, drepDeposit: $drepDeposit, drepInactivityPeriod: $drepInactivityPeriod, minFeeRefScriptCostPerByte: $minFeeRefScriptCostPerByte, lengthType: $lengthType, nonStandardKeyOrder: $nonStandardKeyOrder, poolVotingThresholdsLengthType: $poolVotingThresholdsLengthType, drepVotingThresholdsLengthType: $drepVotingThresholdsLengthType)';
+  final _this = this as ProtocolParamUpdate;
+  return 'ProtocolParamUpdate(minFeeA: ${_this.minFeeA}, minFeeB: ${_this.minFeeB}, maxBlockSize: ${_this.maxBlockSize}, maxTxSize: ${_this.maxTxSize}, maxBlockHeaderSize: ${_this.maxBlockHeaderSize}, keyDeposit: ${_this.keyDeposit}, poolDeposit: ${_this.poolDeposit}, maxEpoch: ${_this.maxEpoch}, nOpt: ${_this.nOpt}, poolPledgeInfluence: ${_this.poolPledgeInfluence}, expansionRate: ${_this.expansionRate}, treasuryGrowth: ${_this.treasuryGrowth}, decentralisationConstant: ${_this.decentralisationConstant}, extraEntropy: ${_this.extraEntropy}, protocolVersion: ${_this.protocolVersion}, minUtxo: ${_this.minUtxo}, minPoolCost: ${_this.minPoolCost}, adaPerUtxoByte: ${_this.adaPerUtxoByte}, costmdls: ${_this.costmdls}, executionCosts: ${_this.executionCosts}, maxTxExUnits: ${_this.maxTxExUnits}, maxBlockExUnits: ${_this.maxBlockExUnits}, maxValSize: ${_this.maxValSize}, collateralPercentage: ${_this.collateralPercentage}, maxCollateralInputs: ${_this.maxCollateralInputs}, poolVotingThresholds: ${_this.poolVotingThresholds}, drepVotingThresholds: ${_this.drepVotingThresholds}, minCommitteeSize: ${_this.minCommitteeSize}, committeeTermLimit: ${_this.committeeTermLimit}, govActionValidityPeriod: ${_this.govActionValidityPeriod}, govActionDeposit: ${_this.govActionDeposit}, drepDeposit: ${_this.drepDeposit}, drepInactivityPeriod: ${_this.drepInactivityPeriod}, minFeeRefScriptCostPerByte: ${_this.minFeeRefScriptCostPerByte}, lengthType: ${_this.lengthType}, nonStandardKeyOrder: ${_this.nonStandardKeyOrder}, poolVotingThresholdsLengthType: ${_this.poolVotingThresholdsLengthType}, drepVotingThresholdsLengthType: ${_this.drepVotingThresholdsLengthType})';
 }
 
 
@@ -101,7 +70,7 @@ class _$ProtocolParamUpdateCopyWithImpl<$Res>
 /// Create a copy of ProtocolParamUpdate
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? minFeeA = freezed,Object? minFeeB = freezed,Object? maxBlockSize = freezed,Object? maxTxSize = freezed,Object? maxBlockHeaderSize = freezed,Object? keyDeposit = freezed,Object? poolDeposit = freezed,Object? maxEpoch = freezed,Object? nOpt = freezed,Object? poolPledgeInfluence = freezed,Object? expansionRate = freezed,Object? treasuryGrowth = freezed,Object? decentralisationConstant = freezed,Object? extraEntropy = freezed,Object? protocolVersion = freezed,Object? minUtxo = freezed,Object? minPoolCost = freezed,Object? adaPerUtxoByte = freezed,Object? costmdls = freezed,Object? executionCosts = freezed,Object? maxTxExUnits = freezed,Object? maxBlockExUnits = freezed,Object? maxValSize = freezed,Object? collateralPercentage = freezed,Object? maxCollateralInputs = freezed,Object? poolVotingThresholds = freezed,Object? drepVotingThresholds = freezed,Object? minCommitteeSize = freezed,Object? committeeTermLimit = freezed,Object? govActionValidityPeriod = freezed,Object? govActionDeposit = freezed,Object? drepDeposit = freezed,Object? drepInactivityPeriod = freezed,Object? minFeeRefScriptCostPerByte = freezed,Object? lengthType = null,Object? nonStandardKeyOrder = freezed,Object? poolVotingThresholdsLengthType = null,Object? drepVotingThresholdsLengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(ProtocolParamUpdate(
 minFeeA: freezed == minFeeA ? _self.minFeeA : minFeeA // ignore: cast_nullable_to_non_nullable
 as BigInt?,minFeeB: freezed == minFeeB ? _self.minFeeB : minFeeB // ignore: cast_nullable_to_non_nullable
 as BigInt?,maxBlockSize: freezed == maxBlockSize ? _self.maxBlockSize : maxBlockSize // ignore: cast_nullable_to_non_nullable
@@ -236,64 +205,35 @@ $RationalNumberCopyWith<$Res>? get minFeeRefScriptCostPerByte {
 
 
 class _ProtocolParamUpdate extends ProtocolParamUpdate {
-  const _ProtocolParamUpdate({required this.minFeeA, required this.minFeeB, required this.maxBlockSize, required this.maxTxSize, required this.maxBlockHeaderSize, required this.keyDeposit, required this.poolDeposit, required this.maxEpoch, required this.nOpt, required this.poolPledgeInfluence, required this.expansionRate, required this.treasuryGrowth, @Deprecated("") required this.decentralisationConstant, @Deprecated("Removed in Babbage era") required this.extraEntropy, required this.protocolVersion, @Deprecated("") required this.minUtxo, required this.minPoolCost, required this.adaPerUtxoByte, required this.costmdls, required this.executionCosts, required this.maxTxExUnits, required this.maxBlockExUnits, required this.maxValSize, required this.collateralPercentage, required this.maxCollateralInputs, final  List<RationalNumber>? poolVotingThresholds, final  List<RationalNumber>? drepVotingThresholds, this.minCommitteeSize, this.committeeTermLimit, this.govActionValidityPeriod, this.govActionDeposit, this.drepDeposit, this.drepInactivityPeriod, this.minFeeRefScriptCostPerByte, this.lengthType = CborLengthType.definite, final  List<int>? nonStandardKeyOrder, this.poolVotingThresholdsLengthType = CborLengthType.definite, this.drepVotingThresholdsLengthType = CborLengthType.definite}): _poolVotingThresholds = poolVotingThresholds,_drepVotingThresholds = drepVotingThresholds,_nonStandardKeyOrder = nonStandardKeyOrder,super._();
+  const _ProtocolParamUpdate({required this.minFeeA, required this.minFeeB, required this.maxBlockSize, required this.maxTxSize, required this.maxBlockHeaderSize, required this.keyDeposit, required this.poolDeposit, required this.maxEpoch, required this.nOpt, required this.poolPledgeInfluence, required this.expansionRate, required this.treasuryGrowth, @Deprecated("") required this.decentralisationConstant, @Deprecated("Removed in Babbage era") required this.extraEntropy, required this.protocolVersion, @Deprecated("") required this.minUtxo, required this.minPoolCost, required this.adaPerUtxoByte, required this.costmdls, required this.executionCosts, required this.maxTxExUnits, required this.maxBlockExUnits, required this.maxValSize, required this.collateralPercentage, required this.maxCollateralInputs,  List<RationalNumber>? poolVotingThresholds,  List<RationalNumber>? drepVotingThresholds, this.minCommitteeSize, this.committeeTermLimit, this.govActionValidityPeriod, this.govActionDeposit, this.drepDeposit, this.drepInactivityPeriod, this.minFeeRefScriptCostPerByte, this.lengthType = CborLengthType.definite,  List<int>? nonStandardKeyOrder, this.poolVotingThresholdsLengthType = CborLengthType.definite, this.drepVotingThresholdsLengthType = CborLengthType.definite}): _poolVotingThresholds = poolVotingThresholds,_drepVotingThresholds = drepVotingThresholds,_nonStandardKeyOrder = nonStandardKeyOrder,super._();
   
 
 @override final  BigInt? minFeeA;
-// 0
 @override final  BigInt? minFeeB;
-// 1
 @override final  int? maxBlockSize;
-// 2
 @override final  int? maxTxSize;
-// 3
 @override final  int? maxBlockHeaderSize;
-// 4
 @override final  BigInt? keyDeposit;
-// 5
 @override final  BigInt? poolDeposit;
-// 6
 @override final  int? maxEpoch;
-// 7
 @override final  int? nOpt;
-// 8
 @override final  RationalNumber? poolPledgeInfluence;
-// 9
 @override final  RationalNumber? expansionRate;
-// 10
 @override final  RationalNumber? treasuryGrowth;
-// 11
 @override@Deprecated("") final  RationalNumber? decentralisationConstant;
-// 12
 @override@Deprecated("Removed in Babbage era") final  Nonce? extraEntropy;
-// 13
 @override final  ProtocolVersion? protocolVersion;
-// 14
 @override@Deprecated("") final  BigInt? minUtxo;
-// 15
 @override final  BigInt? minPoolCost;
-// 16
 @override final  BigInt? adaPerUtxoByte;
-// 17
-// Alonzo changes
 @override final  CborValue? costmdls;
-// 18
 @override final  CborValue? executionCosts;
-// 19
 @override final  CborValue? maxTxExUnits;
-// 20
 @override final  CborValue? maxBlockExUnits;
-// 21
 @override final  BigInt? maxValSize;
-// 22
 @override final  int? collateralPercentage;
-// 23
 @override final  int? maxCollateralInputs;
-// 24
-// Conway changes
  final  List<RationalNumber>? _poolVotingThresholds;
-// 24
-// Conway changes
 @override List<RationalNumber>? get poolVotingThresholds {
   final value = _poolVotingThresholds;
   if (value == null) return null;
@@ -302,9 +242,7 @@ class _ProtocolParamUpdate extends ProtocolParamUpdate {
   return EqualUnmodifiableListView(value);
 }
 
-// 25
  final  List<RationalNumber>? _drepVotingThresholds;
-// 25
 @override List<RationalNumber>? get drepVotingThresholds {
   final value = _drepVotingThresholds;
   if (value == null) return null;
@@ -313,22 +251,13 @@ class _ProtocolParamUpdate extends ProtocolParamUpdate {
   return EqualUnmodifiableListView(value);
 }
 
-// 26
 @override final  int? minCommitteeSize;
-// 27
 @override final  int? committeeTermLimit;
-// 28
 @override final  int? govActionValidityPeriod;
-// 29
 @override final  BigInt? govActionDeposit;
-// 30
 @override final  BigInt? drepDeposit;
-// 31
 @override final  int? drepInactivityPeriod;
-// 32
 @override final  RationalNumber? minFeeRefScriptCostPerByte;
-// 33
-// encoding details (not part of the protocol params)
 @override@JsonKey() final  CborLengthType lengthType;
 /// Map key order as parsed, or null when ascending (the standard order).
  final  List<int>? _nonStandardKeyOrder;
@@ -354,16 +283,18 @@ _$ProtocolParamUpdateCopyWith<_ProtocolParamUpdate> get copyWith => __$ProtocolP
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProtocolParamUpdate&&(identical(other.minFeeA, minFeeA) || other.minFeeA == minFeeA)&&(identical(other.minFeeB, minFeeB) || other.minFeeB == minFeeB)&&(identical(other.maxBlockSize, maxBlockSize) || other.maxBlockSize == maxBlockSize)&&(identical(other.maxTxSize, maxTxSize) || other.maxTxSize == maxTxSize)&&(identical(other.maxBlockHeaderSize, maxBlockHeaderSize) || other.maxBlockHeaderSize == maxBlockHeaderSize)&&(identical(other.keyDeposit, keyDeposit) || other.keyDeposit == keyDeposit)&&(identical(other.poolDeposit, poolDeposit) || other.poolDeposit == poolDeposit)&&(identical(other.maxEpoch, maxEpoch) || other.maxEpoch == maxEpoch)&&(identical(other.nOpt, nOpt) || other.nOpt == nOpt)&&(identical(other.poolPledgeInfluence, poolPledgeInfluence) || other.poolPledgeInfluence == poolPledgeInfluence)&&(identical(other.expansionRate, expansionRate) || other.expansionRate == expansionRate)&&(identical(other.treasuryGrowth, treasuryGrowth) || other.treasuryGrowth == treasuryGrowth)&&(identical(other.decentralisationConstant, decentralisationConstant) || other.decentralisationConstant == decentralisationConstant)&&(identical(other.extraEntropy, extraEntropy) || other.extraEntropy == extraEntropy)&&(identical(other.protocolVersion, protocolVersion) || other.protocolVersion == protocolVersion)&&(identical(other.minUtxo, minUtxo) || other.minUtxo == minUtxo)&&(identical(other.minPoolCost, minPoolCost) || other.minPoolCost == minPoolCost)&&(identical(other.adaPerUtxoByte, adaPerUtxoByte) || other.adaPerUtxoByte == adaPerUtxoByte)&&(identical(other.costmdls, costmdls) || other.costmdls == costmdls)&&(identical(other.executionCosts, executionCosts) || other.executionCosts == executionCosts)&&(identical(other.maxTxExUnits, maxTxExUnits) || other.maxTxExUnits == maxTxExUnits)&&(identical(other.maxBlockExUnits, maxBlockExUnits) || other.maxBlockExUnits == maxBlockExUnits)&&(identical(other.maxValSize, maxValSize) || other.maxValSize == maxValSize)&&(identical(other.collateralPercentage, collateralPercentage) || other.collateralPercentage == collateralPercentage)&&(identical(other.maxCollateralInputs, maxCollateralInputs) || other.maxCollateralInputs == maxCollateralInputs)&&const DeepCollectionEquality().equals(other._poolVotingThresholds, _poolVotingThresholds)&&const DeepCollectionEquality().equals(other._drepVotingThresholds, _drepVotingThresholds)&&(identical(other.minCommitteeSize, minCommitteeSize) || other.minCommitteeSize == minCommitteeSize)&&(identical(other.committeeTermLimit, committeeTermLimit) || other.committeeTermLimit == committeeTermLimit)&&(identical(other.govActionValidityPeriod, govActionValidityPeriod) || other.govActionValidityPeriod == govActionValidityPeriod)&&(identical(other.govActionDeposit, govActionDeposit) || other.govActionDeposit == govActionDeposit)&&(identical(other.drepDeposit, drepDeposit) || other.drepDeposit == drepDeposit)&&(identical(other.drepInactivityPeriod, drepInactivityPeriod) || other.drepInactivityPeriod == drepInactivityPeriod)&&(identical(other.minFeeRefScriptCostPerByte, minFeeRefScriptCostPerByte) || other.minFeeRefScriptCostPerByte == minFeeRefScriptCostPerByte)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other._nonStandardKeyOrder, _nonStandardKeyOrder)&&(identical(other.poolVotingThresholdsLengthType, poolVotingThresholdsLengthType) || other.poolVotingThresholdsLengthType == poolVotingThresholdsLengthType)&&(identical(other.drepVotingThresholdsLengthType, drepVotingThresholdsLengthType) || other.drepVotingThresholdsLengthType == drepVotingThresholdsLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProtocolParamUpdate&&(identical(other.minFeeA, minFeeA) || other.minFeeA == minFeeA)&&(identical(other.minFeeB, minFeeB) || other.minFeeB == minFeeB)&&(identical(other.maxBlockSize, maxBlockSize) || other.maxBlockSize == maxBlockSize)&&(identical(other.maxTxSize, maxTxSize) || other.maxTxSize == maxTxSize)&&(identical(other.maxBlockHeaderSize, maxBlockHeaderSize) || other.maxBlockHeaderSize == maxBlockHeaderSize)&&(identical(other.keyDeposit, keyDeposit) || other.keyDeposit == keyDeposit)&&(identical(other.poolDeposit, poolDeposit) || other.poolDeposit == poolDeposit)&&(identical(other.maxEpoch, maxEpoch) || other.maxEpoch == maxEpoch)&&(identical(other.nOpt, nOpt) || other.nOpt == nOpt)&&(identical(other.poolPledgeInfluence, poolPledgeInfluence) || other.poolPledgeInfluence == poolPledgeInfluence)&&(identical(other.expansionRate, expansionRate) || other.expansionRate == expansionRate)&&(identical(other.treasuryGrowth, treasuryGrowth) || other.treasuryGrowth == treasuryGrowth)&&(identical(other.decentralisationConstant, decentralisationConstant) || other.decentralisationConstant == decentralisationConstant)&&(identical(other.extraEntropy, extraEntropy) || other.extraEntropy == extraEntropy)&&(identical(other.protocolVersion, protocolVersion) || other.protocolVersion == protocolVersion)&&(identical(other.minUtxo, minUtxo) || other.minUtxo == minUtxo)&&(identical(other.minPoolCost, minPoolCost) || other.minPoolCost == minPoolCost)&&(identical(other.adaPerUtxoByte, adaPerUtxoByte) || other.adaPerUtxoByte == adaPerUtxoByte)&&(identical(other.costmdls, costmdls) || other.costmdls == costmdls)&&(identical(other.executionCosts, executionCosts) || other.executionCosts == executionCosts)&&(identical(other.maxTxExUnits, maxTxExUnits) || other.maxTxExUnits == maxTxExUnits)&&(identical(other.maxBlockExUnits, maxBlockExUnits) || other.maxBlockExUnits == maxBlockExUnits)&&(identical(other.maxValSize, maxValSize) || other.maxValSize == maxValSize)&&(identical(other.collateralPercentage, collateralPercentage) || other.collateralPercentage == collateralPercentage)&&(identical(other.maxCollateralInputs, maxCollateralInputs) || other.maxCollateralInputs == maxCollateralInputs)&&const DeepCollectionEquality().equals(other.poolVotingThresholds, _poolVotingThresholds)&&const DeepCollectionEquality().equals(other.drepVotingThresholds, _drepVotingThresholds)&&(identical(other.minCommitteeSize, minCommitteeSize) || other.minCommitteeSize == minCommitteeSize)&&(identical(other.committeeTermLimit, committeeTermLimit) || other.committeeTermLimit == committeeTermLimit)&&(identical(other.govActionValidityPeriod, govActionValidityPeriod) || other.govActionValidityPeriod == govActionValidityPeriod)&&(identical(other.govActionDeposit, govActionDeposit) || other.govActionDeposit == govActionDeposit)&&(identical(other.drepDeposit, drepDeposit) || other.drepDeposit == drepDeposit)&&(identical(other.drepInactivityPeriod, drepInactivityPeriod) || other.drepInactivityPeriod == drepInactivityPeriod)&&(identical(other.minFeeRefScriptCostPerByte, minFeeRefScriptCostPerByte) || other.minFeeRefScriptCostPerByte == minFeeRefScriptCostPerByte)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.nonStandardKeyOrder, _nonStandardKeyOrder)&&(identical(other.poolVotingThresholdsLengthType, poolVotingThresholdsLengthType) || other.poolVotingThresholdsLengthType == poolVotingThresholdsLengthType)&&(identical(other.drepVotingThresholdsLengthType, drepVotingThresholdsLengthType) || other.drepVotingThresholdsLengthType == drepVotingThresholdsLengthType));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,minFeeA,minFeeB,maxBlockSize,maxTxSize,maxBlockHeaderSize,keyDeposit,poolDeposit,maxEpoch,nOpt,poolPledgeInfluence,expansionRate,treasuryGrowth,decentralisationConstant,extraEntropy,protocolVersion,minUtxo,minPoolCost,adaPerUtxoByte,costmdls,executionCosts,maxTxExUnits,maxBlockExUnits,maxValSize,collateralPercentage,maxCollateralInputs,const DeepCollectionEquality().hash(_poolVotingThresholds),const DeepCollectionEquality().hash(_drepVotingThresholds),minCommitteeSize,committeeTermLimit,govActionValidityPeriod,govActionDeposit,drepDeposit,drepInactivityPeriod,minFeeRefScriptCostPerByte,lengthType,const DeepCollectionEquality().hash(_nonStandardKeyOrder),poolVotingThresholdsLengthType,drepVotingThresholdsLengthType]);
+int get hashCode {
+    return Object.hashAll([runtimeType,minFeeA,minFeeB,maxBlockSize,maxTxSize,maxBlockHeaderSize,keyDeposit,poolDeposit,maxEpoch,nOpt,poolPledgeInfluence,expansionRate,treasuryGrowth,decentralisationConstant,extraEntropy,protocolVersion,minUtxo,minPoolCost,adaPerUtxoByte,costmdls,executionCosts,maxTxExUnits,maxBlockExUnits,maxValSize,collateralPercentage,maxCollateralInputs,const DeepCollectionEquality().hash(_poolVotingThresholds),const DeepCollectionEquality().hash(_drepVotingThresholds),minCommitteeSize,committeeTermLimit,govActionValidityPeriod,govActionDeposit,drepDeposit,drepInactivityPeriod,minFeeRefScriptCostPerByte,lengthType,const DeepCollectionEquality().hash(_nonStandardKeyOrder),poolVotingThresholdsLengthType,drepVotingThresholdsLengthType]);
+}
 
 @override
 String toString() {
-  return 'ProtocolParamUpdate(minFeeA: $minFeeA, minFeeB: $minFeeB, maxBlockSize: $maxBlockSize, maxTxSize: $maxTxSize, maxBlockHeaderSize: $maxBlockHeaderSize, keyDeposit: $keyDeposit, poolDeposit: $poolDeposit, maxEpoch: $maxEpoch, nOpt: $nOpt, poolPledgeInfluence: $poolPledgeInfluence, expansionRate: $expansionRate, treasuryGrowth: $treasuryGrowth, decentralisationConstant: $decentralisationConstant, extraEntropy: $extraEntropy, protocolVersion: $protocolVersion, minUtxo: $minUtxo, minPoolCost: $minPoolCost, adaPerUtxoByte: $adaPerUtxoByte, costmdls: $costmdls, executionCosts: $executionCosts, maxTxExUnits: $maxTxExUnits, maxBlockExUnits: $maxBlockExUnits, maxValSize: $maxValSize, collateralPercentage: $collateralPercentage, maxCollateralInputs: $maxCollateralInputs, poolVotingThresholds: $poolVotingThresholds, drepVotingThresholds: $drepVotingThresholds, minCommitteeSize: $minCommitteeSize, committeeTermLimit: $committeeTermLimit, govActionValidityPeriod: $govActionValidityPeriod, govActionDeposit: $govActionDeposit, drepDeposit: $drepDeposit, drepInactivityPeriod: $drepInactivityPeriod, minFeeRefScriptCostPerByte: $minFeeRefScriptCostPerByte, lengthType: $lengthType, nonStandardKeyOrder: $nonStandardKeyOrder, poolVotingThresholdsLengthType: $poolVotingThresholdsLengthType, drepVotingThresholdsLengthType: $drepVotingThresholdsLengthType)';
+    return 'ProtocolParamUpdate(minFeeA: $minFeeA, minFeeB: $minFeeB, maxBlockSize: $maxBlockSize, maxTxSize: $maxTxSize, maxBlockHeaderSize: $maxBlockHeaderSize, keyDeposit: $keyDeposit, poolDeposit: $poolDeposit, maxEpoch: $maxEpoch, nOpt: $nOpt, poolPledgeInfluence: $poolPledgeInfluence, expansionRate: $expansionRate, treasuryGrowth: $treasuryGrowth, decentralisationConstant: $decentralisationConstant, extraEntropy: $extraEntropy, protocolVersion: $protocolVersion, minUtxo: $minUtxo, minPoolCost: $minPoolCost, adaPerUtxoByte: $adaPerUtxoByte, costmdls: $costmdls, executionCosts: $executionCosts, maxTxExUnits: $maxTxExUnits, maxBlockExUnits: $maxBlockExUnits, maxValSize: $maxValSize, collateralPercentage: $collateralPercentage, maxCollateralInputs: $maxCollateralInputs, poolVotingThresholds: $poolVotingThresholds, drepVotingThresholds: $drepVotingThresholds, minCommitteeSize: $minCommitteeSize, committeeTermLimit: $committeeTermLimit, govActionValidityPeriod: $govActionValidityPeriod, govActionDeposit: $govActionDeposit, drepDeposit: $drepDeposit, drepInactivityPeriod: $drepInactivityPeriod, minFeeRefScriptCostPerByte: $minFeeRefScriptCostPerByte, lengthType: $lengthType, nonStandardKeyOrder: $nonStandardKeyOrder, poolVotingThresholdsLengthType: $poolVotingThresholdsLengthType, drepVotingThresholdsLengthType: $drepVotingThresholdsLengthType)';
 }
 
 

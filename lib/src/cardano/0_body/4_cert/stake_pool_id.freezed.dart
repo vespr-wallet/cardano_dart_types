@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'stake_pool_id.dart';
@@ -9,6 +9,7 @@ part of 'stake_pool_id.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $StakePoolIdCopyWith<StakePoolId> get copyWith => _$StakePoolIdCopyWithImpl<Stak
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StakePoolId&&const DeepCollectionEquality().equals(other.poolKeyHash, poolKeyHash));
+  final _this = this as StakePoolId;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StakePoolId&&const DeepCollectionEquality().equals(other.poolKeyHash, _this.poolKeyHash));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(poolKeyHash));
+int get hashCode {
+  final _this = this as StakePoolId;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.poolKeyHash));
+}
 
 @override
 String toString() {
-  return 'StakePoolId(poolKeyHash: $poolKeyHash)';
+  final _this = this as StakePoolId;
+  return 'StakePoolId(poolKeyHash: ${_this.poolKeyHash})';
 }
 
 
@@ -63,8 +69,8 @@ class _$StakePoolIdCopyWithImpl<$Res>
 /// Create a copy of StakePoolId
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? poolKeyHash = null,}) {
-  return _then(_self.copyWith(
-poolKeyHash: null == poolKeyHash ? _self.poolKeyHash : poolKeyHash // ignore: cast_nullable_to_non_nullable
+  return _then(StakePoolId(
+null == poolKeyHash ? _self.poolKeyHash : poolKeyHash // ignore: cast_nullable_to_non_nullable
 as Uint8List,
   ));
 }
@@ -92,16 +98,18 @@ _$StakePoolIdCopyWith<_StakePoolId> get copyWith => __$StakePoolIdCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StakePoolId&&const DeepCollectionEquality().equals(other.poolKeyHash, poolKeyHash));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _StakePoolId&&const DeepCollectionEquality().equals(other.poolKeyHash, poolKeyHash));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(poolKeyHash));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(poolKeyHash));
+}
 
 @override
 String toString() {
-  return 'StakePoolId(poolKeyHash: $poolKeyHash)';
+    return 'StakePoolId(poolKeyHash: $poolKeyHash)';
 }
 
 

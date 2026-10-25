@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cose_sign_1.dart';
@@ -9,6 +9,7 @@ part of 'cose_sign_1.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $CoseSign1CopyWith<CoseSign1> get copyWith => _$CoseSign1CopyWithImpl<CoseSign1>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseSign1&&(identical(other.headers, headers) || other.headers == headers)&&const DeepCollectionEquality().equals(other.payload, payload)&&const DeepCollectionEquality().equals(other.signature, signature));
+  final _this = this as CoseSign1;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseSign1&&(identical(other.headers, _this.headers) || other.headers == _this.headers)&&const DeepCollectionEquality().equals(other.payload, _this.payload)&&const DeepCollectionEquality().equals(other.signature, _this.signature));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,headers,const DeepCollectionEquality().hash(payload),const DeepCollectionEquality().hash(signature));
+int get hashCode {
+  final _this = this as CoseSign1;
+  return Object.hash(runtimeType,_this.headers,const DeepCollectionEquality().hash(_this.payload),const DeepCollectionEquality().hash(_this.signature));
+}
 
 @override
 String toString() {
-  return 'CoseSign1(headers: $headers, payload: $payload, signature: $signature)';
+  final _this = this as CoseSign1;
+  return 'CoseSign1(headers: ${_this.headers}, payload: ${_this.payload}, signature: ${_this.signature})';
 }
 
 
@@ -63,7 +69,7 @@ class _$CoseSign1CopyWithImpl<$Res>
 /// Create a copy of CoseSign1
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? headers = null,Object? payload = null,Object? signature = null,}) {
-  return _then(_self.copyWith(
+  return _then(CoseSign1(
 headers: null == headers ? _self.headers : headers // ignore: cast_nullable_to_non_nullable
 as CoseHeaders,payload: null == payload ? _self.payload : payload // ignore: cast_nullable_to_non_nullable
 as Uint8List,signature: null == signature ? _self.signature : signature // ignore: cast_nullable_to_non_nullable
@@ -105,16 +111,18 @@ _$CoseSign1CopyWith<_CoseSign1> get copyWith => __$CoseSign1CopyWithImpl<_CoseSi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseSign1&&(identical(other.headers, headers) || other.headers == headers)&&const DeepCollectionEquality().equals(other.payload, payload)&&const DeepCollectionEquality().equals(other.signature, signature));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseSign1&&(identical(other.headers, headers) || other.headers == headers)&&const DeepCollectionEquality().equals(other.payload, payload)&&const DeepCollectionEquality().equals(other.signature, signature));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,headers,const DeepCollectionEquality().hash(payload),const DeepCollectionEquality().hash(signature));
+int get hashCode {
+    return Object.hash(runtimeType,headers,const DeepCollectionEquality().hash(payload),const DeepCollectionEquality().hash(signature));
+}
 
 @override
 String toString() {
-  return 'CoseSign1(headers: $headers, payload: $payload, signature: $signature)';
+    return 'CoseSign1(headers: $headers, payload: $payload, signature: $signature)';
 }
 
 

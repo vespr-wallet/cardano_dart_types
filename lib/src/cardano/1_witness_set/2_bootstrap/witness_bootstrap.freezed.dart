@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'witness_bootstrap.dart';
@@ -9,6 +9,7 @@ part of 'witness_bootstrap.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $WitnessBootstrapCopyWith<WitnessBootstrap> get copyWith => _$WitnessBootstrapCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WitnessBootstrap&&const DeepCollectionEquality().equals(other.publicKey, publicKey)&&const DeepCollectionEquality().equals(other.signature, signature)&&const DeepCollectionEquality().equals(other.chainCode, chainCode)&&const DeepCollectionEquality().equals(other.attributes, attributes)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as WitnessBootstrap;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WitnessBootstrap&&const DeepCollectionEquality().equals(other.publicKey, _this.publicKey)&&const DeepCollectionEquality().equals(other.signature, _this.signature)&&const DeepCollectionEquality().equals(other.chainCode, _this.chainCode)&&const DeepCollectionEquality().equals(other.attributes, _this.attributes)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(publicKey),const DeepCollectionEquality().hash(signature),const DeepCollectionEquality().hash(chainCode),const DeepCollectionEquality().hash(attributes),lengthType);
+int get hashCode {
+  final _this = this as WitnessBootstrap;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.publicKey),const DeepCollectionEquality().hash(_this.signature),const DeepCollectionEquality().hash(_this.chainCode),const DeepCollectionEquality().hash(_this.attributes),_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'WitnessBootstrap(publicKey: $publicKey, signature: $signature, chainCode: $chainCode, attributes: $attributes, lengthType: $lengthType)';
+  final _this = this as WitnessBootstrap;
+  return 'WitnessBootstrap(publicKey: ${_this.publicKey}, signature: ${_this.signature}, chainCode: ${_this.chainCode}, attributes: ${_this.attributes}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -63,7 +69,7 @@ class _$WitnessBootstrapCopyWithImpl<$Res>
 /// Create a copy of WitnessBootstrap
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? publicKey = null,Object? signature = null,Object? chainCode = null,Object? attributes = null,Object? lengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(WitnessBootstrap(
 publicKey: null == publicKey ? _self.publicKey : publicKey // ignore: cast_nullable_to_non_nullable
 as Uint8List,signature: null == signature ? _self.signature : signature // ignore: cast_nullable_to_non_nullable
 as Uint8List,chainCode: null == chainCode ? _self.chainCode : chainCode // ignore: cast_nullable_to_non_nullable
@@ -100,16 +106,18 @@ _$WitnessBootstrapCopyWith<_WitnessBootstrap> get copyWith => __$WitnessBootstra
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WitnessBootstrap&&const DeepCollectionEquality().equals(other.publicKey, publicKey)&&const DeepCollectionEquality().equals(other.signature, signature)&&const DeepCollectionEquality().equals(other.chainCode, chainCode)&&const DeepCollectionEquality().equals(other.attributes, attributes)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _WitnessBootstrap&&const DeepCollectionEquality().equals(other.publicKey, publicKey)&&const DeepCollectionEquality().equals(other.signature, signature)&&const DeepCollectionEquality().equals(other.chainCode, chainCode)&&const DeepCollectionEquality().equals(other.attributes, attributes)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(publicKey),const DeepCollectionEquality().hash(signature),const DeepCollectionEquality().hash(chainCode),const DeepCollectionEquality().hash(attributes),lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(publicKey),const DeepCollectionEquality().hash(signature),const DeepCollectionEquality().hash(chainCode),const DeepCollectionEquality().hash(attributes),lengthType);
+}
 
 @override
 String toString() {
-  return 'WitnessBootstrap(publicKey: $publicKey, signature: $signature, chainCode: $chainCode, attributes: $attributes, lengthType: $lengthType)';
+    return 'WitnessBootstrap(publicKey: $publicKey, signature: $signature, chainCode: $chainCode, attributes: $attributes, lengthType: $lengthType)';
 }
 
 

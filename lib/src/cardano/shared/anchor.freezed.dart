@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'anchor.dart';
@@ -9,12 +9,13 @@ part of 'anchor.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Anchor {
 
- Lazy<String> get metadataHashHex; String get anchorUrl; Uint8List get anchorDataHash; CborLengthType get cborLengthType;
+ String get anchorUrl; Uint8List get anchorDataHash; CborLengthType get cborLengthType;
 /// Create a copy of Anchor
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +26,21 @@ $AnchorCopyWith<Anchor> get copyWith => _$AnchorCopyWithImpl<Anchor>(this as Anc
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Anchor&&(identical(other.metadataHashHex, metadataHashHex) || other.metadataHashHex == metadataHashHex)&&(identical(other.anchorUrl, anchorUrl) || other.anchorUrl == anchorUrl)&&const DeepCollectionEquality().equals(other.anchorDataHash, anchorDataHash)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
+  final _this = this as Anchor;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Anchor&&(identical(other.metadataHashHex, _this.metadataHashHex) || other.metadataHashHex == _this.metadataHashHex)&&(identical(other.anchorUrl, _this.anchorUrl) || other.anchorUrl == _this.anchorUrl)&&const DeepCollectionEquality().equals(other.anchorDataHash, _this.anchorDataHash)&&(identical(other.cborLengthType, _this.cborLengthType) || other.cborLengthType == _this.cborLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,metadataHashHex,anchorUrl,const DeepCollectionEquality().hash(anchorDataHash),cborLengthType);
+int get hashCode {
+  final _this = this as Anchor;
+  return Object.hash(runtimeType,_this.metadataHashHex,_this.anchorUrl,const DeepCollectionEquality().hash(_this.anchorDataHash),_this.cborLengthType);
+}
 
 @override
 String toString() {
-  return 'Anchor(metadataHashHex: $metadataHashHex, anchorUrl: $anchorUrl, anchorDataHash: $anchorDataHash, cborLengthType: $cborLengthType)';
+  final _this = this as Anchor;
+  return 'Anchor(metadataHashHex: ${_this.metadataHashHex}, anchorUrl: ${_this.anchorUrl}, anchorDataHash: ${_this.anchorDataHash}, cborLengthType: ${_this.cborLengthType})';
 }
 
 
@@ -63,7 +69,7 @@ class _$AnchorCopyWithImpl<$Res>
 /// Create a copy of Anchor
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? anchorUrl = null,Object? anchorDataHash = null,Object? cborLengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(Anchor(
 anchorUrl: null == anchorUrl ? _self.anchorUrl : anchorUrl // ignore: cast_nullable_to_non_nullable
 as String,anchorDataHash: null == anchorDataHash ? _self.anchorDataHash : anchorDataHash // ignore: cast_nullable_to_non_nullable
 as Uint8List,cborLengthType: null == cborLengthType ? _self.cborLengthType : cborLengthType // ignore: cast_nullable_to_non_nullable
@@ -96,16 +102,18 @@ _$AnchorCopyWith<_Anchor> get copyWith => __$AnchorCopyWithImpl<_Anchor>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Anchor&&(identical(other.anchorUrl, anchorUrl) || other.anchorUrl == anchorUrl)&&const DeepCollectionEquality().equals(other.anchorDataHash, anchorDataHash)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Anchor&&(identical(other.anchorUrl, anchorUrl) || other.anchorUrl == anchorUrl)&&const DeepCollectionEquality().equals(other.anchorDataHash, anchorDataHash)&&(identical(other.cborLengthType, cborLengthType) || other.cborLengthType == cborLengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,anchorUrl,const DeepCollectionEquality().hash(anchorDataHash),cborLengthType);
+int get hashCode {
+    return Object.hash(runtimeType,anchorUrl,const DeepCollectionEquality().hash(anchorDataHash),cborLengthType);
+}
 
 @override
 String toString() {
-  return 'Anchor(anchorUrl: $anchorUrl, anchorDataHash: $anchorDataHash, cborLengthType: $cborLengthType)';
+    return 'Anchor(anchorUrl: $anchorUrl, anchorDataHash: $anchorDataHash, cborLengthType: $cborLengthType)';
 }
 
 

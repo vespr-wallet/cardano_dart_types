@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'address.dart';
@@ -9,13 +9,13 @@ part of 'address.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Address {
 
- List<int> get value;// bytes
- CborLengthType get lengthType; List<int> get cborTags;
+ List<int> get value; CborLengthType get lengthType; List<int> get cborTags;
 /// Create a copy of Address
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,21 @@ $AddressCopyWith<Address> get copyWith => _$AddressCopyWithImpl<Address>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Address&&const DeepCollectionEquality().equals(other.value, value)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.cborTags, cborTags));
+  final _this = this as Address;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Address&&const DeepCollectionEquality().equals(other.value, _this.value)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType)&&const DeepCollectionEquality().equals(other.cborTags, _this.cborTags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(value),lengthType,const DeepCollectionEquality().hash(cborTags));
+int get hashCode {
+  final _this = this as Address;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.value),_this.lengthType,const DeepCollectionEquality().hash(_this.cborTags));
+}
 
 @override
 String toString() {
-  return 'Address(value: $value, lengthType: $lengthType, cborTags: $cborTags)';
+  final _this = this as Address;
+  return 'Address(value: ${_this.value}, lengthType: ${_this.lengthType}, cborTags: ${_this.cborTags})';
 }
 
 
@@ -64,7 +69,7 @@ class _$AddressCopyWithImpl<$Res>
 /// Create a copy of Address
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? value = null,Object? lengthType = null,Object? cborTags = null,}) {
-  return _then(_self.copyWith(
+  return _then(Address(
 value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as List<int>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
 as CborLengthType,cborTags: null == cborTags ? _self.cborTags : cborTags // ignore: cast_nullable_to_non_nullable
@@ -80,7 +85,7 @@ as List<int>,
 
 
 class _Address extends Address {
-  const _Address({required final  List<int> value, this.lengthType = CborLengthType.definite, final  List<int> cborTags = const []}): _value = value,_cborTags = cborTags,super._();
+  const _Address({required  List<int> value, this.lengthType = CborLengthType.definite,  List<int> cborTags = const []}): _value = value,_cborTags = cborTags,super._();
   
 
  final  List<int> _value;
@@ -90,7 +95,6 @@ class _Address extends Address {
   return EqualUnmodifiableListView(_value);
 }
 
-// bytes
 @override@JsonKey() final  CborLengthType lengthType;
  final  List<int> _cborTags;
 @override@JsonKey() List<int> get cborTags {
@@ -110,16 +114,18 @@ _$AddressCopyWith<_Address> get copyWith => __$AddressCopyWithImpl<_Address>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Address&&const DeepCollectionEquality().equals(other._value, _value)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Address&&const DeepCollectionEquality().equals(other.value, _value)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.cborTags, _cborTags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_value),lengthType,const DeepCollectionEquality().hash(_cborTags));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_value),lengthType,const DeepCollectionEquality().hash(_cborTags));
+}
 
 @override
 String toString() {
-  return 'Address(value: $value, lengthType: $lengthType, cborTags: $cborTags)';
+    return 'Address(value: $value, lengthType: $lengthType, cborTags: $cborTags)';
 }
 
 

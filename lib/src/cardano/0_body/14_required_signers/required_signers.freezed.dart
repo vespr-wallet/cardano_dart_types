@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'required_signers.dart';
@@ -9,13 +9,13 @@ part of 'required_signers.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RequiredSigners {
 
- List<Uint8List> get signersBytes; List<int> get cborTags;// [258] tag may be sent in Conway era | passed for ledger serialization
- CborLengthType get lengthType;
+ List<Uint8List> get signersBytes; List<int> get cborTags; CborLengthType get lengthType;
 /// Create a copy of RequiredSigners
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,21 @@ $RequiredSignersCopyWith<RequiredSigners> get copyWith => _$RequiredSignersCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequiredSigners&&const DeepCollectionEquality().equals(other.signersBytes, signersBytes)&&const DeepCollectionEquality().equals(other.cborTags, cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+  final _this = this as RequiredSigners;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequiredSigners&&const DeepCollectionEquality().equals(other.signersBytes, _this.signersBytes)&&const DeepCollectionEquality().equals(other.cborTags, _this.cborTags)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(signersBytes),const DeepCollectionEquality().hash(cborTags),lengthType);
+int get hashCode {
+  final _this = this as RequiredSigners;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.signersBytes),const DeepCollectionEquality().hash(_this.cborTags),_this.lengthType);
+}
 
 @override
 String toString() {
-  return 'RequiredSigners(signersBytes: $signersBytes, cborTags: $cborTags, lengthType: $lengthType)';
+  final _this = this as RequiredSigners;
+  return 'RequiredSigners(signersBytes: ${_this.signersBytes}, cborTags: ${_this.cborTags}, lengthType: ${_this.lengthType})';
 }
 
 
@@ -64,7 +69,7 @@ class _$RequiredSignersCopyWithImpl<$Res>
 /// Create a copy of RequiredSigners
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? signersBytes = null,Object? cborTags = null,Object? lengthType = null,}) {
-  return _then(_self.copyWith(
+  return _then(RequiredSigners(
 signersBytes: null == signersBytes ? _self.signersBytes : signersBytes // ignore: cast_nullable_to_non_nullable
 as List<Uint8List>,cborTags: null == cborTags ? _self.cborTags : cborTags // ignore: cast_nullable_to_non_nullable
 as List<int>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
@@ -80,7 +85,7 @@ as CborLengthType,
 
 
 class _RequiredSigner extends RequiredSigners {
-  const _RequiredSigner({required final  List<Uint8List> signersBytes, required final  List<int> cborTags, this.lengthType = CborLengthType.definite}): _signersBytes = signersBytes,_cborTags = cborTags,super._();
+  const _RequiredSigner({required  List<Uint8List> signersBytes, required  List<int> cborTags, this.lengthType = CborLengthType.definite}): _signersBytes = signersBytes,_cborTags = cborTags,super._();
   
 
  final  List<Uint8List> _signersBytes;
@@ -97,7 +102,6 @@ class _RequiredSigner extends RequiredSigners {
   return EqualUnmodifiableListView(_cborTags);
 }
 
-// [258] tag may be sent in Conway era | passed for ledger serialization
 @override@JsonKey() final  CborLengthType lengthType;
 
 /// Create a copy of RequiredSigners
@@ -110,16 +114,18 @@ _$RequiredSignerCopyWith<_RequiredSigner> get copyWith => __$RequiredSignerCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RequiredSigner&&const DeepCollectionEquality().equals(other._signersBytes, _signersBytes)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _RequiredSigner&&const DeepCollectionEquality().equals(other.signersBytes, _signersBytes)&&const DeepCollectionEquality().equals(other.cborTags, _cborTags)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_signersBytes),const DeepCollectionEquality().hash(_cborTags),lengthType);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_signersBytes),const DeepCollectionEquality().hash(_cborTags),lengthType);
+}
 
 @override
 String toString() {
-  return 'RequiredSigners(signersBytes: $signersBytes, cborTags: $cborTags, lengthType: $lengthType)';
+    return 'RequiredSigners(signersBytes: $signersBytes, cborTags: $cborTags, lengthType: $lengthType)';
 }
 
 

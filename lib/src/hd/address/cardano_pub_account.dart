@@ -110,9 +110,12 @@ abstract class CardanoPubAccountFactory {
   }
 }
 
-@freezed
+@Freezed(copyWith: false) // hand-written below, see [$CardanoPubAccountCopyWith]
 sealed class CardanoPubAccount with _$CardanoPubAccount {
   CardanoPubAccount._();
+
+  $CardanoPubAccountCopyWith<CardanoPubAccount> get copyWith => $CardanoPubAccountCopyWith(this, (value) => value);
+
   factory CardanoPubAccount._private({
     required Bip32PublicKey accountKey,
     required Bip32PublicKey paymentRoleKey,
@@ -127,21 +130,57 @@ sealed class CardanoPubAccount with _$CardanoPubAccount {
     required Bip32PublicKey constitutionalCommitteeHotKey,
   }) = _CardanoPubAccount;
 
-  @override
   late final Lazy<CardanoDerivedAddress> stakeDerivation = Lazy(
     () => CardanoDerivedAddress(type: AddressType.reward, bytes: stakeKey.rawKey),
   );
 
-  @override
   late final Lazy<DRepDerivation> dRepDerivation = Lazy(
     () => DRepDerivation(bytes: drepIdKey.rawKey),
   );
-  @override
   late final Lazy<ConstitutionalCommiteeCold> constitutionalCommitteeColdDerivation = Lazy(
     () => ConstitutionalCommiteeCold(bytes: constitutionalCommitteeColdKey.rawKey),
   );
-  @override
   late final Lazy<ConstitutionalCommiteeHot> constitutionalCommitteeHotDerivation = Lazy(
     () => ConstitutionalCommiteeHot(bytes: constitutionalCommitteeHotKey.rawKey),
+  );
+}
+
+// ponytail: hand-written copy of the copyWith freezed 3 generated. freezed 4 builds it on the
+// `CardanoPubAccount._()` constructor instead of `_private` (https://github.com/rrousselGit/freezed/issues/1376).
+// Back to `@freezed` once that is fixed. A single class is enough: no field is nullable or has a nested copyWith.
+class $CardanoPubAccountCopyWith<$Res> {
+  $CardanoPubAccountCopyWith(this._self, this._then);
+
+  final CardanoPubAccount _self;
+  final $Res Function(CardanoPubAccount) _then;
+
+  @useResult
+  $Res call({
+    Bip32PublicKey? accountKey,
+    Bip32PublicKey? paymentRoleKey,
+    Bip32PublicKey? changeRoleKey,
+    Bip32PublicKey? stakeRoleKey,
+    Bip32PublicKey? drepIdRoleKey,
+    Bip32PublicKey? constitutionalCommitteeColdRoleKey,
+    Bip32PublicKey? constitutionalCommitteeHotRoleKey,
+    Bip32PublicKey? stakeKey,
+    Bip32PublicKey? drepIdKey,
+    Bip32PublicKey? constitutionalCommitteeColdKey,
+    Bip32PublicKey? constitutionalCommitteeHotKey,
+  }) => _then(
+    CardanoPubAccount._private(
+      accountKey: accountKey ?? _self.accountKey,
+      paymentRoleKey: paymentRoleKey ?? _self.paymentRoleKey,
+      changeRoleKey: changeRoleKey ?? _self.changeRoleKey,
+      stakeRoleKey: stakeRoleKey ?? _self.stakeRoleKey,
+      drepIdRoleKey: drepIdRoleKey ?? _self.drepIdRoleKey,
+      constitutionalCommitteeColdRoleKey:
+          constitutionalCommitteeColdRoleKey ?? _self.constitutionalCommitteeColdRoleKey,
+      constitutionalCommitteeHotRoleKey: constitutionalCommitteeHotRoleKey ?? _self.constitutionalCommitteeHotRoleKey,
+      stakeKey: stakeKey ?? _self.stakeKey,
+      drepIdKey: drepIdKey ?? _self.drepIdKey,
+      constitutionalCommitteeColdKey: constitutionalCommitteeColdKey ?? _self.constitutionalCommitteeColdKey,
+      constitutionalCommitteeHotKey: constitutionalCommitteeHotKey ?? _self.constitutionalCommitteeHotKey,
+    ),
   );
 }

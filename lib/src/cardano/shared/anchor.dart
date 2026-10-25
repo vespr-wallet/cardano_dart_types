@@ -38,7 +38,6 @@ sealed class Anchor with _$Anchor implements CborEncodable {
     );
   }
 
-  @override
   late final Lazy<String> metadataHashHex = Lazy(() => anchorDataHash.hexEncode());
 
   @override

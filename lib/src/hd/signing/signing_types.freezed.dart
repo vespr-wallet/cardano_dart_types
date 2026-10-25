@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'signing_types.dart';
@@ -9,28 +9,33 @@ part of 'signing_types.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TxDiff {
 
- Value get diff; List<Utxo> get usedUtxos; String? get stakeDelegationPoolId;// bech32 id
- Drep? get dRepDelegation; DRepDiffInfo? get dRepRegistration; DRepDiffInfo? get dRepUpdate; Credential? get authorizeConstitutionalCommitteeHot; Credential? get resignConstitutionalCommitteeCold; List<VoteInfo> get votes; List<ProposalDiffInfo> get proposals; bool get dRepDeregistration; bool get stakeDeregistration;
+ Value get diff; List<Utxo> get usedUtxos; String? get stakeDelegationPoolId; Drep? get dRepDelegation; DRepDiffInfo? get dRepRegistration; DRepDiffInfo? get dRepUpdate; Credential? get authorizeConstitutionalCommitteeHot; Credential? get resignConstitutionalCommitteeCold; List<VoteInfo> get votes; List<ProposalDiffInfo> get proposals; bool get dRepDeregistration; bool get stakeDeregistration;
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxDiff&&(identical(other.diff, diff) || other.diff == diff)&&const DeepCollectionEquality().equals(other.usedUtxos, usedUtxos)&&(identical(other.stakeDelegationPoolId, stakeDelegationPoolId) || other.stakeDelegationPoolId == stakeDelegationPoolId)&&(identical(other.dRepDelegation, dRepDelegation) || other.dRepDelegation == dRepDelegation)&&(identical(other.dRepRegistration, dRepRegistration) || other.dRepRegistration == dRepRegistration)&&(identical(other.dRepUpdate, dRepUpdate) || other.dRepUpdate == dRepUpdate)&&(identical(other.authorizeConstitutionalCommitteeHot, authorizeConstitutionalCommitteeHot) || other.authorizeConstitutionalCommitteeHot == authorizeConstitutionalCommitteeHot)&&(identical(other.resignConstitutionalCommitteeCold, resignConstitutionalCommitteeCold) || other.resignConstitutionalCommitteeCold == resignConstitutionalCommitteeCold)&&const DeepCollectionEquality().equals(other.votes, votes)&&const DeepCollectionEquality().equals(other.proposals, proposals)&&(identical(other.dRepDeregistration, dRepDeregistration) || other.dRepDeregistration == dRepDeregistration)&&(identical(other.stakeDeregistration, stakeDeregistration) || other.stakeDeregistration == stakeDeregistration));
+  final _this = this as TxDiff;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxDiff&&(identical(other.diff, _this.diff) || other.diff == _this.diff)&&const DeepCollectionEquality().equals(other.usedUtxos, _this.usedUtxos)&&(identical(other.stakeDelegationPoolId, _this.stakeDelegationPoolId) || other.stakeDelegationPoolId == _this.stakeDelegationPoolId)&&(identical(other.dRepDelegation, _this.dRepDelegation) || other.dRepDelegation == _this.dRepDelegation)&&(identical(other.dRepRegistration, _this.dRepRegistration) || other.dRepRegistration == _this.dRepRegistration)&&(identical(other.dRepUpdate, _this.dRepUpdate) || other.dRepUpdate == _this.dRepUpdate)&&(identical(other.authorizeConstitutionalCommitteeHot, _this.authorizeConstitutionalCommitteeHot) || other.authorizeConstitutionalCommitteeHot == _this.authorizeConstitutionalCommitteeHot)&&(identical(other.resignConstitutionalCommitteeCold, _this.resignConstitutionalCommitteeCold) || other.resignConstitutionalCommitteeCold == _this.resignConstitutionalCommitteeCold)&&const DeepCollectionEquality().equals(other.votes, _this.votes)&&const DeepCollectionEquality().equals(other.proposals, _this.proposals)&&(identical(other.dRepDeregistration, _this.dRepDeregistration) || other.dRepDeregistration == _this.dRepDeregistration)&&(identical(other.stakeDeregistration, _this.stakeDeregistration) || other.stakeDeregistration == _this.stakeDeregistration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,diff,const DeepCollectionEquality().hash(usedUtxos),stakeDelegationPoolId,dRepDelegation,dRepRegistration,dRepUpdate,authorizeConstitutionalCommitteeHot,resignConstitutionalCommitteeCold,const DeepCollectionEquality().hash(votes),const DeepCollectionEquality().hash(proposals),dRepDeregistration,stakeDeregistration);
+int get hashCode {
+  final _this = this as TxDiff;
+  return Object.hash(runtimeType,_this.diff,const DeepCollectionEquality().hash(_this.usedUtxos),_this.stakeDelegationPoolId,_this.dRepDelegation,_this.dRepRegistration,_this.dRepUpdate,_this.authorizeConstitutionalCommitteeHot,_this.resignConstitutionalCommitteeCold,const DeepCollectionEquality().hash(_this.votes),const DeepCollectionEquality().hash(_this.proposals),_this.dRepDeregistration,_this.stakeDeregistration);
+}
 
 @override
 String toString() {
-  return 'TxDiff(diff: $diff, usedUtxos: $usedUtxos, stakeDelegationPoolId: $stakeDelegationPoolId, dRepDelegation: $dRepDelegation, dRepRegistration: $dRepRegistration, dRepUpdate: $dRepUpdate, authorizeConstitutionalCommitteeHot: $authorizeConstitutionalCommitteeHot, resignConstitutionalCommitteeCold: $resignConstitutionalCommitteeCold, votes: $votes, proposals: $proposals, dRepDeregistration: $dRepDeregistration, stakeDeregistration: $stakeDeregistration)';
+  final _this = this as TxDiff;
+  return 'TxDiff(diff: ${_this.diff}, usedUtxos: ${_this.usedUtxos}, stakeDelegationPoolId: ${_this.stakeDelegationPoolId}, dRepDelegation: ${_this.dRepDelegation}, dRepRegistration: ${_this.dRepRegistration}, dRepUpdate: ${_this.dRepUpdate}, authorizeConstitutionalCommitteeHot: ${_this.authorizeConstitutionalCommitteeHot}, resignConstitutionalCommitteeCold: ${_this.resignConstitutionalCommitteeCold}, votes: ${_this.votes}, proposals: ${_this.proposals}, dRepDeregistration: ${_this.dRepDeregistration}, stakeDeregistration: ${_this.stakeDeregistration})';
 }
 
 
@@ -44,7 +49,7 @@ String toString() {
 
 
 class _TxDiff extends TxDiff {
-  const _TxDiff({required this.diff, required final  List<Utxo> usedUtxos, required this.stakeDelegationPoolId, required this.dRepDelegation, required this.dRepRegistration, required this.dRepUpdate, required this.authorizeConstitutionalCommitteeHot, required this.resignConstitutionalCommitteeCold, required final  List<VoteInfo> votes, required final  List<ProposalDiffInfo> proposals, required this.dRepDeregistration, required this.stakeDeregistration}): _usedUtxos = usedUtxos,_votes = votes,_proposals = proposals,super._();
+  const _TxDiff({required this.diff, required  List<Utxo> usedUtxos, required this.stakeDelegationPoolId, required this.dRepDelegation, required this.dRepRegistration, required this.dRepUpdate, required this.authorizeConstitutionalCommitteeHot, required this.resignConstitutionalCommitteeCold, required  List<VoteInfo> votes, required  List<ProposalDiffInfo> proposals, required this.dRepDeregistration, required this.stakeDeregistration}): _usedUtxos = usedUtxos,_votes = votes,_proposals = proposals,super._();
   
 
 @override final  Value diff;
@@ -56,7 +61,6 @@ class _TxDiff extends TxDiff {
 }
 
 @override final  String? stakeDelegationPoolId;
-// bech32 id
 @override final  Drep? dRepDelegation;
 @override final  DRepDiffInfo? dRepRegistration;
 @override final  DRepDiffInfo? dRepUpdate;
@@ -84,16 +88,18 @@ class _TxDiff extends TxDiff {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxDiff&&(identical(other.diff, diff) || other.diff == diff)&&const DeepCollectionEquality().equals(other._usedUtxos, _usedUtxos)&&(identical(other.stakeDelegationPoolId, stakeDelegationPoolId) || other.stakeDelegationPoolId == stakeDelegationPoolId)&&(identical(other.dRepDelegation, dRepDelegation) || other.dRepDelegation == dRepDelegation)&&(identical(other.dRepRegistration, dRepRegistration) || other.dRepRegistration == dRepRegistration)&&(identical(other.dRepUpdate, dRepUpdate) || other.dRepUpdate == dRepUpdate)&&(identical(other.authorizeConstitutionalCommitteeHot, authorizeConstitutionalCommitteeHot) || other.authorizeConstitutionalCommitteeHot == authorizeConstitutionalCommitteeHot)&&(identical(other.resignConstitutionalCommitteeCold, resignConstitutionalCommitteeCold) || other.resignConstitutionalCommitteeCold == resignConstitutionalCommitteeCold)&&const DeepCollectionEquality().equals(other._votes, _votes)&&const DeepCollectionEquality().equals(other._proposals, _proposals)&&(identical(other.dRepDeregistration, dRepDeregistration) || other.dRepDeregistration == dRepDeregistration)&&(identical(other.stakeDeregistration, stakeDeregistration) || other.stakeDeregistration == stakeDeregistration));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxDiff&&(identical(other.diff, diff) || other.diff == diff)&&const DeepCollectionEquality().equals(other.usedUtxos, _usedUtxos)&&(identical(other.stakeDelegationPoolId, stakeDelegationPoolId) || other.stakeDelegationPoolId == stakeDelegationPoolId)&&(identical(other.dRepDelegation, dRepDelegation) || other.dRepDelegation == dRepDelegation)&&(identical(other.dRepRegistration, dRepRegistration) || other.dRepRegistration == dRepRegistration)&&(identical(other.dRepUpdate, dRepUpdate) || other.dRepUpdate == dRepUpdate)&&(identical(other.authorizeConstitutionalCommitteeHot, authorizeConstitutionalCommitteeHot) || other.authorizeConstitutionalCommitteeHot == authorizeConstitutionalCommitteeHot)&&(identical(other.resignConstitutionalCommitteeCold, resignConstitutionalCommitteeCold) || other.resignConstitutionalCommitteeCold == resignConstitutionalCommitteeCold)&&const DeepCollectionEquality().equals(other.votes, _votes)&&const DeepCollectionEquality().equals(other.proposals, _proposals)&&(identical(other.dRepDeregistration, dRepDeregistration) || other.dRepDeregistration == dRepDeregistration)&&(identical(other.stakeDeregistration, stakeDeregistration) || other.stakeDeregistration == stakeDeregistration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,diff,const DeepCollectionEquality().hash(_usedUtxos),stakeDelegationPoolId,dRepDelegation,dRepRegistration,dRepUpdate,authorizeConstitutionalCommitteeHot,resignConstitutionalCommitteeCold,const DeepCollectionEquality().hash(_votes),const DeepCollectionEquality().hash(_proposals),dRepDeregistration,stakeDeregistration);
+int get hashCode {
+    return Object.hash(runtimeType,diff,const DeepCollectionEquality().hash(_usedUtxos),stakeDelegationPoolId,dRepDelegation,dRepRegistration,dRepUpdate,authorizeConstitutionalCommitteeHot,resignConstitutionalCommitteeCold,const DeepCollectionEquality().hash(_votes),const DeepCollectionEquality().hash(_proposals),dRepDeregistration,stakeDeregistration);
+}
 
 @override
 String toString() {
-  return 'TxDiff(diff: $diff, usedUtxos: $usedUtxos, stakeDelegationPoolId: $stakeDelegationPoolId, dRepDelegation: $dRepDelegation, dRepRegistration: $dRepRegistration, dRepUpdate: $dRepUpdate, authorizeConstitutionalCommitteeHot: $authorizeConstitutionalCommitteeHot, resignConstitutionalCommitteeCold: $resignConstitutionalCommitteeCold, votes: $votes, proposals: $proposals, dRepDeregistration: $dRepDeregistration, stakeDeregistration: $stakeDeregistration)';
+    return 'TxDiff(diff: $diff, usedUtxos: $usedUtxos, stakeDelegationPoolId: $stakeDelegationPoolId, dRepDelegation: $dRepDelegation, dRepRegistration: $dRepRegistration, dRepUpdate: $dRepUpdate, authorizeConstitutionalCommitteeHot: $authorizeConstitutionalCommitteeHot, resignConstitutionalCommitteeCold: $resignConstitutionalCommitteeCold, votes: $votes, proposals: $proposals, dRepDeregistration: $dRepDeregistration, stakeDeregistration: $stakeDeregistration)';
 }
 
 
@@ -105,23 +111,27 @@ String toString() {
 /// @nodoc
 mixin _$TxSigningBundle {
 
- String get receiveAddressBech32; NetworkId get networkId; List<TxPreparedForSigning> get txsData; Value get totalDiff; String? get stakeDelegationPoolId;// bech32 id
- Drep? get dRepDelegation; DRepDiffInfo? get dRepRegistration; DRepDiffInfo? get dRepUpdate; Credential? get authorizeConstitutionalCommitteeHot; Credential? get resignConstitutionalCommitteeCold; List<VoteInfo> get votes; List<ProposalDiffInfo> get proposals; bool get dRepDeregistration; bool get stakeDeregistration;
+ String get receiveAddressBech32; NetworkId get networkId; List<TxPreparedForSigning> get txsData; Value get totalDiff; String? get stakeDelegationPoolId; Drep? get dRepDelegation; DRepDiffInfo? get dRepRegistration; DRepDiffInfo? get dRepUpdate; Credential? get authorizeConstitutionalCommitteeHot; Credential? get resignConstitutionalCommitteeCold; List<VoteInfo> get votes; List<ProposalDiffInfo> get proposals; bool get dRepDeregistration; bool get stakeDeregistration;
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxSigningBundle&&(identical(other.receiveAddressBech32, receiveAddressBech32) || other.receiveAddressBech32 == receiveAddressBech32)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&const DeepCollectionEquality().equals(other.txsData, txsData)&&(identical(other.totalDiff, totalDiff) || other.totalDiff == totalDiff)&&(identical(other.stakeDelegationPoolId, stakeDelegationPoolId) || other.stakeDelegationPoolId == stakeDelegationPoolId)&&(identical(other.dRepDelegation, dRepDelegation) || other.dRepDelegation == dRepDelegation)&&(identical(other.dRepRegistration, dRepRegistration) || other.dRepRegistration == dRepRegistration)&&(identical(other.dRepUpdate, dRepUpdate) || other.dRepUpdate == dRepUpdate)&&(identical(other.authorizeConstitutionalCommitteeHot, authorizeConstitutionalCommitteeHot) || other.authorizeConstitutionalCommitteeHot == authorizeConstitutionalCommitteeHot)&&(identical(other.resignConstitutionalCommitteeCold, resignConstitutionalCommitteeCold) || other.resignConstitutionalCommitteeCold == resignConstitutionalCommitteeCold)&&const DeepCollectionEquality().equals(other.votes, votes)&&const DeepCollectionEquality().equals(other.proposals, proposals)&&(identical(other.dRepDeregistration, dRepDeregistration) || other.dRepDeregistration == dRepDeregistration)&&(identical(other.stakeDeregistration, stakeDeregistration) || other.stakeDeregistration == stakeDeregistration));
+  final _this = this as TxSigningBundle;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxSigningBundle&&(identical(other.receiveAddressBech32, _this.receiveAddressBech32) || other.receiveAddressBech32 == _this.receiveAddressBech32)&&(identical(other.networkId, _this.networkId) || other.networkId == _this.networkId)&&const DeepCollectionEquality().equals(other.txsData, _this.txsData)&&(identical(other.totalDiff, _this.totalDiff) || other.totalDiff == _this.totalDiff)&&(identical(other.stakeDelegationPoolId, _this.stakeDelegationPoolId) || other.stakeDelegationPoolId == _this.stakeDelegationPoolId)&&(identical(other.dRepDelegation, _this.dRepDelegation) || other.dRepDelegation == _this.dRepDelegation)&&(identical(other.dRepRegistration, _this.dRepRegistration) || other.dRepRegistration == _this.dRepRegistration)&&(identical(other.dRepUpdate, _this.dRepUpdate) || other.dRepUpdate == _this.dRepUpdate)&&(identical(other.authorizeConstitutionalCommitteeHot, _this.authorizeConstitutionalCommitteeHot) || other.authorizeConstitutionalCommitteeHot == _this.authorizeConstitutionalCommitteeHot)&&(identical(other.resignConstitutionalCommitteeCold, _this.resignConstitutionalCommitteeCold) || other.resignConstitutionalCommitteeCold == _this.resignConstitutionalCommitteeCold)&&const DeepCollectionEquality().equals(other.votes, _this.votes)&&const DeepCollectionEquality().equals(other.proposals, _this.proposals)&&(identical(other.dRepDeregistration, _this.dRepDeregistration) || other.dRepDeregistration == _this.dRepDeregistration)&&(identical(other.stakeDeregistration, _this.stakeDeregistration) || other.stakeDeregistration == _this.stakeDeregistration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,receiveAddressBech32,networkId,const DeepCollectionEquality().hash(txsData),totalDiff,stakeDelegationPoolId,dRepDelegation,dRepRegistration,dRepUpdate,authorizeConstitutionalCommitteeHot,resignConstitutionalCommitteeCold,const DeepCollectionEquality().hash(votes),const DeepCollectionEquality().hash(proposals),dRepDeregistration,stakeDeregistration);
+int get hashCode {
+  final _this = this as TxSigningBundle;
+  return Object.hash(runtimeType,_this.receiveAddressBech32,_this.networkId,const DeepCollectionEquality().hash(_this.txsData),_this.totalDiff,_this.stakeDelegationPoolId,_this.dRepDelegation,_this.dRepRegistration,_this.dRepUpdate,_this.authorizeConstitutionalCommitteeHot,_this.resignConstitutionalCommitteeCold,const DeepCollectionEquality().hash(_this.votes),const DeepCollectionEquality().hash(_this.proposals),_this.dRepDeregistration,_this.stakeDeregistration);
+}
 
 @override
 String toString() {
-  return 'TxSigningBundle(receiveAddressBech32: $receiveAddressBech32, networkId: $networkId, txsData: $txsData, totalDiff: $totalDiff, stakeDelegationPoolId: $stakeDelegationPoolId, dRepDelegation: $dRepDelegation, dRepRegistration: $dRepRegistration, dRepUpdate: $dRepUpdate, authorizeConstitutionalCommitteeHot: $authorizeConstitutionalCommitteeHot, resignConstitutionalCommitteeCold: $resignConstitutionalCommitteeCold, votes: $votes, proposals: $proposals, dRepDeregistration: $dRepDeregistration, stakeDeregistration: $stakeDeregistration)';
+  final _this = this as TxSigningBundle;
+  return 'TxSigningBundle(receiveAddressBech32: ${_this.receiveAddressBech32}, networkId: ${_this.networkId}, txsData: ${_this.txsData}, totalDiff: ${_this.totalDiff}, stakeDelegationPoolId: ${_this.stakeDelegationPoolId}, dRepDelegation: ${_this.dRepDelegation}, dRepRegistration: ${_this.dRepRegistration}, dRepUpdate: ${_this.dRepUpdate}, authorizeConstitutionalCommitteeHot: ${_this.authorizeConstitutionalCommitteeHot}, resignConstitutionalCommitteeCold: ${_this.resignConstitutionalCommitteeCold}, votes: ${_this.votes}, proposals: ${_this.proposals}, dRepDeregistration: ${_this.dRepDeregistration}, stakeDeregistration: ${_this.stakeDeregistration})';
 }
 
 
@@ -135,7 +145,7 @@ String toString() {
 
 
 class _TxSigningBundle extends TxSigningBundle {
-  const _TxSigningBundle({required this.receiveAddressBech32, required this.networkId, required final  List<TxPreparedForSigning> txsData, required this.totalDiff, required this.stakeDelegationPoolId, required this.dRepDelegation, required this.dRepRegistration, required this.dRepUpdate, required this.authorizeConstitutionalCommitteeHot, required this.resignConstitutionalCommitteeCold, required final  List<VoteInfo> votes, required final  List<ProposalDiffInfo> proposals, required this.dRepDeregistration, required this.stakeDeregistration}): _txsData = txsData,_votes = votes,_proposals = proposals,super._();
+  const _TxSigningBundle({required this.receiveAddressBech32, required this.networkId, required  List<TxPreparedForSigning> txsData, required this.totalDiff, required this.stakeDelegationPoolId, required this.dRepDelegation, required this.dRepRegistration, required this.dRepUpdate, required this.authorizeConstitutionalCommitteeHot, required this.resignConstitutionalCommitteeCold, required  List<VoteInfo> votes, required  List<ProposalDiffInfo> proposals, required this.dRepDeregistration, required this.stakeDeregistration}): _txsData = txsData,_votes = votes,_proposals = proposals,super._();
   
 
 @override final  String receiveAddressBech32;
@@ -149,7 +159,6 @@ class _TxSigningBundle extends TxSigningBundle {
 
 @override final  Value totalDiff;
 @override final  String? stakeDelegationPoolId;
-// bech32 id
 @override final  Drep? dRepDelegation;
 @override final  DRepDiffInfo? dRepRegistration;
 @override final  DRepDiffInfo? dRepUpdate;
@@ -177,16 +186,18 @@ class _TxSigningBundle extends TxSigningBundle {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxSigningBundle&&(identical(other.receiveAddressBech32, receiveAddressBech32) || other.receiveAddressBech32 == receiveAddressBech32)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&const DeepCollectionEquality().equals(other._txsData, _txsData)&&(identical(other.totalDiff, totalDiff) || other.totalDiff == totalDiff)&&(identical(other.stakeDelegationPoolId, stakeDelegationPoolId) || other.stakeDelegationPoolId == stakeDelegationPoolId)&&(identical(other.dRepDelegation, dRepDelegation) || other.dRepDelegation == dRepDelegation)&&(identical(other.dRepRegistration, dRepRegistration) || other.dRepRegistration == dRepRegistration)&&(identical(other.dRepUpdate, dRepUpdate) || other.dRepUpdate == dRepUpdate)&&(identical(other.authorizeConstitutionalCommitteeHot, authorizeConstitutionalCommitteeHot) || other.authorizeConstitutionalCommitteeHot == authorizeConstitutionalCommitteeHot)&&(identical(other.resignConstitutionalCommitteeCold, resignConstitutionalCommitteeCold) || other.resignConstitutionalCommitteeCold == resignConstitutionalCommitteeCold)&&const DeepCollectionEquality().equals(other._votes, _votes)&&const DeepCollectionEquality().equals(other._proposals, _proposals)&&(identical(other.dRepDeregistration, dRepDeregistration) || other.dRepDeregistration == dRepDeregistration)&&(identical(other.stakeDeregistration, stakeDeregistration) || other.stakeDeregistration == stakeDeregistration));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxSigningBundle&&(identical(other.receiveAddressBech32, receiveAddressBech32) || other.receiveAddressBech32 == receiveAddressBech32)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&const DeepCollectionEquality().equals(other.txsData, _txsData)&&(identical(other.totalDiff, totalDiff) || other.totalDiff == totalDiff)&&(identical(other.stakeDelegationPoolId, stakeDelegationPoolId) || other.stakeDelegationPoolId == stakeDelegationPoolId)&&(identical(other.dRepDelegation, dRepDelegation) || other.dRepDelegation == dRepDelegation)&&(identical(other.dRepRegistration, dRepRegistration) || other.dRepRegistration == dRepRegistration)&&(identical(other.dRepUpdate, dRepUpdate) || other.dRepUpdate == dRepUpdate)&&(identical(other.authorizeConstitutionalCommitteeHot, authorizeConstitutionalCommitteeHot) || other.authorizeConstitutionalCommitteeHot == authorizeConstitutionalCommitteeHot)&&(identical(other.resignConstitutionalCommitteeCold, resignConstitutionalCommitteeCold) || other.resignConstitutionalCommitteeCold == resignConstitutionalCommitteeCold)&&const DeepCollectionEquality().equals(other.votes, _votes)&&const DeepCollectionEquality().equals(other.proposals, _proposals)&&(identical(other.dRepDeregistration, dRepDeregistration) || other.dRepDeregistration == dRepDeregistration)&&(identical(other.stakeDeregistration, stakeDeregistration) || other.stakeDeregistration == stakeDeregistration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,receiveAddressBech32,networkId,const DeepCollectionEquality().hash(_txsData),totalDiff,stakeDelegationPoolId,dRepDelegation,dRepRegistration,dRepUpdate,authorizeConstitutionalCommitteeHot,resignConstitutionalCommitteeCold,const DeepCollectionEquality().hash(_votes),const DeepCollectionEquality().hash(_proposals),dRepDeregistration,stakeDeregistration);
+int get hashCode {
+    return Object.hash(runtimeType,receiveAddressBech32,networkId,const DeepCollectionEquality().hash(_txsData),totalDiff,stakeDelegationPoolId,dRepDelegation,dRepRegistration,dRepUpdate,authorizeConstitutionalCommitteeHot,resignConstitutionalCommitteeCold,const DeepCollectionEquality().hash(_votes),const DeepCollectionEquality().hash(_proposals),dRepDeregistration,stakeDeregistration);
+}
 
 @override
 String toString() {
-  return 'TxSigningBundle(receiveAddressBech32: $receiveAddressBech32, networkId: $networkId, txsData: $txsData, totalDiff: $totalDiff, stakeDelegationPoolId: $stakeDelegationPoolId, dRepDelegation: $dRepDelegation, dRepRegistration: $dRepRegistration, dRepUpdate: $dRepUpdate, authorizeConstitutionalCommitteeHot: $authorizeConstitutionalCommitteeHot, resignConstitutionalCommitteeCold: $resignConstitutionalCommitteeCold, votes: $votes, proposals: $proposals, dRepDeregistration: $dRepDeregistration, stakeDeregistration: $stakeDeregistration)';
+    return 'TxSigningBundle(receiveAddressBech32: $receiveAddressBech32, networkId: $networkId, txsData: $txsData, totalDiff: $totalDiff, stakeDelegationPoolId: $stakeDelegationPoolId, dRepDelegation: $dRepDelegation, dRepRegistration: $dRepRegistration, dRepUpdate: $dRepUpdate, authorizeConstitutionalCommitteeHot: $authorizeConstitutionalCommitteeHot, resignConstitutionalCommitteeCold: $resignConstitutionalCommitteeCold, votes: $votes, proposals: $proposals, dRepDeregistration: $dRepDeregistration, stakeDeregistration: $stakeDeregistration)';
 }
 
 
@@ -209,16 +220,21 @@ $TxSignedBundleCopyWith<TxSignedBundle> get copyWith => _$TxSignedBundleCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxSignedBundle&&(identical(other.receiveAddressBech32, receiveAddressBech32) || other.receiveAddressBech32 == receiveAddressBech32)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&const DeepCollectionEquality().equals(other.txsData, txsData)&&(identical(other.totalDiff, totalDiff) || other.totalDiff == totalDiff));
+  final _this = this as TxSignedBundle;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxSignedBundle&&(identical(other.receiveAddressBech32, _this.receiveAddressBech32) || other.receiveAddressBech32 == _this.receiveAddressBech32)&&(identical(other.networkId, _this.networkId) || other.networkId == _this.networkId)&&const DeepCollectionEquality().equals(other.txsData, _this.txsData)&&(identical(other.totalDiff, _this.totalDiff) || other.totalDiff == _this.totalDiff));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,receiveAddressBech32,networkId,const DeepCollectionEquality().hash(txsData),totalDiff);
+int get hashCode {
+  final _this = this as TxSignedBundle;
+  return Object.hash(runtimeType,_this.receiveAddressBech32,_this.networkId,const DeepCollectionEquality().hash(_this.txsData),_this.totalDiff);
+}
 
 @override
 String toString() {
-  return 'TxSignedBundle(receiveAddressBech32: $receiveAddressBech32, networkId: $networkId, txsData: $txsData, totalDiff: $totalDiff)';
+  final _this = this as TxSignedBundle;
+  return 'TxSignedBundle(receiveAddressBech32: ${_this.receiveAddressBech32}, networkId: ${_this.networkId}, txsData: ${_this.txsData}, totalDiff: ${_this.totalDiff})';
 }
 
 
@@ -247,7 +263,7 @@ class _$TxSignedBundleCopyWithImpl<$Res>
 /// Create a copy of TxSignedBundle
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? receiveAddressBech32 = null,Object? networkId = null,Object? txsData = null,Object? totalDiff = null,}) {
-  return _then(_self.copyWith(
+  return _then(TxSignedBundle(
 receiveAddressBech32: null == receiveAddressBech32 ? _self.receiveAddressBech32 : receiveAddressBech32 // ignore: cast_nullable_to_non_nullable
 as String,networkId: null == networkId ? _self.networkId : networkId // ignore: cast_nullable_to_non_nullable
 as NetworkId,txsData: null == txsData ? _self.txsData : txsData // ignore: cast_nullable_to_non_nullable
@@ -273,7 +289,7 @@ $ValueCopyWith<$Res> get totalDiff {
 
 
 class _TxSignedBundle extends TxSignedBundle {
-  const _TxSignedBundle({required this.receiveAddressBech32, required this.networkId, required final  List<TxAndSignature> txsData, required this.totalDiff}): _txsData = txsData,super._();
+  const _TxSignedBundle({required this.receiveAddressBech32, required this.networkId, required  List<TxAndSignature> txsData, required this.totalDiff}): _txsData = txsData,super._();
   
 
 @override final  String receiveAddressBech32;
@@ -297,16 +313,18 @@ _$TxSignedBundleCopyWith<_TxSignedBundle> get copyWith => __$TxSignedBundleCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxSignedBundle&&(identical(other.receiveAddressBech32, receiveAddressBech32) || other.receiveAddressBech32 == receiveAddressBech32)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&const DeepCollectionEquality().equals(other._txsData, _txsData)&&(identical(other.totalDiff, totalDiff) || other.totalDiff == totalDiff));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxSignedBundle&&(identical(other.receiveAddressBech32, receiveAddressBech32) || other.receiveAddressBech32 == receiveAddressBech32)&&(identical(other.networkId, networkId) || other.networkId == networkId)&&const DeepCollectionEquality().equals(other.txsData, _txsData)&&(identical(other.totalDiff, totalDiff) || other.totalDiff == totalDiff));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,receiveAddressBech32,networkId,const DeepCollectionEquality().hash(_txsData),totalDiff);
+int get hashCode {
+    return Object.hash(runtimeType,receiveAddressBech32,networkId,const DeepCollectionEquality().hash(_txsData),totalDiff);
+}
 
 @override
 String toString() {
-  return 'TxSignedBundle(receiveAddressBech32: $receiveAddressBech32, networkId: $networkId, txsData: $txsData, totalDiff: $totalDiff)';
+    return 'TxSignedBundle(receiveAddressBech32: $receiveAddressBech32, networkId: $networkId, txsData: $txsData, totalDiff: $totalDiff)';
 }
 
 
@@ -365,16 +383,21 @@ mixin _$TxPreparedForSigning {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxPreparedForSigning&&(identical(other.tx, tx) || other.tx == tx)&&(identical(other.txDiff, txDiff) || other.txDiff == txDiff)&&const DeepCollectionEquality().equals(other.utxosBeforeTx, utxosBeforeTx)&&const DeepCollectionEquality().equals(other.signingAddressesRequired, signingAddressesRequired));
+  final _this = this as TxPreparedForSigning;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxPreparedForSigning&&(identical(other.tx, _this.tx) || other.tx == _this.tx)&&(identical(other.txDiff, _this.txDiff) || other.txDiff == _this.txDiff)&&const DeepCollectionEquality().equals(other.utxosBeforeTx, _this.utxosBeforeTx)&&const DeepCollectionEquality().equals(other.signingAddressesRequired, _this.signingAddressesRequired));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,tx,txDiff,const DeepCollectionEquality().hash(utxosBeforeTx),const DeepCollectionEquality().hash(signingAddressesRequired));
+int get hashCode {
+  final _this = this as TxPreparedForSigning;
+  return Object.hash(runtimeType,_this.tx,_this.txDiff,const DeepCollectionEquality().hash(_this.utxosBeforeTx),const DeepCollectionEquality().hash(_this.signingAddressesRequired));
+}
 
 @override
 String toString() {
-  return 'TxPreparedForSigning(tx: $tx, txDiff: $txDiff, utxosBeforeTx: $utxosBeforeTx, signingAddressesRequired: $signingAddressesRequired)';
+  final _this = this as TxPreparedForSigning;
+  return 'TxPreparedForSigning(tx: ${_this.tx}, txDiff: ${_this.txDiff}, utxosBeforeTx: ${_this.utxosBeforeTx}, signingAddressesRequired: ${_this.signingAddressesRequired})';
 }
 
 
@@ -388,7 +411,7 @@ String toString() {
 
 
 class _TxPreparedForSigning extends TxPreparedForSigning {
-  const _TxPreparedForSigning({required this.tx, required this.txDiff, required this.utxosBeforeTx, required final  Set<String> signingAddressesRequired}): _signingAddressesRequired = signingAddressesRequired,super._();
+  const _TxPreparedForSigning({required this.tx, required this.txDiff, required this.utxosBeforeTx, required  Set<String> signingAddressesRequired}): _signingAddressesRequired = signingAddressesRequired,super._();
   
 
 @override final  CardanoTransaction tx;
@@ -407,16 +430,18 @@ class _TxPreparedForSigning extends TxPreparedForSigning {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxPreparedForSigning&&(identical(other.tx, tx) || other.tx == tx)&&(identical(other.txDiff, txDiff) || other.txDiff == txDiff)&&const DeepCollectionEquality().equals(other.utxosBeforeTx, utxosBeforeTx)&&const DeepCollectionEquality().equals(other._signingAddressesRequired, _signingAddressesRequired));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxPreparedForSigning&&(identical(other.tx, tx) || other.tx == tx)&&(identical(other.txDiff, txDiff) || other.txDiff == txDiff)&&const DeepCollectionEquality().equals(other.utxosBeforeTx, utxosBeforeTx)&&const DeepCollectionEquality().equals(other.signingAddressesRequired, _signingAddressesRequired));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,tx,txDiff,const DeepCollectionEquality().hash(utxosBeforeTx),const DeepCollectionEquality().hash(_signingAddressesRequired));
+int get hashCode {
+    return Object.hash(runtimeType,tx,txDiff,const DeepCollectionEquality().hash(utxosBeforeTx),const DeepCollectionEquality().hash(_signingAddressesRequired));
+}
 
 @override
 String toString() {
-  return 'TxPreparedForSigning(tx: $tx, txDiff: $txDiff, utxosBeforeTx: $utxosBeforeTx, signingAddressesRequired: $signingAddressesRequired)';
+    return 'TxPreparedForSigning(tx: $tx, txDiff: $txDiff, utxosBeforeTx: $utxosBeforeTx, signingAddressesRequired: $signingAddressesRequired)';
 }
 
 
@@ -434,16 +459,21 @@ mixin _$TxAndSignature {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxAndSignature&&(identical(other.tx, tx) || other.tx == tx)&&(identical(other.txDiff, txDiff) || other.txDiff == txDiff)&&const DeepCollectionEquality().equals(other.utxosBeforeTx, utxosBeforeTx)&&const DeepCollectionEquality().equals(other.signingAddressesRequired, signingAddressesRequired)&&(identical(other.nweSignatures, nweSignatures) || other.nweSignatures == nweSignatures));
+  final _this = this as TxAndSignature;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TxAndSignature&&(identical(other.tx, _this.tx) || other.tx == _this.tx)&&(identical(other.txDiff, _this.txDiff) || other.txDiff == _this.txDiff)&&const DeepCollectionEquality().equals(other.utxosBeforeTx, _this.utxosBeforeTx)&&const DeepCollectionEquality().equals(other.signingAddressesRequired, _this.signingAddressesRequired)&&(identical(other.nweSignatures, _this.nweSignatures) || other.nweSignatures == _this.nweSignatures));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,tx,txDiff,const DeepCollectionEquality().hash(utxosBeforeTx),const DeepCollectionEquality().hash(signingAddressesRequired),nweSignatures);
+int get hashCode {
+  final _this = this as TxAndSignature;
+  return Object.hash(runtimeType,_this.tx,_this.txDiff,const DeepCollectionEquality().hash(_this.utxosBeforeTx),const DeepCollectionEquality().hash(_this.signingAddressesRequired),_this.nweSignatures);
+}
 
 @override
 String toString() {
-  return 'TxAndSignature(tx: $tx, txDiff: $txDiff, utxosBeforeTx: $utxosBeforeTx, signingAddressesRequired: $signingAddressesRequired, nweSignatures: $nweSignatures)';
+  final _this = this as TxAndSignature;
+  return 'TxAndSignature(tx: ${_this.tx}, txDiff: ${_this.txDiff}, utxosBeforeTx: ${_this.utxosBeforeTx}, signingAddressesRequired: ${_this.signingAddressesRequired}, nweSignatures: ${_this.nweSignatures})';
 }
 
 
@@ -457,7 +487,7 @@ String toString() {
 
 
 class _TxAndSignature extends TxAndSignature {
-  const _TxAndSignature({required this.tx, required this.txDiff, required this.utxosBeforeTx, required final  Set<String> signingAddressesRequired, required this.nweSignatures}): _signingAddressesRequired = signingAddressesRequired,super._();
+  const _TxAndSignature({required this.tx, required this.txDiff, required this.utxosBeforeTx, required  Set<String> signingAddressesRequired, required this.nweSignatures}): _signingAddressesRequired = signingAddressesRequired,super._();
   
 
 @override final  CardanoTransaction tx;
@@ -477,16 +507,18 @@ class _TxAndSignature extends TxAndSignature {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxAndSignature&&(identical(other.tx, tx) || other.tx == tx)&&(identical(other.txDiff, txDiff) || other.txDiff == txDiff)&&const DeepCollectionEquality().equals(other.utxosBeforeTx, utxosBeforeTx)&&const DeepCollectionEquality().equals(other._signingAddressesRequired, _signingAddressesRequired)&&(identical(other.nweSignatures, nweSignatures) || other.nweSignatures == nweSignatures));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TxAndSignature&&(identical(other.tx, tx) || other.tx == tx)&&(identical(other.txDiff, txDiff) || other.txDiff == txDiff)&&const DeepCollectionEquality().equals(other.utxosBeforeTx, utxosBeforeTx)&&const DeepCollectionEquality().equals(other.signingAddressesRequired, _signingAddressesRequired)&&(identical(other.nweSignatures, nweSignatures) || other.nweSignatures == nweSignatures));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,tx,txDiff,const DeepCollectionEquality().hash(utxosBeforeTx),const DeepCollectionEquality().hash(_signingAddressesRequired),nweSignatures);
+int get hashCode {
+    return Object.hash(runtimeType,tx,txDiff,const DeepCollectionEquality().hash(utxosBeforeTx),const DeepCollectionEquality().hash(_signingAddressesRequired),nweSignatures);
+}
 
 @override
 String toString() {
-  return 'TxAndSignature(tx: $tx, txDiff: $txDiff, utxosBeforeTx: $utxosBeforeTx, signingAddressesRequired: $signingAddressesRequired, nweSignatures: $nweSignatures)';
+    return 'TxAndSignature(tx: $tx, txDiff: $txDiff, utxosBeforeTx: $utxosBeforeTx, signingAddressesRequired: $signingAddressesRequired, nweSignatures: $nweSignatures)';
 }
 
 

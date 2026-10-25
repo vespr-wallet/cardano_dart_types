@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'data_signature.dart';
@@ -9,14 +9,14 @@ part of 'data_signature.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$DataSignature {
 
-@JsonKey(name: "key") String get coseKeyHex;// hex encoded [CoseKey]
-@JsonKey(name: "signature") String get coseSignHex;
+@JsonKey(name: "key") String get coseKeyHex;@JsonKey(name: "signature") String get coseSignHex;
 /// Create a copy of DataSignature
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,21 @@ $DataSignatureCopyWith<DataSignature> get copyWith => _$DataSignatureCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DataSignature&&(identical(other.coseKeyHex, coseKeyHex) || other.coseKeyHex == coseKeyHex)&&(identical(other.coseSignHex, coseSignHex) || other.coseSignHex == coseSignHex));
+  final _this = this as DataSignature;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DataSignature&&(identical(other.coseKeyHex, _this.coseKeyHex) || other.coseKeyHex == _this.coseKeyHex)&&(identical(other.coseSignHex, _this.coseSignHex) || other.coseSignHex == _this.coseSignHex));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,coseKeyHex,coseSignHex);
+int get hashCode {
+  final _this = this as DataSignature;
+  return Object.hash(runtimeType,_this.coseKeyHex,_this.coseSignHex);
+}
 
 @override
 String toString() {
-  return 'DataSignature(coseKeyHex: $coseKeyHex, coseSignHex: $coseSignHex)';
+  final _this = this as DataSignature;
+  return 'DataSignature(coseKeyHex: ${_this.coseKeyHex}, coseSignHex: ${_this.coseSignHex})';
 }
 
 
@@ -67,7 +72,7 @@ class _$DataSignatureCopyWithImpl<$Res>
 /// Create a copy of DataSignature
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? coseKeyHex = null,Object? coseSignHex = null,}) {
-  return _then(_self.copyWith(
+  return _then(DataSignature(
 coseKeyHex: null == coseKeyHex ? _self.coseKeyHex : coseKeyHex // ignore: cast_nullable_to_non_nullable
 as String,coseSignHex: null == coseSignHex ? _self.coseSignHex : coseSignHex // ignore: cast_nullable_to_non_nullable
 as String,
@@ -86,7 +91,6 @@ class _DataSignature extends DataSignature {
   factory _DataSignature.fromJson(Map<String, dynamic> json) => _$DataSignatureFromJson(json);
 
 @override@JsonKey(name: "key") final  String coseKeyHex;
-// hex encoded [CoseKey]
 @override@JsonKey(name: "signature") final  String coseSignHex;
 
 /// Create a copy of DataSignature
@@ -102,16 +106,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DataSignature&&(identical(other.coseKeyHex, coseKeyHex) || other.coseKeyHex == coseKeyHex)&&(identical(other.coseSignHex, coseSignHex) || other.coseSignHex == coseSignHex));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DataSignature&&(identical(other.coseKeyHex, coseKeyHex) || other.coseKeyHex == coseKeyHex)&&(identical(other.coseSignHex, coseSignHex) || other.coseSignHex == coseSignHex));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,coseKeyHex,coseSignHex);
+int get hashCode {
+    return Object.hash(runtimeType,coseKeyHex,coseSignHex);
+}
 
 @override
 String toString() {
-  return 'DataSignature(coseKeyHex: $coseKeyHex, coseSignHex: $coseSignHex)';
+    return 'DataSignature(coseKeyHex: $coseKeyHex, coseSignHex: $coseSignHex)';
 }
 
 

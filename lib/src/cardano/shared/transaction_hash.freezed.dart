@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'transaction_hash.dart';
@@ -9,6 +9,7 @@ part of 'transaction_hash.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $TransactionHashCopyWith<TransactionHash> get copyWith => _$TransactionHashCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionHash&&const DeepCollectionEquality().equals(other.value, value)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.cborTags, cborTags));
+  final _this = this as TransactionHash;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionHash&&const DeepCollectionEquality().equals(other.value, _this.value)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType)&&const DeepCollectionEquality().equals(other.cborTags, _this.cborTags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(value),lengthType,const DeepCollectionEquality().hash(cborTags));
+int get hashCode {
+  final _this = this as TransactionHash;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.value),_this.lengthType,const DeepCollectionEquality().hash(_this.cborTags));
+}
 
 @override
 String toString() {
-  return 'TransactionHash(value: $value, lengthType: $lengthType, cborTags: $cborTags)';
+  final _this = this as TransactionHash;
+  return 'TransactionHash(value: ${_this.value}, lengthType: ${_this.lengthType}, cborTags: ${_this.cborTags})';
 }
 
 
@@ -63,7 +69,7 @@ class _$TransactionHashCopyWithImpl<$Res>
 /// Create a copy of TransactionHash
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? value = null,Object? lengthType = null,Object? cborTags = null,}) {
-  return _then(_self.copyWith(
+  return _then(TransactionHash(
 value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as List<int>,lengthType: null == lengthType ? _self.lengthType : lengthType // ignore: cast_nullable_to_non_nullable
 as CborLengthType,cborTags: null == cborTags ? _self.cborTags : cborTags // ignore: cast_nullable_to_non_nullable
@@ -79,7 +85,7 @@ as List<int>,
 
 
 class _TransactionHash extends TransactionHash {
-  const _TransactionHash({required final  List<int> value, this.lengthType = CborLengthType.definite, final  List<int> cborTags = const []}): _value = value,_cborTags = cborTags,super._();
+  const _TransactionHash({required  List<int> value, this.lengthType = CborLengthType.definite,  List<int> cborTags = const []}): _value = value,_cborTags = cborTags,super._();
   
 
  final  List<int> _value;
@@ -108,16 +114,18 @@ _$TransactionHashCopyWith<_TransactionHash> get copyWith => __$TransactionHashCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionHash&&const DeepCollectionEquality().equals(other._value, _value)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other._cborTags, _cborTags));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionHash&&const DeepCollectionEquality().equals(other.value, _value)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&const DeepCollectionEquality().equals(other.cborTags, _cborTags));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_value),lengthType,const DeepCollectionEquality().hash(_cborTags));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_value),lengthType,const DeepCollectionEquality().hash(_cborTags));
+}
 
 @override
 String toString() {
-  return 'TransactionHash(value: $value, lengthType: $lengthType, cborTags: $cborTags)';
+    return 'TransactionHash(value: $value, lengthType: $lengthType, cborTags: $cborTags)';
 }
 
 

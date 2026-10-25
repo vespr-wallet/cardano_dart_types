@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cose_signature.dart';
@@ -9,6 +9,7 @@ part of 'cose_signature.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $CoseSignatureCopyWith<CoseSignature> get copyWith => _$CoseSignatureCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseSignature&&(identical(other.headers, headers) || other.headers == headers)&&const DeepCollectionEquality().equals(other.signature, signature));
+  final _this = this as CoseSignature;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CoseSignature&&(identical(other.headers, _this.headers) || other.headers == _this.headers)&&const DeepCollectionEquality().equals(other.signature, _this.signature));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,headers,const DeepCollectionEquality().hash(signature));
+int get hashCode {
+  final _this = this as CoseSignature;
+  return Object.hash(runtimeType,_this.headers,const DeepCollectionEquality().hash(_this.signature));
+}
 
 @override
 String toString() {
-  return 'CoseSignature(headers: $headers, signature: $signature)';
+  final _this = this as CoseSignature;
+  return 'CoseSignature(headers: ${_this.headers}, signature: ${_this.signature})';
 }
 
 
@@ -63,7 +69,7 @@ class _$CoseSignatureCopyWithImpl<$Res>
 /// Create a copy of CoseSignature
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? headers = null,Object? signature = null,}) {
-  return _then(_self.copyWith(
+  return _then(CoseSignature(
 headers: null == headers ? _self.headers : headers // ignore: cast_nullable_to_non_nullable
 as CoseHeaders,signature: null == signature ? _self.signature : signature // ignore: cast_nullable_to_non_nullable
 as Uint8List,
@@ -103,16 +109,18 @@ _$CoseSignatureCopyWith<_CoseSignature> get copyWith => __$CoseSignatureCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseSignature&&(identical(other.headers, headers) || other.headers == headers)&&const DeepCollectionEquality().equals(other.signature, signature));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CoseSignature&&(identical(other.headers, headers) || other.headers == headers)&&const DeepCollectionEquality().equals(other.signature, signature));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,headers,const DeepCollectionEquality().hash(signature));
+int get hashCode {
+    return Object.hash(runtimeType,headers,const DeepCollectionEquality().hash(signature));
+}
 
 @override
 String toString() {
-  return 'CoseSignature(headers: $headers, signature: $signature)';
+    return 'CoseSignature(headers: $headers, signature: $signature)';
 }
 
 
