@@ -6,6 +6,7 @@ import "package:cbor/cbor.dart";
 import "package:collection/collection.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
+import "../exceptions/parse_exceptions.dart";
 import "../exceptions/signing_exceptions.dart";
 import "../hd/address/cardano_address.dart";
 import "../hd/signing/drep_diff_info.dart";
@@ -32,6 +33,13 @@ void conditionalAssert(bool Function() fct, [String? message]) {
   if (debugAssertEnabled) {
     assert(fct(), message);
   }
+}
+
+/// Offset of the first item of the CBOR array whose head is at [offset] (RFC 8949 section 3).
+int _arrayItemsStart(Uint8List bytes, int offset) {
+  final additionalInfo = bytes[offset] & 0x1f;
+  // 0-23 and 31 (indefinite): no length bytes; 24-27: the length is in the next 1, 2, 4 or 8 bytes
+  return offset + 1 + (additionalInfo >= 24 && additionalInfo <= 27 ? 1 << (additionalInfo - 24) : 0);
 }
 
 /// outer wrapper of a Cardano blockchain transaction.
@@ -92,6 +100,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
   /// See [CardanoTransactionBody.hasAscendingKeyOrder].
   bool get hasAscendingBodyKeyOrder => body.hasAscendingKeyOrder;
 
+  /// Throws [NonCanonicalTransactionBodyException] unless the body re-serializes to its bytes in [transactionBytes].
+  /// Only the body is checked: it is what witnesses sign and what the transaction id is the hash of.
   factory CardanoTransaction.deserializeBytes(Uint8List transactionBytes) {
     final list = cbor.decode(transactionBytes) as CborList;
     // if (list.length != 1) throw CborDeserializationException();
@@ -113,16 +123,30 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
       lengthType: tx.type,
     );
 
+    // CBOR data items are self-delimiting, so the body item is exactly bodyBytes when its bytes start with them
+    final bodyBytes = result.body.serializeAsBytes();
+    final bodyStart = _arrayItemsStart(transactionBytes, list.length == 1 ? _arrayItemsStart(transactionBytes, 0) : 0);
+    final bodyEnd = bodyStart + bodyBytes.length;
+    final originalBodyBytes = bodyEnd <= transactionBytes.length
+        ? Uint8List.sublistView(transactionBytes, bodyStart, bodyEnd)
+        : null;
+    if (!const ListEquality<int>().equals(bodyBytes, originalBodyBytes)) {
+      throw NonCanonicalTransactionBodyException();
+    }
+
     conditionalAssert(() => const DeepCollectionEquality().equals(result.serializeAsBytes(), transactionBytes));
     conditionalAssert(() => result.serializeHexString() == transactionBytes.hexEncode());
 
     return result;
   }
 
+  /// See [CardanoTransaction.deserializeBytes].
   factory CardanoTransaction.deserializeFromHex(String transactionHex) {
     return CardanoTransaction.deserializeBytes(transactionHex.hexDecode());
   }
 
+  /// No byte-exactness check: the body hash is of [cBody] as `package:cbor` re-encodes it, which for decoded bytes
+  /// is not their hash when they were not canonical. Use [CardanoTransaction.deserializeBytes] for untrusted bytes.
   factory CardanoTransaction.deserialize({
     required CborMap cBody,
     required CborMap cWitnessSet,

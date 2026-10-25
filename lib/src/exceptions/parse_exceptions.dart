@@ -26,6 +26,18 @@ class TransactionBodyParseException extends TransactionParseException {
   TransactionBodyParseException(super.message);
 }
 
+/// The transaction body does not re-serialize to the bytes it was parsed from, because of an encoding this library
+/// normalizes: a non-minimal integer or length head, a chunked string or a duplicate map key (only the last value is
+/// kept). The parsed body may then differ from what the ledger reads from those bytes, and its hash is not the
+/// transaction id, so a summary or signature of it would not be of the transaction. Refused instead.
+class NonCanonicalTransactionBodyException extends TransactionBodyParseException {
+  NonCanonicalTransactionBodyException()
+    : super(
+        "the transaction body does not re-serialize to its original bytes. Encode it without non-minimal integer or "
+        "length heads, chunked strings or duplicate map keys",
+      );
+}
+
 class WitnessBootstrapParseException extends TransactionParseException {
   WitnessBootstrapParseException(super.message);
 }

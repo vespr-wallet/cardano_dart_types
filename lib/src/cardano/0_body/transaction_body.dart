@@ -1,6 +1,7 @@
 import "dart:typed_data";
 
 import "package:cbor/cbor.dart";
+import "package:collection/collection.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:hex/hex.dart";
 
@@ -245,15 +246,23 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
     donation: donation,
   );
 
+  /// Throws [NonCanonicalTransactionBodyException] unless the body re-serializes to [hexData].
   factory CardanoTransactionBody.deserializeHex(String hexData) {
     final bytes = hexData.hexDecode();
 
-    return CardanoTransactionBody.deserialize(
+    final body = CardanoTransactionBody.deserialize(
       cMap: bytes.cborDecode() as CborMap,
       originalBodyBlake2bHash256: blake2bHash256(bytes).hexEncode(),
     );
+    if (!const ListEquality<int>().equals(body.serializeAsBytes(), bytes)) {
+      throw NonCanonicalTransactionBodyException();
+    }
+    return body;
   }
 
+  /// No byte-exactness check: an [originalBodyBlake2bHash256] is trusted to be the hash of the bytes [cMap]
+  /// re-serializes to. Use [CardanoTransactionBody.deserializeHex] or [CardanoTransaction.deserializeBytes] for
+  /// untrusted bytes.
   factory CardanoTransactionBody.deserialize({
     required CborMap cMap,
     String? originalBodyBlake2bHash256, // used for signing the tx
