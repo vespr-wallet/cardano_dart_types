@@ -5,7 +5,6 @@ import "package:freezed_annotation/freezed_annotation.dart";
 import "../../../binary/binary_reader.dart";
 import "../../../binary/binary_writer.dart";
 import "../../cardano/0_body/4_cert/credential.dart";
-import "../../cardano/0_body/transaction_body.dart";
 import "../../cardano/1_witness_set/witness_set.dart";
 import "../../cardano/shared/asset.dart";
 import "../../cardano/shared/drep.dart";
@@ -258,8 +257,7 @@ sealed class TxPreparedForSigning with _$TxPreparedForSigning {
 
   Uint8List marshal() {
     final writer = BinaryWriter();
-    writer.writeByteList(tx.body.blake2bHash256.marshal());
-    writer.writeByteList(tx.serializeAsBytes());
+    writer.writeByteList(tx.marshal());
     writer.writeByteList(txDiff.marshal());
     writer.writeBytesList(utxosBeforeTx.map((e) => e.serializeAsBytes()).toList());
     writer.writeStringList(signingAddressesRequired.toList());
@@ -268,15 +266,7 @@ sealed class TxPreparedForSigning with _$TxPreparedForSigning {
 
   factory TxPreparedForSigning.unmarshal(Uint8List bytes) {
     final reader = BinaryReader(bytes);
-
-    final tx = () {
-      final blake2bHash256 = Blake2bHash256.unmarshal(reader.readByteList());
-      final deserializedTx = CardanoTransaction.deserializeBytes(reader.readByteList());
-
-      return deserializedTx.copyWith.body(
-        blake2bHash256: blake2bHash256,
-      );
-    }();
+    final tx = CardanoTransaction.unmarshal(reader.readByteList());
     final txDiff = TxDiff.unmarshal(reader.readByteList());
     final utxos = reader.readBytesList().map(Utxo.deserializeBytes).toList();
     final signingAddressesRequired = reader.readStringList().toSet();
@@ -302,7 +292,7 @@ sealed class TxAndSignature with _$TxAndSignature {
 
   Uint8List marshal() {
     final writer = BinaryWriter();
-    writer.writeByteList(tx.serializeAsBytes());
+    writer.writeByteList(tx.marshal());
     writer.writeByteList(txDiff.marshal());
     writer.writeBytesList(utxosBeforeTx.map((e) => e.serializeAsBytes()).toList());
     writer.writeStringList(signingAddressesRequired.toList());
@@ -312,7 +302,7 @@ sealed class TxAndSignature with _$TxAndSignature {
 
   factory TxAndSignature.unmarshal(Uint8List bytes) {
     final reader = BinaryReader(bytes);
-    final tx = CardanoTransaction.deserializeBytes(reader.readByteList());
+    final tx = CardanoTransaction.unmarshal(reader.readByteList());
     final txDiff = TxDiff.unmarshal(reader.readByteList());
     final utxos = reader.readBytesList().map(Utxo.deserializeBytes).toList();
     final signingAddressesRequired = reader.readStringList().toSet();

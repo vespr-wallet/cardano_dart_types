@@ -1,3 +1,17 @@
+## 3.3.0
+
+Security:
+
+- `CardanoTransaction.deserializeBytes` / `deserializeFromHex` and `CardanoTransactionBody.deserializeHex` keep the hash of the body bytes as they are in the input, which is the transaction id. Before, the hash was of the body as package:cbor re-encodes it, which normalizes non-minimal integer or length heads, so witnesses of such a body did not fit the submitted transaction.
+  - A body that does not re-serialize to its bytes (non-minimal heads, chunked strings) still parses, so `blake2bHash256` and `computeBlake2bHash256()` differ for it. `serializeAsBytes()` re-encodes such a body, so a signed one has to be submitted as its original bytes with the witness set, as CIP-30 dApps do.
+  - A duplicate map key anywhere in the body throws `TransactionBodyDuplicateKeyException` (a `TransactionBodyParseException`). Decoding keeps only the last value, which need not be the one the ledger reads, so a summary of the parsed body could differ from the signed one.
+  - New `CardanoTransactionBody.deserializeBytes`. `CardanoTransaction.deserialize` and `CardanoTransactionBody.deserialize`, which take already decoded CBOR values, have no bytes to hash or to find duplicate keys in.
+
+Other Changes:
+
+- New `CardanoTransaction.marshal` / `unmarshal` for passing a transaction to a worker. Unlike `serializeAsBytes`, they keep the body hash. `TxPreparedForSigning` already kept the hash and now uses them. `TxAndSignature` uses them too: it used to drop the hash, so a signed transaction coming back from a worker reported the hash of its re-serialization
+- `RationalNumber` is exported. `Certificate.poolRegistration` requires one
+
 ## 3.2.1
 
 Bug Fix:

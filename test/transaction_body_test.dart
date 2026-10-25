@@ -95,39 +95,110 @@ void main() async {
     });
 
     group("copyWith hash", () {
-      // Fee 42 non-minimally encoded (19002a), so the hash of these bytes differs from the hash of the re-serialization
-      const nonMinimalBody = "a300d901028001800219002a";
-      final originalHash = blake2bHash256(nonMinimalBody.hexDecode()).hexEncode();
-      final body = CardanoTransactionBody.deserializeHex(nonMinimalBody);
+      const bodyHex = "a300d9010280018002182a";
+      // Not the body's hash, so keeping the cached hash is distinguishable from recomputing it
+      const cachedHash = Blake2bHash256.passed(blake2bHash256: "00");
+      final body = CardanoTransactionBody.deserializeHex(bodyHex).copyWith(blake2bHash256: cachedHash);
 
-      test("parsed body reports the hash of its original bytes", () {
-        expect(body.blake2bHash256Hex(), originalHash);
-        expect(body.computeBlake2bHash256().hexEncode(), isNot(originalHash));
-      });
-
-      test("no-op copyWith keeps the original hash", () {
-        expect(body.copyWith().blake2bHash256Hex(), originalHash);
+      test("no-op copyWith keeps the cached hash", () {
+        expect(body.copyWith().blake2bHash256, cachedHash);
       });
 
       test("copyWith changing a field hashes the new serialization", () {
         final modified = body.copyWith(fee: BigInt.from(43).toCborInt());
 
         expect(modified.blake2bHash256Hex(), modified.computeBlake2bHash256().hexEncode());
-        expect(modified.blake2bHash256Hex(), isNot(originalHash));
       });
 
       test("transaction copyWith.body changing a field hashes the new serialization", () {
-        final tx = CardanoTransaction.deserializeFromHex("84${nonMinimalBody}a0f5f6");
+        final tx = CardanoTransaction.deserializeFromHex("84${bodyHex}a0f5f6");
         final modified = tx.copyWith.body(fee: BigInt.from(43).toCborInt()).body;
 
         expect(modified.blake2bHash256Hex(), modified.computeBlake2bHash256().hexEncode());
+        expect(modified.blake2bHash256Hex(), isNot(tx.body.blake2bHash256Hex()));
       });
 
       test("explicit hash is kept", () {
-        const hash = Blake2bHash256.passed(blake2bHash256: "00");
+        const hash = Blake2bHash256.passed(blake2bHash256: "01");
 
         expect(body.copyWith(fee: BigInt.from(43).toCborInt(), blake2bHash256: hash).blake2bHash256, hash);
       });
+    });
+
+    // Not in transaction_test.dart: its debugAssertEnabled asserts the whole transaction re-serializes byte-exact
+    group("the body hash is of its bytes when they do not re-serialize to them", () {
+      // body a3 00 80 01 80 02 0a (no inputs or outputs, fee 10), with an encoding that parsing normalizes
+      final bodies = {
+        "non-minimal integer head":
+            "a3008001800218"
+            "0a",
+        "non-minimal length head":
+            "a300"
+            "9800"
+            "0180020a",
+        "non-minimal map head":
+            "b90003"
+            "00800180020a",
+        "chunked byte string":
+            "a400800180020a07"
+            "5f41004101ff",
+      };
+      for (final MapEntry(key: name, value: bodyHex) in bodies.entries) {
+        test(name, () {
+          final bodyHash = blake2bHash256(bodyHex.hexDecode()).hexEncode();
+          final body = CardanoTransactionBody.deserializeHex(bodyHex);
+
+          expect(body.blake2bHash256Hex(), bodyHash);
+          expect(body.computeBlake2bHash256().hexEncode(), isNot(bodyHash));
+          expect(CardanoTransaction.deserializeFromHex("84${bodyHex}a0f5f6").body.blake2bHash256Hex(), bodyHash);
+        });
+      }
+    });
+
+    group("refuses a duplicate map key in the body", () {
+      final bodies = {
+        "body key (only the last fee would be kept)":
+            "a4008001800201"
+            "0202",
+        "key of a nested map":
+            "a4008001800200"
+            "09a1581c${"00" * 28}a2"
+            "4001"
+            "4002",
+        "key of an indefinite map":
+            "bf008001800201"
+            "0202"
+            "ff",
+      };
+      for (final MapEntry(key: name, value: bodyHex) in bodies.entries) {
+        test(name, () {
+          expect(
+            () => CardanoTransactionBody.deserializeHex(bodyHex),
+            throwsA(isA<TransactionBodyDuplicateKeyException>()),
+          );
+          expect(
+            () => CardanoTransaction.deserializeFromHex("84${bodyHex}a0f5f6"),
+            throwsA(isA<TransactionBodyDuplicateKeyException>()),
+          );
+        });
+      }
+    });
+
+    group("CardanoTransaction.deserializeBytes finds the body bytes in any transaction encoding", () {
+      const bodyHex = "a300800180020a";
+      final bodyHash = blake2bHash256(bodyHex.hexDecode()).hexEncode();
+      final cases = {
+        "canonical": "84${bodyHex}a0f5f6",
+        "non-minimal transaction array head": "9804${bodyHex}a0f5f6",
+        "wrapped in a one-item array": "8184${bodyHex}a0f5f6",
+        "indefinite transaction array": "9f${bodyHex}a0f5f6ff",
+        "chunked auxiliary data bytes": "84${bodyHex}a0f55f41004101ff",
+      };
+      for (final MapEntry(key: name, value: txHex) in cases.entries) {
+        test(name, () {
+          expect(CardanoTransaction.deserializeFromHex(txHex).body.blake2bHash256Hex(), bodyHash);
+        });
+      }
     });
   });
 }

@@ -26,6 +26,12 @@ class TransactionBodyParseException extends TransactionParseException {
   TransactionBodyParseException(super.message);
 }
 
+/// A map in the transaction body has a duplicate key. Decoding keeps only the last value, which need not be the one the
+/// ledger reads, so a summary of the parsed body could differ from the signed one. Refused instead.
+class TransactionBodyDuplicateKeyException extends TransactionBodyParseException {
+  TransactionBodyDuplicateKeyException() : super("a map in the transaction body has a duplicate key");
+}
+
 class WitnessBootstrapParseException extends TransactionParseException {
   WitnessBootstrapParseException(super.message);
 }

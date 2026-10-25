@@ -261,6 +261,47 @@ void main() async {
     });
   });
 
+  group("marshal keeps the hash of a body that does not re-serialize to its bytes", () {
+    // fee 10 with a non-minimal head (18 0a)
+    final tx = CardanoTransaction.deserializeFromHex(
+      "84a3008001800218"
+      "0aa0f5f6",
+    );
+    final originalHash = tx.body.blake2bHash256Hex();
+
+    test("the parsed hash is not of the serialization", () {
+      expect(tx.body.computeBlake2bHash256().hexEncode(), isNot(originalHash));
+    });
+
+    test("CardanoTransaction", () {
+      expect(CardanoTransaction.unmarshal(tx.marshal()).body.blake2bHash256Hex(), originalHash);
+    });
+
+    test("TxAndSignature", () {
+      final txAndSignature = TxAndSignature(
+        tx: tx,
+        txDiff: TxDiff(
+          diff: Value.v1(lovelace: BigInt.one.toCborInt(), mA: const []),
+          usedUtxos: [],
+          stakeDelegationPoolId: null,
+          dRepDelegation: null,
+          dRepRegistration: null,
+          dRepUpdate: null,
+          authorizeConstitutionalCommitteeHot: null,
+          resignConstitutionalCommitteeCold: null,
+          votes: [],
+          proposals: [],
+          dRepDeregistration: false,
+          stakeDeregistration: false,
+        ),
+        utxosBeforeTx: [],
+        signingAddressesRequired: {},
+        nweSignatures: WitnessSet.deserializeFromHex(hexCbor: "a0"),
+      );
+      expect(TxAndSignature.unmarshal(txAndSignature.marshal()).tx.body.blake2bHash256Hex(), originalHash);
+    });
+  });
+
   group("tx diff", () {
     test("no nulls", () {
       final txDiff = TxDiff(
