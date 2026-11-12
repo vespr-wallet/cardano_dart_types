@@ -1,3 +1,9 @@
+## Unreleased
+
+Other Changes:
+
+- Toolchain: Flutter 3.50.0 / Dart 3.14.0 (`.tool-versions`, CI `actions/checkout` v7). Dependencies: no constraint changes; every dependency already resolves to its latest version on Dart 3.14 (cbor 6.5.2, bip32_ed25519 0.6.2, freezed_annotation 3.1.0, json_annotation 4.12.0; dev: freezed 4.0.3, json_serializable 6.15.2, build_runner 2.17.1, test 1.33.0). Generated code unchanged
+
 ## 3.3.0
 
 Security:
