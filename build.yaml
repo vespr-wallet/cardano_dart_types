@@ -15,3 +15,10 @@ targets:
           format: false
           map: false
           when: false
+      source_gen:combining_builder:
+        options:
+          # The generators format their output at 80 columns, but this repo
+          # formats at 120 (analysis_options.yaml). The marker makes
+          # `dart format` keep the generated layout, so CI's format check
+          # passes on freshly generated files.
+          preamble: "// dart format width=80"

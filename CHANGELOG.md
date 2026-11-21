@@ -4,6 +4,7 @@ Other Changes:
 
 - Toolchain: Flutter 3.50.0 / Dart 3.14.0 (`.tool-versions`, CI `actions/checkout` v7). Dependencies: no constraint changes; every dependency already resolves to its latest version on Dart 3.14 (cbor 6.5.2, bip32_ed25519 0.6.2, freezed_annotation 3.1.0, json_annotation 4.12.0; dev: freezed 4.0.3, json_serializable 6.15.2, build_runner 2.17.1, test 1.33.0). Generated code unchanged
 - Tooling: Flutter 3.50.1 (`.tool-versions`; still Dart 3.14.0)
+- CI: the PR workflow fails on unformatted Dart code (`dart format --set-exit-if-changed`). Formatted the files that failed, and the generated `*.g.dart` files now start with `// dart format width=80` (a `source_gen:combining_builder` preamble in `build.yaml`), so freshly generated code passes the check. No code changes
 
 ## 3.3.0
 

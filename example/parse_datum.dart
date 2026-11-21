@@ -41,7 +41,8 @@ void main() async {
   // print(data.blacke2bHash()?.hexEncode()); // wrong
 
   final addr = CardanoAddress.fromBech32OrBase58(
-      "addr_test1qq6nhz7zng2kq0ctw04vg3jn6x7egnvjursde40trpgkfgk6ytznygr2wknzsauwawhk8qn0nkflh6d54356078ye4uqwau0ts");
+    "addr_test1qq6nhz7zng2kq0ctw04vg3jn6x7egnvjursde40trpgkfgk6ytznygr2wknzsauwawhk8qn0nkflh6d54356078ye4uqwau0ts",
+  );
 
   print(addr.addressType);
   print(addr.credentials);
