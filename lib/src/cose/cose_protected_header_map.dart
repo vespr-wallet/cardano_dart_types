@@ -28,7 +28,8 @@ sealed class CoseProtectedHeaderMap with _$CoseProtectedHeaderMap implements COS
   }
 
   @override
-  CborValue serialize({required bool forJson}) => forJson //
+  CborValue serialize({required bool forJson}) =>
+      forJson //
       ? CoseHeaderMap.deserialize(bytes.cborDecode()).serialize(forJson: forJson)
       : CborBytes(bytes);
 }
