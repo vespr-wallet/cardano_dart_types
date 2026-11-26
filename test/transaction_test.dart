@@ -51,6 +51,17 @@ void main() async {
         expect(tx.copyWithAdditionalSignatures(const WitnessSet()).serializeHexString(), hex);
       });
 
+      test("adding a signature keeps the body bytes and leaves the flag out", () {
+        // {0: [[vkey, signature]]}
+        final vkeyWitness = "a10081825820${"11" * 32}5840${"22" * 64}";
+        final tx = CardanoTransaction.deserializeFromHex("83${body}a0$metadata");
+        final signed = tx.copyWithAdditionalSignatures(WitnessSet.deserializeFromHex(hexCbor: vkeyWitness));
+
+        expect(signed.serializeHexString(), "83$body$vkeyWitness$metadata");
+        expect(signed.body.blake2bHash256Hex(), tx.body.blake2bHash256Hex());
+        expect(CardanoTransaction.unmarshal(signed.marshal()).serializeHexString(), signed.serializeHexString());
+      });
+
       test("a false flag is written even if the parsed transaction had none", () {
         final tx = CardanoTransaction.deserializeFromHex("83${body}a0f6").copyWith(isValidDi: false);
 
