@@ -1,5 +1,9 @@
 ## Unreleased
 
+Security:
+
+- `CardanoTransactionOutput.deserialize` (and so `deserializeHex`, and the outputs and collateral return of a parsed transaction body) throws `TransactionOutputUnknownKeyException`, a `TransactionOutputParseException`, for a post-Alonzo output key other than 0 (address), 1 (value), 2 (datum) and 3 (script ref), a tagged key such as `1(2)` included. Before, such a key was silently left out of the parsed output, so a tagged datum key showed the output without its datum, while the witnesses still signed the original bytes with it. The ledger rejects such outputs, so no funds were at risk
+
 Other Changes:
 
 - Toolchain: Flutter 3.50.0 / Dart 3.14.0 (`.tool-versions`, CI `actions/checkout` v7). Dependencies: no constraint changes; every dependency already resolves to its latest version on Dart 3.14 (cbor 6.5.2, bip32_ed25519 0.6.2, freezed_annotation 3.1.0, json_annotation 4.12.0; dev: freezed 4.0.3, json_serializable 6.15.2, build_runner 2.17.1, test 1.33.0). Generated code unchanged

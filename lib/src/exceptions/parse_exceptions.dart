@@ -22,6 +22,17 @@ class TransactionOutputParseException extends TransactionParseException {
   TransactionOutputParseException(super.message);
 }
 
+/// A post-Alonzo transaction output has a key this library does not parse: anything but 0 (address), 1 (value),
+/// 2 (datum) and 3 (script ref), or one of those with a CBOR tag. A parsed output would leave it out, so a summary of it
+/// could differ from the signed one, while the witnesses still sign the original bytes, key included. Refused instead.
+class TransactionOutputUnknownKeyException extends TransactionOutputParseException {
+  TransactionOutputUnknownKeyException(this.keys)
+    : super("the transaction output has keys that are not supported: $keys");
+
+  /// The unsupported keys, in the order they appear in the output.
+  final List<Object> keys;
+}
+
 class TransactionBodyParseException extends TransactionParseException {
   TransactionBodyParseException(super.message);
 }
