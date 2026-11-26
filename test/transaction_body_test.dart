@@ -220,6 +220,11 @@ void main() async {
         "Dijkstra sub-transactions (23)": ("a400d9010280018002182a178183a300d9010280018002182aa0f6", [23]),
         // "foo": 1
         "a text key": ("a400d9010280018002182a63666f6f01", ["foo"]),
+        // tag 1 on key 5 (withdrawals), which a lookup of the plain key 5 does not find
+        "a tagged known key": (
+          "a400d9010280018002182ac105a1581de1070707070707070707070707070707070707070707070707070707071a02faf080",
+          ["1(5)"],
+        ),
       };
       for (final MapEntry(key: name, value: (hex, keys)) in unknownBodies.entries) {
         test("$name is refused", () {

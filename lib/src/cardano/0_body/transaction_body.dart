@@ -277,9 +277,14 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
 
     // A key that is not parsed below would be missing from the parsed body, and so from any summary of it, while the
     // witnesses sign the original bytes with that key in them. Refuse the body instead of silently dropping the key.
+    // A tagged key counts as unknown: package:cbor compares tags, so the lookups below would not find it either.
     final unknownKeys = cMap.keys
-        .where((key) => key is! CborSmallInt || !_supportedKeys.contains(key.value))
-        .map((key) => key is CborSmallInt ? key.value : key.toString())
+        .where((key) => key is! CborSmallInt || key.tags.isNotEmpty || !_supportedKeys.contains(key.value))
+        .map(
+          (key) => key is CborSmallInt && key.tags.isEmpty
+              ? key.value
+              : "${key.tags.map((tag) => "$tag(").join()}$key${")" * key.tags.length}",
+        )
         .toList(growable: false);
     if (unknownKeys.isNotEmpty) {
       throw TransactionBodyUnknownKeyException(unknownKeys);
