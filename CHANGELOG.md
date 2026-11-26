@@ -6,7 +6,7 @@ Security:
 
 Bug Fix:
 
-- `CardanoTransaction.deserializeBytes` parses transactions without the isValid flag, `[body, witnessSet, auxiliaryData]`, the format the Dijkstra era recommends for submitted transactions. Before, one with auxiliary data failed with a type error, as did pre-Alonzo ones. The new `hasIsValidFlag` keeps the format, so such a transaction re-serializes to its bytes. A transaction array with other than 3 or 4 items, or with 4 items and no bool as the 3rd, throws `CborDeserializationException`
+- `CardanoTransaction.deserializeBytes` parses transactions without the isValid flag, `[body, witnessSet, auxiliaryData]`, the format the Dijkstra era recommends for submitted transactions. Before, one with auxiliary data failed with a type error, as did pre-Alonzo ones. `CardanoTransaction.isValidDi` is now a `bool?`, null for a transaction without the flag (the ledger treats it as valid), so such a transaction re-serializes to its bytes. Code reading `isValidDi` as a `bool` has to handle null. A transaction array with other than 3 or 4 items, or with 4 items and no bool as the 3rd, throws `CborDeserializationException`
 
 Other Changes:
 

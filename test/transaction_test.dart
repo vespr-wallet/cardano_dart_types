@@ -20,8 +20,7 @@ void main() async {
         const hex = "83${body}a0$metadata";
         final tx = CardanoTransaction.deserializeFromHex(hex);
 
-        expect(tx.isValidDi, isTrue);
-        expect(tx.hasIsValidFlag, isFalse);
+        expect(tx.isValidDi, isNull);
         expect(tx.auxiliaryData?.serializeHexString(), metadata);
         expect(tx.serializeHexString(), hex);
         expect(tx.body.serializeHexString(), body);
@@ -31,7 +30,7 @@ void main() async {
         const hex = "83${body}a0f6";
         final tx = CardanoTransaction.deserializeFromHex(hex);
 
-        expect(tx.isValidDi, isTrue);
+        expect(tx.isValidDi, isNull);
         expect(tx.serializeHexString(), hex);
       });
 
@@ -39,7 +38,7 @@ void main() async {
         final withFlag = CardanoTransaction.deserializeFromHex("84${body}a0f5$metadata");
         final withoutFlag = CardanoTransaction.deserializeFromHex("83${body}a0$metadata");
 
-        expect(withFlag.hasIsValidFlag, isTrue);
+        expect(withFlag.isValidDi, isTrue);
         expect(withoutFlag.body.blake2bHash256Hex(), withFlag.body.blake2bHash256Hex());
       });
 

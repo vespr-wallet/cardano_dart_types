@@ -43,7 +43,7 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
   factory CardanoTransaction({
     required CardanoTransactionBody body,
     required WitnessSet witnessSet,
-    required bool isValidDi,
+    required bool? isValidDi,
     required CBORMetadata? auxiliaryData,
     required bool overrideBodyMetadataHash, // NEVER USE THIS FOR PARTIAL SIGN
   }) => CardanoTransaction._hidden(
@@ -82,13 +82,12 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
   const factory CardanoTransaction._hidden({
     required CardanoTransactionBody body, // 0
     required WitnessSet witnessSet, // 1
-    required bool isValidDi, // 2
+    // null: the transaction array has no isValid flag, [body, witnessSet, auxiliaryData], as in the Dijkstra era's
+    // mempool transactions (and pre-Alonzo ones). The ledger treats it as valid. Kept from a parsed transaction so it
+    // re-serializes to its bytes.
+    required bool? isValidDi, // 2
     required CBORMetadata? auxiliaryData, // 3
     @Default(CborLengthType.definite) CborLengthType lengthType,
-    // Whether the transaction array has the isValid flag, so [body, witnessSet, isValid, auxiliaryData]. Without it,
-    // [body, witnessSet, auxiliaryData] as in the Dijkstra era's mempool transactions (and pre-Alonzo ones), the flag
-    // is true. Kept from a parsed transaction so it re-serializes to its bytes.
-    @Default(true) bool hasIsValidFlag,
   }) = _CardanoTransaction;
 
   $CardanoTransactionCopyWith<CardanoTransaction> get copyWith => $CardanoTransactionCopyWith(this, (value) => value);
@@ -111,15 +110,15 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
 
     // [body, witnessSet, isValid, auxiliaryData] up to Conway, or [body, witnessSet, auxiliaryData] without the flag,
     // which the Dijkstra era recommends for transactions submitted to the mempool (the block producer sets it)
-    final (CborValue cIsValidDi, CborValue cAuxData) = switch (tx.length) {
+    final (CborValue? cIsValidDi, CborValue cAuxData) = switch (tx.length) {
       4 => (tx[2], tx[3]),
-      3 => (const CborBool(true), tx[2]),
+      3 => (null, tx[2]),
       _ => throw CborDeserializationException("transaction has ${tx.length} items instead of 3 or 4"),
     };
-    if (cIsValidDi is! CborBool) {
+    if (cIsValidDi != null && cIsValidDi is! CborBool) {
       throw CborDeserializationException("isValid is ${cIsValidDi.runtimeType} instead of a bool");
     }
-    if (tx.length == 3 && cAuxData is CborBool) {
+    if (cIsValidDi == null && cAuxData is CborBool) {
       throw const CborDeserializationException("transaction without auxiliary data or nil after the isValid flag");
     }
 
@@ -130,10 +129,9 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     final result = CardanoTransaction._hidden(
       body: CardanoTransactionBody.deserializeBytes(Uint8List.sublistView(transactionBytes, bodyStart, bodyEnd)),
       witnessSet: WitnessSet.deserialize(cMap: tx[1] as CborMap),
-      isValidDi: cIsValidDi.value,
+      isValidDi: cIsValidDi is CborBool ? cIsValidDi.value : null,
       auxiliaryData: CBORMetadata.deserialize(cValue: cAuxData),
       lengthType: tx.type,
-      hasIsValidFlag: tx.length == 4,
     );
 
     conditionalAssert(() => const DeepCollectionEquality().equals(result.serializeAsBytes(), transactionBytes));
@@ -188,8 +186,7 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
       [
         body.serialize(forJson: forJson),
         witnessSet.serialize(forJson: forJson),
-        // Only true can be left out
-        if (hasIsValidFlag || !isValidDi) CborBool(isValidDi),
+        if (isValidDi case final bool isValid) CborBool(isValid),
         auxiliaryData?.serialize(forJson: forJson) ?? const CborNull(),
       ],
       type: lengthType,
@@ -263,7 +260,7 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
 
     // The isValid flag is not covered by the signature (witnesses sign the body hash only) and can be switched after
     // signing, so it is only trustworthy for transactions already on chain. See TxDiManagement.
-    if (!isValidDi) {
+    if (isValidDi == false) {
       switch (txDiManagement) {
         case TxDiManagement.safeAlwaysReject:
           throw TransactionMarkedInvalidException(txHash: body.blake2bHash256Hex());
@@ -508,10 +505,9 @@ abstract mixin class $CardanoTransactionCopyWith<$Res> {
   $Res call({
     CardanoTransactionBody body,
     WitnessSet witnessSet,
-    bool isValidDi,
+    bool? isValidDi,
     CBORMetadata? auxiliaryData,
     CborLengthType lengthType,
-    bool hasIsValidFlag,
   });
 
   $CardanoTransactionBodyCopyWith<$Res> get body;
@@ -529,18 +525,16 @@ class _CardanoTransactionCopyWithImpl<$Res> implements $CardanoTransactionCopyWi
   $Res call({
     CardanoTransactionBody? body,
     WitnessSet? witnessSet,
-    bool? isValidDi,
+    Object? isValidDi = freezed,
     Object? auxiliaryData = freezed,
     CborLengthType? lengthType,
-    bool? hasIsValidFlag,
   }) => _then(
     CardanoTransaction._hidden(
       body: body ?? _self.body,
       witnessSet: witnessSet ?? _self.witnessSet,
-      isValidDi: isValidDi ?? _self.isValidDi,
+      isValidDi: freezed == isValidDi ? _self.isValidDi : (isValidDi is bool ? isValidDi : null),
       auxiliaryData: freezed == auxiliaryData ? _self.auxiliaryData : auxiliaryData as CBORMetadata?,
       lengthType: lengthType ?? _self.lengthType,
-      hasIsValidFlag: hasIsValidFlag ?? _self.hasIsValidFlag,
     ),
   );
 
