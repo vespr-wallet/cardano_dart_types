@@ -43,6 +43,16 @@ class TransactionBodyDuplicateKeyException extends TransactionBodyParseException
   TransactionBodyDuplicateKeyException() : super("a map in the transaction body has a duplicate key");
 }
 
+/// The transaction body has a key this library does not parse, such as the Dijkstra era's sub-transactions (23) or
+/// direct deposits (25). A parsed body would leave it out, so a summary of it could differ from the signed one, while
+/// the witnesses still sign the original bytes, key included. Refused instead.
+class TransactionBodyUnknownKeyException extends TransactionBodyParseException {
+  TransactionBodyUnknownKeyException(this.keys) : super("the transaction body has keys that are not supported: $keys");
+
+  /// The unsupported keys, in the order they appear in the body.
+  final List<Object> keys;
+}
+
 class WitnessBootstrapParseException extends TransactionParseException {
   WitnessBootstrapParseException(super.message);
 }
