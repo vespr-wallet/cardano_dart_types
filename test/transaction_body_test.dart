@@ -200,5 +200,45 @@ void main() async {
         });
       }
     });
+
+    group("unknown keys", () {
+      // a3 00 d9010280 01 80 02 182a: inputs (tag 258, empty), outputs (empty), fee 42
+      const knownKeysOnly = "a300d9010280018002182a";
+
+      test("a body with only known keys parses", () {
+        expect(CardanoTransactionBody.deserializeHex(knownKeysOnly).serializeHexString(), knownKeysOnly);
+      });
+
+      // The witnesses sign the original bytes, so a dropped key would be signed without being in the parsed body
+      final unknownBodies = {
+        // 25: direct deposits, 50 ADA to a reward account
+        "Dijkstra direct deposits (25)": (
+          "a400d9010280018002182a1819a1581de1070707070707070707070707070707070707070707070707070707071a02faf080",
+          [25],
+        ),
+        // 23: one sub-transaction
+        "Dijkstra sub-transactions (23)": ("a400d9010280018002182a178183a300d9010280018002182aa0f6", [23]),
+        // "foo": 1
+        "a text key": ("a400d9010280018002182a63666f6f01", ["foo"]),
+        // tag 1 on key 5 (withdrawals), which a lookup of the plain key 5 does not find
+        "a tagged known key": (
+          "a400d9010280018002182ac105a1581de1070707070707070707070707070707070707070707070707070707071a02faf080",
+          ["1(5)"],
+        ),
+      };
+      for (final MapEntry(key: name, value: (hex, keys)) in unknownBodies.entries) {
+        test("$name is refused", () {
+          for (final parse in [
+            () => CardanoTransactionBody.deserializeHex(hex),
+            () => CardanoTransaction.deserializeFromHex("84${hex}a0f5f6"),
+          ]) {
+            expect(
+              parse,
+              throwsA(isA<TransactionBodyUnknownKeyException>().having((e) => e.keys, "keys", keys)),
+            );
+          }
+        });
+      }
+    });
   });
 }
