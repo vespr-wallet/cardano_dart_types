@@ -275,6 +275,16 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
         ? Blake2bHash256.passed(blake2bHash256: originalBodyBlake2bHash256)
         : Blake2bHash256._computed(blake2bHash256: blake2bHash256(cMap.uint8ListEncode()).hexEncode());
 
+    // A key that is not parsed below would be missing from the parsed body, and so from any summary of it, while the
+    // witnesses sign the original bytes with that key in them. Refuse the body instead of silently dropping the key.
+    final unknownKeys = cMap.keys
+        .where((key) => key is! CborSmallInt || !_supportedKeys.contains(key.value))
+        .map((key) => key is CborSmallInt ? key.value : key.toString())
+        .toList(growable: false);
+    if (unknownKeys.isNotEmpty) {
+      throw TransactionBodyUnknownKeyException(unknownKeys);
+    }
+
     // Capture non-standard (non-ascending) key order to preserve it during re-serialization.
     // If the keys are already in ascending order, we don't store them (leave as null).
     // This is important because:
@@ -461,6 +471,9 @@ sealed class CardanoTransactionBody with _$CardanoTransactionBody implements Cbo
 
     return result;
   }
+
+  /// The body keys `deserialize` parses, up to the Conway era. 6 (update) is refused on its own, as before.
+  static const _supportedKeys = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
 
   @override
   CborMap serialize({required bool forJson}) {

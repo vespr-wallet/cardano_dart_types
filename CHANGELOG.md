@@ -1,5 +1,9 @@
 ## Unreleased
 
+Security:
+
+- `CardanoTransactionBody.deserialize` (and so `deserializeBytes`, `deserializeHex` and `CardanoTransaction.deserializeBytes`) throws `TransactionBodyUnknownKeyException`, a `TransactionBodyParseException`, for a body key it does not parse. Before, such a key was silently left out of the parsed body and of `diff`, while the witnesses still signed the original bytes with it. The Dijkstra era adds body keys 23 to 27 (sub-transactions, required top-level guards, direct deposits, account balance intervals), so a Dijkstra transaction moving funds to someone else's reward account would have been summarised without it. They are refused until they are parsed and summarised
+
 Other Changes:
 
 - Toolchain: Flutter 3.50.0 / Dart 3.14.0 (`.tool-versions`, CI `actions/checkout` v7). Dependencies: no constraint changes; every dependency already resolves to its latest version on Dart 3.14 (cbor 6.5.2, bip32_ed25519 0.6.2, freezed_annotation 3.1.0, json_annotation 4.12.0; dev: freezed 4.0.3, json_serializable 6.15.2, build_runner 2.17.1, test 1.33.0). Generated code unchanged
