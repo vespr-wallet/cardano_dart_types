@@ -1,5 +1,9 @@
 ## Unreleased
 
+Security:
+
+- `CardanoTransactionBody.deserialize` (and so `deserializeBytes`, `deserializeHex` and `CardanoTransaction.deserializeBytes`) throws `TransactionBodyUnknownKeyException`, a `TransactionBodyParseException`, for a body key it does not parse, a tagged key included. Before, such a key was silently left out of the parsed body and of `diff`, while the witnesses still signed the original bytes with it. The Dijkstra era adds body keys 23 to 27 (sub-transactions, required top-level guards, direct deposits, account balance intervals), so a Dijkstra transaction moving funds to someone else's reward account would have been summarised without it. They are refused until they are parsed and summarised
+
 Bug Fix:
 
 - `CardanoTransaction.deserializeBytes` parses transactions without the isValid flag, `[body, witnessSet, auxiliaryData]`, the format the Dijkstra era recommends for submitted transactions. Before, one with auxiliary data failed with a type error, as did pre-Alonzo ones. The new `hasIsValidFlag` keeps the format, so such a transaction re-serializes to its bytes. A transaction array with other than 3 or 4 items, or with 4 items and no bool as the 3rd, throws `CborDeserializationException`
