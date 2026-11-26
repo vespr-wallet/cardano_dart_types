@@ -85,6 +85,10 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     required bool isValidDi, // 2
     required CBORMetadata? auxiliaryData, // 3
     @Default(CborLengthType.definite) CborLengthType lengthType,
+    // Whether the transaction array has the isValid flag, so [body, witnessSet, isValid, auxiliaryData]. Without it,
+    // [body, witnessSet, auxiliaryData] as in the Dijkstra era's mempool transactions (and pre-Alonzo ones), the flag
+    // is true. Kept from a parsed transaction so it re-serializes to its bytes.
+    @Default(true) bool hasIsValidFlag,
   }) = _CardanoTransaction;
 
   $CardanoTransactionCopyWith<CardanoTransaction> get copyWith => $CardanoTransactionCopyWith(this, (value) => value);
@@ -105,13 +109,19 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     // if (list.length != 1) throw CborDeserializationException();
     final tx = list.length == 1 ? list[0] as CborList : list;
 
-    final cIsValidDi = tx[2] as CborSimpleValue;
-    final minTxLen = cIsValidDi is CborNull ? 2 : 3;
-
-    if (tx.length < minTxLen) {
-      throw CborDeserializationException("minTxLen too small: ${tx.length}");
+    // [body, witnessSet, isValid, auxiliaryData] up to Conway, or [body, witnessSet, auxiliaryData] without the flag,
+    // which the Dijkstra era recommends for transactions submitted to the mempool (the block producer sets it)
+    final (CborValue cIsValidDi, CborValue cAuxData) = switch (tx.length) {
+      4 => (tx[2], tx[3]),
+      3 => (const CborBool(true), tx[2]),
+      _ => throw CborDeserializationException("transaction has ${tx.length} items instead of 3 or 4"),
+    };
+    if (cIsValidDi is! CborBool) {
+      throw CborDeserializationException("isValid is ${cIsValidDi.runtimeType} instead of a bool");
     }
-    final cAuxData = cIsValidDi is CborNull ? const CborNull() : tx[3];
+    if (tx.length == 3 && cAuxData is CborBool) {
+      throw const CborDeserializationException("transaction without auxiliary data or nil after the isValid flag");
+    }
 
     // the body is the first item of the transaction array, itself the only item of the wrapper array if there is one
     final bodyStart = cborContentStart(transactionBytes, list.length == 1 ? cborContentStart(transactionBytes, 0) : 0);
@@ -120,9 +130,10 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
     final result = CardanoTransaction._hidden(
       body: CardanoTransactionBody.deserializeBytes(Uint8List.sublistView(transactionBytes, bodyStart, bodyEnd)),
       witnessSet: WitnessSet.deserialize(cMap: tx[1] as CborMap),
-      isValidDi: cIsValidDi is! CborBool || cIsValidDi.value,
+      isValidDi: cIsValidDi.value,
       auxiliaryData: CBORMetadata.deserialize(cValue: cAuxData),
       lengthType: tx.type,
+      hasIsValidFlag: tx.length == 4,
     );
 
     conditionalAssert(() => const DeepCollectionEquality().equals(result.serializeAsBytes(), transactionBytes));
@@ -177,7 +188,8 @@ sealed class CardanoTransaction with _$CardanoTransaction implements CborEncodab
       [
         body.serialize(forJson: forJson),
         witnessSet.serialize(forJson: forJson),
-        CborBool(isValidDi),
+        // Only true can be left out
+        if (hasIsValidFlag || !isValidDi) CborBool(isValidDi),
         auxiliaryData?.serialize(forJson: forJson) ?? const CborNull(),
       ],
       type: lengthType,
@@ -499,6 +511,7 @@ abstract mixin class $CardanoTransactionCopyWith<$Res> {
     bool isValidDi,
     CBORMetadata? auxiliaryData,
     CborLengthType lengthType,
+    bool hasIsValidFlag,
   });
 
   $CardanoTransactionBodyCopyWith<$Res> get body;
@@ -519,6 +532,7 @@ class _CardanoTransactionCopyWithImpl<$Res> implements $CardanoTransactionCopyWi
     bool? isValidDi,
     Object? auxiliaryData = freezed,
     CborLengthType? lengthType,
+    bool? hasIsValidFlag,
   }) => _then(
     CardanoTransaction._hidden(
       body: body ?? _self.body,
@@ -526,6 +540,7 @@ class _CardanoTransactionCopyWithImpl<$Res> implements $CardanoTransactionCopyWi
       isValidDi: isValidDi ?? _self.isValidDi,
       auxiliaryData: freezed == auxiliaryData ? _self.auxiliaryData : auxiliaryData as CBORMetadata?,
       lengthType: lengthType ?? _self.lengthType,
+      hasIsValidFlag: hasIsValidFlag ?? _self.hasIsValidFlag,
     ),
   );
 

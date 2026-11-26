@@ -1,5 +1,9 @@
 ## Unreleased
 
+Bug Fix:
+
+- `CardanoTransaction.deserializeBytes` parses transactions without the isValid flag, `[body, witnessSet, auxiliaryData]`, the format the Dijkstra era recommends for submitted transactions. Before, one with auxiliary data failed with a type error, as did pre-Alonzo ones. The new `hasIsValidFlag` keeps the format, so such a transaction re-serializes to its bytes. A transaction array with other than 3 or 4 items, or with 4 items and no bool as the 3rd, throws `CborDeserializationException`
+
 Other Changes:
 
 - Toolchain: Flutter 3.50.0 / Dart 3.14.0 (`.tool-versions`, CI `actions/checkout` v7). Dependencies: no constraint changes; every dependency already resolves to its latest version on Dart 3.14 (cbor 6.5.2, bip32_ed25519 0.6.2, freezed_annotation 3.1.0, json_annotation 4.12.0; dev: freezed 4.0.3, json_serializable 6.15.2, build_runner 2.17.1, test 1.33.0). Generated code unchanged

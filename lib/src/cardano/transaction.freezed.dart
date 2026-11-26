@@ -15,27 +15,27 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CardanoTransaction {
 
- CardanoTransactionBody get body; WitnessSet get witnessSet; bool get isValidDi; CBORMetadata? get auxiliaryData; CborLengthType get lengthType;
+ CardanoTransactionBody get body; WitnessSet get witnessSet; bool get isValidDi; CBORMetadata? get auxiliaryData; CborLengthType get lengthType; bool get hasIsValidFlag;
 
 
 
 @override
 bool operator ==(Object other) {
   final _this = this as CardanoTransaction;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransaction&&(identical(other.body, _this.body) || other.body == _this.body)&&(identical(other.witnessSet, _this.witnessSet) || other.witnessSet == _this.witnessSet)&&(identical(other.isValidDi, _this.isValidDi) || other.isValidDi == _this.isValidDi)&&(identical(other.auxiliaryData, _this.auxiliaryData) || other.auxiliaryData == _this.auxiliaryData)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CardanoTransaction&&(identical(other.body, _this.body) || other.body == _this.body)&&(identical(other.witnessSet, _this.witnessSet) || other.witnessSet == _this.witnessSet)&&(identical(other.isValidDi, _this.isValidDi) || other.isValidDi == _this.isValidDi)&&(identical(other.auxiliaryData, _this.auxiliaryData) || other.auxiliaryData == _this.auxiliaryData)&&(identical(other.lengthType, _this.lengthType) || other.lengthType == _this.lengthType)&&(identical(other.hasIsValidFlag, _this.hasIsValidFlag) || other.hasIsValidFlag == _this.hasIsValidFlag));
 }
 
 
 @override
 int get hashCode {
   final _this = this as CardanoTransaction;
-  return Object.hash(runtimeType,_this.body,_this.witnessSet,_this.isValidDi,_this.auxiliaryData,_this.lengthType);
+  return Object.hash(runtimeType,_this.body,_this.witnessSet,_this.isValidDi,_this.auxiliaryData,_this.lengthType,_this.hasIsValidFlag);
 }
 
 @override
 String toString() {
   final _this = this as CardanoTransaction;
-  return 'CardanoTransaction(body: ${_this.body}, witnessSet: ${_this.witnessSet}, isValidDi: ${_this.isValidDi}, auxiliaryData: ${_this.auxiliaryData}, lengthType: ${_this.lengthType})';
+  return 'CardanoTransaction(body: ${_this.body}, witnessSet: ${_this.witnessSet}, isValidDi: ${_this.isValidDi}, auxiliaryData: ${_this.auxiliaryData}, lengthType: ${_this.lengthType}, hasIsValidFlag: ${_this.hasIsValidFlag})';
 }
 
 
@@ -49,7 +49,7 @@ String toString() {
 
 
 class _CardanoTransaction extends CardanoTransaction {
-  const _CardanoTransaction({required this.body, required this.witnessSet, required this.isValidDi, required this.auxiliaryData, this.lengthType = CborLengthType.definite}): super._();
+  const _CardanoTransaction({required this.body, required this.witnessSet, required this.isValidDi, required this.auxiliaryData, this.lengthType = CborLengthType.definite, this.hasIsValidFlag = true}): super._();
   
 
 @override final  CardanoTransactionBody body;
@@ -57,24 +57,25 @@ class _CardanoTransaction extends CardanoTransaction {
 @override final  bool isValidDi;
 @override final  CBORMetadata? auxiliaryData;
 @override@JsonKey() final  CborLengthType lengthType;
+@override@JsonKey() final  bool hasIsValidFlag;
 
 
 
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransaction&&(identical(other.body, body) || other.body == body)&&(identical(other.witnessSet, witnessSet) || other.witnessSet == witnessSet)&&(identical(other.isValidDi, isValidDi) || other.isValidDi == isValidDi)&&(identical(other.auxiliaryData, auxiliaryData) || other.auxiliaryData == auxiliaryData)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CardanoTransaction&&(identical(other.body, body) || other.body == body)&&(identical(other.witnessSet, witnessSet) || other.witnessSet == witnessSet)&&(identical(other.isValidDi, isValidDi) || other.isValidDi == isValidDi)&&(identical(other.auxiliaryData, auxiliaryData) || other.auxiliaryData == auxiliaryData)&&(identical(other.lengthType, lengthType) || other.lengthType == lengthType)&&(identical(other.hasIsValidFlag, hasIsValidFlag) || other.hasIsValidFlag == hasIsValidFlag));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,body,witnessSet,isValidDi,auxiliaryData,lengthType);
+    return Object.hash(runtimeType,body,witnessSet,isValidDi,auxiliaryData,lengthType,hasIsValidFlag);
 }
 
 @override
 String toString() {
-    return 'CardanoTransaction._hidden(body: $body, witnessSet: $witnessSet, isValidDi: $isValidDi, auxiliaryData: $auxiliaryData, lengthType: $lengthType)';
+    return 'CardanoTransaction._hidden(body: $body, witnessSet: $witnessSet, isValidDi: $isValidDi, auxiliaryData: $auxiliaryData, lengthType: $lengthType, hasIsValidFlag: $hasIsValidFlag)';
 }
 
 
