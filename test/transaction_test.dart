@@ -1,6 +1,7 @@
 import "dart:typed_data";
 
 import "package:cardano_dart_types/cardano_dart_types.dart";
+import "package:cardano_dart_types/src/hd/util/CborDeserializationException.dart";
 import "package:test/test.dart";
 
 import "test_utils/cbor_mutations.dart";
@@ -9,6 +10,75 @@ import "test_utils/fixtures.dart";
 void main() async {
   debugAssertEnabled = true;
   group("CardanoTransaction", () {
+    group("without the isValid flag (Dijkstra mempool format)", () {
+      // a3 00 d9010280 01 80 02 182a: inputs (tag 258, empty), outputs (empty), fee 42
+      const body = "a300d9010280018002182a";
+      // {674: {"msg": ["hi"]}}
+      const metadata = "a11902a2a1636d736781626869";
+
+      test("with auxiliary data parses and re-serializes byte-exact", () {
+        const hex = "83${body}a0$metadata";
+        final tx = CardanoTransaction.deserializeFromHex(hex);
+
+        expect(tx.isValidDi, isNull);
+        expect(tx.auxiliaryData?.serializeHexString(), metadata);
+        expect(tx.serializeHexString(), hex);
+        expect(tx.body.serializeHexString(), body);
+      });
+
+      test("with nil auxiliary data parses and re-serializes byte-exact", () {
+        const hex = "83${body}a0f6";
+        final tx = CardanoTransaction.deserializeFromHex(hex);
+
+        expect(tx.isValidDi, isNull);
+        expect(tx.serializeHexString(), hex);
+      });
+
+      test("the body hash is the same as with the flag", () {
+        final withFlag = CardanoTransaction.deserializeFromHex("84${body}a0f5$metadata");
+        final withoutFlag = CardanoTransaction.deserializeFromHex("83${body}a0$metadata");
+
+        expect(withFlag.isValidDi, isTrue);
+        expect(withoutFlag.body.blake2bHash256Hex(), withFlag.body.blake2bHash256Hex());
+      });
+
+      test("keeps the format through marshal and copyWith", () {
+        const hex = "83${body}a0$metadata";
+        final tx = CardanoTransaction.deserializeFromHex(hex);
+
+        expect(CardanoTransaction.unmarshal(tx.marshal()).serializeHexString(), hex);
+        expect(tx.copyWithAdditionalSignatures(const WitnessSet()).serializeHexString(), hex);
+      });
+
+      test("adding a signature keeps the body bytes and leaves the flag out", () {
+        // {0: [[vkey, signature]]}
+        final vkeyWitness = "a10081825820${"11" * 32}5840${"22" * 64}";
+        final tx = CardanoTransaction.deserializeFromHex("83${body}a0$metadata");
+        final signed = tx.copyWithAdditionalSignatures(WitnessSet.deserializeFromHex(hexCbor: vkeyWitness));
+
+        expect(signed.serializeHexString(), "83$body$vkeyWitness$metadata");
+        expect(signed.body.blake2bHash256Hex(), tx.body.blake2bHash256Hex());
+        expect(CardanoTransaction.unmarshal(signed.marshal()).serializeHexString(), signed.serializeHexString());
+      });
+
+      test("a false flag is written even if the parsed transaction had none", () {
+        final tx = CardanoTransaction.deserializeFromHex("83${body}a0f6").copyWith(isValidDi: false);
+
+        expect(tx.serializeHexString(), "84${body}a0f4f6");
+      });
+
+      for (final (name, hex) in [
+        ("2 items", "82${body}a0"),
+        ("5 items", "85${body}a0f5f6f6"),
+        ("4 items without a bool flag", "84${body}a0f6f6"),
+        ("3 items ending with a flag", "83${body}a0f5"),
+      ]) {
+        test("$name is refused", () {
+          expect(() => CardanoTransaction.deserializeFromHex(hex), throwsA(isA<CborDeserializationException>()));
+        });
+      }
+    });
+
     group("no change on re-encoding and tx body hash matches original", () {
       for (final testData in _TestCaseTx.values) {
         test(testData.name, () async {
