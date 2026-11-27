@@ -1,3 +1,9 @@
+## 4.0.1
+
+Bug Fix:
+
+- Requires cbor 6.5.3 (`^6.5.3`, from `^6.5.0`). cbor 6.5.2 and older drop the tags of a decoded integer, so a tagged body key such as `1(5)`, or a tagged output key such as `1(2)`, parsed as the plain key. 4.0.0's refusal of tagged keys (`TransactionBodyUnknownKeyException`, `TransactionOutputUnknownKeyException`) therefore only worked with cbor 6.5.3, which also keeps the tags of indefinite-length byte and text strings when encoding
+
 ## 4.0.0
 
 Security:
