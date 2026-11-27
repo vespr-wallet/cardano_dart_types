@@ -84,6 +84,21 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
   }
 
   factory CardanoTransactionOutput.deserializePostAlonzo({required CborMap cMap}) {
+    // A key that is not parsed below would be missing from the parsed output, and so from any summary of it, while the
+    // witnesses sign the original bytes with that key in them. Refuse the output instead of silently dropping the key.
+    // A tagged key counts as unknown: package:cbor compares tags, so the lookups below would not find it either.
+    final unknownKeys = cMap.keys
+        .where((key) => key is! CborSmallInt || key.tags.isNotEmpty || !_supportedPostAlonzoKeys.contains(key.value))
+        .map(
+          (key) => key is CborSmallInt && key.tags.isEmpty
+              ? key.value
+              : "${key.tags.map((tag) => "$tag(").join()}$key${")" * key.tags.length}",
+        )
+        .toList(growable: false);
+    if (unknownKeys.isNotEmpty) {
+      throw TransactionOutputUnknownKeyException(unknownKeys);
+    }
+
     final address = Address.deserialize(cMap[const CborSmallInt(0)]!);
     final cardanoValue = _parseCborValue(
       cMap[const CborSmallInt(1)].require(argumentName: "deserializePostAlonzo: cMap[const CborSmallInt(1)]"),
@@ -159,6 +174,9 @@ sealed class CardanoTransactionOutput with _$CardanoTransactionOutput implements
 
     return result;
   }
+
+  /// The keys of a post-Alonzo output, the same up to the Dijkstra era: address, value, datum and script ref.
+  static const _supportedPostAlonzoKeys = {0, 1, 2, 3};
 
   static Value _parseCborValue(CborValue cborValue, {required String source}) {
     if (cborValue is! CborList && cborValue is! CborInt) {

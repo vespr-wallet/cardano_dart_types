@@ -3,6 +3,7 @@
 Security:
 
 - `CardanoTransactionBody.deserialize` (and so `deserializeBytes`, `deserializeHex` and `CardanoTransaction.deserializeBytes`) throws `TransactionBodyUnknownKeyException`, a `TransactionBodyParseException`, for a body key it does not parse, a tagged key included. Before, such a key was silently left out of the parsed body and of `diff`, while the witnesses still signed the original bytes with it. The Dijkstra era adds body keys 23 to 27 (sub-transactions, required top-level guards, direct deposits, account balance intervals), so a Dijkstra transaction moving funds to someone else's reward account would have been summarised without it. They are refused until they are parsed and summarised
+- `CardanoTransactionOutput.deserialize` (and so `deserializeHex`, and the outputs and collateral return of a parsed transaction body) throws `TransactionOutputUnknownKeyException`, a `TransactionOutputParseException`, for a post-Alonzo output key other than 0 (address), 1 (value), 2 (datum) and 3 (script ref), a tagged key such as `1(2)` included. Before, such a key was silently left out of the parsed output, so a tagged datum key showed the output without its datum, while the witnesses still signed the original bytes with it. The ledger rejects such outputs, so no funds were at risk
 
 Bug Fix:
 
