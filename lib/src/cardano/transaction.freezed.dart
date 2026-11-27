@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CardanoTransaction {
 
- CardanoTransactionBody get body; WitnessSet get witnessSet; bool get isValidDi; CBORMetadata? get auxiliaryData; CborLengthType get lengthType;
+ CardanoTransactionBody get body; WitnessSet get witnessSet; bool? get isValidDi; CBORMetadata? get auxiliaryData; CborLengthType get lengthType;
 
 
 
@@ -54,7 +54,7 @@ class _CardanoTransaction extends CardanoTransaction {
 
 @override final  CardanoTransactionBody body;
 @override final  WitnessSet witnessSet;
-@override final  bool isValidDi;
+@override final  bool? isValidDi;
 @override final  CBORMetadata? auxiliaryData;
 @override@JsonKey() final  CborLengthType lengthType;
 
